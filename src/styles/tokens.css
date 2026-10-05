@@ -1,0 +1,32 @@
+/* Design tokens from the Heartwood design system: tokens/fonts.css, colors.css, typography.css, layout.css. */
+@font-face { font-family: "PP Frama"; src: url("/assets/fonts/PPFrama-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "PP Frama"; src: url("/assets/fonts/PPFrama-Black.woff2") format("woff2"); font-weight: 900; font-display: swap; }
+@font-face { font-family: "PP Right Serif Mono"; src: url("/assets/fonts/PPRightSerifMono-Medium.woff") format("woff"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Freight Text"; src: url("/assets/fonts/FreightText-Book.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Freight Text"; src: url("/assets/fonts/FreightText-BookItalic.ttf") format("truetype"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Freight Text"; src: url("/assets/fonts/FreightText-SemiBold.ttf") format("truetype"); font-weight: 600; font-display: swap; }
+
+:root {
+  --hw-white: #F9F9F9; --hw-black: #212121;
+  --hw-cool-grey: #C5DCEA; --hw-brown: #3A2316;
+  --hw-teal: #2697AA; --hw-terracotta: #BC532D; --hw-landscape: #617954; --hw-hemlock: #B28951;
+  --surface-dark: var(--hw-black); --surface-light: var(--hw-white);
+  --text-on-dark: var(--hw-white); --text-on-light: var(--hw-black);
+  --accent: var(--hw-terracotta);
+  --section-break: var(--hw-terracotta);
+  --overlay-brown: rgba(58, 35, 22, .5);
+  --overlay-cool-grey: rgba(197, 220, 234, .5);
+  --overlay-image: var(--overlay-brown);
+  --fund-growth: var(--hw-landscape); --fund-income: var(--hw-teal);
+
+  --font-display: "PP Frama", sans-serif;
+  --font-subhead: "PP Right Serif Mono", monospace;
+  --font-body: "Freight Text", Georgia, serif;
+  --weight-frama-medium: 500; --weight-frama-black: 900; --weight-body: 400; --weight-body-semibold: 600;
+
+  --section-rule: 1.5px solid var(--section-break);
+  --rule: 1.5px solid var(--hw-black);
+  --radius: 0;
+
+  --gutter: clamp(20px, 3vw, 40px);
+}
