@@ -1,7 +1,7 @@
 /* Design tokens from the Heartwood design system: tokens/fonts.css, colors.css, typography.css, layout.css. */
 @font-face { font-family: "PP Frama"; src: url("/assets/fonts/PPFrama-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
 @font-face { font-family: "PP Frama"; src: url("/assets/fonts/PPFrama-Black.woff2") format("woff2"); font-weight: 900; font-display: swap; }
-@font-face { font-family: "PP Right Serif Mono"; src: url("/assets/fonts/PPRightSerifMono-Medium.woff") format("woff"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "PP Right Serif Mono"; src: url("/assets/fonts/PPRightSerifMono-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
 @font-face { font-family: "Freight Text"; src: url("/assets/fonts/FreightText-Book.ttf") format("truetype"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Freight Text"; src: url("/assets/fonts/FreightText-BookItalic.ttf") format("truetype"); font-weight: 400; font-style: italic; font-display: swap; }
 @font-face { font-family: "Freight Text"; src: url("/assets/fonts/FreightText-SemiBold.ttf") format("truetype"); font-weight: 600; font-display: swap; }
