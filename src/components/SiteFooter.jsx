@@ -38,7 +38,7 @@ function SiteFooter({ go }) {
         </div>
 
         <div className="site-footer__aside">
-          <span className="site-footer__heading">The Long View — monthly</span>
+          <span className="site-footer__heading">The Long View Newsletter — monthly</span>
           <HubspotNote label="The Long View newsletter (footer)" />
           <form className="site-footer__form" onSubmit={subscribe}>
             <input

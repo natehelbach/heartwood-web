@@ -4,8 +4,24 @@
   box-sizing: border-box;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img,
+video,
+svg {
+  max-width: 100%;
+}
+
 body {
   margin: 0;
+  overflow-x: hidden;
   background: var(--hw-white);
   color: var(--hw-black);
   font-family: var(--font-body);
@@ -53,6 +69,7 @@ input::placeholder {
 .site {
   position: relative;
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
 }
@@ -93,6 +110,10 @@ input::placeholder {
 
 .site-header--inner .site-header__row {
   min-height: 82px;
+}
+
+.site-header--mobile .site-header__row {
+  min-height: 64px;
 }
 
 .site-header__wordmark,
@@ -240,6 +261,156 @@ input::placeholder {
 .btn--solid:hover {
   background: var(--hw-teal);
   color: var(--hw-white);
+}
+
+/* Mobile: Menu button and full-screen drawer (from the design's shell, < 900px). */
+.site-burger {
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: var(--hw-black);
+  font-family: var(--font-subhead);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.site-burger__bars {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 22px;
+}
+.site-burger__bars span {
+  display: block;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 0.2s;
+}
+
+.site-drawer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--nav-h, 64px);
+  bottom: 0;
+  z-index: 31;
+  background: var(--hw-white);
+  border-top: 1px solid rgba(33, 33, 33, 0.15);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 20px calc(32px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+}
+.site-drawer__section {
+  border-bottom: 1px solid rgba(33, 33, 33, 0.15);
+  display: flex;
+  flex-direction: column;
+}
+.site-drawer__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 60px;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: var(--hw-black);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 28px;
+  letter-spacing: -0.01em;
+  text-align: left;
+}
+.site-drawer__head span {
+  font-family: var(--font-subhead);
+  font-size: 18px;
+}
+.site-drawer__items {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 14px;
+}
+.site-drawer__group {
+  display: block;
+  padding: 14px 0 4px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--hw-terracotta);
+}
+.site-drawer__link {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  min-height: 44px;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  color: var(--hw-black);
+  font-family: var(--font-subhead);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-underline-offset: 5px;
+}
+.site-drawer__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+.site-drawer__btn {
+  flex: 1 1 140px;
+  min-height: 48px;
+  padding: 12px 16px;
+  background: transparent;
+  color: var(--hw-black);
+  border: 1.5px solid var(--hw-black);
+  cursor: pointer;
+  font-family: var(--font-subhead);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.site-drawer__btn--solid {
+  background: var(--hw-black);
+  color: var(--hw-white);
+  border: 0;
+}
+.site-drawer__btn--solid:hover {
+  color: var(--hw-white);
+}
+
+@media (max-width: 900px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
 }
 
 /* Section sub-nav, shown under the header on sections with child pages. */
@@ -491,4 +662,17 @@ input::placeholder {
 /* Inputs on dark panels (PageInsights subscribe form). */
 .hw-input-on-dark::placeholder {
   color: rgba(249, 249, 249, 0.75);
+}
+
+/* Innovation map outcome panel: overlaid on wide screens, stacked under the map otherwise
+   (from PagePlatform.dc.html). */
+@media (max-width: 1100px) {
+  .hw-outcome-ov {
+    display: none !important;
+  }
+}
+@media (min-width: 1101px) {
+  .hw-outcome-st {
+    display: none !important;
+  }
 }

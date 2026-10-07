@@ -18,7 +18,7 @@ const SERVE = [
 ]
 
 const BUILT = [
-  { label: 'Home — Well-being', title: 'Built for well-being.', body: 'Healthier homes come from natural light, clean air and space to gather. We design them in from day one.', img: '/assets/imagery/HW_Amenity_Fitness.png', cap: 'On-site fitness, part of everyday life' },
+  { label: 'Home — Well-being', title: 'Built for well-being.', body: 'Healthier homes come from natural light, clean air and space to gather. We design them in from day one.', img: '/assets/photography/HW_Photo_Fitness-Gym.jpg', cap: 'On-site fitness, part of everyday life' },
   { label: 'Home — Long term', title: 'Built for the long term.', body: 'Durable materials, smart systems and repeatable design keep buildings performing for decades.', img: '/assets/project-renders/HW_Render_3385-Lawrence-Courtyard.jpg', cap: '3385 Lawrence Avenue East, courtyard rendering' },
   { label: 'Home — Resilient investments', title: 'Built for resilient investments.', body: 'Quality buildings, strong demand and active management hold value through economic cycles. Two strategies, one discipline.', img: '/assets/project-renders/HW_Render_360-Kennedy-Lane.jpg', cap: '360 Kennedy Lane, Ottawa, rendering' },
 ]
@@ -31,8 +31,8 @@ const WAYS_IN = [
 
 const LIFESTYLE = [
   ['/assets/lifestyle/HW_Lifestyle_26.jpg', 'Kitchens built for everyday use'],
-  ['/assets/lifestyle/HW_Lifestyle_21.jpg', 'Durable, natural finishes'],
-  ['/assets/lifestyle/HW_Lifestyle_34.jpg', 'Room to gather'],
+  ['/assets/project-renders/HW_517-W-Main_Material-board.png', 'Durable, natural finishes'],
+  ['/assets/photography/HW_Photo_517-W-Main_Work-Nook.jpg', 'Space to work', '30% center'],
   ['/assets/lifestyle/HW_Lifestyle_32.jpg', 'Walkable, connected neighbourhoods'],
 ]
 
@@ -60,7 +60,7 @@ function PageHome({ go }) {
   return (
     <div style={sx('background:var(--hw-white);color:var(--hw-black);font-family:var(--font-body)')}>
       <div data-scroll-track="landing" data-screen-label="Home — Hero" style={sx('position:relative;height:200vh')}>
-        <div style={sx("position:sticky;top:0;height:100vh;overflow:clip;background:#212121 url('/assets/website/landing-image.webp') center/cover no-repeat")}>
+        <div style={sx("position:sticky;top:0;height:100vh;height:100svh;overflow:clip;background:#212121 url('/assets/website/landing-image.webp') center/cover no-repeat")}>
           <div style={sx('position:absolute;top:var(--nav-h,82px);left:0;right:0;bottom:0;overflow:hidden')}>
             <DotField preset="landing" />
             <p style={sx('position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:clamp(16rem,30vw,26rem);margin:0;font-family:var(--font-subhead);font-weight:500;text-transform:uppercase;font-size:clamp(0.875rem,1.15vw,1.5rem);line-height:1.5;color:#F9F9F9;text-align:center;text-wrap:pretty;pointer-events:none')}>
@@ -102,7 +102,7 @@ function PageHome({ go }) {
           </div>
         </div>
         <figure style={sx('margin:40px 0 0;display:flex;flex-direction:column;gap:12px')}>
-          <div style={sx(FIG_IMG('/assets/imagery/HW_Interior_Timber-Living.jpg'))} />
+          <div style={sx(FIG_IMG('/assets/photography/HW_Photo_Timber-Open-Plan.jpg'))} />
           <figcaption style={sx('font-size:18px;font-style:italic')}>Timber ceilings, natural light and warm, durable finishes.</figcaption>
         </figure>
       </section>
@@ -197,9 +197,9 @@ function PageHome({ go }) {
           </span>
         </button>
         <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px')}>
-          {LIFESTYLE.map(([img, cap]) => (
+          {LIFESTYLE.map(([img, cap, pos = 'center']) => (
             <figure key={img} style={sx('margin:0;display:flex;flex-direction:column;gap:10px')}>
-              <div style={sx(`aspect-ratio:4/5;background:var(--hw-cool-grey) url('${img}') center/cover no-repeat`)} />
+              <div style={sx(`aspect-ratio:4/5;background:var(--hw-cool-grey) url('${img}') ${pos}/cover no-repeat`)} />
               <figcaption style={sx('font-size:14px;font-style:italic')}>{cap}</figcaption>
             </figure>
           ))}

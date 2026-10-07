@@ -30,7 +30,7 @@ const PAGES = {
     form: { eyebrow: 'Stay informed', title: 'New research, straight to your inbox.', note: 'We publish when we have something worth reading — not on a schedule.', cta: 'Subscribe', thanks: 'Thanks — you’re on the list.', hubspot: 'learn-subscribe', hasSelect: false, options: [] },
   },
   podcast: {
-    hero: { eyebrow: 'Insights · Podcast', title: 'The Heartwood Podcast', intro: 'Conversations with people in finance, tax, law and real estate on how durable housing gets financed, built and held.', cta: 'Subscribe', img: L + 'HW_Lifestyle_28.jpg' },
+    hero: { eyebrow: 'Insights · The Long View Podcast', title: 'The Long View Podcast', intro: 'Conversations on how we live, build and invest for the long term. Our founders, market experts, architects and institutional investors on why purpose-built rental matters, and where it’s heading.', cta: 'Subscribe', img: L + 'HW_Lifestyle_28.jpg' },
     form: { eyebrow: 'Subscribe', title: 'Be the first to hear new episodes.', note: 'One email per episode, with show notes.', cta: 'Subscribe', thanks: 'Subscribed. We’ll let you know when episode one is live.', hubspot: 'podcast-subscribe', hasSelect: false, options: [] },
   },
   advisors: {
@@ -46,8 +46,8 @@ const PAGES = {
     form: { eyebrow: 'Institutional enquiries', title: 'Contact us.', note: 'Tell us about your mandate. We’ll meet first, then share the data room and DDQ.', cta: 'Send enquiry', thanks: 'Thank you. A senior member of our team will be in touch.', hubspot: 'institutional-enquiry', hasSelect: true, selectLabel: 'Organization type', options: ['Pension fund', 'Foundation or endowment', 'Insurer', 'Sovereign wealth fund', 'Consultant or placement agent', 'Other'] },
   },
   meeting: {
-    hero: { eyebrow: 'Investments · Schedule a meeting', title: 'Talk to someone who knows the portfolio.', intro: 'A 30-minute call with our investment team. We’ll learn about your goals, walk you through our Growth and Income strategies, and see if we’re the right fit.', cta: 'Book a call', img: '/assets/renders/HW_360-Kennedy-Lane_1.png', faded: true },
-    form: { eyebrow: 'Book a call', title: 'Pick a time that works.', note: 'You’ll receive a short prep email with what to expect and who you’ll be speaking with.', cta: 'Book a call', thanks: 'Booked. A confirmation and prep email are on the way.', hubspot: 'meeting-booking', hasSelect: true, selectLabel: 'Which best describes you?', options: ['Advisor (EMD, RIA, wealth manager)', 'Private wealth (family office or high-net-worth)', 'Institutional investor'] },
+    hero: { eyebrow: 'Investments · Schedule a meeting', title: 'Talk to someone who knows the portfolio.', intro: 'A 30-minute call with our investment team. We’ll learn about your goals, walk you through our Growth and Income strategies, and see if we’re the right fit.', cta: 'Invest with us', img: '/assets/renders/HW_360-Kennedy-Lane_1.png', faded: true },
+    form: { eyebrow: 'Schedule a meeting', title: 'Pick a time that works.', note: 'You’ll receive a short prep email with what to expect and who you’ll be speaking with.', cta: 'Schedule a meeting', thanks: 'Booked. A confirmation and prep email are on the way.', hubspot: 'meeting-booking', hasSelect: true, selectLabel: 'Which best describes you?', options: ['Advisor (EMD, RIA, wealth manager)', 'Private wealth (family office or high-net-worth)', 'Institutional investor'] },
   },
   portal: {
     hero: { eyebrow: 'Investments · Investor portal', title: 'Everything you need to invest, in one place.', intro: 'Create an account to review fund materials, start a subscription and track your investment.', cta: 'Create your account', img: R + 'HW_Render_3385-Lawrence-Courtyard.jpg' },
@@ -106,7 +106,7 @@ const AUD = {
     stepsHeading: 'How it works',
     steps: [{ no: '01', title: 'Book a call', body: 'A 30-minute conversation about your goals and our two strategies.' }, { no: '02', title: 'Review the documents', body: 'We send the Offering Memorandum and answer any questions.' }, { no: '03', title: 'Subscribe', body: 'Sign electronically and send funds to SGGG, our record keeper.' }, { no: '04', title: 'Track your investment', body: 'Monthly statements and updates in the investor portal.' }],
     docs: [{ t: 'Growth Trust overview', m: 'Strategy, projects and target returns.', cta: 'Request' }, { t: 'Income Trust overview', m: 'Buildings, distributions and occupancy.', cta: 'Request' }, { t: 'The Long View', m: 'Our monthly letter from the founders.', cta: 'Subscribe' }, { t: 'Investor evenings', m: 'Quarterly, in Toronto.', cta: 'Join' }],
-    contact: { n: 'Dylan Kent', t: 'Private Wealth', img: '/assets/team/HW_Team_Dylan-Kent.jpg', body: 'Your contact for questions about our strategies, subscriptions and your account.' },
+    contact: { n: 'Dylan Kent', t: 'Private Wealth', img: '/assets/team/HW_Team_Dylan-Kent_HR.jpg', body: 'Your contact for questions about our strategies, subscriptions and your account.' },
   },
   institutional: {
     lead: 'Built to institutional standards.',
@@ -161,14 +161,11 @@ const PAPERS = [
 ]
 const PLATFORMS = ['YouTube', 'Spotify', 'Apple Podcasts', 'Amazon Music']
 const EPISODES = [
-  { no: '03', date: 'Coming soon', guest: 'Market Expert', title: 'Where Canadian rental housing goes from here', img: R + 'HW_Render_353-Sherbourne.jpg' },
-  { no: '02', date: 'Coming soon', guest: 'Investor', title: 'Why I invest in purpose-built rental', img: L + 'HW_Lifestyle_28.jpg' },
-  { no: '01', date: 'Coming soon', guest: 'Tim Blair & David Constable', title: 'The Heartwood founder story', img: R + 'HW_Render_3385-Lawrence.jpg' },
-]
-const EXPECT = [
-  { no: '01', title: 'Your clients', body: 'Your book, your clients’ goals and where private real estate fits in their portfolios.' },
-  { no: '02', title: 'Our strategies', body: 'How the Growth and Income trusts differ, and what each is built to deliver.' },
-  { no: '03', title: 'Next steps', body: 'If there’s a fit, we’ll work with you to bring the right strategy to your clients.' },
+  { no: '01', date: 'Coming soon', title: 'Founding Story', guest: 'With Tim Blair & David Constable, Co-founders', desc: 'Meet the founders behind Heartwood, and why they started the firm.', img: R + 'HW_Render_3385-Lawrence.jpg' },
+  { no: '02', date: 'Coming soon', title: 'Renter Demand', guest: 'With the Heartwood team', desc: 'The habits people have when it comes to how they live, and the trends we’re seeing in how Canadians rent, move and settle.', img: L + 'HW_Lifestyle_28.jpg' },
+  { no: '03', date: 'Coming soon', title: 'The Case for Multifamily', guest: 'With Wendy, Market Expert', desc: 'Why we build, buy and own purpose-built multifamily real estate, and what the market tells us about the decades ahead.', img: R + 'HW_Render_353-Sherbourne.jpg' },
+  { no: '04', date: 'Coming soon', title: 'Design as Value', guest: 'With Michael Green, MGA | Michael Green Architecture', desc: 'High-quality, sustainable design, and why the buildings we build today should perform for the next century.', img: R + 'HW_Render_Innovation.jpg' },
+  { no: '05', date: 'Coming soon', title: 'The Institutional Lens', guest: 'With an institutional investor', desc: 'Why institutional investors have an appetite for purpose-built rental, and what they look for in a long-term partner.', img: R + 'HW_Render_360-Kennedy-Lane.jpg' },
 ]
 const BENEFITS = [
   { title: 'Fund materials', body: 'Offering memorandum, fund overview and track record.' },
@@ -178,7 +175,7 @@ const BENEFITS = [
 ]
 const MEETING_TEAM = [
   { name: 'Dustin Buenaventura', title: 'Director, Business Development', img: '/assets/team/HW_Team_Dustin-Buenaventura.png' },
-  { name: 'Dylan Kent', title: 'Director, Capital Markets', img: '/assets/team/HW_Team_Dylan-Kent.jpg' },
+  { name: 'Dylan Kent', title: 'Director, Capital Markets', img: '/assets/team/HW_Team_Dylan-Kent_HR.jpg' },
 ]
 
 const chipStyle = (on) => `border:1.5px solid var(--hw-black);background:${on ? '#212121' : 'transparent'};color:${on ? '#F9F9F9' : '#212121'};cursor:pointer;${MONO};font-size:13px`
@@ -360,9 +357,10 @@ function Podcast() {
             <span style={sx('position:absolute;left:14px;bottom:10px;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.4vw,48px);line-height:1;color:var(--hw-white)')}>#{ep.no}</span>
           </div>
           <div style={sx('display:flex;flex-direction:column;gap:8px;min-width:0')}>
-            <span style={sx(`${MONO};font-size:13px;color:var(--hw-black)`)}>{ep.date}</span>
-            <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2.2vw,32px);line-height:1.1')}>Episode #{ep.no} — {ep.guest}</span>
-            <span style={sx('font-size:18px;line-height:1.5')}>{ep.title}</span>
+            <span style={sx(`${MONO};font-size:13px;color:var(--hw-black)`)}>Episode {ep.no} · {ep.date}</span>
+            <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.4vw,36px);line-height:1.1;letter-spacing:-.01em')}>{ep.title}</span>
+            <span style={sx('font-family:var(--font-subhead);font-weight:500;font-size:14px;text-transform:uppercase;color:var(--hw-teal)')}>{ep.guest}</span>
+            <span style={sx('font-size:18px;line-height:1.5;max-width:640px;text-wrap:pretty')}>{ep.desc}</span>
           </div>
           <div style={sx('display:flex;justify-content:flex-end')}>
             <span style={sx(`padding:12px 16px;border:1.5px solid var(--hw-black);${MONO};font-size:13px;opacity:.55`)}>Watch · coming soon</span>
@@ -557,13 +555,6 @@ function PageLanding({ sub, go }) {
       {s === 'podcast' && <Podcast />}
       {aud && <Audience sub={s} aud={aud} go={go} />}
 
-      {meeting && (
-        <section data-screen-label="Schedule a Meeting — What to expect" style={sx(`padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px) 0;display:flex;flex-direction:column;gap:28px;background:${RULE_BG}`)}>
-          <div style={sx(RULE_LINE)} />
-          <h2 style={sx(H2)}>What to expect on the call</h2>
-          <NumberedGrid items={EXPECT} />
-        </section>
-      )}
 
       {s === 'portal' && (
         <section data-screen-label="Investor Portal — Benefits" style={sx(`padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:28px;background:${RULE_BG}`)}>

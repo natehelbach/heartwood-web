@@ -1,7 +1,6 @@
 // Site structure, ported from ui_kits/website/Heartwood Website.dc.html.
 // Routes are slash paths ("investment/growth") carried in the URL hash.
 
-// TODO: point at the production investor portal. The design links to a prototype.
 export const LOGIN_URL = 'https://heartwood.sgggfsi.com/'
 
 export const LINKEDIN_URL = 'https://www.linkedin.com/company/heartwood-investments'
@@ -32,7 +31,7 @@ export const SECTIONS = {
     items: [
       { label: 'Perspectives', r: 'insights/perspectives' },
       { label: 'News', r: 'insights/news' },
-      { label: 'Podcast', r: 'insights/podcast' },
+      { label: 'The Long View', r: 'insights/podcast', tag: 'Podcast' },
       { label: 'The Long View', r: 'insights/newsletter', tag: 'Newsletter' },
     ],
   },
@@ -41,6 +40,7 @@ export const SECTIONS = {
     items: [
       { label: 'Who we are', r: 'about/who' },
       { label: 'Team', r: 'about/leadership' },
+      { label: 'Our standards', r: 'about/standards' },
       { label: 'Careers', r: 'about/careers' },
       { label: 'Contact', r: 'about/contact' },
     ],
@@ -64,8 +64,8 @@ export const FOOTER_COLUMNS = [
     items: [
       ['Perspectives', 'insights/perspectives'],
       ['News', 'insights/news'],
-      ['Podcast', 'insights/podcast'],
-      ['The Long View', 'insights/newsletter'],
+      ['The Long View Podcast', 'insights/podcast'],
+      ['The Long View Newsletter', 'insights/newsletter'],
     ],
   },
   {
@@ -73,6 +73,7 @@ export const FOOTER_COLUMNS = [
     items: [
       ['Who we are', 'about/who'],
       ['Team', 'about/leadership'],
+      ['Our standards', 'about/standards'],
       ['Careers', 'about/careers'],
       ['Contact', 'about/contact'],
     ],
@@ -96,6 +97,9 @@ const LANDING_ROUTES = {
   'investment/hnw': 'hnw',
   'investment/institutional': 'institutional',
 }
+
+// Tag colour in menus: the podcast is teal, everything else terracotta.
+export const tagColor = (tag) => (tag === 'Podcast' ? 'var(--hw-teal)' : 'var(--hw-terracotta)')
 
 export function normalizeRoute(route) {
   const r = route || 'home'
@@ -123,6 +127,8 @@ export function activeSubRoute(route, section, sub) {
 const TITLES = Object.fromEntries([
   ...Object.values(SECTIONS).flatMap((s) => (s.items || []).map((it) => [it.r, it.label])),
   ...LEGAL_LINKS.map(([label, r]) => [r, label]),
+  ['insights/podcast', 'The Long View Podcast'],
+  ['insights/newsletter', 'The Long View Newsletter'],
   ['properties', 'Properties'],
   ['insights', 'Insights'],
 ])

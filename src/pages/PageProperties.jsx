@@ -140,7 +140,7 @@ function PropertyDetail({ sub, go }) {
 
   return (
     <div data-screen-label="Properties — Project" className="hw-split" style={sx('display:grid;grid-template-columns:minmax(320px,1fr) minmax(0,2fr);align-items:start;border-top:1px solid rgba(33,33,33,.2)')}>
-      <aside className="hw-split-left" style={sx('min-width:0;align-self:start;position:sticky;top:82px;max-height:calc(100vh - 82px);overflow:auto;border-right:1px solid rgba(33,33,33,.2);display:flex;flex-direction:column')}>
+      <aside className="hw-split-left" style={sx('min-width:0;align-self:start;position:sticky;top:82px;max-height:calc(100vh - 82px);max-height:calc(100svh - 82px);overflow:auto;border-right:1px solid rgba(33,33,33,.2);display:flex;flex-direction:column')}>
         <div style={sx('flex:none;padding:clamp(20px,2vw,32px) clamp(20px,2vw,32px) 0;display:flex;flex-direction:column;gap:16px')}>
           <Hv as="button" onClick={() => go('properties')} s={`align-self:flex-start;background:none;border:0;padding:0;cursor:pointer;color:var(--hw-black);${MONO};font-size:13px`} h="color:var(--hw-terracotta)">
             ← All properties
@@ -243,7 +243,7 @@ function PropertyDetail({ sub, go }) {
         )}
 
         {drawings.length > 0 && (
-          <section data-screen-label="Property — Drawings" onMouseEnter={() => setDwPaused(true)} onMouseLeave={() => setDwPaused(false)} style={sx('margin:0 48px;display:flex;flex-direction:column;gap:16px')}>
+          <section data-screen-label="Property — Drawings" onMouseEnter={() => setDwPaused(true)} onMouseLeave={() => setDwPaused(false)} style={sx('margin:0 clamp(20px,3.4vw,48px);display:flex;flex-direction:column;gap:16px')}>
             <div style={sx('display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-top:1px solid rgba(33,33,33,.2);padding-top:14px')}>
               <span style={sx('font-size:18px;font-weight:600')}>Drawings</span>
               <span style={sx('font-size:14px')}>{`${dwi + 1} / ${drawings.length}`}</span>
