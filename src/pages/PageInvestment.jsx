@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { Hv, sx, RULE_BG, HubspotNote } from '../design/ui.jsx'
 import DotIcon from '../design/DotIcon.jsx'
+import { StandardLogos } from './PageAbout.jsx'
 
 // Ported from ui_kits/website/PageInvestment.dc.html. `sub` is overview | growth | income |
 // funds | flexible | services.
@@ -30,7 +31,7 @@ const GROWTH = {
   why: {
     label: 'Why growth', h: 'We build what we intend to own.',
     p: ['Taking on development, construction and lease-up risk lets us design every building for resilience from the first drawing: lower operating costs, healthier homes and assets that stay competitive for decades.', 'The goal is a durable, modern portfolio of resilient buildings, built with the future in mind, and to keep getting better at building them, project by project.'],
-    quote: 'High architectural design and high construction quality aren’t vanity expenses; they are long-term insurance policies against obsolescence.', by: 'Gerald D. Hines, founder of Hines',
+    quote: 'Good design and quality construction aren’t a cost to cut. They are how a building stays relevant, and valuable, for decades.', by: 'David Constable, Founding Partner',
   },
   deliversH: 'Development value today. Stabilized income tomorrow.',
   delivers: ['Construction and lease-up value creation', 'Long-term capital appreciation', 'De-risked entitlement access at cost', 'Climate-resilient, future-proof assets', 'Residual income upon stabilization'],
@@ -69,7 +70,7 @@ const INCOME = {
   why: {
     label: 'Why income', h: 'Contrarian to buy. Disciplined to hold.',
     p: ['Real estate moves in cycles. We are patient opportunists who buy high-quality, modern, sustainable assets in tier-one growth markets when pricing is attractive, and who are equally content to hold, generate cash flow and let appreciation compound when it is not.', 'Our work on the Growth strategy means we know exactly what it takes to run an efficient, healthy building. We bring that same expertise to every asset we acquire.'],
-    quote: 'The key to successful investing isn’t buying good things but buying things well.', by: 'Howard Marks, co-founder of Oaktree Capital Management',
+    quote: 'A great building bought at the wrong price is still a poor investment. We wait for quality and value to meet.', by: 'Tim Blair, Founding Partner',
   },
   deliversH: 'Durable income, built on quality.',
   delivers: ['Resilient, tax-efficient income', 'Long-term capital appreciation', 'A conservative capital structure with low leverage', 'High-quality, inflation-resistant real estate', 'Beautiful buildings that create community and well-being'],
@@ -110,8 +111,8 @@ const INCOME = {
 }
 // The two trusts, as shown on Investments › Our funds.
 const FUNDS = [
-  { name: 'Heartwood Residential Growth Trust', kind: GROWTH.kind, logo: '/assets/logos/HW_Growth_Logo_Black.png', pitch: 'Builds resilient, beautiful, well-located buildings designed for long-term growth — developing purpose-built rental and holding through stabilization.', color: '#617954', short: 'Growth Trust', whyLabel: 'Why growth', why: 'Taking on development lets us design every building for resilience from the start.', r: 'investment/growth' },
-  { name: 'Heartwood Residential Income Trust', kind: INCOME.kind, logo: '/assets/logos/HW_Income_Logo_Black.png', pitch: 'Buys modern, efficient, stabilized assets already generating cash flow — at today’s reset pricing, with no legacy assets.', color: '#2697AA', short: 'Income Trust', whyLabel: 'Why income', why: 'What we learn building and operating efficient, healthy buildings, we apply to every acquisition.', r: 'investment/income' },
+  { name: 'Heartwood Residential Growth Trust', kind: GROWTH.kind, logo: '/assets/logos/HW_Growth_Logo_Black.png', pitch: 'Builds resilient, beautiful, well-located buildings designed for long-term growth — developing purpose-built rental and holding through stabilization.', color: 'var(--hw-cool-grey)', short: 'Growth Trust', whyLabel: 'Why growth', why: 'Taking on development lets us design every building for resilience from the start.', r: 'investment/growth' },
+  { name: 'Heartwood Residential Income Trust', kind: INCOME.kind, logo: '/assets/logos/HW_Income_Logo_Black.png', pitch: 'Buys modern, efficient, stabilized assets already generating cash flow — at today’s reset pricing, with no legacy assets.', color: 'var(--hw-hemlock)', short: 'Income Trust', whyLabel: 'Why income', why: 'What we learn building and operating efficient, healthy buildings, we apply to every acquisition.', r: 'investment/income' },
 ]
 
 const VEHICLES = [
@@ -157,7 +158,7 @@ const MARKET_GROUPS = [
 ]
 const STRATEGIES = [
   {
-    word: 'Growth', color: 'var(--hw-landscape)', ring: '/assets/logos/HW_Growth_Ring_Black.png', h: 'Build to hold.',
+    word: 'Growth', color: 'var(--hw-cool-grey)', ring: '/assets/logos/HW_Growth_Ring_Black.png', h: 'Build to hold.',
     lead: 'We develop energy-efficient, community-centric, healthy residential communities in supply-constrained markets.',
     points: [
       { k: 'Risk reduction', v: 'Our vertically integrated platform lets us underwrite hard and soft costs more accurately, so actual results vary less from our financial assumptions.' },
@@ -167,7 +168,7 @@ const STRATEGIES = [
     access: 'Heartwood Residential Growth Trust, joint ventures, Co-GP, co-investments and separately managed accounts.', r: 'investment/growth',
   },
   {
-    word: 'Income', color: 'var(--hw-teal)', ring: '/assets/logos/HW_Income_Ring_Black.png', h: 'Buy to hold.',
+    word: 'Income', color: 'var(--hw-hemlock)', ring: '/assets/logos/HW_Income_Ring_Black.png', h: 'Buy to hold.',
     lead: 'We acquire modern, stabilized, institutional-quality rental communities at today’s pricing, then improve them through ownership.',
     points: [
       { k: 'Designed to deliver', v: 'Resilient, tax-efficient monthly income, long-term capital appreciation and a conservative capital structure.' },
@@ -176,14 +177,6 @@ const STRATEGIES = [
     ],
     access: 'Heartwood Residential Income Trust, joint ventures, co-investments and separately managed accounts.', r: 'investment/income',
   },
-]
-const LP = '/assets/logos/partners/'
-const STANDARDS = [
-  { name: 'CaGBC Zero Carbon Building Standard', img: LP + 'CaGBC_Zero-Carbon-Building-Standard.png' },
-  { name: 'CRREM', img: LP + 'CRREM.png' },
-  { name: 'GRESB', img: LP + 'GRESB.png' },
-  { name: 'PRI', img: LP + 'PRI.png' },
-  { name: 'Net Zero Asset Managers Initiative', img: LP + 'NZAM.png' },
 ]
 const ROUTES = [
   { title: 'Private wealth', body: 'Family offices and high-net-worth investors. Invest directly in either trust from $25,000, or co-invest alongside us.', cta: 'For private wealth', r: 'investment/hnw' },
@@ -238,7 +231,7 @@ function Vehicle({ veh, isFunds, go }) {
           </div>
           <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(16px,2vw,28px)')}>
             {FUNDS.map((f) => (
-              <Hv key={f.r} as="button" onClick={() => go(f.r)} s="text-align:left;cursor:pointer;background:var(--hw-white);border:1.5px solid var(--hw-black);color:var(--hw-black);padding:0;display:flex;flex-direction:column" h="background:var(--hw-cool-grey)">
+              <Hv key={f.r} as="button" onClick={() => go(f.r)} s="text-align:left;cursor:pointer;background:var(--hw-white);border:1.5px solid var(--hw-black);color:var(--hw-black);padding:0;display:flex;flex-direction:column" h="background:rgba(197,220,234,.35)">
                 <div style={sx('display:flex;align-items:center;justify-content:center;padding:clamp(40px,6vw,88px) clamp(28px,4vw,64px);min-height:clamp(220px,22vw,320px);box-sizing:border-box;width:100%')}>
                   <img src={f.logo} alt={f.name} style={sx('width:100%;max-width:440px;height:auto;display:block')} />
                 </div>
@@ -440,23 +433,23 @@ function Overview({ go }) {
             </div>
           ))}
         </div>
-        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(20px,4vw,72px);align-items:center;background:var(--hw-brown);color:var(--hw-white);padding:clamp(28px,3.6vw,52px)')}>
+        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(20px,4vw,72px);align-items:center;background:var(--hw-white);color:var(--hw-black);border-top:4px solid var(--hw-terracotta);border-bottom:1px solid var(--hw-black);padding:clamp(28px,3.6vw,52px) 0')}>
           <div style={sx('display:flex;flex-direction:column;gap:12px')}>
-            <span style={sx(`${MONO};font-size:13px`)}>03 · Hold · Across both</span>
+            <span style={sx(`${MONO};font-size:13px;color:var(--hw-terracotta)`)}>03 · Hold · Across both</span>
             <h3 style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(30px,3vw,46px);line-height:1.05;letter-spacing:-.015em')}>Owned for the long view.</h3>
           </div>
           <div style={sx('display:flex;flex-direction:column;gap:18px;align-items:flex-start')}>
             <p style={sx('margin:0;font-size:clamp(17px,1.35vw,20px);line-height:1.55;text-wrap:pretty')}>
               Hold isn’t a third product. It’s how both strategies are managed. What we build becomes tomorrow’s income-producing portfolio, and what we buy we keep improving while we own it. Investors in either strategy benefit from the same patient ownership.
             </p>
-            <Hv as="button" onClick={() => go('about/who')} s={`padding:13px 20px;background:transparent;color:var(--hw-white);border:1.5px solid var(--hw-white);cursor:pointer;${MONO};font-size:13px`} h="background:var(--hw-white);color:var(--hw-black)">
+            <Hv as="button" onClick={() => go('about/who')} s={OUTLINE_SM} h="background:var(--hw-black);color:var(--hw-white)">
               Why we hold →
             </Hv>
           </div>
         </div>
       </section>
 
-      <section data-screen-label="Investment — Ways to invest" style={sx('background:var(--hw-cool-grey);padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:clamp(28px,3vw,48px)')}>
+      <section data-screen-label="Investment — Ways to invest" style={sx('background:var(--hw-white);border-top:1.5px solid var(--hw-terracotta);padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:clamp(28px,3vw,48px)')}>
         <div style={sx('display:flex;flex-direction:column;gap:20px')}>
           <p style={sx(EYEBROW)}>Ways to invest</p>
           <h2 style={sx(H2)}>One platform, several vehicles.</h2>
@@ -494,7 +487,7 @@ function Overview({ go }) {
         </div>
       </section>
 
-      <section data-screen-label="Investment — Invest your way" style={sx('background:var(--hw-cool-grey);padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:clamp(28px,3vw,48px)')}>
+      <section data-screen-label="Investment — Invest your way" style={sx('background:var(--hw-white);border-top:1.5px solid var(--hw-terracotta);padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:clamp(28px,3vw,48px)')}>
         <div style={sx(SPLIT_HEAD)}>
           <div style={sx('display:flex;flex-direction:column;gap:20px')}>
             <p style={sx(EYEBROW)}>Invest with us</p>
@@ -566,20 +559,14 @@ function Overview({ go }) {
       <section data-screen-label="Investment — Standards" style={sx('padding:clamp(40px,5vw,64px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:24px;border-top:1.5px solid var(--hw-terracotta)')}>
         <div style={sx('display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px 40px')}>
           <div style={sx('display:flex;flex-direction:column;gap:10px')}>
-            <p style={sx(EYEBROW)}>Standards and frameworks</p>
+            <p style={sx(EYEBROW)}>Signatories and frameworks</p>
             <p style={sx('margin:0;font-size:clamp(18px,1.4vw,21px);line-height:1.45')}>We design, measure and report against recognized standards.</p>
           </div>
           <Hv as="button" onClick={() => go('about/standards')} s={OUTLINE_SM} h="background:var(--hw-black);color:var(--hw-white)">
-            Our environmental standards →
+            Our standards →
           </Hv>
         </div>
-        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));border-top:1px solid var(--hw-black);border-left:1px solid var(--hw-black)')}>
-          {STANDARDS.map((l) => (
-            <div key={l.name} style={sx(`min-height:110px;display:flex;align-items:center;justify-content:center;padding:16px 20px;border-right:1px solid var(--hw-black);border-bottom:1px solid var(--hw-black);text-align:center;${MONO};font-size:14px;line-height:1.3`)}>
-              <img src={l.img} alt={l.name} style={sx('max-width:100%;max-height:64px;width:auto;height:auto;display:block;mix-blend-mode:multiply')} />
-            </div>
-          ))}
-        </div>
+        <StandardLogos />
       </section>
     </>
   )

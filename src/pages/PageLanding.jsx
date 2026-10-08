@@ -46,7 +46,7 @@ const PAGES = {
     form: { eyebrow: 'Institutional enquiries', title: 'Contact us.', note: 'Tell us about your mandate. We’ll meet first, then share the data room and DDQ.', cta: 'Send enquiry', thanks: 'Thank you. A senior member of our team will be in touch.', hubspot: 'institutional-enquiry', hasSelect: true, selectLabel: 'Organization type', options: ['Pension fund', 'Foundation or endowment', 'Insurer', 'Sovereign wealth fund', 'Consultant or placement agent', 'Other'] },
   },
   meeting: {
-    hero: { eyebrow: 'Investments · Schedule a meeting', title: 'Talk to someone who knows the portfolio.', intro: 'A 30-minute call with our investment team. We’ll learn about your goals, walk you through our Growth and Income strategies, and see if we’re the right fit.', cta: 'Invest with us', img: '/assets/renders/HW_360-Kennedy-Lane_1.png', faded: true },
+    hero: { eyebrow: 'Investments · Schedule a meeting', title: 'Meet with our investment team.', intro: 'An introductory meeting with our senior team to understand your objectives, review our Growth and Income strategies and discuss how we can partner.', cta: 'Invest with us', img: '/assets/renders/HW_360-Kennedy-Lane_1.png', faded: true },
     form: { eyebrow: 'Schedule a meeting', title: 'Pick a time that works.', note: 'You’ll receive a short prep email with what to expect and who you’ll be speaking with.', cta: 'Schedule a meeting', thanks: 'Booked. A confirmation and prep email are on the way.', hubspot: 'meeting-booking', hasSelect: true, selectLabel: 'Which best describes you?', options: ['Advisor (EMD, RIA, wealth manager)', 'Private wealth (family office or high-net-worth)', 'Institutional investor'] },
   },
   portal: {

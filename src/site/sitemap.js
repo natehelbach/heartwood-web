@@ -39,8 +39,8 @@ export const SECTIONS = {
     label: 'About',
     items: [
       { label: 'Who we are', r: 'about/who' },
-      { label: 'Team', r: 'about/leadership' },
       { label: 'Our standards', r: 'about/standards' },
+      { label: 'Team', r: 'about/leadership' },
       { label: 'Careers', r: 'about/careers' },
       { label: 'Contact', r: 'about/contact' },
     ],
@@ -72,8 +72,8 @@ export const FOOTER_COLUMNS = [
     label: 'About',
     items: [
       ['Who we are', 'about/who'],
-      ['Team', 'about/leadership'],
       ['Our standards', 'about/standards'],
+      ['Team', 'about/leadership'],
       ['Careers', 'about/careers'],
       ['Contact', 'about/contact'],
     ],
