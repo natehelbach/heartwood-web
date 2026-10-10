@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Hv, sx, DotField, RULE_BG, HubspotNote } from '../design/ui.jsx'
+import { Hv, sx, RULE_BG, HubspotNote } from '../design/ui.jsx'
 import HW_DATA from '../design/site-data.js'
 import DotIcon from '../design/DotIcon.jsx'
 import PageWhoB from './PageWhoB.jsx'
@@ -27,18 +27,14 @@ function Leadership() {
   const [open, setOpen] = useState(null)
   return (
     <section data-screen-label="Team" style={sx('background:var(--hw-white);color:var(--hw-black)')}>
-      <div style={sx('position:relative;overflow:hidden;min-height:clamp(380px,36vw,520px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));align-items:end')}>
-        <div style={sx('padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px) clamp(32px,4vw,56px);display:flex;flex-direction:column;gap:20px;position:relative;z-index:1')}>
-          <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:clamp(14px,1.2vw,18px);text-transform:uppercase;color:var(--hw-teal)')}>Team</p>
-          <h1 style={sx('margin:0;max-width:640px;font-family:var(--font-display);font-weight:500;font-size:clamp(34px,4.4vw,64px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance')}>One integrated team, building, owning and operating homes that last.</h1>
-          <p style={sx('margin:0;max-width:520px;font-size:clamp(17px,1.35vw,20px);line-height:1.5')}>
+      <div data-screen-label="Team — Hero" style={sx("position:relative;overflow:hidden;min-height:clamp(480px,48vw,720px);background:var(--hw-brown) url('/assets/photography/HW_MassTimber_Ceiling-Corner.jpg') center 15%/cover no-repeat;display:flex;align-items:flex-end")}>
+        <div style={sx('position:absolute;inset:0;background:var(--overlay-brown)')} />
+        <div style={sx('position:relative;padding:clamp(40px,5vw,72px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:20px;color:var(--hw-white)')}>
+          <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:clamp(14px,1.2vw,18px);text-transform:uppercase')}>Team</p>
+          <h1 style={sx('margin:0;max-width:760px;font-family:var(--font-display);font-weight:500;font-size:clamp(34px,4.4vw,64px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance')}>One integrated team, building, owning and operating homes that last.</h1>
+          <p style={sx('margin:0;max-width:560px;font-size:clamp(17px,1.35vw,20px);line-height:1.5')}>
             Our team brings together specialists from across real estate, each with deep experience in their disciplines.
           </p>
-        </div>
-        <div style={sx('position:relative;height:100%;min-height:340px')}>
-          <div style={sx('position:absolute;inset:0;pointer-events:none')}>
-            <DotField preset="icons" icons="OFFICE|CO-WORKING SPACE|LIBRARY|CLOCK" iconSize=".6" interval="4500" color="#2697AA" />
-          </div>
         </div>
       </div>
       {GROUPS.map(([label, key]) => (
@@ -167,10 +163,39 @@ const STD_EYEBROW = 'margin:0;font-family:var(--font-subhead);font-weight:500;fo
 const STD_H2 = 'margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.6vw,54px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance'
 const STD_BODY = 'margin:0;font-size:clamp(16px,1.2vw,18px);line-height:1.5;text-wrap:pretty'
 
+const STD_H3 = 'margin:24px 0 0;font-family:var(--font-display);font-weight:500;font-size:clamp(22px,1.9vw,28px);line-height:1.15;letter-spacing:-.01em'
+
+const STD_FOLLOW = [
+  ['CRREM', 'We set our emissions targets using national CRREM decarbonization pathways: science-based annual carbon intensity limits from 2020 to 2050, specific to each country and building type.'],
+  ['CaGBC Zero Carbon Building Standard', 'The Growth Trust prioritizes projects designed to meet, or already certified to, the Zero Carbon Building standard.'],
+  ['Net Zero Asset Managers initiative', 'As a signatory, we have committed Growth Trust assets to be managed toward net zero emissions by 2050 or sooner.'],
+  ['GHG Protocol', 'Our emissions reporting follows the GHG Protocol Corporate Standard. For Growth Trust assets, we also report embodied carbon under the Scope 3 Standard.'],
+  ['UN Sustainable Development Goals', 'Using the SDG Compass, we identified the SDGs our sustainability metrics contribute to measurably.'],
+]
+
+const STD_REPORT = [
+  ['PRI', 'We are a signatory to the Principles for Responsible Investment and report annually.'],
+  ['GRESB', 'The Growth Trust reports to GRESB annually.'],
+  ['Common Impact Data Standard', 'Our sustainability indicators are published in the Common Impact Data Standard format.'],
+]
+
+function FrameworkList({ items, last }) {
+  return (
+    <div style={sx(`display:flex;flex-direction:column;border-bottom:1px solid var(--hw-black)${last ? ';margin-bottom:24px' : ''}`)}>
+      {items.map(([k, v]) => (
+        <div key={k} style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:8px clamp(20px,3vw,48px);padding:18px 0;border-top:1px solid var(--hw-black)')}>
+          <span style={sx('font-family:var(--font-subhead);font-weight:500;font-size:15px;text-transform:uppercase;line-height:1.35')}>{k}</span>
+          <p style={sx('margin:0;max-width:720px;font-size:18px;line-height:1.5;text-wrap:pretty')}>{v}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 function Standards() {
   return (
     <>
-      <section data-screen-label="Standards — Hero" style={sx("position:relative;overflow:hidden;min-height:clamp(440px,44vw,640px);background:var(--hw-brown) url('/assets/photography/HW_Photo_Forest-Light.jpg') center 40%/cover no-repeat;display:flex;align-items:flex-end")}>
+      <section data-screen-label="Standards — Hero" style={sx("position:relative;overflow:hidden;min-height:clamp(440px,44vw,640px);background:var(--hw-brown) url('/assets/photography/HW_Wood-Slice-Rings.jpg') 30% 15%/cover no-repeat;display:flex;align-items:flex-end")}>
         <div style={sx('position:absolute;inset:0;background:var(--overlay-brown)')} />
         <div style={sx('position:relative;padding:clamp(32px,4vw,56px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:20px;color:var(--hw-white)')}>
           <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:clamp(14px,1.2vw,18px);text-transform:uppercase')}>Our standards</p>
@@ -266,6 +291,11 @@ function Standards() {
 
       <section data-screen-label="Standards — Frameworks" style={sx('padding:clamp(32px,3.5vw,48px) clamp(20px,3vw,40px) clamp(48px,6vw,88px);display:flex;flex-direction:column;gap:20px')}>
         <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:clamp(16px,1.3vw,20px);text-transform:uppercase;color:var(--hw-terracotta)')}>Signatories and frameworks</p>
+        <p style={sx('margin:0;max-width:720px;font-size:clamp(18px,1.5vw,22px);line-height:1.5;text-wrap:pretty')}>We design, measure and report against recognized standards.</p>
+        <h3 style={sx(STD_H3)}>Standards we follow</h3>
+        <FrameworkList items={STD_FOLLOW} />
+        <h3 style={sx(STD_H3)}>How we report</h3>
+        <FrameworkList items={STD_REPORT} last />
         <StandardLogos />
       </section>
     </>
@@ -275,17 +305,20 @@ function Standards() {
 function Contact() {
   const [sent, setSent] = useState(false)
   return (
+    <>
+      <section data-screen-label="Contact — Hero" style={sx("position:relative;overflow:hidden;min-height:clamp(480px,48vw,720px);background:var(--hw-brown) url('/assets/photography/HW_MassTimber_Living-Room-Window.jpg') center 75%/cover no-repeat;display:flex;align-items:flex-end")}>
+        <div style={sx('position:absolute;inset:0;background:var(--overlay-brown)')} />
+        <div style={sx('position:relative;padding:clamp(40px,5vw,72px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:20px;color:var(--hw-white)')}>
+          <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:clamp(14px,1.2vw,18px);text-transform:uppercase')}>Contact</p>
+          <h1 style={sx('margin:0;max-width:760px;font-family:var(--font-display);font-weight:500;font-size:clamp(34px,4.4vw,64px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance')}>Contact us.</h1>
+        </div>
+      </section>
     <section data-screen-label="Contact" style={sx(`padding:clamp(48px,6vw,96px) clamp(20px,3vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(32px,5vw,80px);align-items:start;background:${RULE_BG}`)}>
       <div style={sx('display:flex;flex-direction:column;gap:24px')}>
-        <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:clamp(18px,1.4vw,22px);text-transform:uppercase;color:var(--hw-terracotta)')}>Contact</p>
-        <h1 style={sx('margin:0;max-width:640px;font-family:var(--font-display);font-weight:500;font-size:clamp(34px,4.4vw,64px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance')}>Contact us.</h1>
         <p style={sx('margin:0;max-width:520px;font-size:clamp(18px,1.5vw,22px);line-height:1.5')}>
-          Questions about Heartwood, our properties or working with us. We’ll reply within one business day.
+          We’d love to hear from you, whether it’s about Heartwood, our properties or working together. Send us a note and we’ll reply within one business day.
         </p>
-        <div style={sx('display:flex;flex-direction:column;gap:6px;font-family:var(--font-subhead);font-weight:500;font-size:14px;text-transform:uppercase;line-height:1.5')}>
-          <span>25 King St W, Toronto, Ontario M5L 2A1</span>
-          <a href="mailto:info@heartwood.com">info@heartwood.com</a>
-        </div>
+        <iframe src="/contact-map.html" title="Heartwood offices: Toronto and San Francisco" style={sx('width:100%;max-width:640px;aspect-ratio:16/10;border:0;display:block')} />
       </div>
       <div style={sx('display:flex;flex-direction:column;gap:18px')}>
         <HubspotNote label="General contact" />
@@ -311,17 +344,15 @@ function Contact() {
         )}
       </div>
     </section>
+    </>
   )
 }
 
 function Careers() {
   return (
     <>
-      <section data-screen-label="Careers — Hero" style={sx("position:relative;overflow:hidden;min-height:clamp(480px,48vw,720px);background:var(--hw-brown) url('/assets/lifestyle/HW_Lifestyle_37.jpg') center/cover no-repeat;display:flex;align-items:flex-end")}>
+      <section data-screen-label="Careers — Hero" style={sx("position:relative;overflow:hidden;min-height:clamp(480px,48vw,720px);background:var(--hw-brown) url('/assets/photography/HW_MassTimber_Lobby-Pendants.jpg') center 30%/cover no-repeat;display:flex;align-items:flex-end")}>
         <div style={sx('position:absolute;inset:0;background:var(--overlay-brown)')} />
-        <div style={sx('position:absolute;top:0;bottom:0;right:0;width:min(100%,max(46%,380px));pointer-events:none')}>
-          <DotField preset="icons" icons="CO-WORKING SPACE|CAFE|OFFICE|COMPUTER|BUILDING|RETURNS" iconSize=".6" interval="4800" color="#C5DCEA" />
-        </div>
         <div style={sx('position:relative;padding:clamp(40px,5vw,72px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:20px;color:var(--hw-white)')}>
           <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:clamp(14px,1.2vw,18px);text-transform:uppercase')}>Careers</p>
           <h1 style={sx('margin:0;max-width:760px;font-family:var(--font-display);font-weight:500;font-size:clamp(34px,4.4vw,64px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance')}>Help us build, own and operate the next generation of housing.</h1>

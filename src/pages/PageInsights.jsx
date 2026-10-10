@@ -245,11 +245,7 @@ function NewsletterLanding({ go }) {
             Our view of the markets we build and buy in, previews of new projects, and the latest across the Heartwood platform — from the desks of our founders.
           </p>
         </div>
-        <div style={sx('position:relative;min-height:380px')}>
-          <div style={sx('position:absolute;inset:0;pointer-events:none')}>
-            <DotField preset="icons" icons="MAIL|LIBRARY|CLOCK|RETURNS" iconSize=".6" interval="5400" color="#BC532D" />
-          </div>
-        </div>
+        <div style={sx("min-height:380px;background:var(--hw-cool-grey) url('/assets/photography/HW_MassTimber_Coffee-Table.jpg') center 60%/cover no-repeat")} />
       </section>
       <section style={sx('padding:0 clamp(20px,3vw,40px) clamp(40px,5vw,72px);display:flex;flex-direction:column')}>
         <div style={sx(`display:flex;justify-content:space-between;padding:14px 0;border-top:1px solid var(--hw-black);${MONO};font-size:13px`)}>
@@ -461,15 +457,29 @@ function PageInsights({ sub = '', go }) {
     <div style={sx('background:var(--hw-white);color:var(--hw-black);font-family:var(--font-body)')}>
       {isHub && (
         <>
-          <section data-screen-label="Insights — Hero" style={sx('position:relative;overflow:hidden;min-height:clamp(420px,40vw,600px);display:flex;align-items:flex-end')}>
-            <div style={sx('position:absolute;top:0;bottom:0;right:0;width:min(100%,max(46%,380px));pointer-events:none')}>
-              <DotField preset="icons" icons="LIBRARY|MAIL|RETURNS|CLOCK" iconSize=".6" interval="5100" color="#2697AA" />
-            </div>
-            <div style={sx('position:relative;padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:20px')}>
-              <p style={sx(`margin:0;${MONO};font-size:clamp(14px,1.2vw,18px);color:var(--hw-teal)`)}>{eyebrow}</p>
-              <h1 style={sx('margin:0;max-width:880px;font-family:var(--font-display);font-weight:500;font-size:clamp(34px,4.4vw,64px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance;background:rgba(249,249,249,.82)')}>{title}</h1>
-            </div>
-          </section>
+          {sub === 'news' || sub === 'perspectives' ? (
+            <section data-screen-label={eyebrow + ' — Header'} style={sx('position:relative;overflow:hidden;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));min-height:clamp(480px,46vw,700px)')}>
+              <div style={sx('padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:24px;justify-content:flex-end;position:relative;z-index:1')}>
+                <p style={sx(`margin:0;${MONO};font-size:clamp(18px,1.4vw,22px);color:var(--hw-terracotta)`)}>Insights · {eyebrow}</p>
+                <h1 style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(48px,6.4vw,120px);line-height:.92;letter-spacing:-.03em')}>{eyebrow}</h1>
+                <p style={sx('margin:0;max-width:560px;font-size:clamp(18px,1.5vw,22px);line-height:1.5')}>{title}</p>
+              </div>
+              {sub === 'news' ? (
+                <div style={sx("min-height:380px;background:var(--hw-cool-grey) url('/assets/photography/HW_MassTimber_Suite-415.jpg') 70% 82%/cover no-repeat")} />
+              ) : (
+                <div style={sx("min-height:380px;background:var(--hw-cool-grey) url('/assets/photography/HW_MassTimber_Studio-Lounge.jpg') center 60%/cover no-repeat")} />
+              )}
+            </section>
+          ) : (
+            <section data-screen-label="Insights — Hero" style={sx('position:relative;overflow:hidden;min-height:clamp(480px,48vw,720px);background:var(--hw-brown);display:flex;align-items:flex-end')}>
+              <div style={sx("position:absolute;inset:0;background:url('/assets/photography/HW_MassTimber_Dining.jpg') center 40%/cover no-repeat")} />
+              <div style={sx('position:absolute;inset:0;background:var(--overlay-brown)')} />
+              <div style={sx('position:relative;padding:clamp(40px,5vw,72px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:20px;color:var(--hw-white)')}>
+                <p style={sx(`margin:0;${MONO};font-size:clamp(14px,1.2vw,18px)`)}>{eyebrow}</p>
+                <h1 style={sx('margin:0;max-width:880px;font-family:var(--font-display);font-weight:500;font-size:clamp(34px,4.4vw,64px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance')}>{title}</h1>
+              </div>
+            </section>
+          )}
           {sub === '' && (
             <section style={sx('padding:0 clamp(20px,3vw,40px) clamp(40px,5vw,72px)')}>
               <Hv as="button" onClick={() => go('insights/newsletter/01')} s="width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:0;background:var(--hw-white);color:var(--hw-black);border:0;padding:0;cursor:pointer;text-align:left" h="background:var(--hw-cool-grey)">

@@ -6,8 +6,7 @@ import HW_DATA from '../design/site-data.js'
 
 const FP = [
   { slug: '3385-lawrence', short: '3385 Lawrence', desc: '155 purpose-built rental homes in Toronto, planned around a landscaped courtyard, shared amenities and transit access.' },
-  { slug: '360-kennedy', short: '360 Kennedy', desc: 'Purpose-built rental housing in Ottawa, part of our Growth strategy.' },
-  { slug: '353-sherbourne', short: '353 Sherbourne', desc: 'Purpose-built rental housing in downtown Toronto, part of our Growth strategy.' },
+    { slug: '353-sherbourne', short: '353 Sherbourne', desc: 'Purpose-built rental housing in downtown Toronto, part of our Growth strategy.' },
   { slug: '4094-tomken', short: '4094 Tomken', desc: 'Purpose-built rental housing in Mississauga, part of our Growth strategy.' },
 ].map((x) => ({ ...(HW_DATA.projects.find((p) => p.slug === x.slug) || {}), ...x }))
 
@@ -19,7 +18,7 @@ const SERVE = [
 
 const BUILT = [
   { label: 'Home — Well-being', title: 'Built for well-being.', body: 'Healthier homes come from natural light, clean air and space to gather. We design them in from day one.', img: '/assets/photography/HW_Photo_Fitness-Gym.jpg', cap: 'On-site fitness, part of everyday life' },
-  { label: 'Home — Long term', title: 'Built for the long term.', body: 'Durable materials, smart systems and repeatable design keep buildings performing for decades.', img: '/assets/project-renders/HW_Render_3385-Lawrence-Courtyard.jpg', cap: '3385 Lawrence Avenue East, courtyard rendering' },
+  { label: 'Home — Long term', title: 'Built for the long term.', body: 'Durable materials, smart systems and repeatable design keep buildings performing for decades.', img: '/assets/project-renders/HW_Mass-Timber-Living-Building.jpg', cap: 'Mass timber living building, designed by MGA | Michael Green Architects' },
   { label: 'Home — Resilient investments', title: 'Built for resilient investments.', body: 'Quality buildings, strong demand and active management hold value through economic cycles. Two strategies, one discipline.', img: '/assets/project-renders/HW_Render_360-Kennedy-Lane.jpg', cap: '360 Kennedy Lane, Ottawa, rendering' },
 ]
 
@@ -102,8 +101,8 @@ function PageHome({ go }) {
           </div>
         </div>
         <figure style={sx('margin:40px 0 0;display:flex;flex-direction:column;gap:12px')}>
-          <div style={sx(FIG_IMG('/assets/photography/HW_Photo_Timber-Open-Plan.jpg'))} />
-          <figcaption style={sx('font-size:18px;font-style:italic')}>Timber ceilings, natural light and warm, durable finishes.</figcaption>
+          <div style={sx("aspect-ratio:16/9;background:var(--hw-cool-grey) url('/assets/photography/HW_MassTimber_Studio.jpg') center 40%/cover no-repeat")} />
+          <figcaption style={sx('font-size:18px;font-style:italic')}>Timber ceilings, natural light and warm, durable finishes. Designed by MGA | Michael Green Architects.</figcaption>
         </figure>
       </section>
 
@@ -207,13 +206,12 @@ function PageHome({ go }) {
       </section>
 
       <section data-screen-label="Home — Platform deck CTA" style={sx('background:var(--hw-terracotta);color:var(--hw-white);padding:clamp(48px,5vw,88px) clamp(20px,3vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(32px,4vw,64px);align-items:center')}>
-        <div style={sx('display:flex;flex-direction:column;gap:20px')}>
-          <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:clamp(14px,1.2vw,18px);text-transform:uppercase')}>Start with a discovery meeting</p>
+        <div style={sx('display:flex;flex-direction:column;justify-content:center;align-self:stretch')}>
           <p style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.6vw,52px);line-height:1.08;letter-spacing:-.015em;max-width:640px;text-wrap:balance')}>Build the next generation of real estate with us.</p>
         </div>
         <div style={sx('display:flex;flex-direction:column;gap:24px')}>
           <p style={sx('margin:0;max-width:520px;font-size:clamp(17px,1.4vw,20px);line-height:1.5')}>
-            A 30-minute conversation with our investment team. Tell us whether you’re an advisor, private investor or institution and we’ll take it from there.
+            Meet with our investment team to review our funds, strategy and track record. We work with financial advisors, private investors and institutions, and tailor each conversation to your mandate.
           </p>
           <Hv as="button" onClick={nav('investment/meeting')} s="align-self:flex-start;padding:16px 26px;background:var(--hw-black);color:var(--hw-white);border:0;cursor:pointer;font-family:var(--font-subhead);font-weight:500;font-size:15px;letter-spacing:.02em;text-transform:uppercase" h="background:var(--hw-terracotta)">
             Book a discovery meeting →

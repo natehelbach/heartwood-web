@@ -15,6 +15,8 @@ const FILTERS = [
 ]
 
 const MONO = 'font-family:var(--font-subhead);font-weight:500;text-transform:uppercase'
+// The design currently hides the callout row under the project gallery.
+const SHOW_CALLOUTS = false
 
 function PropertyList({ go }) {
   const [sel, setSel] = useState({ country: 'All', strategy: 'All' })
@@ -80,7 +82,7 @@ function ProjectCard({ p, go }) {
         </span>
       </span>
       <span style={sx('display:block;width:100%;aspect-ratio:2/3;overflow:hidden;background:var(--hw-cool-grey)')}>
-        <img src={p.img} alt={p.name} style={sx(`width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;transform:${hover ? 'scale(1.03)' : 'none'}`)} />
+        <img src={p.img} alt={p.name} style={sx(`width:100%;height:100%;object-fit:cover;object-position:${p.pos || 'center'};display:block;transition:transform .6s ease;transform:${hover ? 'scale(1.03)' : 'none'}`)} />
       </span>
     </button>
   )
@@ -183,13 +185,17 @@ function PropertyDetail({ sub, go }) {
               ))}
             </div>
           ))}
-          {c.materialBoard && (
-            <figure data-screen-label="Property — Material board" style={sx('margin:0;padding-top:12px;border-top:1px solid var(--hw-black);display:flex;flex-direction:column;gap:10px')}>
-              <span style={sx(`${MONO};font-size:12px`)}>Material board</span>
-              <img src={c.materialBoard.src} alt="Material board" style={sx('width:100%;max-width:520px;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
-              <figcaption style={sx('font-size:14px;max-width:520px')}>{c.materialBoard.cap}</figcaption>
-            </figure>
-          )}
+          <figure data-screen-label="Property — Material board" style={sx('margin:0;padding-top:12px;border-top:1px solid var(--hw-black);display:flex;flex-direction:column;gap:10px')}>
+            <span style={sx(`${MONO};font-size:12px`)}>Material board</span>
+            {c.materialBoard ? (
+              <>
+                <img src={c.materialBoard.src} alt="Material board" style={sx('width:100%;max-width:520px;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
+                <figcaption style={sx('font-size:14px;max-width:520px')}>{c.materialBoard.cap}</figcaption>
+              </>
+            ) : (
+              <div style={sx(`width:100%;max-width:520px;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;border:1.5px dashed rgba(33,33,33,.4);background:var(--hw-cool-grey);${MONO};font-size:12px;opacity:.7`)}>Material board to come</div>
+            )}
+          </figure>
         </div>
       </aside>
 
@@ -217,7 +223,7 @@ function PropertyDetail({ sub, go }) {
               <span>{n > 1 ? `${ii + 1} / ${n}` : ''}</span>
             </figcaption>
           </figure>
-          {callouts.length > 0 && (
+          {SHOW_CALLOUTS && callouts.length > 0 && (
             <div style={sx('margin:16px 48px 0;display:flex;flex-wrap:wrap;gap:10px 28px')}>
               {callouts.map((co) => (
                 <span key={co} style={sx(`display:flex;align-items:center;gap:10px;${MONO};font-size:13px`)}>
@@ -241,6 +247,13 @@ function PropertyDetail({ sub, go }) {
             ))}
           </div>
         )}
+
+        {(c.scroll || []).map((si) => (
+          <figure key={si.src} data-screen-label="Property — Photo" style={sx('margin:0 48px;display:flex;flex-direction:column;gap:10px')}>
+            <img src={si.src} alt={si.cap} style={sx('width:100%;aspect-ratio:3/2;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
+            <figcaption style={sx('font-size:14px;font-style:italic')}>{si.cap}</figcaption>
+          </figure>
+        ))}
 
         {drawings.length > 0 && (
           <section data-screen-label="Property — Drawings" onMouseEnter={() => setDwPaused(true)} onMouseLeave={() => setDwPaused(false)} style={sx('margin:0 clamp(20px,3.4vw,48px);display:flex;flex-direction:column;gap:16px')}>

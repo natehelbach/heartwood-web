@@ -15,7 +15,7 @@ const CHAPTERS = [
 ]
 
 const TIERS = [
-  { n: '01', w: 'Build', k: 'Build-to-hold development', p: 'Our building strategy is focused on purpose-built rental communities in supply-constrained markets, built in an efficient and innovative manner to create resilient assets designed for the future.', f: 'Growth strategy', r: 'investment/growth' },
+  { n: '01', w: 'Build', k: 'Build to Hold development', p: 'Our building strategy is focused on purpose-built rental communities in supply-constrained markets, built in an efficient and innovative manner to create resilient assets designed for the future.', f: 'Growth strategy', r: 'investment/growth' },
   { n: '02', w: 'Buy', k: 'Core acquisition', p: 'We acquire well-located, modern, stabilized, institutional-quality rental properties at attractive entry points. Through our management system and operating efficiency, we increase rental income, reduce expenses by optimizing building operations, and hold for the long term to capture cash flow and appreciation.', f: 'Income strategy', r: 'investment/income' },
   { n: '03', w: 'Hold', k: 'Long-term ownership', p: 'We hold to capture development value on what we build, and income and appreciation on what we buy.', f: 'Subscribe to The Long View', r: 'insights/newsletter' },
 ]

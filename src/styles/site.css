@@ -593,9 +593,9 @@ input::placeholder {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 50%;
+  left: 23%;
   transform: translateX(-50%);
-  width: min(100%, 64%);
+  width: 36%;
 }
 
 .site-footer__mark {

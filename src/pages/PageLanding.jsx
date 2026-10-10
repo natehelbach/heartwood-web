@@ -62,7 +62,7 @@ const AUD = {
     heading: 'How we work with advisors',
     items: [{ no: '01', title: 'Clear materials', body: 'Fund overviews, the Offering Memorandum and client-ready summaries for each trust.' }, { no: '02', title: 'Ongoing education', body: 'Webinars and whitepapers on private real estate, tax, legal and planning topics.' }, { no: '03', title: 'Access for your clients', body: 'Bring a group of clients into an opportunity together, with our team alongside you.' }, { no: '04', title: 'A dedicated contact', body: 'One person for subscriptions, documents and client questions.' }],
     link: 'See upcoming advisor events', r: 'insights/events',
-    oppHeading: 'What you can offer your clients', oppIntro: 'Two trusts, available in Series A and Series F, with a $25,000 minimum per client.',
+    oppHeading: 'What you can offer your clients', oppIntro: 'Two trusts, both available to your clients in Series A: $25,000 minimum for the Growth Trust and $20,000 for the Income Trust.',
     opps: [
       { tag: 'Growth strategy', dot: 'var(--fund-growth)', title: 'Heartwood Residential Growth Trust', body: 'New purpose-built rental, developed and held for long-term appreciation.', cta: 'Explore the Growth Trust', r: 'investment/growth' },
       { tag: 'Income strategy', dot: 'var(--fund-income)', title: 'Heartwood Residential Income Trust', body: 'Stabilized buildings that pay monthly distributions, with an optional DRIP.', cta: 'Explore the Income Trust', r: 'investment/income' },
@@ -70,12 +70,13 @@ const AUD = {
     ],
     factsHeading: 'The details advisors ask about first.',
     facts: [
-      { k: 'Who it’s for', v: 'EMDs, investment dealers, portfolio managers, RIAs and wealth managers.' }, { k: 'Minimum', v: '$25,000 per client.' },
-      { k: 'Unit series', v: 'Series A pays a 1% annual trailing commission to your dealer. Series F is for fee-based accounts.' },
+      { k: 'Who it’s for', v: 'EMDs, investment dealers, portfolio managers, RIAs and wealth managers.' },
+      { k: 'Minimum', v: '$25,000 per client for the Growth Trust, $20,000 for the Income Trust.' },
+      { k: 'Unit series', v: 'Series A in both trusts, with an up-front commission and a trailer of up to 1.0% a year to your dealer. Institutional series (Growth Series I, Income Series B) carry no trailer.' },
       { k: 'Eligibility', v: 'Accredited investors, and eligible investors under the offering memorandum exemption where it applies.' },
       { k: 'Registered accounts', v: 'Eligible for RRSPs, RRIFs, TFSAs and FHSAs through a supported custodian.' },
-      { k: 'Subscriptions', v: 'Signed through DocuSign. Funds go to SGGG, our record keeper.' },
-      { k: 'Reporting', v: 'Monthly statements and T3 slips. You see your clients’ holdings in the advisor portal.' },
+      { k: 'Subscriptions', v: 'Signed through DocuSign. Clients fund by wire to the trust, or through Olympia Trust for registered accounts. SGGG, our record keeper, records the units.' },
+      { k: 'Reporting', v: 'Monthly statements and T3 slips from SGGG, our record keeper. You see your clients’ units, unit price, market value and returns in the advisor portal.' },
     ],
     stepsHeading: 'How it works',
     steps: [{ no: '01', title: 'Request access', body: 'Tell us about your firm. We confirm your registration within one business day.' }, { no: '02', title: 'Review the materials', body: 'Offering Memorandum, due diligence pack and client-ready summaries.' }, { no: '03', title: 'Allocate for clients', body: 'Start a subscription from the advisor portal. Your client signs electronically.' }, { no: '04', title: 'Stay informed', body: 'Statements, distributions and project updates for every client, in one place.' }],
@@ -88,7 +89,7 @@ const AUD = {
     heading: 'What to expect from us',
     items: [{ no: '01', title: 'Two strategies', body: 'Growth for long-term appreciation. Income for regular distributions. Or both.' }, { no: '02', title: 'Direct access', body: 'Speak with the people who build and manage the buildings you invest in.' }, { no: '03', title: 'Regular updates', body: 'The Long View every month, plus project milestones as they happen.' }, { no: '04', title: 'Events and tours', body: 'Investor evenings each quarter and building tours when there’s something to see.' }],
     link: 'Compare our investment strategies', r: 'investment/overview',
-    oppHeading: 'Ways to invest with us', oppIntro: 'Invest directly in either trust from $25,000. Family offices can also co-invest alongside us in specific projects.',
+    oppHeading: 'Ways to invest with us', oppIntro: 'Invest directly from $25,000 in the Growth Trust or $20,000 in the Income Trust. Family offices can also co-invest alongside us in specific projects.',
     opps: [
       { tag: 'Growth strategy', dot: 'var(--fund-growth)', title: 'Heartwood Residential Growth Trust', body: 'For long-term appreciation. We build new rental homes and hold them.', cta: 'Explore the Growth Trust', r: 'investment/growth' },
       { tag: 'Income strategy', dot: 'var(--fund-income)', title: 'Heartwood Residential Income Trust', body: 'For regular income. Monthly distributions from stabilized buildings.', cta: 'Explore the Income Trust', r: 'investment/income' },
@@ -96,15 +97,16 @@ const AUD = {
     ],
     factsHeading: 'The details that matter before you invest.',
     facts: [
-      { k: 'Who it’s for', v: 'Accredited investors, entrepreneurs, families and family offices.' }, { k: 'Minimum', v: '$25,000.' },
+      { k: 'Who it’s for', v: 'Accredited investors, entrepreneurs, families and family offices.' },
+      { k: 'Minimum', v: 'Series A: $25,000 for the Growth Trust, $20,000 for the Income Trust. Growth Series F: $1,000,000.' },
       { k: 'Distributions', v: 'The Income Trust pays monthly, with an option to reinvest. The Growth Trust reinvests for long-term value.' },
       { k: 'Liquidity', v: 'Monthly redemptions with notice. Early redemption fees may apply in the first years.' },
-      { k: 'Registered accounts', v: 'Hold units in an RRSP, RRIF, TFSA or FHSA through a self-directed plan.' },
+      { k: 'Registered accounts', v: 'Hold units in an RRSP, RRIF, TFSA or FHSA through a self-directed plan with Olympia Trust.' },
       { k: 'Tax reporting', v: 'T3 slips by the end of March, or NR4 for non-residents.' },
       { k: 'Investor portal', v: 'Holdings, statements and documents online, any time.' },
     ],
     stepsHeading: 'How it works',
-    steps: [{ no: '01', title: 'Book a call', body: 'A 30-minute conversation about your goals and our two strategies.' }, { no: '02', title: 'Review the documents', body: 'We send the Offering Memorandum and answer any questions.' }, { no: '03', title: 'Subscribe', body: 'Sign electronically and send funds to SGGG, our record keeper.' }, { no: '04', title: 'Track your investment', body: 'Monthly statements and updates in the investor portal.' }],
+    steps: [{ no: '01', title: 'Book a call', body: 'A 30-minute conversation about your goals and our two strategies.' }, { no: '02', title: 'Review the documents', body: 'We send the Offering Memorandum and answer any questions.' }, { no: '03', title: 'Subscribe', body: 'Sign electronically, then fund by wire or through Olympia Trust for registered accounts.' }, { no: '04', title: 'Track your investment', body: 'Monthly statements and updates in the investor portal.' }],
     docs: [{ t: 'Growth Trust overview', m: 'Strategy, projects and target returns.', cta: 'Request' }, { t: 'Income Trust overview', m: 'Buildings, distributions and occupancy.', cta: 'Request' }, { t: 'The Long View', m: 'Our monthly letter from the founders.', cta: 'Subscribe' }, { t: 'Investor evenings', m: 'Quarterly, in Toronto.', cta: 'Join' }],
     contact: { n: 'Dylan Kent', t: 'Private Wealth', img: '/assets/team/HW_Team_Dylan-Kent_HR.jpg', body: 'Your contact for questions about our strategies, subscriptions and your account.' },
   },
@@ -123,7 +125,7 @@ const AUD = {
     factsHeading: 'What your investment committee will ask.',
     facts: [
       { k: 'Who it’s for', v: 'Pension funds, foundations, endowments, insurers and sovereign wealth funds.' },
-      { k: 'Minimum', v: '$25,000 for trust units. Mandates and partnerships are sized to your programme.' },
+      { k: 'Minimum', v: '$5,000,000 for Growth Series I and $1,000,000 for Income Series B. Mandates and partnerships are sized to your programme.' },
       { k: 'Alignment', v: 'We build to hold, and the team invests alongside our partners.' },
       { k: 'Governance', v: 'Independent advisory board, audited financials, SGGG as record keeper.' },
       { k: 'Reporting', v: 'Quarterly reporting, with property-level data available.' },
@@ -520,11 +522,16 @@ function PageLanding({ sub, go }) {
   return (
     <div style={sx('background:var(--hw-white);color:var(--hw-black);font-family:var(--font-body)')}>
       {plainHero ? (
-        <section data-screen-label={'Landing — ' + s} style={sx('padding:clamp(56px,8vw,128px) clamp(20px,3vw,40px) clamp(32px,4vw,56px);display:flex;flex-direction:column;gap:24px')}>
-          <p style={sx(EYEBROW)}>{hero.eyebrow}</p>
-          <h1 style={sx('margin:0;max-width:900px;font-family:var(--font-display);font-weight:500;font-size:clamp(44px,6vw,96px);line-height:1;letter-spacing:-.025em;text-wrap:balance')}>{hero.title}</h1>
-          <p style={sx('margin:0;max-width:680px;font-size:clamp(18px,1.5vw,22px);line-height:1.5;text-wrap:pretty')}>{hero.intro}</p>
-          {s === 'podcast' && <PlatformButtons />}
+        <section data-screen-label={'Landing — ' + s} style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))')}>
+          <div style={sx('padding:clamp(56px,8vw,128px) clamp(20px,3vw,40px) clamp(32px,4vw,56px);display:flex;flex-direction:column;gap:24px;justify-content:flex-end')}>
+            <p style={sx(EYEBROW)}>{hero.eyebrow}</p>
+            <h1 style={sx('margin:0;max-width:900px;font-family:var(--font-display);font-weight:500;font-size:clamp(44px,6vw,96px);line-height:1;letter-spacing:-.025em;text-wrap:balance')}>{hero.title}</h1>
+            <p style={sx('margin:0;max-width:680px;font-size:clamp(18px,1.5vw,22px);line-height:1.5;text-wrap:pretty')}>{hero.intro}</p>
+            {s === 'podcast' && <PlatformButtons />}
+          </div>
+          {s === 'podcast' && (
+            <div style={sx("min-height:clamp(380px,40vw,640px);background:var(--hw-cool-grey) url('/assets/photography/HW_MassTimber_Lounge-Corner.jpg') center 85%/cover no-repeat")} />
+          )}
         </section>
       ) : (
         <section data-screen-label={'Landing — ' + s} style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));min-height:clamp(440px,42vw,640px)')}>
