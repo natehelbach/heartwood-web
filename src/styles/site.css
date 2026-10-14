@@ -698,3 +698,9 @@ input::placeholder {
     grid-template-columns: minmax(0, 1fr) !important;
   }
 }
+@media (max-width: 1100px) {
+  [data-m-unstick] {
+    position: static !important;
+    max-width: none !important;
+  }
+}

@@ -143,7 +143,7 @@ function PageArticle({ slug, go }) {
             <img src={a.img} alt="" style={sx('width:100%;aspect-ratio:16/7;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
           </div>
           <section data-screen-label="Perspective — Body" style={sx('padding:clamp(40px,5vw,80px) clamp(20px,3vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(32px,5vw,96px);align-items:start;max-width:1280px')}>
-            <aside style={sx('position:sticky;top:96px;display:flex;flex-direction:column;gap:18px;max-width:340px')}>
+            <aside data-m-unstick="" style={sx('position:sticky;top:96px;display:flex;flex-direction:column;gap:18px;max-width:340px')}>
               <p style={sx(`margin:0;${MONO};font-size:13px;color:var(--hw-black)`)}>Key points</p>
               {a.keyPoints.map((k) => (
                 <p key={k} style={sx('margin:0;padding-top:12px;border-top:1px solid var(--hw-black);font-size:18px;line-height:1.45')}>{k}</p>
@@ -232,7 +232,7 @@ function PageArticle({ slug, go }) {
             </div>
           </header>
           <section data-screen-label="White paper — Body" style={sx(`padding:clamp(40px,5vw,80px) clamp(20px,3vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(32px,5vw,96px);align-items:start;max-width:1280px;background:${RULE_BG}`)}>
-            <aside style={sx('position:sticky;top:96px;display:flex;flex-direction:column;max-width:320px')}>
+            <aside data-m-unstick="" style={sx('position:sticky;top:96px;display:flex;flex-direction:column;max-width:320px')}>
               <p style={sx(`margin:0 0 14px;${MONO};font-size:13px;color:var(--hw-black)`)}>Contents</p>
               <span style={sx('padding:10px 0;border-top:1px solid var(--hw-black);font-size:18px')}>Executive summary</span>
               {toc.map((t) => (
