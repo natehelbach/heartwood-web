@@ -704,3 +704,13 @@ input::placeholder {
     max-width: none !important;
   }
 }
+
+/* How We Build: drop the chapter index and go single-column on narrow screens. */
+@media (max-width: 900px) {
+  [data-hwb-nav] {
+    display: none !important;
+  }
+  [data-hwb-grid] {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}

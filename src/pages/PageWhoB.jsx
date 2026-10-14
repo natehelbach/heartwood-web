@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { Hv, sx } from '../design/ui.jsx'
-import DotIcon from '../design/DotIcon.jsx'
-import PagePlatform, { Illustration } from './PagePlatform.jsx'
+import { Illustration } from './PagePlatform.jsx'
 
 // Ported from ui_kits/website/PageWhoB.dc.html: About › Who we are, layout B ("Editorial index"),
 // the design's default. A sticky chapter index sits beside five sections on wide screens.
@@ -20,25 +19,6 @@ const TIERS = [
   { n: '03', w: 'Hold', k: 'Long-term ownership', p: 'We hold to capture development value on what we build, and income and appreciation on what we buy.', f: 'Subscribe to The Long View', r: 'insights/newsletter' },
 ]
 
-const T = 'var(--hw-terracotta)'
-const TL = 'var(--hw-teal)'
-const pt = (q, ic, c = T) => ({ ...q, ic, c, icC: c, nC: c, nT: 'none', boxBg: 'var(--hw-white)', isQ: false })
-
-const BUILD_FLOW = [
-  pt({ n: '01', k: 'An owner’s perspective', v: 'Sites chosen for how they will perform beyond construction and lease-up.' }, 'PEOPLE'),
-  pt({ n: '02', k: 'Quality as strategy', v: 'Building decisions made for lifetime operating cost and durability.' }, 'BRICK'),
-  pt({ n: '03', k: 'One connected process', v: 'Investment, design, construction and operations working as a single operating system within our company.' }, 'ASSET MANAGEMENT'),
-  pt({ n: '04', k: 'Future built', v: 'We design for the decades ahead: for a 2050 climate, for how mobility will change over the coming century, and for a portfolio structured with lower leverage to support accretive risk-adjusted returns.' }, 'FUTURE BUILT'),
-  pt({ n: '05', k: 'Building systems', v: 'Every system we choose lowers operating costs, improves comfort, creates community and keeps the building competitive. Explore them below.' }, 'BUILDING', TL),
-]
-
-const BUY_FLOW = [
-  pt({ n: '01', k: 'The Heartwood standard', v: 'Asset quality, location and long-term competitiveness that match what we build.' }, 'STAR'),
-  pt({ n: '02', k: 'Underwritten for today', v: 'Current income and fundamentals, not legacy assumptions.' }, 'RETURNS'),
-  pt({ n: '03', k: 'Improved through ownership', v: 'Continuous capital, operational and intellectual investment in the assets we acquire.' }, 'PEOPLE'),
-  { n: 'The objective', k: '', v: 'Whether we build an asset ourselves or acquire it from another owner, the objective is the same: own high-quality residential real estate that can generate durable income and appreciate over time.', ic: 'ARROW RIGHT', c: 'var(--hw-brown)', icC: '#F9F9F9', nC: T, nT: 'uppercase', boxBg: 'var(--hw-brown)', isQ: true },
-]
-
 const HOLD = [
   { n: '01', k: 'Planning for an uncertain future', ps: ['Our podcast and newsletter, The Long View, take their name from Peter Schwartz’s The Art of the Long View, a book about making good decisions when the future cannot be predicted. Schwartz’s lesson is that even the Warren Buffetts of investing cannot reliably forecast a single outcome. The better approach is to consider a range of plausible futures and choose strategies that hold up across all of them, separating variable risk from our factual reality.', 'We apply that thinking to how we approach real estate investing. Interest rates, policy and the pace of population growth will move in ways no one can reliably predict. Other things are far more certain: people need homes, more households are renting for longer, and a well-built building will stand for decades. We don’t try to time the cycle. We own assets designed to perform across many possible futures, and when the opportune moment to sell an asset presents itself, we capitalize on it.'] },
   { n: '02', k: 'Aligned by ownership', ps: ['Because we intend to hold, we can prioritize durable building quality, make investments whose benefits accrue over many years, focus on resident retention and community quality, and improve operating performance rather than optimize for a near-term exit.', 'We don’t merchant build, and we don’t buy simply to flip. This mentality creates alignment between Heartwood, our investors, our assets and the residents who call them home.'] },
@@ -52,6 +32,7 @@ const H2 = 'margin:0;max-width:880px;font-family:var(--font-display);font-weight
 const LEDE = 'margin:0;max-width:820px;font-size:clamp(20px,1.8vw,28px);line-height:1.4;text-wrap:pretty'
 const BODY = 'margin:0;max-width:680px;font-size:clamp(18px,1.3vw,20px);line-height:1.6;text-wrap:pretty'
 const BODY_GRID = 'display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px clamp(24px,3vw,48px)'
+const MORE_LINK = 'align-self:flex-start;background:none;border:0;padding:0;cursor:pointer;color:var(--hw-black);font-family:var(--font-subhead);font-weight:500;font-size:14px;text-transform:uppercase;display:inline-flex;gap:10px'
 
 const TREE_SLICE = "position:absolute;inset:0;border-radius:50%;background:#F9F9F9 url('/assets/brand/HW_Tree-Slice-Bark_HR.jpg') 50% 43%/186% auto no-repeat"
 
@@ -68,42 +49,10 @@ function useWiderThan(ref, min, initial) {
   return wide
 }
 
-// Numbered steps joined by a dotted line: a row of columns when wide, a vertical list otherwise.
-function Flow({ items, row, cols }) {
-  const fl = row
-    ? { nd: 'flex', ng: '16px', pb: '0', gg: 'clamp(20px,2vw,32px)', lr: '44px', lb: 'auto', bt: '2px dotted var(--hw-black)', bl: '0', cols }
-    : { nd: 'grid', ng: '0 20px', pb: '28px', gg: '0', lr: 'auto', lb: '120px', bt: '0', bl: '2px dotted var(--hw-black)', cols: 'minmax(0,1fr)' }
-  return (
-    <div style={sx(`position:relative;display:grid;grid-template-columns:${fl.cols};gap:${fl.gg};align-items:start;padding-top:8px`)}>
-      <span style={sx(`position:absolute;z-index:0;left:44px;top:52px;right:${fl.lr};bottom:${fl.lb};border-top:${fl.bt};border-left:${fl.bl}`)} />
-      {items.map((q) => (
-        <div key={q.n} data-m-stack="" style={sx(`position:relative;z-index:1;display:${fl.nd};grid-template-columns:88px minmax(0,1fr);flex-direction:column;gap:${fl.ng};padding-bottom:${fl.pb}`)}>
-          <div style={sx(`width:88px;height:88px;box-sizing:border-box;flex:none;display:flex;align-items:center;justify-content:center;background:${q.boxBg};border:1.5px solid ${q.c}`)}>
-            <DotIcon name={q.ic} color={q.icC} size={50} />
-          </div>
-          <div style={sx('display:flex;flex-direction:column;gap:10px;min-width:0')}>
-            <span style={sx(`font-family:var(--font-subhead);font-weight:500;font-size:15px;text-transform:${q.nT};color:${q.nC}`)}>{q.n}</span>
-            {q.isQ ? (
-              <p style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.1vw,32px);line-height:1.18;letter-spacing:-.01em;text-wrap:balance')}>{q.v}</p>
-            ) : (
-              <>
-                <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(22px,1.8vw,26px);line-height:1.15;letter-spacing:-.01em')}>{q.k}</span>
-                <span style={sx('font-size:18px;line-height:1.5;text-wrap:pretty')}>{q.v}</span>
-              </>
-            )}
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
-
 function PageWhoB({ go }) {
   const wrapRef = useRef(null)
-  const buildRef = useRef(null)
-  const refs = { who: useRef(null), what: useRef(null), build: buildRef, buy: useRef(null), hold: useRef(null) }
+  const refs = { who: useRef(null), what: useRef(null), build: useRef(null), buy: useRef(null), hold: useRef(null) }
   const wide = useWiderThan(wrapRef, 960, true)
-  const flowRow = useWiderThan(buildRef, 900, true)
   const [active, setActive] = useState('who')
 
   // Highlight the chapter crossing the middle of the viewport.
@@ -206,33 +155,18 @@ function PageWhoB({ go }) {
             <p style={sx(EYEBROW)}>03 · How we build · Growth strategy</p>
             <h2 style={sx(H2)}>Designed to perform for decades.</h2>
             <p style={sx(LEDE)}>We don’t develop buildings simply to complete construction or reach lease-up and turn around to sell them as merchants. We develop assets we intend to own for the long term.</p>
-            <div style={sx(BODY_GRID)}>
-              <p style={sx(BODY)}>Every project starts with the long-term owner in mind. We evaluate locations based on long-term rental demand and supply, and we select sites in supply-constrained markets where the underlying fundamentals support decades of ownership, not just a successful lease-up.</p>
-              <p style={sx(BODY)}>For us, building quality is an investment decision. Energy-efficient systems, durable materials, high-performing walls and windows, and efficient design using prefabrication all lower operating and maintenance costs and keep a building competitive long after it opens.</p>
-              <p style={sx(BODY)}>Because we stay involved beyond development, every decision is connected. Investment goals inform design. Design shapes construction. Construction determines operating costs. And operating performance ultimately drives asset value and investor returns.</p>
-              <p style={sx(BODY)}>We evaluate each choice through the lens of the owner who will live with it for decades to come.</p>
-            </div>
-            <Flow items={BUILD_FLOW} row={flowRow} cols="repeat(5,minmax(0,1fr))" />
-            <div style={sx('margin:calc(-1 * clamp(24px,3vw,40px)) calc(-1 * clamp(20px,3vw,40px)) 0;min-width:0;overflow:hidden')}>
-              <PagePlatform
-                go={go}
-                only="innovation"
-                hideIntro
-                outcome="The objective is not simply to deliver a building. It is to create a durable, income-producing asset that can remain competitive for decades."
-              />
-            </div>
+            <Hv as="button" type="button" onClick={() => go('development/design')} s={MORE_LINK} h="color:var(--hw-terracotta)">
+              How we build<span aria-hidden="true">→</span>
+            </Hv>
           </div>
 
           <div ref={refs.buy} data-screen-label="Who we are B — How we buy" style={sx(CHAPTER_RULED)}>
             <p style={sx(EYEBROW)}>04 · How we buy · Income strategy</p>
             <h2 style={sx(H2)}>Institutional discipline. Entrepreneurial pace.</h2>
             <p style={sx(LEDE)}>We bring an institutional investor’s rigour to every acquisition, with the speed and flexibility of an entrepreneur to act when the right opportunity appears.</p>
-            <div style={sx(BODY_GRID)}>
-              <p style={sx(BODY)}>We acquire modern, purpose-built rental communities with institutional-quality construction, strong locations, stable occupancy and limited near-term capital requirements: assets capable of producing durable income from the day we own them.</p>
-              <p style={sx(BODY)}>We underwrite for today. Each acquisition is priced on current rents and operating fundamentals, not on assumptions carried over from a prior market cycle, and we focus on assets where the existing income stream supports the investment.</p>
-              <p style={sx(BODY)}>Ownership doesn’t end at acquisition. We apply our development, construction and operating capabilities to improve the properties we buy, supporting resident experience, operating efficiency and long-term value.</p>
-            </div>
-            <Flow items={BUY_FLOW} row={flowRow} cols="repeat(3,minmax(0,1fr)) minmax(0,1.5fr)" />
+            <Hv as="button" type="button" onClick={() => go('investment/income')} s={MORE_LINK} h="color:var(--hw-terracotta)">
+              Explore the Income Strategy<span aria-hidden="true">→</span>
+            </Hv>
           </div>
 
           <div ref={refs.hold} data-screen-label="Who we are B — Why we hold" style={sx(CHAPTER)}>

@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
-import { Hv, sx, DotField } from '../design/ui.jsx'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { Hv, sx } from '../design/ui.jsx'
 
-// Ported from ui_kits/website/PagePlatform.dc.html. The site embeds it in About › Who we are
-// (PageWhoB) with only="innovation", which shows just the innovation map.
+// Ported from ui_kits/website/PagePlatform.dc.html. The site embeds it in Development › How We Build
+// (PageHowWeBuild) with only="innovation", which shows just the innovation map.
 
 const IH = '/assets/project-renders/innovation/'
 
@@ -126,15 +126,54 @@ function Outcome({ text, stacked }) {
   )
 }
 
+// Where the info card sits on the map: beside the active dot if it fits, else above or below it.
+// Narrow maps pin it to the bottom-right corner. `zUp` puts the enlarged image above the card.
+function placeCard(m, c, x, y) {
+  const W = m.clientWidth, H = m.clientHeight, cw = c.offsetWidth, ch = c.offsetHeight, g = 24, pad = 16
+  const dx = (W * parseFloat(x)) / 100, dy = (H * parseFloat(y)) / 100
+  const clamp = (v, a, b) => Math.max(a, Math.min(v, b))
+  let l, t
+  if (W < 700) [l, t] = [W - cw - pad, H - ch - pad]
+  else if (dx + g + cw <= W - pad) [l, t] = [dx + g, dy - ch / 2]
+  else if (dx - g - cw >= pad) [l, t] = [dx - g - cw, dy - ch / 2]
+  else if (dy - g - ch >= pad) [l, t] = [dx - cw / 2, dy - g - ch]
+  else [l, t] = [dx - cw / 2, dy + g]
+  l = Math.round(clamp(l, pad, W - cw - pad))
+  t = Math.round(clamp(t, pad, H - ch - pad))
+  return { l, t, zUp: t + ch / 2 > H / 2 }
+}
+
 function InnovationMap({ showIntro, outcome }) {
   const [filter, setFilter] = useState('all')
   const [hot, setHot] = useState(4)
   const [zoom, setZoom] = useState(false)
+  const [cp, setCp] = useState(null)
+  const mapRef = useRef(null)
+  const cardRef = useRef(null)
   const cur = { note: '', pos: '50% 50%', ...HOTSPOTS[hot] }
   const pick = (i) => {
     setHot(i)
     setZoom(false)
   }
+
+  // Re-place the card when the active dot changes or the map or card resizes.
+  useLayoutEffect(() => {
+    const m = mapRef.current, c = cardRef.current
+    if (!m || !c) return
+    const place = () => {
+      const p = placeCard(m, c, cur.x, cur.y)
+      setCp((o) => (o && o.l === p.l && o.t === p.t && o.zUp === p.zUp ? o : p))
+    }
+    place()
+    const ro = new ResizeObserver(place)
+    ro.observe(m)
+    ro.observe(c)
+    return () => ro.disconnect()
+  }, [cur.x, cur.y])
+
+  const card = cp
+    ? { l: cp.l + 'px', t: cp.t + 'px', b: 'auto', zt: cp.zUp ? 'auto' : 'calc(100% + 12px)', zb: cp.zUp ? 'calc(100% + 12px)' : 'auto' }
+    : { l: 'calc(100% - min(360px,calc(100% - 32px)) - 16px)', t: 'auto', b: '16px', zt: 'auto', zb: 'calc(100% + 12px)' }
 
   return (
     <section data-screen-label="Platform — Innovation map" style={sx('width:100%;box-sizing:border-box;max-width:1440px;margin:0 auto;padding:0 clamp(20px,3vw,40px) clamp(48px,6vw,88px);display:flex;flex-direction:column;gap:clamp(24px,3vw,40px)')}>
@@ -160,7 +199,7 @@ function InnovationMap({ showIntro, outcome }) {
           </button>
         ))}
       </div>
-      <div style={sx("position:relative;width:100%;max-width:100%;box-sizing:border-box;aspect-ratio:3/2;min-height:460px;background:var(--hw-brown) url('/assets/project-renders/innovation/HW_Innovation_Hero-Render.jpg') center/cover no-repeat;overflow:hidden")}>
+      <div ref={mapRef} style={sx("position:relative;width:100%;max-width:100%;box-sizing:border-box;aspect-ratio:3/2;min-height:460px;background:var(--hw-brown) url('/assets/project-renders/innovation/HW_Innovation_Hero-Render.jpg') center/cover no-repeat;overflow:hidden")}>
         <div style={sx('position:absolute;inset:0;background:var(--overlay-brown)')} />
         {outcome && <Outcome text={outcome} />}
         {HOTSPOTS.map((h, i) => {
@@ -180,9 +219,9 @@ function InnovationMap({ showIntro, outcome }) {
             </button>
           )
         })}
-        <div style={sx(`position:absolute;right:clamp(16px,2vw,28px);bottom:clamp(16px,2vw,28px);width:min(400px,calc(100% - 32px));background:rgba(249,249,249,.9);display:grid;grid-template-columns:${cur.img ? '140px minmax(0,1fr)' : 'minmax(0,1fr)'};gap:0`)}>
+        <div ref={cardRef} style={sx(`position:absolute;z-index:4;left:${card.l};top:${card.t};bottom:${card.b};width:min(360px,calc(100% - 32px));background:rgba(249,249,249,.96);box-shadow:0 12px 32px rgba(33,33,33,.22);display:grid;grid-template-columns:${cur.img ? '140px minmax(0,1fr)' : 'minmax(0,1fr)'};gap:0;transition:left .3s ease,right .3s ease,top .3s ease,bottom .3s ease`)}>
           {zoom && cur.img && (
-            <div style={sx('position:absolute;z-index:3;right:0;bottom:calc(100% + 12px);width:100%;aspect-ratio:4/3;max-height:calc(100vh - var(--nav-h,82px) - 340px);min-height:160px;background:var(--hw-cool-grey);pointer-events:none;box-shadow:0 12px 32px rgba(33,33,33,.22)')}>
+            <div style={sx(`position:absolute;z-index:3;right:0;top:${card.zt};bottom:${card.zb};width:100%;aspect-ratio:4/3;max-height:260px;max-height:calc(100vh - var(--nav-h,82px) - 340px);min-height:160px;background:var(--hw-cool-grey);pointer-events:none;box-shadow:0 12px 32px rgba(33,33,33,.22)`)}>
               <img src={cur.img} alt={cur.title} style={sx(`width:100%;height:100%;object-fit:cover;object-position:${cur.pos};display:block`)} />
             </div>
           )}
@@ -238,27 +277,6 @@ function PagePlatform({ go, hideHero, only, hideIntro, outcome }) {
           </div>
           <Illustration />
         </section>
-      )}
-
-      {showRest && (
-        <div style={{ position: 'relative' }}>
-          <section style={sx('position:relative;height:100vh;height:100svh;min-height:560px;overflow:clip')}>
-            <div data-screen-label="Platform — A Resilient Approach" style={sx('position:absolute;inset:0;z-index:2;overflow:clip;background:#F9F9F9')}>
-              <div style={sx('position:absolute;top:82px;bottom:0;right:30px;left:calc(30px + (100% - 390px) / 12 * 4 + 120px)')}>
-                <DotField preset="approach" />
-              </div>
-              <div style={sx('position:relative;z-index:1;height:100%;box-sizing:border-box;padding:calc(82px + clamp(1rem,4vh,3rem)) 30px clamp(1rem,4vh,3rem);display:flex;flex-direction:column;justify-content:center;pointer-events:none')}>
-                <div style={sx('max-width:calc((100vw - 390px) / 12 * 5 + 120px);min-width:min(100%,320px)')}>
-                  <p style={sx('margin:0 0 clamp(1rem,2.5vh,1.75rem);font-family:var(--font-subhead);font-weight:500;text-transform:uppercase;font-size:clamp(0.875rem,1.15vw,1.5rem);line-height:1.2;color:#BC532D')}>A resilient approach</p>
-                  <h2 style={sx('margin:0;font-family:var(--font-display);font-weight:500;line-height:1.25;font-size:clamp(1.65rem,2.5vw,3.25rem);text-wrap:pretty;color:#212121')}>Responsive intelligence and systems-based discipline.</h2>
-                  <p style={sx('margin:clamp(1rem,3vh,2.25rem) 0 0;font-family:var(--font-body);line-height:1.35;font-size:clamp(1rem,2.2vh,1.25rem);text-wrap:balance;color:#212121')}>
-                    Our platform integrates real estate expertise, data intelligence and a drive toward innovation.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
       )}
 
       <InnovationMap showIntro={!hideIntro} outcome={outcome} />

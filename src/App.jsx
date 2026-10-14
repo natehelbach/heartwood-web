@@ -2,7 +2,7 @@ import SiteHeader from './components/SiteHeader.jsx'
 import SiteFooter from './components/SiteFooter.jsx'
 import PageHome from './pages/PageHome.jsx'
 import PageAbout from './pages/PageAbout.jsx'
-import PagePlatform from './pages/PagePlatform.jsx'
+import PageHowWeBuild from './pages/PageHowWeBuild.jsx'
 import PageManagement from './pages/PageManagement.jsx'
 import PageProperties from './pages/PageProperties.jsx'
 import PageInvestment from './pages/PageInvestment.jsx'
@@ -24,7 +24,7 @@ function App() {
       <main className="site__main">
         {is('home') && <PageHome go={go} />}
         {is('about') && <PageAbout sub={sub} go={go} />}
-        {is('platform') && <PagePlatform go={go} hideHero />}
+        {is('platform') && <PageHowWeBuild go={go} />}
         {is('management') && <PageManagement go={go} />}
         {is('properties') && <PageProperties sub={sub} only={propsOnly} go={go} />}
         {is('investment') && <PageInvestment sub={sub} go={go} />}
