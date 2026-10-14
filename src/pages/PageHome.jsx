@@ -1,60 +1,66 @@
 import { useEffect, useState } from 'react'
-import { Hv, sx, DotField, RULE_BG } from '../design/ui.jsx'
+import { Hv, sx, DotField } from '../design/ui.jsx'
 import HW_DATA from '../design/site-data.js'
 
 // Ported from ui_kits/website/PageHome.dc.html.
 
-const FP = [
-  { slug: '3385-lawrence', short: '3385 Lawrence', desc: '155 purpose-built rental homes in Toronto, planned around a landscaped courtyard, shared amenities and transit access.' },
-    { slug: '353-sherbourne', short: '353 Sherbourne', desc: 'Purpose-built rental housing in downtown Toronto, part of our Growth strategy.' },
-  { slug: '4094-tomken', short: '4094 Tomken', desc: 'Purpose-built rental housing in Mississauga, part of our Growth strategy.' },
-].map((x) => ({ ...(HW_DATA.projects.find((p) => p.slug === x.slug) || {}), ...x }))
+const MONO = 'font-family:var(--font-subhead);font-weight:500;text-transform:uppercase'
+// Card underline and label colour (the design's "CTA colour" option, set to Black).
+const CTA_C = 'var(--hw-black)'
 
-const SERVE = [
-  ['Advisors', 'EMDs, RIAs and wealth managers.', 'investment/advisors'],
-  ['Private wealth', 'Family offices and high-net-worth individuals.', 'investment/hnw'],
-  ['Institutional investors', 'Pensions, foundations, endowments and insurers.', 'investment/institutional'],
+const PILLAR = 'margin:clamp(64px,7vw,96px) clamp(20px,3vw,40px) 0;padding-top:40px;border-top:1.5px solid var(--hw-black);display:flex;flex-wrap:wrap;gap:clamp(28px,3.4vw,48px)'
+const PILLAR_LINK = `align-self:flex-start;background:none;border:0;padding:0;cursor:pointer;color:var(--hw-black);${MONO};font-size:14px`
+const CARD = 'display:flex;flex-direction:column;gap:10px;padding:0;border:0;background:none;cursor:pointer;text-align:left;color:var(--hw-black);font-family:var(--font-body);transition:transform .25s ease,color .2s'
+const CARD_HOVER = 'color:var(--hw-terracotta);transform:translateY(-4px)'
+const ARROW_BTN = 'width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--hw-black);background:none;cursor:pointer;color:var(--hw-black);font-size:18px'
+
+const STRATEGIES = [
+  { kind: 'Growth strategy · Build to Hold', big: 'Build.', bg: 'var(--hw-cool-grey)', img: '/assets/photography/HW_Photo_Timber-Townhomes-Courtyard.png', pos: 'center 85%', ring: '/assets/logos/HW_Growth_Ring_White.png', word: 'Growth', label: 'Growth strategy', r: 'investment/growth-strategy' },
+  { kind: 'Income strategy · Buy to Hold', big: 'Buy.', bg: 'var(--hw-hemlock)', img: '/assets/photography/HW_Photo_517-W-Main_Facade-Trees.jpg', pos: 'center', ring: '/assets/logos/HW_Income_Ring_White.png', word: 'Income', label: 'Income strategy', r: 'investment/income-strategy' },
 ]
 
-const BUILT = [
-  { label: 'Home — Well-being', title: 'Built for well-being.', body: 'Healthier homes come from natural light, clean air and space to gather. We design them in from day one.', img: '/assets/photography/HW_Photo_Fitness-Gym.jpg', cap: 'On-site fitness, part of everyday life' },
-  { label: 'Home — Long term', title: 'Built for the long term.', body: 'Durable materials, smart systems and repeatable design keep buildings performing for decades.', img: '/assets/project-renders/HW_Mass-Timber-Living-Building.jpg', cap: 'Mass timber living building, designed by MGA | Michael Green Architects' },
-  { label: 'Home — Resilient investments', title: 'Built for resilient investments.', body: 'Quality buildings, strong demand and active management hold value through economic cycles. Two strategies, one discipline.', img: '/assets/project-renders/HW_Render_360-Kennedy-Lane.jpg', cap: '360 Kennedy Lane, Ottawa, rendering' },
-]
+// Development carousel: Growth projects with a rendering, three at a time.
+const DEV = HW_DATA.projects
+  .filter((p) => p.strategy === 'Growth' && p.img)
+  .map((p) => ({ ...p, short: p.name.replace(/ (Avenue|Street|Road|Drive|Lane)( East| West| North)?$/, (m) => (m.includes('Lane') ? ' Lane' : '')) }))
 
-const WAYS_IN = [
-  ['Perspectives', 'Our thinking on housing, markets and building better.', 'Read →', 'insights/perspectives'],
-  ['Podcast', 'Conversations on building better real estate.', 'Listen →', 'insights/podcast'],
-  ['The Long View', 'Our monthly letter to investors and partners.', 'Subscribe →', 'insights/newsletter'],
-]
+function Pillar({ n, title, line, children, links }) {
+  return (
+    <div style={sx('flex:1 1 280px;display:flex;flex-direction:column;gap:18px')}>
+      <span style={sx(`${MONO};font-size:14px;color:var(--hw-terracotta)`)}>{n}</span>
+      <h2 style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(34px,3.4vw,48px);line-height:1;letter-spacing:-.02em')}>{title}</h2>
+      <p style={sx('margin:0;font-size:18px;line-height:1.5;text-wrap:pretty')}>{line}</p>
+      {links}
+      {children}
+    </div>
+  )
+}
 
-const LIFESTYLE = [
-  ['/assets/lifestyle/HW_Lifestyle_26.jpg', 'Kitchens built for everyday use'],
-  ['/assets/project-renders/HW_517-W-Main_Material-board.png', 'Durable, natural finishes'],
-  ['/assets/photography/HW_Photo_517-W-Main_Work-Nook.jpg', 'Space to work', '30% center'],
-  ['/assets/lifestyle/HW_Lifestyle_32.jpg', 'Walkable, connected neighbourhoods'],
-]
-
-const OUTLINE_BTN = 'padding:16px 24px;background:transparent;color:var(--hw-black);border:1.5px solid var(--hw-black);cursor:pointer;font-family:var(--font-subhead);font-weight:500;font-size:14px;text-transform:uppercase'
-const OUTLINE_HOVER = 'background:var(--hw-black);color:var(--hw-white)'
-const SECTION = `padding:clamp(72px,8vw,120px) clamp(20px,3vw,40px) 0;display:flex;flex-direction:column;gap:28px;background:${RULE_BG}`
-const FIG_IMG = (img) => `aspect-ratio:16/9;background:var(--hw-cool-grey) url('${img}') center/cover no-repeat`
+function CardLabel({ children }) {
+  return (
+    <span style={sx(`display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;box-sizing:border-box;padding:14px 0 12px;border-bottom:1.5px solid ${CTA_C};color:${CTA_C};${MONO};font-size:14px;letter-spacing:.02em`)}>
+      {children}
+      <span aria-hidden="true">→</span>
+    </span>
+  )
+}
 
 function PageHome({ go }) {
   const nav = (r) => () => go(r)
-  const [feat, setFeat] = useState(0)
-  const [paused, setPaused] = useState(false)
+  const [devI, setDevI] = useState(0)
+  const [devPaused, setDevPaused] = useState(false)
 
   useEffect(() => {
     const t = setInterval(() => {
-      if (!paused) setFeat((f) => (f + 1) % FP.length)
-    }, 6000)
+      if (!devPaused) setDevI((i) => i + 1)
+    }, 5000)
     return () => clearInterval(t)
-  }, [paused])
+  }, [devPaused])
 
-  const fi = feat % FP.length
-  const cur = FP[fi]
-  const openFeat = nav('properties/' + cur.slug)
+  const dn = DEV.length || 1
+  const di = ((devI % dn) + dn) % dn
+  const devSlides = [0, 1, 2].slice(0, Math.min(3, DEV.length)).map((o) => DEV[(di + o) % dn])
+  const pad = (v) => String(v).padStart(2, '0')
 
   return (
     <div style={sx('background:var(--hw-white);color:var(--hw-black);font-family:var(--font-body)')}>
@@ -63,7 +69,7 @@ function PageHome({ go }) {
           <div style={sx('position:absolute;top:var(--nav-h,82px);left:0;right:0;bottom:0;overflow:hidden')}>
             <DotField preset="landing" />
             <p style={sx('position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:clamp(16rem,30vw,26rem);margin:0;font-family:var(--font-subhead);font-weight:500;text-transform:uppercase;font-size:clamp(0.875rem,1.15vw,1.5rem);line-height:1.5;color:#F9F9F9;text-align:center;text-wrap:pretty;pointer-events:none')}>
-              Partnering to create durable real estate investments and enduring returns through buildings that last, healthier homes, and stronger communities.
+              Heartwood is a Real Estate Investment Manager
             </p>
             <p style={sx('position:absolute;bottom:clamp(1.5rem,4vh,3rem);left:30px;margin:0;font-family:var(--font-subhead);font-weight:500;text-transform:uppercase;font-size:clamp(0.875rem,1.15vw,1.5rem);line-height:1.15;color:#F9F9F9;pointer-events:none')}>
               Future<br />built.
@@ -72,136 +78,96 @@ function PageHome({ go }) {
         </div>
       </div>
 
-      <section data-screen-label="Home — Built to last" style={sx('padding:clamp(56px,6vw,96px) clamp(20px,3vw,40px) 0')}>
-        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:clamp(36px,5vw,96px);align-items:end')}>
-          <div style={sx('display:flex;flex-direction:column;gap:clamp(20px,2.4vw,32px)')}>
-            <h1 style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(36px,4.8vw,80px);line-height:1;letter-spacing:-.02em;text-wrap:balance')}>
-              Homes built to last. Investments designed to endure.
-            </h1>
-            <p style={sx('margin:0;max-width:520px;font-size:clamp(17px,1.35vw,20px);line-height:1.5;text-wrap:pretty')}>
-              We build, buy and operate purpose-built rental housing in Canada and the United States, and invest alongside the investors we serve.
-            </p>
-          </div>
-          <div data-screen-label="Home — Who we serve" style={sx('display:flex;flex-direction:column')}>
-            <p style={sx('margin:0 0 14px;font-family:var(--font-subhead);font-weight:500;font-size:14px;text-transform:uppercase;color:var(--hw-black)')}>Who we serve</p>
-            {SERVE.map(([title, sub, r]) => (
-              <Hv
-                key={r}
-                as="button"
-                onClick={nav(r)}
-                s="display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:clamp(16px,2vw,28px);row-gap:6px;align-items:baseline;padding:clamp(18px,2vw,24px) 0;background:none;border:0;border-top:1px solid var(--hw-black);cursor:pointer;color:var(--hw-black);text-align:left;font-family:var(--font-body)"
-                h="color:var(--hw-terracotta)"
-              >
-                <span style={sx('grid-column:1;grid-row:1;font-family:var(--font-display);font-weight:500;font-size:clamp(26px,2.6vw,38px);line-height:1.05;letter-spacing:-.015em')}>{title}</span>
-                <span style={sx('grid-column:2;grid-row:1/3;align-self:center;font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2.2vw,32px);line-height:1')}>→</span>
-                <span style={sx('grid-column:1;grid-row:2;justify-self:start;font-size:18px;line-height:1.45;text-wrap:pretty')}>{sub}</span>
+      <section data-screen-label="Home — Who we are" style={sx('padding:clamp(56px,6vw,96px) clamp(20px,3vw,40px) 0;display:flex;flex-wrap:wrap;gap:clamp(28px,4.4vw,64px);align-items:flex-end')}>
+        <h1 style={sx('flex:3 1 520px;margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(40px,6vw,88px);line-height:1;letter-spacing:-.03em;text-wrap:balance')}>
+          An investment manager with institutional rigour and entrepreneurial pace.
+        </h1>
+        <p style={sx('flex:2 1 320px;margin:0;font-size:clamp(18px,1.4vw,20px);line-height:1.5;text-wrap:pretty')}>
+          Heartwood is a real estate investment manager focused on purpose-built rental housing. One integrated team invests, develops and manages, bringing disciplined strategy, thoughtful design and hands-on operations to every building. The result is resilient assets, healthy communities and lasting value for our investors.
+        </p>
+      </section>
+
+      <section data-screen-label="Home — Investment" style={sx(PILLAR)}>
+        <Pillar n="01" title="Investment" line="Two strategies in purpose-built rental housing.">
+          <Hv as="button" onClick={nav('investment/overview')} s={PILLAR_LINK} h="color:var(--hw-terracotta)">Explore our strategies →</Hv>
+        </Pillar>
+        <div style={sx('flex:2 1 560px;min-width:0')}>
+          <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px')}>
+            {STRATEGIES.map((st) => (
+              <Hv key={st.r} as="button" onClick={nav(st.r)} s="display:flex;flex-direction:column;padding:0;border:0;background:none;cursor:pointer;text-align:left;color:var(--hw-white);transition:transform .25s ease,opacity .25s ease" h="transform:translateY(-4px);opacity:.92">
+                <span style={sx(`width:100%;box-sizing:border-box;background:${st.bg};padding:28px 24px 20px;display:flex;flex-direction:column;gap:6px`)}>
+                  <span style={sx(`${MONO};font-size:12px;letter-spacing:.04em`)}>{st.kind}</span>
+                  <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(56px,6vw,84px);line-height:.95;letter-spacing:-.04em')}>{st.big}</span>
+                </span>
+                <span style={sx(`position:relative;display:block;width:100%;aspect-ratio:4/3;background:var(--hw-cool-grey) url('${st.img}') ${st.pos}/cover no-repeat`)}>
+                  <span style={sx('position:absolute;inset:0;background:linear-gradient(0deg,rgba(33,33,33,.55),rgba(33,33,33,0) 40%)')} />
+                  <span style={sx('position:absolute;left:24px;bottom:24px;display:flex;align-items:center;gap:14px')}>
+                    <img src={st.ring} alt="" style={sx('height:clamp(44px,4.4vw,64px);width:auto;display:block')} />
+                    <span style={sx('font-family:var(--font-display);font-weight:900;font-size:clamp(28px,2.8vw,40px);line-height:.85;text-transform:uppercase')}>{st.word}</span>
+                  </span>
+                </span>
+                <CardLabel>{st.label}</CardLabel>
               </Hv>
             ))}
-            <div style={sx('height:1.5px;background:var(--hw-black)')} />
           </div>
         </div>
-        <figure style={sx('margin:40px 0 0;display:flex;flex-direction:column;gap:12px')}>
-          <div style={sx("aspect-ratio:16/9;background:var(--hw-cool-grey) url('/assets/photography/HW_MassTimber_Studio.jpg') center 40%/cover no-repeat")} />
-          <figcaption style={sx('font-size:18px;font-style:italic')}>Timber ceilings, natural light and warm, durable finishes. Designed by MGA | Michael Green Architects.</figcaption>
-        </figure>
       </section>
 
-      {BUILT.map((b, i) => (
-        <section key={b.label} data-screen-label={b.label} style={sx(SECTION)}>
-          <h2 style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(40px,6vw,96px);line-height:1;letter-spacing:-.03em;max-width:1100px;text-wrap:balance')}>{b.title}</h2>
-          <p style={sx('margin:0;max-width:620px;font-size:clamp(18px,1.5vw,22px);line-height:1.45;text-wrap:pretty')}>{b.body}</p>
-          {i === 0 && (
-            <div style={{ display: 'flex' }}>
-              <Hv as="button" onClick={nav('insights')} s={OUTLINE_BTN} h={OUTLINE_HOVER}>Read our insights →</Hv>
-            </div>
-          )}
-          {i === 1 && (
-            <div style={{ display: 'flex' }}>
-              <Hv as="button" onClick={nav('properties')} s={OUTLINE_BTN} h={OUTLINE_HOVER}>See our properties →</Hv>
-            </div>
-          )}
-          {i === 2 && (
-            <div style={sx('display:flex;gap:12px;flex-wrap:wrap')}>
-              <Hv
-                as="button"
-                onClick={nav('investment/overview')}
-                s="padding:16px 24px;background:var(--hw-black);color:var(--hw-white);border:1.5px solid var(--hw-black);cursor:pointer;font-family:var(--font-subhead);font-weight:500;font-size:14px;text-transform:uppercase"
-                h="background:var(--hw-teal);border-color:var(--hw-teal)"
-              >
-                Explore our investment strategies →
+      <section data-screen-label="Home — Development" style={sx(PILLAR)}>
+        <Pillar n="02" title="Development" line="New rental homes, from zoning through construction.">
+          <Hv as="button" onClick={nav('development/design')} s={PILLAR_LINK} h="color:var(--hw-terracotta)">How we develop →</Hv>
+        </Pillar>
+        <div onMouseEnter={() => setDevPaused(true)} onMouseLeave={() => setDevPaused(false)} style={sx('flex:2 1 560px;min-width:0;display:flex;flex-direction:column;gap:20px')}>
+          <div data-m-one="" style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:16px')}>
+            {devSlides.map((p) => (
+              <Hv key={p.slug} as="button" onClick={nav('properties/' + p.slug)} s={CARD} h={CARD_HOVER}>
+                <span style={sx(`position:relative;display:block;width:100%;aspect-ratio:3/4;background:var(--hw-cool-grey) url('${p.img}') center/cover no-repeat`)} />
+                <span style={sx('font-family:var(--font-display);font-weight:500;font-size:20px')}>{p.short}</span>
+                <CardLabel>View project</CardLabel>
               </Hv>
-              <Hv as="button" onClick={nav('investment/growth')} s={OUTLINE_BTN} h={OUTLINE_HOVER}>Growth strategy</Hv>
-              <Hv as="button" onClick={nav('investment/income')} s={OUTLINE_BTN} h={OUTLINE_HOVER}>Income strategy</Hv>
+            ))}
+          </div>
+          <div style={sx('display:flex;align-items:center;justify-content:space-between;gap:16px')}>
+            <span style={sx(`${MONO};font-size:13px`)}>{pad(di + 1)} / {pad(DEV.length)}</span>
+            <div style={sx('display:flex;gap:8px')}>
+              <Hv as="button" onClick={() => setDevI((i) => i - 1)} aria-label="Previous projects" s={ARROW_BTN} h="background:var(--hw-black);color:var(--hw-white)">←</Hv>
+              <Hv as="button" onClick={() => setDevI((i) => i + 1)} aria-label="Next projects" s={ARROW_BTN} h="background:var(--hw-black);color:var(--hw-white)">→</Hv>
             </div>
-          )}
-          <figure style={sx('margin:24px 0 0;display:flex;flex-direction:column;gap:12px')}>
-            <div style={sx(FIG_IMG(b.img))} />
-            <figcaption style={sx('font-size:18px;font-style:italic')}>{b.cap}</figcaption>
-          </figure>
-        </section>
-      ))}
-
-      <section data-screen-label="Home — Ways in" style={sx(`padding:clamp(72px,8vw,140px) clamp(20px,3vw,40px) clamp(56px,6vw,88px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px;background:${RULE_BG}`)}>
-        {WAYS_IN.map(([title, body, cta, r]) => (
-          <Hv
-            key={r}
-            as="button"
-            onClick={nav(r)}
-            s="background:transparent;border:1px solid var(--hw-black);padding:32px;display:flex;flex-direction:column;justify-content:space-between;gap:48px;min-height:260px;text-align:left;cursor:pointer;font-family:var(--font-body);color:var(--hw-black)"
-            h="background:var(--hw-cool-grey)"
-          >
-            <span style={sx('display:flex;flex-direction:column;gap:10px')}>
-              <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2vw,30px)')}>{title}</span>
-              <span style={sx('font-size:18px;line-height:1.45')}>{body}</span>
-            </span>
-            <span style={sx('font-family:var(--font-subhead);font-weight:500;font-size:14px;text-transform:uppercase')}>{cta}</span>
-          </Hv>
-        ))}
-      </section>
-
-      <section data-screen-label="Home — Featured property" style={sx(`padding:clamp(72px,8vw,120px) clamp(20px,3vw,40px) 0;display:flex;flex-direction:column;gap:clamp(20px,2.5vw,40px);background:${RULE_BG}`)}>
-        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,4vw,64px);align-items:end')}>
-          <button onClick={openFeat} style={sx('background:none;border:0;padding:0;cursor:pointer;text-align:left;margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.8vw,56px);line-height:1.05;letter-spacing:-.02em;color:var(--hw-black);min-height:2.2em')}>
-            Places people want to live. <span style={{ color: 'var(--hw-terracotta)' }}>Explore {cur.short} →</span>
-          </button>
-          <div style={sx('display:flex;flex-direction:column;gap:20px')}>
-            <p style={sx('margin:0;font-size:clamp(17px,1.35vw,20px);line-height:1.5;text-wrap:pretty;min-height:3em')}>{cur.desc}</p>
-            <div style={sx('display:flex;align-items:center;gap:16px')}>
-              <Hv as="button" onClick={() => setFeat((f) => (f + FP.length - 1) % FP.length)} aria-label="Previous project" s="width:48px;height:48px;border:1.5px solid var(--hw-black);background:none;color:var(--hw-black);cursor:pointer;font-family:var(--font-body);font-size:20px" h={OUTLINE_HOVER}>←</Hv>
-              <Hv as="button" onClick={() => setFeat((f) => (f + 1) % FP.length)} aria-label="Next project" s="width:48px;height:48px;border:1.5px solid var(--hw-black);background:none;color:var(--hw-black);cursor:pointer;font-family:var(--font-body);font-size:20px" h={OUTLINE_HOVER}>→</Hv>
-              <div style={sx('display:flex;gap:8px;margin-left:8px')}>
-                {FP.map((fd, i) => (
-                  <button key={fd.slug} onClick={() => setFeat(i)} aria-label={fd.name} style={sx(`width:10px;height:10px;border-radius:50%;border:0;padding:0;cursor:pointer;background:var(--hw-black);opacity:${i === fi ? 1 : 0.25}`)} />
-                ))}
-              </div>
-              <span style={sx('margin-left:auto;font-family:var(--font-subhead);font-weight:500;font-size:14px')}>{`0${fi + 1} / 0${FP.length}`}</span>
-            </div>
-            <Hv as="button" onClick={nav('properties')} s="align-self:flex-start;padding:14px 22px;background:var(--hw-black);color:var(--hw-white);border:0;cursor:pointer;font-family:var(--font-subhead);font-weight:500;font-size:14px;letter-spacing:.02em;text-transform:uppercase" h="background:var(--hw-terracotta)">
-              See our properties →
-            </Hv>
           </div>
         </div>
-        <button
-          onClick={openFeat}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          aria-label={cur.name}
-          style={sx('position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;cursor:pointer;background:var(--hw-cool-grey);overflow:hidden')}
-        >
-          {FP.map((fd, i) => (
-            <img key={fd.slug} src={fd.img} alt={fd.name} style={sx(`position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:${i === fi ? 1 : 0};transition:opacity .6s ease`)} />
-          ))}
-          <span style={sx('position:absolute;left:0;bottom:0;padding:10px 14px;background:rgba(249,249,249,.92);font-family:var(--font-body);font-size:18px;font-style:italic;color:var(--hw-black)')}>
-            {cur.name}, {cur.loc}
-          </span>
-        </button>
-        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px')}>
-          {LIFESTYLE.map(([img, cap, pos = 'center']) => (
-            <figure key={img} style={sx('margin:0;display:flex;flex-direction:column;gap:10px')}>
-              <div style={sx(`aspect-ratio:4/5;background:var(--hw-cool-grey) url('${img}') ${pos}/cover no-repeat`)} />
-              <figcaption style={sx('font-size:14px;font-style:italic')}>{cap}</figcaption>
-            </figure>
-          ))}
+      </section>
+
+      <section data-screen-label="Home — Management" style={sx(`${PILLAR};margin-bottom:clamp(72px,8vw,120px)`)}>
+        <Pillar
+          n="03"
+          title="Management"
+          line="Completed buildings we operate for the long term."
+          links={
+            <div style={sx('display:flex;flex-wrap:wrap;gap:12px 28px')}>
+              <Hv as="button" onClick={nav('management/asset')} s={PILLAR_LINK} h="color:var(--hw-terracotta)">How we operate →</Hv>
+              <Hv as="button" onClick={nav('properties')} s={PILLAR_LINK} h="color:var(--hw-terracotta)">View our properties →</Hv>
+            </div>
+          }
+        />
+        <div style={sx('flex:2 1 560px;min-width:0')}>
+          <div style={sx('display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start')}>
+            <div style={sx('flex:2 1 300px;min-width:0;display:flex;flex-direction:column')}>
+              <Hv as="button" onClick={nav('management/asset')} s={CARD} h={CARD_HOVER}>
+                <span style={sx("position:relative;display:block;width:100%;aspect-ratio:16/10;background:var(--hw-cool-grey) url('/assets/photography/HW_MassTimber_Studio.jpg') center/cover no-repeat")} />
+                <span style={sx('font-family:var(--font-display);font-weight:500;font-size:20px')}>Operating rental communities</span>
+                <span style={sx('font-size:15px;color:var(--hw-black)')}>Leased, maintained and improved for the long term</span>
+                <CardLabel>How we operate</CardLabel>
+              </Hv>
+            </div>
+            <div style={sx('flex:1 1 180px;min-width:0;display:flex;flex-direction:column')}>
+              <Hv as="button" onClick={nav('management/asset')} s={CARD} h={CARD_HOVER}>
+                <span style={sx("position:relative;display:block;width:100%;aspect-ratio:3/4;background:var(--hw-cool-grey) url('/assets/photography/HW_Photo_Fitness-Gym.jpg') center/cover no-repeat")} />
+                <span style={sx('font-family:var(--font-display);font-weight:500;font-size:20px')}>Resident life</span>
+                <span style={sx('font-size:15px;color:var(--hw-black)')}>Amenities and services for residents</span>
+                <CardLabel>The resident experience</CardLabel>
+              </Hv>
+            </div>
+          </div>
         </div>
       </section>
 

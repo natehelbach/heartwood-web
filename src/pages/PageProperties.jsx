@@ -18,9 +18,12 @@ const MONO = 'font-family:var(--font-subhead);font-weight:500;text-transform:upp
 // The design currently hides the callout row under the project gallery.
 const SHOW_CALLOUTS = false
 
-function PropertyList({ go }) {
+// `only` limits the list to one strategy (Development › Projects shows Growth) and drops the
+// strategy filter.
+function PropertyList({ only, go }) {
   const [sel, setSel] = useState({ country: 'All', strategy: 'All' })
-  const shown = P.filter((p) => (sel.country === 'All' || p.country === sel.country) && (sel.strategy === 'All' || p.strategy === sel.strategy))
+  const filters = only ? FILTERS.slice(0, 1) : FILTERS
+  const shown = P.filter((p) => (!only || p.strategy === only) && (sel.country === 'All' || p.country === sel.country) && (sel.strategy === 'All' || p.strategy === sel.strategy))
   return (
     <>
       <section data-screen-label="Properties — Intro" style={sx('padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px) clamp(32px,4vw,56px);display:flex;flex-direction:column;gap:20px')}>
@@ -30,7 +33,7 @@ function PropertyList({ go }) {
         </h1>
       </section>
       <section data-screen-label="Properties — Filters" style={sx('padding:0 clamp(20px,3vw,40px) clamp(28px,3vw,40px);display:flex;flex-wrap:wrap;gap:16px clamp(32px,5vw,72px)')}>
-        {FILTERS.map(([label, key, opts]) => (
+        {filters.map(([label, key, opts]) => (
           <div key={key} style={sx('display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 20px')}>
             <span style={sx('font-size:14px;color:rgba(33,33,33,.6)')}>{label}</span>
             {opts.map((t) => {
@@ -141,7 +144,7 @@ function PropertyDetail({ sub, go }) {
   const arrow = `background:none;border:0;padding:8px;cursor:pointer;font-family:var(--font-body);font-size:22px;color:var(--hw-black);visibility:${arrowVis}`
 
   return (
-    <div data-screen-label="Properties — Project" className="hw-split" style={sx('display:grid;grid-template-columns:minmax(320px,1fr) minmax(0,2fr);align-items:start;border-top:1px solid rgba(33,33,33,.2)')}>
+    <div data-screen-label="Properties — Project" className="hw-split" data-m-stack-md="" style={sx('display:grid;grid-template-columns:minmax(320px,1fr) minmax(0,2fr);align-items:start;border-top:1px solid rgba(33,33,33,.2)')}>
       <aside className="hw-split-left" style={sx('min-width:0;align-self:start;position:sticky;top:82px;max-height:calc(100vh - 82px);max-height:calc(100svh - 82px);overflow:auto;border-right:1px solid rgba(33,33,33,.2);display:flex;flex-direction:column')}>
         <div style={sx('flex:none;padding:clamp(20px,2vw,32px) clamp(20px,2vw,32px) 0;display:flex;flex-direction:column;gap:16px')}>
           <Hv as="button" onClick={() => go('properties')} s={`align-self:flex-start;background:none;border:0;padding:0;cursor:pointer;color:var(--hw-black);${MONO};font-size:13px`} h="color:var(--hw-terracotta)">
@@ -288,10 +291,10 @@ function PropertyDetail({ sub, go }) {
   )
 }
 
-function PageProperties({ sub, go }) {
+function PageProperties({ sub, only, go }) {
   return (
     <div style={sx('background:var(--hw-white);color:var(--hw-black);font-family:var(--font-body)')}>
-      {sub ? <PropertyDetail sub={sub} go={go} /> : <PropertyList go={go} />}
+      {sub ? <PropertyDetail sub={sub} go={go} /> : <PropertyList only={only} go={go} />}
     </div>
   )
 }

@@ -50,6 +50,7 @@ function Leadership() {
                     as="button"
                     aria-expanded={isOpen}
                     onClick={() => setOpen((o) => (o === t.id ? null : t.id))}
+                    data-m-stack=""
                     s="width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,260px) 48px;gap:24px;align-items:center;padding:clamp(18px,2vw,26px) clamp(20px,3vw,40px);background:none;border:0;cursor:pointer;color:var(--hw-black);text-align:left"
                     h="background:rgba(33,33,33,.04)"
                   >
@@ -61,7 +62,7 @@ function Leadership() {
                     </span>
                   </Hv>
                   {isOpen && (
-                    <div style={sx('display:grid;grid-template-columns:minmax(0,200px) minmax(0,640px);gap:clamp(20px,3vw,40px);padding:0 clamp(20px,3vw,40px) clamp(24px,3vw,36px)')}>
+                    <div data-m-stack="" style={sx('display:grid;grid-template-columns:minmax(0,200px) minmax(0,640px);gap:clamp(20px,3vw,40px);padding:0 clamp(20px,3vw,40px) clamp(24px,3vw,36px)')}>
                       <img src={t.photo} alt={t.name} style={sx('width:100%;aspect-ratio:1/1;object-fit:cover;display:block;filter:grayscale(1);background:var(--hw-brown)')} />
                       <div style={sx('display:flex;flex-direction:column;gap:24px;align-items:flex-start')}>
                         <p style={sx('margin:0;font-size:clamp(17px,1.35vw,20px);line-height:1.55;text-wrap:pretty;white-space:pre-line')}>{t.bio || 'Full bio coming soon.'}</p>
@@ -116,15 +117,6 @@ const STD_APPLY = [
       'At least 65% less energy than code minimum, powered by 75%+ renewable energy.',
       'Metering and our data platform built in from day one.',
       'Natural materials, abundant light, a gym, outdoor space and lounges, in walkable neighbourhoods.',
-    ],
-  },
-  {
-    label: 'Income Strategy · When we buy', ring: '/assets/logos/HW_Income_Ring_White.png', bg: 'var(--hw-hemlock)', fg: 'var(--hw-white)', line: 'rgba(249,249,249,.5)', chip: 'var(--hw-white)',
-    items: [
-      'A plan to bring every building to our standard within two years of acquisition.',
-      'Recommissioning, heat pumps, solar, new windows and fresh-air ventilation.',
-      'Our technology connected and sensors added to track energy and water use.',
-      'Amenities retrofitted for well-being, and fossil-free landscaping and snow removal.',
     ],
   },
 ]
@@ -201,7 +193,7 @@ function Standards() {
           <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:clamp(14px,1.2vw,18px);text-transform:uppercase')}>Our standards</p>
           <h1 style={sx('margin:0;max-width:900px;font-family:var(--font-display);font-weight:500;font-size:clamp(40px,5.4vw,88px);line-height:1;letter-spacing:-.02em;text-wrap:balance')}>Built to a higher standard.</h1>
           <p style={sx('margin:0;max-width:680px;font-size:clamp(18px,1.5vw,22px);line-height:1.5;text-wrap:pretty')}>
-            Efficient, durable and healthy buildings cost less to run, stay competitive for longer and are better to live in. That is why environmental performance is part of every investment decision we make.
+            Efficient, durable and healthy buildings cost less to run, stay competitive for longer and are better to live in. That is why environmental performance shapes every building we design and build in our Growth Strategy.
           </p>
         </div>
       </section>
@@ -232,7 +224,7 @@ function Standards() {
           </div>
         </div>
         <div style={sx('display:flex;flex-direction:column;gap:24px')}>
-          <p style={sx('margin:0;max-width:900px;font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-.01em;text-wrap:pretty')}>Every building we build or buy serves four groups.</p>
+          <p style={sx('margin:0;max-width:900px;font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-.01em;text-wrap:pretty')}>Every building we build serves four groups.</p>
           <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));border-top:1px solid var(--hw-black);border-left:1px solid var(--hw-black)')}>
             {STD_GROUPS.map((g) => (
               <div key={g.k} style={sx('display:flex;flex-direction:column;gap:16px;padding:clamp(20px,2.4vw,32px);border-right:1px solid var(--hw-black);border-bottom:1px solid var(--hw-black)')}>
@@ -251,7 +243,7 @@ function Standards() {
         <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(28px,4vw,56px);align-items:start')}>
           <div style={sx('display:flex;flex-direction:column;gap:20px')}>
             <p style={sx(STD_EYEBROW)}>Our standard</p>
-            <h2 style={sx(STD_H2)}>To do it, we hold every building we build and buy to a standard.</h2>
+            <h2 style={sx(STD_H2)}>To do it, we hold every building we build to a standard.</h2>
           </div>
           <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,max(240px,calc(50% - 1px))),1fr))')}>
             {STD_PILLARS.map((p) => (

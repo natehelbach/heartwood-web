@@ -385,7 +385,9 @@ function Overview({ go }) {
       <section data-screen-label="Investment — Ways to invest" style={sx('background:var(--hw-white);border-top:1.5px solid var(--hw-terracotta);padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:clamp(28px,3vw,48px)')}>
         <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(28px,4vw,64px);align-items:center')}>
           <div style={sx('display:flex;flex-direction:column;gap:20px')}>
-            <p style={sx(EYEBROW)}>Ways to invest</p>
+            <Hv as="button" onClick={() => go('investors/private-wealth')} s={`align-self:flex-start;margin:0;padding:0;border:0;background:none;cursor:pointer;${MONO};font-size:clamp(18px,1.4vw,22px);color:var(--hw-terracotta);display:inline-flex;gap:10px;align-items:center`} h="color:var(--hw-black)">
+              Ways to invest<span aria-hidden="true">→</span>
+            </Hv>
             <h2 style={sx(H2)}>One platform, several vehicles.</h2>
             <p style={sx('margin:0;max-width:680px;font-size:clamp(17px,1.35vw,20px);line-height:1.5;text-wrap:pretty')}>
               Our strategies are broader than our funds. Investors can access them through commingled trusts, specific mandates or deal-level partnerships.

@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Hv, sx, RULE_BG } from '../design/ui.jsx'
 import HW_ARTICLES from '../design/articles-data.js'
+import { render as renderGraph } from '../design/graphs.js'
 
 // Ported from ui_kits/website/PageArticle.dc.html: one Perspective or White paper by slug.
 
@@ -39,6 +40,21 @@ function Figure({ a, bars, prefix = '' }) {
   )
 }
 
+// One dot chart from the article's `charts` list (drawn with the Heartwood Tool renderer).
+function Chart({ c }) {
+  if (!c.g) return <img src={c.src} alt={c.t} style={{ width: '100%', display: 'block' }} />
+  const g = JSON.parse(JSON.stringify(c.g))
+  if (g.style === 'lines') g.labelsOut = true
+  const r = renderGraph(g, { ink: '#212121', dotSize: 100 })
+  return (
+    <div style={{ width: '100%' }}>
+      <svg viewBox={`0 0 ${r.W} ${r.H}`} style={{ width: '100%', height: 'auto', display: 'block' }} role="img" aria-label={c.t} dangerouslySetInnerHTML={{ __html: r.svg }} />
+    </div>
+  )
+}
+
+const SHARE_BTN = `${MONO};font-size:12px;padding:9px 12px;border:1.5px solid var(--hw-black);background:transparent;color:var(--hw-black);cursor:pointer`
+
 function PageArticle({ slug, go }) {
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -51,6 +67,44 @@ function PageArticle({ slug, go }) {
   const bars = fb.map((b, i) => ({ l: b.l, label: b.label || b.v + '%', w: (b.v / max) * 100 + '%', c: i === 0 ? 'var(--hw-terracotta)' : 'var(--hw-black)' }))
   const secs = a.sections || []
   const toc = secs.map((s, i) => ({ ...s, n: String(i + 1).padStart(2, '0'), fig: i === 1 }))
+  const ctaSec = secs.find((x) => x.cta)
+  const cta = ctaSec ? { kicker: 'Learn more about the Growth Trust', ...ctaSec.cta } : null
+  const authors = a.author ? a.author.people || [a.author] : []
+  const charts = a.charts || []
+
+  const [copied, setCopied] = useState(false)
+  const copyTimer = useRef(0)
+  useEffect(() => () => clearTimeout(copyTimer.current), [])
+  const pageUrl = () => {
+    const u = new URL(window.location.href)
+    u.hash = '#insights/perspectives/' + (a.slug || '')
+    return u.toString()
+  }
+  const shareLinkedIn = () => window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(pageUrl()), '_blank', 'noopener,width=600,height=640')
+  const copyLink = () => {
+    const u = pageUrl()
+    const done = () => {
+      setCopied(true)
+      clearTimeout(copyTimer.current)
+      copyTimer.current = setTimeout(() => setCopied(false), 2000)
+    }
+    // Older browsers and non-secure pages have no async clipboard.
+    const fallback = () => {
+      const ta = document.createElement('textarea')
+      ta.value = u
+      document.body.appendChild(ta)
+      ta.select()
+      try {
+        document.execCommand('copy')
+      } catch {
+        // Nothing else to try; still confirm so the button doesn't look broken.
+      }
+      ta.remove()
+      done()
+    }
+    if (navigator.clipboard?.writeText) navigator.clipboard.writeText(u).then(done, fallback)
+    else fallback()
+  }
   const related = HW_ARTICLES.filter((x) => x.slug !== a.slug && (x.kind === 'White paper') === paper)
     .slice(0, 3)
     .map((x) => ({ kind: x.kind === 'White paper' ? 'White paper No. ' + x.no : 'Perspective', title: x.title, dek: x.dek, slug: x.slug }))
@@ -73,12 +127,16 @@ function PageArticle({ slug, go }) {
             </span>
             <h1 style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(38px,5.4vw,80px);line-height:1.02;letter-spacing:-.02em;text-wrap:balance')}>{a.title}</h1>
             <p style={sx('margin:0;max-width:760px;font-size:clamp(19px,1.7vw,24px);line-height:1.45;text-wrap:pretty')}>{a.dek}</p>
-            <div style={sx('display:flex;align-items:center;gap:14px')}>
-              {a.author?.photo && <img src={a.author.photo} alt="" style={sx('width:48px;height:48px;border-radius:50%;object-fit:cover;display:block')} />}
-              <span style={sx('display:flex;flex-direction:column;gap:2px')}>
-                <span style={sx('font-family:var(--font-display);font-weight:500;font-size:18px')}>{a.author?.name}</span>
-                <span style={sx('font-size:18px')}>{a.author?.role}</span>
-              </span>
+            <div style={sx('display:flex;flex-wrap:wrap;gap:16px 32px')}>
+              {authors.map((p) => (
+                <div key={p.name} style={sx('display:flex;align-items:center;gap:14px')}>
+                  {p.photo && <img src={p.photo} alt="" style={sx('width:48px;height:48px;border-radius:50%;object-fit:cover;display:block')} />}
+                  <span style={sx('display:flex;flex-direction:column;gap:2px')}>
+                    <span style={sx('font-family:var(--font-display);font-weight:500;font-size:18px')}>{p.name}</span>
+                    <span style={sx('font-size:18px')}>{p.role}</span>
+                  </span>
+                </div>
+              ))}
             </div>
           </header>
           <div style={sx('padding:0 clamp(20px,3vw,40px)')}>
@@ -91,21 +149,53 @@ function PageArticle({ slug, go }) {
                 <p key={k} style={sx('margin:0;padding-top:12px;border-top:1px solid var(--hw-black);font-size:18px;line-height:1.45')}>{k}</p>
               ))}
               <div style={sx('display:flex;gap:8px;flex-wrap:wrap;padding-top:6px')}>
-                <span style={sx(`${MONO};font-size:12px;padding:9px 12px;border:1.5px solid var(--hw-black)`)}>Share on LinkedIn</span>
-                <span style={sx(`${MONO};font-size:12px;padding:9px 12px;border:1.5px solid var(--hw-black)`)}>Copy link</span>
+                <Hv as="button" onClick={shareLinkedIn} s={SHARE_BTN} h="background:var(--hw-black);color:var(--hw-white)">
+                  Share on LinkedIn
+                </Hv>
+                <Hv as="button" onClick={copyLink} s={SHARE_BTN} h="background:var(--hw-black);color:var(--hw-white)">
+                  {copied ? 'Link copied ✓' : 'Copy link'}
+                </Hv>
               </div>
+              {cta && (
+                <div style={sx('display:flex;flex-direction:column;gap:12px;margin-top:10px;padding-top:18px;border-top:1.5px solid var(--hw-terracotta)')}>
+                  <span style={sx(`${MONO};font-size:12px;color:var(--hw-terracotta)`)}>{cta.kicker}</span>
+                  <Hv as="button" onClick={() => go(cta.r)} s={`align-self:flex-start;padding:14px 22px;border:0;background:var(--hw-black);color:var(--hw-white);${MONO};font-size:14px;cursor:pointer`} h="background:var(--hw-terracotta)">
+                    {cta.label} →
+                  </Hv>
+                </div>
+              )}
             </aside>
             <article style={sx('display:flex;flex-direction:column;gap:clamp(28px,3vw,40px);max-width:700px;grid-column:span 2')}>
               {secs.slice(0, 1).map((s) => (
                 <Section key={s.h} s={s} />
               ))}
-              <blockquote style={sx('margin:0;padding:clamp(8px,1vw,16px) 0;font-family:var(--font-display);font-weight:500;font-size:clamp(28px,3vw,42px);line-height:1.12;letter-spacing:-.01em;color:var(--hw-terracotta);text-wrap:balance')}>
-                “{a.quote}”
-              </blockquote>
+              {a.quote && (
+                <blockquote style={sx('margin:0;padding:clamp(8px,1vw,16px) 0;font-family:var(--font-display);font-weight:500;font-size:clamp(28px,3vw,42px);line-height:1.12;letter-spacing:-.01em;color:var(--hw-terracotta);text-wrap:balance')}>
+                  “{a.quote}”
+                </blockquote>
+              )}
               {secs.slice(1).map((s) => (
                 <Section key={s.h} s={s} />
               ))}
-              <Figure a={a} bars={bars} />
+              {bars.length > 0 && <Figure a={a} bars={bars} />}
+              {charts.length > 0 && (
+                <div style={sx('display:flex;flex-direction:column;gap:20px;border-top:1.5px solid var(--hw-terracotta);padding-top:20px')}>
+                  <h2 style={sx(H2)}>{a.chartsTitle}</h2>
+                  <div style={sx('display:flex;flex-direction:column;gap:clamp(28px,3vw,44px)')}>
+                    {charts.map((c, i) => (
+                      <figure key={c.t} style={sx('margin:0;display:flex;flex-direction:column;gap:16px;padding-top:20px;border-top:1px solid var(--hw-black)')}>
+                        <figcaption style={sx('display:flex;flex-direction:column;gap:8px')}>
+                          <span style={sx(`${MONO};font-size:13px;color:var(--hw-terracotta)`)}>Chart {i + 1} of {charts.length}</span>
+                          <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2vw,28px);line-height:1.15')}>{c.t}</span>
+                          <span style={sx('font-size:18px;line-height:1.5;max-width:640px;text-wrap:pretty')}>{c.d}</span>
+                        </figcaption>
+                        <Chart c={c} />
+                        <span style={sx(`${MONO};font-size:11px`)}>Source: {c.s}</span>
+                      </figure>
+                    ))}
+                  </div>
+                </div>
+              )}
             </article>
           </section>
           <section style={sx('margin:0 clamp(20px,3vw,40px);padding:clamp(32px,4vw,56px);background:var(--hw-teal);color:var(--hw-white);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px')}>

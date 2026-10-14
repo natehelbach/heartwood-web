@@ -77,7 +77,7 @@ function Flow({ items, row, cols }) {
     <div style={sx(`position:relative;display:grid;grid-template-columns:${fl.cols};gap:${fl.gg};align-items:start;padding-top:8px`)}>
       <span style={sx(`position:absolute;z-index:0;left:44px;top:52px;right:${fl.lr};bottom:${fl.lb};border-top:${fl.bt};border-left:${fl.bl}`)} />
       {items.map((q) => (
-        <div key={q.n} style={sx(`position:relative;z-index:1;display:${fl.nd};grid-template-columns:88px minmax(0,1fr);flex-direction:column;gap:${fl.ng};padding-bottom:${fl.pb}`)}>
+        <div key={q.n} data-m-stack="" style={sx(`position:relative;z-index:1;display:${fl.nd};grid-template-columns:88px minmax(0,1fr);flex-direction:column;gap:${fl.ng};padding-bottom:${fl.pb}`)}>
           <div style={sx(`width:88px;height:88px;box-sizing:border-box;flex:none;display:flex;align-items:center;justify-content:center;background:${q.boxBg};border:1.5px solid ${q.c}`)}>
             <DotIcon name={q.ic} color={q.icC} size={50} />
           </div>

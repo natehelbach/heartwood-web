@@ -10,22 +10,38 @@ export const ADDRESS = '25 King St W, Toronto, Ontario M5L 2A1'
 // Top-level menus. `g` groups items in the dropdown and the section sub-nav.
 export const SECTIONS = {
   investment: {
-    label: 'Investments',
+    label: 'Investment',
     items: [
       { label: 'Overview', r: 'investment/overview' },
-      { label: 'Growth', r: 'investment/growth', g: 'Strategies' },
-      { label: 'Income', r: 'investment/income', g: 'Strategies' },
-      { label: 'Funds', r: 'investment/funds', g: 'Ways to invest' },
-      { label: 'Project investments', r: 'investment/flexible', g: 'Ways to invest' },
-      { label: 'Services', r: 'investment/services', g: 'Ways to invest' },
-      { label: 'Advisors', r: 'investment/advisors', g: 'Who we serve' },
-      { label: 'Private wealth', r: 'investment/hnw', g: 'Who we serve' },
-      { label: 'Institutional', r: 'investment/institutional', g: 'Who we serve' },
-      { label: 'Schedule a meeting', r: 'investment/meeting', g: 'Next steps' },
-      { label: 'Investor portal', r: 'investment/portal', g: 'Next steps' },
+      { label: 'Growth Strategy', r: 'investment/growth-strategy', g: 'Strategies' },
+      { label: 'Income Strategy', r: 'investment/income-strategy', g: 'Strategies' },
+      { label: 'Growth Fund', r: 'investment/growth-fund', g: 'Investment solutions' },
+      { label: 'Income Fund', r: 'investment/income-fund', g: 'Investment solutions' },
+      { label: 'Direct Investments', r: 'investment/direct', g: 'Investment solutions' },
     ],
   },
-  properties: { label: 'Properties', r: 'properties' },
+  development: {
+    label: 'Development',
+    items: [
+      { label: 'Standards', r: 'development/standards' },
+      { label: 'How We Build', r: 'development/design' },
+      { label: 'Projects', r: 'development/projects' },
+    ],
+  },
+  management: {
+    label: 'Management',
+    items: [
+      { label: 'Asset Management', r: 'management/asset' },
+      { label: 'Properties', r: 'properties' },
+    ],
+  },
+  investors: {
+    label: 'For Investors',
+    items: [
+      { label: 'Private Wealth', r: 'investors/private-wealth' },
+      { label: 'Institutional', r: 'investors/institutional' },
+    ],
+  },
   insights: {
     label: 'Insights',
     items: [
@@ -39,9 +55,7 @@ export const SECTIONS = {
     label: 'About',
     items: [
       { label: 'Who we are', r: 'about/who' },
-      { label: 'Our standards', r: 'about/standards' },
       { label: 'Team', r: 'about/leadership' },
-      { label: 'Careers', r: 'about/careers' },
       { label: 'Contact', r: 'about/contact' },
     ],
   },
@@ -49,16 +63,37 @@ export const SECTIONS = {
 
 export const FOOTER_COLUMNS = [
   {
-    label: 'Investments',
+    label: 'Investment',
     items: [
-      ['Overview', 'investment/overview'],
-      ['Strategies', 'investment/growth'],
-      ['Ways to invest', 'investment/funds'],
-      ['Who we serve', 'investment/advisors'],
-      ['Next steps', 'investment/meeting'],
+      ['Growth Strategy', 'investment/growth-strategy'],
+      ['Income Strategy', 'investment/income-strategy'],
+      ['Growth Fund', 'investment/growth-fund'],
+      ['Income Fund', 'investment/income-fund'],
+      ['Direct Investments', 'investment/direct'],
     ],
   },
-  { label: 'Properties', items: [['All properties', 'properties']] },
+  {
+    label: 'Development',
+    items: [
+      ['Standards', 'development/standards'],
+      ['How We Build', 'development/design'],
+      ['Projects', 'development/projects'],
+    ],
+  },
+  {
+    label: 'Management',
+    items: [
+      ['Asset Management', 'management/asset'],
+      ['Properties', 'properties'],
+    ],
+  },
+  {
+    label: 'For Investors',
+    items: [
+      ['Private Wealth', 'investors/private-wealth'],
+      ['Institutional', 'investors/institutional'],
+    ],
+  },
   {
     label: 'Insights',
     items: [
@@ -72,7 +107,6 @@ export const FOOTER_COLUMNS = [
     label: 'About',
     items: [
       ['Who we are', 'about/who'],
-      ['Our standards', 'about/standards'],
       ['Team', 'about/leadership'],
       ['Careers', 'about/careers'],
       ['Contact', 'about/contact'],
@@ -85,7 +119,44 @@ export const LEGAL_LINKS = [
   ['Legal and disclosures (Canada and United States)', 'legal/disclosures'],
 ]
 
-const ALIASES = { platform: 'about/who', about: 'about/who', 'insights/events': 'insights' }
+const ALIASES = { about: 'about/who', 'insights/events': 'insights' }
+
+// Menu routes that show an existing page. The URL keeps the menu route, so the
+// header can highlight the menu it came from.
+const PAGE_OF = {
+  'investment/growth-strategy': 'investment/growth',
+  'investment/income-strategy': 'investment/income',
+  'investment/growth-fund': 'investment/funds',
+  'investment/income-fund': 'investment/funds',
+  'investment/direct': 'investment/flexible',
+  development: 'properties',
+  'development/projects': 'properties',
+  'development/design': 'platform',
+  'development/standards': 'about/standards',
+  management: 'management/asset',
+  investors: 'investment/hnw',
+  'investors/private-wealth': 'investment/hnw',
+  'investors/institutional': 'investment/institutional',
+}
+
+// Pages that sit under a different menu than their route's first segment.
+const MENU_OF = {
+  properties: 'management',
+  'investment/advisors': 'investors',
+  'investment/hnw': 'investors',
+  'investment/institutional': 'investors',
+}
+
+// The menu item a page lights up when it was reached by its own route.
+const MENU_ITEM_OF = {
+  'investment/growth': 'investment/growth-strategy',
+  'investment/income': 'investment/income-strategy',
+  'investment/flexible': 'investment/direct',
+  'investment/hnw': 'investors/private-wealth',
+  'investment/advisors': 'investors/private-wealth',
+  'investment/institutional': 'investors/institutional',
+  platform: 'development/design',
+}
 
 // Routes rendered by the design's PageLanding rather than their section page.
 const LANDING_ROUTES = {
@@ -106,19 +177,31 @@ export function normalizeRoute(route) {
   return ALIASES[r] || r
 }
 
-// Splits a route into the pieces the shell and pages need.
-export function parseRoute(route) {
+// Splits a route into the pieces the shell and pages need. `navRoute` is the route in the URL;
+// `route` is the page it shows.
+export function parseRoute(navRoute) {
+  const route = PAGE_OF[navRoute] || navRoute
   const parts = route.split('/')
+  const section = parts[0]
+  const sub = parts.slice(1).join('/')
+  const fromDevelopment = navRoute.startsWith('development')
+  const navSection = (fromDevelopment && 'development') || MENU_OF[route] || (section === 'platform' && 'development') || navRoute.split('/')[0]
   return {
     route,
-    section: parts[0],
-    sub: parts.slice(1).join('/'),
+    section,
+    sub,
+    navSection,
+    activeSub: activeSubRoute(navRoute, route, section, sub),
+    propsOnly: fromDevelopment ? 'Growth' : '',
     landing: LANDING_ROUTES[route] || '',
   }
 }
 
 // The sub-nav item a route highlights: articles and newsletter issues light up their index.
-export function activeSubRoute(route, section, sub) {
+function activeSubRoute(navRoute, route, section, sub) {
+  if (section === 'properties' && navRoute.startsWith('development')) return 'development/projects'
+  if (PAGE_OF[navRoute] && navRoute.includes('/')) return navRoute
+  if (MENU_ITEM_OF[route]) return MENU_ITEM_OF[route]
   if (section === 'insights' && sub.startsWith('newsletter')) return 'insights/newsletter'
   if (route === 'insights/learn' || route.startsWith('insights/perspectives/')) return 'insights/perspectives'
   return route

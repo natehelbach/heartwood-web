@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { SECTIONS, LOGIN_URL, activeSubRoute, tagColor } from '../site/sitemap.js'
+import { SECTIONS, LOGIN_URL, tagColor } from '../site/sitemap.js'
 
 // Scroll distance over which the Home header collapses from the full-width
 // wordmark to a compact bar.
@@ -67,7 +67,9 @@ function buildSubGroups(items, activeSub) {
   return out
 }
 
-function SiteHeader({ route, section, sub, go }) {
+// `navSection` is the menu the route belongs to, which can differ from its first segment
+// (Properties sits under Management). `activeSub` is the sub-nav item to underline.
+function SiteHeader({ route, section, navSection, activeSub, go }) {
   const home = section === 'home'
   const k = useScrollProgress(home)
   const mob = useIsMobile()
@@ -119,8 +121,7 @@ function SiteHeader({ route, section, sub, go }) {
     return () => ro.disconnect()
   }, [])
 
-  const cur = SECTIONS[section]
-  const activeSub = activeSubRoute(route, section, sub)
+  const cur = SECTIONS[navSection]
   const subGroups = cur?.items && !mob ? buildSubGroups(cur.items, activeSub) : []
 
   const navTo = (r) => {
@@ -140,14 +141,14 @@ function SiteHeader({ route, section, sub, go }) {
         }
       : {
           className: 'site-header site-header--home',
-          padding: `${48 - 28 * k}px var(--gutter) ${160 - 140 * k}px`,
+          padding: `${40 - 24 * k}px var(--gutter) ${88 - 72 * k}px`,
           logoWidth: `${100 - 84 * k}%`,
           navStyle: { opacity: k, pointerEvents: k > 0.5 ? 'auto' : 'none' },
         }
     : { className: `site-header site-header--inner${mob ? ' site-header--mobile' : ''}`, padding: '0 var(--gutter)' }
 
   // In the drawer, the current section starts expanded.
-  const openKey = dOpen ?? (cur?.items ? section : null)
+  const openKey = dOpen ?? (cur?.items ? navSection : null)
 
   return (
     <header
@@ -176,19 +177,23 @@ function SiteHeader({ route, section, sub, go }) {
           {!mob && (
             <nav className="site-nav" aria-label="Main" style={bar.navStyle}>
               {Object.entries(SECTIONS).map(([key, m]) => {
-                const open = menu === key && !!m.items
+                // The current section's items are already in the sub-nav, so its menu
+                // doesn't drop down; clicking it goes to its first page instead.
+                const current = navSection === key
+                const drops = !!m.items && !current
+                const open = menu === key && drops
                 return (
                   <div
                     key={key}
                     className="site-nav__item"
-                    onMouseEnter={() => canHover() && setMenu(m.items ? key : null)}
+                    onMouseEnter={() => canHover() && setMenu(drops ? key : null)}
                   >
                     <button
                       type="button"
-                      className={`site-nav__link${section === key ? ' is-current' : ''}`}
-                      aria-expanded={m.items ? open : undefined}
-                      aria-haspopup={m.items ? 'true' : undefined}
-                      onClick={m.items ? () => setMenu((v) => (v === key ? null : key)) : () => navTo(m.r)}
+                      className={`site-nav__link${current ? ' is-current' : ''}`}
+                      aria-expanded={drops ? open : undefined}
+                      aria-haspopup={drops ? 'true' : undefined}
+                      onClick={drops ? () => setMenu((v) => (v === key ? null : key)) : () => navTo(m.items ? m.items[0].r : m.r)}
                     >
                       {m.label}
                     </button>
@@ -260,7 +265,7 @@ function SiteHeader({ route, section, sub, go }) {
                   onClick={has ? () => setDOpen(open ? '' : key) : () => navTo(m.r)}
                 >
                   {m.label}
-                  <span style={{ color: section === key ? 'var(--hw-teal)' : 'var(--hw-black)' }}>
+                  <span style={{ color: navSection === key ? 'var(--hw-teal)' : 'var(--hw-black)' }}>
                     {has ? (open ? '−' : '+') : '→'}
                   </span>
                 </button>

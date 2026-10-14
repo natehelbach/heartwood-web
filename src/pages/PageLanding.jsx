@@ -38,11 +38,11 @@ const PAGES = {
     form: { eyebrow: 'Advisor access', title: 'Request advisor access.', note: 'Our advisor team will confirm your registration and send fund materials, the Offering Memorandum and upcoming CE sessions.', cta: 'Request access', thanks: 'Thanks — our advisor team will be in touch within one business day.', hubspot: 'advisor-access', hasSelect: true, selectLabel: 'Firm type', options: ['Exempt market dealer', 'Investment dealer (CIRO)', 'Portfolio manager', 'RIA', 'Wealth manager', 'Other'] },
   },
   hnw: {
-    hero: { eyebrow: 'Investments · For private wealth', title: 'Real estate built to hold its value.', intro: 'For family offices, entrepreneurs and high-net-worth families who want durable, lower-volatility returns from purpose-built rental housing.', cta: 'Book a call', img: R + 'HW_Render_3385-Lawrence-Courtyard.jpg' },
+    hero: { eyebrow: 'For Investors · Private Wealth', title: 'Real estate built to hold its value.', intro: 'For family offices, entrepreneurs and high-net-worth families who want durable, lower-volatility returns from purpose-built rental housing.', cta: 'Book a call', img: R + 'HW_Render_3385-Lawrence-Courtyard.jpg' },
     form: { eyebrow: 'Get started', title: 'Talk to our investment team.', note: 'A 30-minute call to learn about your goals and walk you through our Growth and Income strategies.', cta: 'Book a call', thanks: 'Thanks. A member of our team will be in touch within one business day.', hubspot: 'hnw-enquiry', hasSelect: true, selectLabel: 'I’m interested in', options: ['Growth strategy', 'Income strategy', 'Both', 'Co-investment (family office)', 'Not sure yet'] },
   },
   institutional: {
-    hero: { eyebrow: 'Investments · For institutional investors', title: 'An institutional mindset. An entrepreneurial pace.', intro: 'For pension funds, foundations, endowments, insurers and sovereign wealth funds looking for long-term exposure to purpose-built rental housing.', cta: 'Contact us', img: R + 'HW_Render_360-Kennedy-Lane.jpg' },
+    hero: { eyebrow: 'For Investors · Institutional', title: 'An institutional mindset. An entrepreneurial pace.', intro: 'For pension funds, foundations, endowments, insurers and sovereign wealth funds looking for long-term exposure to purpose-built rental housing.', cta: 'Contact us', img: R + 'HW_Render_360-Kennedy-Lane.jpg' },
     form: { eyebrow: 'Institutional enquiries', title: 'Contact us.', note: 'Tell us about your mandate. We’ll meet first, then share the data room and DDQ.', cta: 'Send enquiry', thanks: 'Thank you. A senior member of our team will be in touch.', hubspot: 'institutional-enquiry', hasSelect: true, selectLabel: 'Organization type', options: ['Pension fund', 'Foundation or endowment', 'Insurer', 'Sovereign wealth fund', 'Consultant or placement agent', 'Other'] },
   },
   meeting: {
@@ -53,6 +53,23 @@ const PAGES = {
     hero: { eyebrow: 'Investments · Investor portal', title: 'Everything you need to invest, in one place.', intro: 'Create an account to review fund materials, start a subscription and track your investment.', cta: 'Create your account', img: R + 'HW_Render_3385-Lawrence-Courtyard.jpg' },
     form: { eyebrow: 'Investor sign-up', title: 'Create your account.', note: 'Takes two minutes. You can browse before you commit.', cta: 'Create your account', thanks: 'Account created. Check your email to continue to the portal.', hubspot: 'portal-signup', hasSelect: true, selectLabel: 'Investor type', options: ['Individual', 'Joint', 'Corporation / trust', 'Advisor', 'Institutional'] },
   },
+}
+
+const A = '/assets/'
+const FEATURE_PW = [
+  { tag: 'White paper', t: 'Tax-efficient income from private real estate', m: 'How return of capital and registered accounts can help you keep more of what you earn.', img: A + 'lifestyle/HW_Lifestyle_26.jpg', r: 'insights/perspectives/tax-efficient-income' },
+  { tag: 'White paper', t: 'Private real estate in a modern portfolio', m: 'Why Canada’s largest pension funds hold alternatives, and what rental housing adds.', img: A + 'project-renders/HW_Render_3385-Lawrence-Courtyard.jpg', r: 'insights/perspectives/private-real-estate-portfolio' },
+]
+const FEATURE_INST = [
+  { tag: 'White paper', t: 'Rental fundamentals: why the housing gap persists', m: 'Short-term softness hides a long-term shortage. The data behind our outlook.', img: A + 'project-renders/HW_Render_353-Sherbourne.jpg', r: 'insights/perspectives/housing-gap' },
+  { tag: 'White paper', t: 'Low leverage, lower risk', m: 'Why we keep debt conservative, and what that means when rates or values move.', img: A + 'photography/HW_MassTimber_Studio.jpg', r: 'insights/perspectives/low-leverage' },
+]
+const QUOTE_PW = { q: '[Quote to confirm] We started Heartwood to give private investors access to the kind of long-term rental housing that institutions have held for decades, built and run by one team.', n: 'Tim Blair', t: 'Founding Partner', img: A + 'team/HW_Team_Tim-Blair_HR.jpg' }
+const QUOTE_INST = { q: '[Quote to confirm] We build to hold, so every decision we make, from the site to the systems, is one we expect to live with for decades alongside our partners.', n: 'David Constable', t: 'Founding Partner', img: A + 'team/HW_Team_David-Constable_HR.jpg' }
+const AUD_EXTRA = {
+  hnw: { feature: FEATURE_PW, quote: QUOTE_PW },
+  advisors: { feature: FEATURE_PW, quote: QUOTE_PW },
+  institutional: { feature: FEATURE_INST, quote: QUOTE_INST },
 }
 
 const AUD = {
@@ -352,7 +369,7 @@ function Podcast() {
     <section data-screen-label="Podcast — Episodes" style={sx('padding:0 clamp(20px,3vw,40px) clamp(48px,6vw,88px);display:flex;flex-direction:column')}>
       <div style={sx(RULE_LINE)} />
       {EPISODES.map((ep) => (
-        <div key={ep.no} style={sx('display:grid;grid-template-columns:minmax(0,clamp(140px,24vw,300px)) minmax(0,1fr) auto;gap:16px clamp(20px,3vw,48px);align-items:center;padding:24px 0;border-bottom:1px solid var(--hw-black)')}>
+        <div key={ep.no} data-m-stack="" style={sx('display:grid;grid-template-columns:minmax(0,clamp(140px,24vw,300px)) minmax(0,1fr) auto;gap:16px clamp(20px,3vw,48px);align-items:center;padding:24px 0;border-bottom:1px solid var(--hw-black)')}>
           <div style={sx('position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--hw-brown)')}>
             <img src={ep.img} alt="" style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block')} />
             <div style={sx('position:absolute;inset:0;background:var(--overlay-brown)')} />
@@ -377,12 +394,42 @@ function Podcast() {
   )
 }
 
-function Audience({ sub, aud, go }) {
+function Audience({ sub, aud, hero, toForm, go }) {
+  const { feature, quote } = AUD_EXTRA[sub]
   return (
     <>
-      <section data-screen-label="Audience — Why Heartwood" style={sx(`padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px) 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,4vw,64px);align-items:start;background:${RULE_BG}`)}>
-        <h2 style={sx(`${H2};text-wrap:balance`)}>{aud.lead}</h2>
-        <p style={sx('margin:0;font-size:clamp(17px,1.35vw,20px);line-height:1.55;text-wrap:pretty')}>{aud.body}</p>
+      <section data-screen-label="Audience — Intro" style={sx('padding:clamp(56px,6vw,96px) clamp(20px,3vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(28px,4vw,72px);align-items:start')}>
+        <h2 style={sx(`${H2};letter-spacing:-.01em;text-wrap:balance`)}>{aud.lead}</h2>
+        <div style={sx('display:flex;flex-direction:column;gap:24px')}>
+          <p style={sx('margin:0;font-size:clamp(18px,1.5vw,22px);line-height:1.5;text-wrap:pretty')}>{hero.intro}</p>
+          <p style={sx('margin:0;font-size:clamp(17px,1.35vw,20px);line-height:1.55;text-wrap:pretty')}>{aud.body}</p>
+          <div style={sx('display:flex;flex-wrap:wrap;gap:12px')}>
+            <Hv as="button" onClick={toForm} s={`padding:16px 24px;background:var(--hw-black);color:var(--hw-white);border:1.5px solid var(--hw-black);cursor:pointer;${MONO};font-size:14px`} h="background:var(--hw-terracotta);border-color:var(--hw-terracotta)">
+              {hero.cta} →
+            </Hv>
+            {hero.cta2 && (
+              <Hv as="button" onClick={() => go('investment/meeting')} s={`padding:16px 24px;background:transparent;color:var(--hw-black);border:1.5px solid var(--hw-black);cursor:pointer;${MONO};font-size:14px`} h="background:var(--hw-black);color:var(--hw-white)">
+                {hero.cta2}
+              </Hv>
+            )}
+          </div>
+        </div>
+      </section>
+      <section data-screen-label="Audience — Featured insights" style={sx('padding:0 clamp(20px,3vw,40px) clamp(56px,6vw,96px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(16px,2vw,24px)')}>
+        {feature.map((ft) => (
+          <Hv key={ft.t} as="button" onClick={() => go(ft.r)} s="position:relative;display:flex;align-items:flex-end;min-height:clamp(320px,30vw,460px);padding:0;border:0;cursor:pointer;text-align:left;overflow:hidden;background:var(--hw-brown);color:var(--hw-white);font-family:var(--font-body);transition:transform .25s ease" h="transform:translateY(-4px)">
+            <img src={ft.img} alt="" style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block')} />
+            <span style={sx('position:absolute;inset:0;background:linear-gradient(0deg,rgba(33,33,33,.75),rgba(33,33,33,0) 70%)')} />
+            <span style={sx('position:relative;display:flex;flex-direction:column;gap:12px;padding:clamp(24px,2.6vw,36px);width:100%;box-sizing:border-box')}>
+              <span style={sx(`${MONO};font-size:13px`)}>{ft.tag}</span>
+              <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(26px,2.6vw,38px);line-height:1.08;letter-spacing:-.01em;text-wrap:balance')}>{ft.t}</span>
+              <span style={sx('font-size:18px;line-height:1.45;max-width:520px;text-wrap:pretty')}>{ft.m}</span>
+              <span style={sx(`display:flex;justify-content:space-between;align-items:center;padding:12px 0 10px;border-bottom:1.5px solid var(--hw-white);${MONO};font-size:14px`)}>
+                Read more<span aria-hidden="true">→</span>
+              </span>
+            </span>
+          </Hv>
+        ))}
       </section>
       <section data-screen-label="Audience — How we work" style={sx(`padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:28px;background:${RULE_BG}`)}>
         <div style={sx(RULE_LINE)} />
@@ -413,6 +460,16 @@ function Audience({ sub, aud, go }) {
           ))}
         </div>
       </section>
+      <section data-screen-label="Audience — Quote" style={sx('padding:0 clamp(20px,3vw,40px) clamp(56px,6vw,96px);display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,72px);align-items:center')}>
+        <img src={quote.img} alt={quote.n} style={sx('flex:1 1 260px;width:100%;max-width:420px;aspect-ratio:1;object-fit:cover;object-position:center top;display:block;background:var(--hw-cool-grey)')} />
+        <div style={sx('flex:2 1 420px;min-width:0;display:flex;flex-direction:column;gap:24px')}>
+          <p style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(26px,2.8vw,42px);line-height:1.18;letter-spacing:-.01em;text-wrap:pretty')}>“{quote.q}”</p>
+          <Hv as="button" onClick={() => go('about/leadership')} s="align-self:flex-start;display:flex;flex-direction:column;gap:4px;background:none;border:0;padding:0;cursor:pointer;text-align:left;color:var(--hw-black)" h="color:var(--hw-terracotta)">
+            <span style={sx('font-family:var(--font-display);font-weight:500;font-size:22px')}>{quote.n} →</span>
+            <span style={sx(`${MONO};font-size:13px`)}>{quote.t}</span>
+          </Hv>
+        </div>
+      </section>
       <section data-screen-label="Audience — Key facts" style={sx('background:var(--hw-cool-grey);padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(28px,4vw,72px);align-items:start')}>
         <div style={sx('display:flex;flex-direction:column;gap:16px')}>
           <p style={sx(EYEBROW)}>What you’ll want to know</p>
@@ -420,7 +477,7 @@ function Audience({ sub, aud, go }) {
         </div>
         <div style={sx('display:flex;flex-direction:column')}>
           {aud.facts.map((k) => (
-            <div key={k.k} style={sx('display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:8px 24px;padding:16px 0;border-top:1px solid var(--hw-black)')}>
+            <div key={k.k} data-m-stack="" style={sx('display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:8px 24px;padding:16px 0;border-top:1px solid var(--hw-black)')}>
               <span style={sx(`${MONO};font-size:13px;padding-top:3px`)}>{k.k}</span>
               <span style={sx('font-size:18px;line-height:1.5;text-wrap:pretty')}>{k.v}</span>
             </div>
@@ -488,16 +545,19 @@ function Audience({ sub, aud, go }) {
             <span style={sx(`${MONO};font-size:13px;white-space:nowrap`)}>Log in ↗</span>
           </Hv>
         </div>
-        <div style={sx('background:var(--hw-black);color:var(--hw-white);padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:18px')}>
-          <p style={sx(`margin:0;${MONO};font-size:13px`)}>Your Heartwood contact</p>
-          <div style={sx('display:flex;gap:18px;align-items:center')}>
-            <img src={aud.contact.img} alt={aud.contact.n} style={sx('width:88px;height:88px;border-radius:50%;object-fit:cover;flex:none;background:var(--hw-cool-grey)')} />
-            <span style={sx('display:flex;flex-direction:column;gap:4px')}>
-              <span style={sx('font-family:var(--font-display);font-weight:500;font-size:26px')}>{aud.contact.n}</span>
-              <span style={sx('font-size:18px')}>{aud.contact.t}</span>
-            </span>
+        <div style={sx('display:flex;flex-direction:column;gap:18px')}>
+          <p style={sx(`margin:0;${MONO};font-size:clamp(14px,1.2vw,18px);color:var(--hw-terracotta)`)}>Your Heartwood contact</p>
+          <div data-m-stack="" style={sx('display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr);gap:clamp(16px,2vw,28px);align-items:end;padding-top:16px;border-top:1px solid var(--hw-black)')}>
+            <img src={aud.contact.img} alt={aud.contact.n} style={sx('width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
+            <div style={sx('display:flex;flex-direction:column;gap:8px')}>
+              <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.2vw,32px)')}>{aud.contact.n}</span>
+              <span style={sx(`${MONO};font-size:13px`)}>{aud.contact.t}</span>
+              <span style={sx('font-size:18px;line-height:1.5;text-wrap:pretty')}>{aud.contact.body}</span>
+              <Hv as="button" onClick={() => go('about/leadership')} s={`align-self:flex-start;margin-top:6px;background:none;border:0;border-bottom:1.5px solid var(--hw-black);padding:0 0 3px;cursor:pointer;color:var(--hw-black);${MONO};font-size:13px`} h="color:var(--hw-terracotta);border-color:var(--hw-terracotta)">
+                View full bio →
+              </Hv>
+            </div>
           </div>
-          <p style={sx('margin:0;font-size:18px;line-height:1.5;text-wrap:pretty')}>{aud.contact.body}</p>
         </div>
       </section>
     </>
@@ -521,7 +581,16 @@ function PageLanding({ sub, go }) {
 
   return (
     <div style={sx('background:var(--hw-white);color:var(--hw-black);font-family:var(--font-body)')}>
-      {plainHero ? (
+      {aud ? (
+        <section data-screen-label={'Landing — ' + s} style={sx('position:relative;overflow:hidden;height:clamp(480px,52vw,760px);background:var(--hw-brown)')}>
+          <img src={hero.img} alt="" style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block')} />
+          <div style={sx('position:absolute;inset:0;background:var(--overlay-brown)')} />
+          <div style={sx('position:absolute;left:0;right:0;bottom:0;padding:clamp(40px,5vw,72px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:20px;color:var(--hw-white)')}>
+            <p style={sx(`margin:0;${MONO};font-size:clamp(14px,1.2vw,18px)`)}>{hero.eyebrow}</p>
+            <h1 style={sx('margin:0;max-width:980px;font-family:var(--font-display);font-weight:500;font-size:clamp(40px,5.6vw,88px);line-height:1;letter-spacing:-.025em;text-wrap:balance')}>{hero.title}</h1>
+          </div>
+        </section>
+      ) : plainHero ? (
         <section data-screen-label={'Landing — ' + s} style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))')}>
           <div style={sx('padding:clamp(56px,8vw,128px) clamp(20px,3vw,40px) clamp(32px,4vw,56px);display:flex;flex-direction:column;gap:24px;justify-content:flex-end')}>
             <p style={sx(EYEBROW)}>{hero.eyebrow}</p>
@@ -560,7 +629,7 @@ function PageLanding({ sub, go }) {
       {s === 'events' && <Events toForm={toForm} go={go} />}
       {s === 'learn' && <Learn go={go} />}
       {s === 'podcast' && <Podcast />}
-      {aud && <Audience sub={s} aud={aud} go={go} />}
+      {aud && <Audience sub={s} aud={aud} hero={hero} toForm={toForm} go={go} />}
 
 
       {s === 'portal' && (

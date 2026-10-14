@@ -5,7 +5,7 @@ import HW_ARTICLES from '../design/articles-data.js'
 import PageArticle from './PageArticle.jsx'
 
 // Ported from ui_kits/website/PageInsights.dc.html. `sub` is '' (overview) | perspectives |
-// perspectives/<slug> | news | newsletter | newsletter/<no>.
+// perspectives/<slug> | news | news/<release> | newsletter | newsletter/<no>.
 
 const MONO = 'font-family:var(--font-subhead);font-weight:500;text-transform:uppercase'
 
@@ -17,31 +17,33 @@ const TOPIC = {
 const TOPICS = ['All', 'Market', 'Tax & income', 'Portfolio & risk', 'Sustainability']
 
 const PAPERS = [
-  { kind: 'White paper', slug: 'tax-efficient-income', title: 'Tax-efficient income from private real estate', dek: 'How return of capital, registered accounts and the way income is taxed can help your clients keep more of what they earn.' },
-  { kind: 'White paper', slug: 'housing-gap', title: 'Rental fundamentals: why the housing gap persists', dek: 'Short-term softness hides a long-term shortage. The data behind our outlook for purpose-built rental.' },
-  { kind: 'White paper', slug: 'private-real-estate-portfolio', title: 'Private real estate in a modern portfolio', dek: 'Why Canada’s largest pension funds hold alternatives, and what private rental housing adds to client portfolios.' },
-  { kind: 'White paper', slug: 'rental-vs-condo', title: 'Why purpose-built rental is not a condo', dek: 'Ownership, tenure and operations: why rental buildings behave differently from condos through a housing cycle.' },
-  { kind: 'White paper', slug: 'distribution-coverage', title: 'Distributions covered by cash flow', dek: 'How we fund distributions from net operating income, not new capital, and how we report coverage each quarter.' },
-  { kind: 'White paper', slug: 'low-leverage', title: 'Low leverage, lower risk', dek: 'Why we keep debt conservative, and what that means for investors when rates or values move.' },
-  { kind: 'White paper', slug: 'nimble-fund', title: 'A nimble fund with no legacy assets', dek: 'A newer portfolio with no older assets to fix, so capital goes into new, efficient buildings.' },
+  { kind: 'White paper', slug: 'housing-gap', img: '/assets/photography/HW_MassTimber_Living-Room.jpg', title: 'Rental fundamentals: why the housing gap persists', dek: 'Short-term softness hides a long-term shortage. The data behind our outlook for purpose-built rental.' },
+  { kind: 'White paper', slug: 'private-real-estate-portfolio', img: '/assets/photography/HW_MassTimber_Coffee-Table.jpg', title: 'Private real estate in a modern portfolio', dek: 'Why Canada’s largest pension funds hold alternatives, and what private rental housing adds to client portfolios.' },
+  { kind: 'White paper', slug: 'rental-vs-condo', img: '/assets/photography/HW_MassTimber_Kitchen.jpg', title: 'Why purpose-built rental is not a condo', dek: 'Ownership, tenure and operations: why rental buildings behave differently from condos through a housing cycle.' },
+  { kind: 'White paper', slug: 'distribution-coverage', img: '/assets/photography/HW_MassTimber_Dining.jpg', title: 'Distributions covered by cash flow', dek: 'How we fund distributions from net operating income, not new capital, and how we report coverage each quarter.' },
+  { kind: 'White paper', slug: 'low-leverage', img: '/assets/photography/HW_MassTimber_Lounge-Corner.jpg', title: 'Low leverage, lower risk', dek: 'Why we keep debt conservative, and what that means for investors when rates or values move.' },
+  { kind: 'White paper', slug: 'nimble-fund', img: '/assets/photography/HW_MassTimber_Studio.jpg', title: 'A nimble fund with no legacy assets', dek: 'A newer portfolio with no older assets to fix, so capital goes into new, efficient buildings.' },
 ].map((a) => ({ ...a, dot: 'var(--hw-black)', more: 'Read →' }))
 
 const PERSP = [
-  { kind: 'Perspective', slug: 'nation-of-renters', title: 'Canada is becoming a nation of renters', dek: 'Renter households grew 35% between 2011 and 2025 — far faster than households overall.' },
-  { kind: 'Perspective', slug: 'supply-cliff', title: 'The supply cliff: why cancelled condos matter for rental', dek: '7,243 condominium units were cancelled in 2025. What it leaves behind in Ontario’s largest markets.' },
-  { kind: 'Perspective', slug: 'heat-pumps-2050', title: 'Heat pumps, envelopes and the 2050 climate', dek: 'How low-energy systems protect residents from utility volatility — and investors from stranded assets.' },
+  { kind: 'Perspective', slug: 'nation-of-renters', img: '/assets/photography/HW_Photo_Timber-Living-Room.jpg', title: 'Canada is becoming a nation of renters', dek: 'Renter households grew 35% between 2011 and 2025 — far faster than households overall.' },
+  { kind: 'Perspective', slug: 'supply-cliff', img: '/assets/photography/HW_MassTimber_Living-Room-Window.jpg', title: 'The supply cliff: why cancelled condos matter for rental', dek: '7,243 condominium units were cancelled in 2025. What it leaves behind in Ontario’s largest markets.' },
+  { kind: 'Perspective', slug: 'heat-pumps-2050', img: '/assets/photography/HW_MassTimber_Bedroom.jpg', title: 'Heat pumps, envelopes and the 2050 climate', dek: 'How low-energy systems protect residents from utility volatility — and investors from stranded assets.' },
 ]
   .map((a) => ({ ...a, dot: 'var(--hw-teal)', more: 'Read →' }))
   .concat(PAPERS)
 
 const CLIPS = [
+  { g: 'press', outlet: 'Heartwood Investments', type: 'Press release', date: 'November 2026', title: 'Heartwood launches the Heartwood Residential Income Trust, now open for investment', relCta: { label: 'Learn more about the Income Strategy', r: 'investment/income' }, dek: 'The Income Trust buys stabilized, modern purpose-built rental buildings in high-growth, supply-constrained Canadian markets, aiming for capital preservation, stable tax-efficient monthly income and long-term capital appreciation.', img: '', cta: 'Read the release →' },
+  { g: 'press', outlet: 'Heartwood Investments', type: 'Press release', date: 'July 2026', title: 'Heartwood welcomes Dustin Buenaventura to our team', person: 'Dustin Buenaventura', role: 'Director, Business Development', dek: 'Dustin joins as Director, Business Development, bringing more than a decade in Canadian financial services from Equiton, Horizons ETFs and Sun Life Global Investments. He will lead our advisor and dealer relationships, helping EMDs and wealth managers bring the Growth and Income trusts to their clients.', img: '/assets/team/HW_Team_Dustin-Buenaventura.png', cta: 'Read the release →' },
   { g: 'media', outlet: 'Forbes', type: 'In the press', date: 'June 23, 2025', title: 'Future-proof investing: how Heartwood Trust is redefining real estate for a resilient economy', dek: 'Afdhel Aziz profiles co-founders David Constable and Tim Blair, and our view that design, climate performance and long-term value go hand in hand.', img: 'https://imageio.forbes.com/specials-images/imageserve/68596129797d872e0d01f701/0x0.jpg?format=jpg&height=900&width=1600&fit=bounds', cta: 'Read on Forbes ↗', url: 'https://www.forbes.com/sites/afdhelaziz/2025/06/23/future-proof-investing-how-heartwood-trust-is-redefining-real-estate-for-a-resilient-economy/' },
-  { g: 'media', outlet: 'Canadian Architect', type: 'Interview', date: 'April 2026', title: 'Geoffrey Turnbull on climate-safe, purpose-built rental', dek: 'Our Director, Innovation and Sustainability on carbon transition pathways, a repeatable timber kit of parts, electrification, and the housing policy changes that would help most.', img: '/assets/team/HW_Team_Geoffrey-Turnbull.png', cta: 'Read in Canadian Architect ↗', url: '' },
-  { g: 'press', outlet: 'Heartwood Investments', type: 'Press release', date: 'Sample date', title: 'Heartwood launches the Residential Income Trust', dek: 'Placeholder for a company announcement. Paste the first paragraph of the release here, then link to the full PDF.', img: '', cta: 'Read the release →' },
-  { g: 'press', outlet: 'Heartwood Investments', type: 'Press release', date: 'Sample date', title: 'Groundbreaking at 3385 Lawrence Avenue East', dek: 'Placeholder for a project milestone release: groundbreaking, topping out, opening or leasing.', img: '/assets/project-renders/HW_Render_3385-Lawrence-Courtyard.jpg', cta: 'Read the release →' },
-  { g: 'media', outlet: 'Outlet name', type: 'In the press', date: 'Sample date', title: 'Headline of a market or industry story', dek: 'Placeholder for an excerpt from a story that mentions Heartwood’s approach to purpose-built rental.', img: '/assets/project-renders/HW_Render_353-Sherbourne.jpg', cta: 'Read on outlet ↗' },
-  { g: 'press', outlet: 'Heartwood Investments', type: 'Press release', date: 'Sample date', title: 'Heartwood welcomes new team members', dek: 'Placeholder for a team announcement release.', img: '', cta: 'Read the release →' },
 ]
+// Clips without an outside URL are our own releases, shown at insights/news/<slug>.
+const slugOf = (c) => c.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60)
+const RELEASE_FALLBACK = '/assets/photography/HW_Photo_517-W-Main_Facade-Trees.jpg'
+const photoOf = (c) => c.img || RELEASE_FALLBACK
+const posOf = (c) => (/HW_Team_/.test(c.img || '') ? 'center 20%' : 'center')
+const linkOf = (c) => (c.url ? { href: c.url, target: '_blank' } : { href: '#insights/news/' + slugOf(c), target: '_self' })
 const NEWS_FILTERS = [
   ['all', 'All'],
   ['press', 'Press releases'],
@@ -113,8 +115,7 @@ function IssueLabel({ n, label }) {
 function Perspectives({ go }) {
   const [topic, setTopic] = useState('All')
   const all = HW_ARTICLES.map((a) => ({ ...a, topic: TOPIC[a.slug] || 'Market', author: a.author ? a.author.name : '' })).filter((a) => topic === 'All' || a.topic === topic)
-  const persp = all.filter((a) => a.kind !== 'White paper')
-  const papers = all.filter((a) => a.kind === 'White paper')
+  const persp = all
   const feat = persp[0]
   const open = (slug) => () => go('insights/perspectives/' + slug)
 
@@ -144,30 +145,11 @@ function Perspectives({ go }) {
           <p style={sx(SECTION_LABEL)}>More perspectives</p>
           <div style={sx('display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:clamp(20px,2.5vw,36px)')}>
             {persp.slice(1).map((m) => (
-              <Hv key={m.slug} as="button" onClick={open(m.slug)} s={ROW_LINK} h="color:var(--hw-teal)">
+              <Hv key={m.slug} as="button" onClick={open(m.slug)} data-m-stack="" s={ROW_LINK} h="color:var(--hw-teal)">
                 <img src={m.img} alt="" style={sx('width:140px;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
                 <span style={sx('display:flex;flex-direction:column;gap:8px')}>
                   <span style={sx(`${MONO};font-size:12px`)}>{m.topic} · {m.read}</span>
                   <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(21px,1.8vw,26px);line-height:1.15;text-wrap:balance')}>{m.title}</span>
-                </span>
-              </Hv>
-            ))}
-          </div>
-        </div>
-      )}
-      {papers.length > 0 && (
-        <div style={sx('display:flex;flex-direction:column;gap:20px')}>
-          <div style={sx('display:flex;justify-content:space-between;align-items:baseline;gap:16px')}>
-            <p style={sx(SECTION_LABEL)}>White papers</p>
-            <span style={sx(`${MONO};font-size:13px`)}>{papers.length + (papers.length === 1 ? ' paper' : ' papers')}</span>
-          </div>
-          <div style={sx('display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:clamp(20px,2.5vw,36px)')}>
-            {papers.map((w) => (
-              <Hv key={w.slug} as="button" onClick={open(w.slug)} s={ROW_LINK} h="color:var(--hw-teal)">
-                <img src={w.img} alt="" style={sx('width:140px;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
-                <span style={sx('display:flex;flex-direction:column;gap:8px')}>
-                  <span style={sx(`${MONO};font-size:12px`)}>No. {w.no} · {w.topic} · {w.read}</span>
-                  <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(21px,1.8vw,26px);line-height:1.15;text-wrap:balance')}>{w.title}</span>
                 </span>
               </Hv>
             ))}
@@ -181,9 +163,9 @@ function Perspectives({ go }) {
 
 function News() {
   const [nf, setNf] = useState('all')
-  const clips = CLIPS.filter((c) => nf === 'all' || c.g === nf).map((c) => ({ ...c, href: c.url || '#', dot: c.g === 'press' ? 'var(--hw-black)' : 'var(--hw-terracotta)' }))
-  const lead = clips.find((c) => c.img) || clips[0]
-  const rest = clips.filter((c) => c !== lead)
+  const clips = CLIPS.filter((c) => nf === 'all' || c.g === nf).map((c) => ({ ...c, ...linkOf(c), dot: c.g === 'press' ? 'var(--hw-black)' : 'var(--hw-terracotta)' }))
+  const lead = clips[0] && { ...clips[0], img: photoOf(clips[0]) }
+  const rest = clips.slice(1)
   return (
     <section data-screen-label="News — Clippings" style={sx('padding:0 clamp(20px,3vw,40px) clamp(56px,7vw,104px);display:flex;flex-direction:column;gap:clamp(40px,5vw,72px)')}>
       <div style={sx('display:flex;flex-wrap:wrap;gap:8px;border-top:1.5px solid var(--hw-terracotta);padding-top:20px')}>
@@ -192,7 +174,7 @@ function News() {
         ))}
       </div>
       {lead && (
-        <Hv as="a" href={lead.href} target="_blank" rel="noopener" s="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,4vw,64px);align-items:center;color:var(--hw-black);text-decoration:none" h="color:var(--hw-teal)">
+        <Hv as="a" href={lead.href} target={lead.target} rel="noopener" s="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,4vw,64px);align-items:center;color:var(--hw-black);text-decoration:none" h="color:var(--hw-teal)">
           {lead.img && <img src={lead.img} alt="" style={sx('width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />}
           <span style={sx('display:flex;flex-direction:column;gap:18px')}>
             <span style={sx(`display:flex;gap:10px;align-items:center;${MONO};font-size:12px`)}>
@@ -211,7 +193,7 @@ function News() {
           <p style={sx(SECTION_LABEL)}>{nf === 'press' ? 'More press releases' : nf === 'media' ? 'More coverage' : 'More news'}</p>
           <div style={sx('display:flex;flex-direction:column;border-bottom:1px solid var(--hw-black)')}>
             {rest.map((c) => (
-              <Hv key={c.title} as="a" href={c.href} target="_blank" rel="noopener" s="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:clamp(10px,2vw,32px);align-items:start;padding:22px 0;border-top:1px solid var(--hw-black);color:var(--hw-black);text-decoration:none" h="background:var(--hw-cool-grey)">
+              <Hv key={c.title} as="a" href={c.href} target={c.target} rel="noopener" s="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:clamp(10px,2vw,32px);align-items:start;padding:22px 0;border-top:1px solid var(--hw-black);color:var(--hw-black);text-decoration:none" h="background:var(--hw-cool-grey)">
                 <span style={sx('display:flex;flex-direction:column;gap:6px')}>
                   <span style={sx('font-family:var(--font-display);font-weight:500;font-size:19px')}>{c.outlet}</span>
                   <span style={sx(`display:flex;gap:8px;align-items:center;${MONO};font-size:12px`)}>
@@ -230,6 +212,91 @@ function News() {
         </div>
       )}
     </section>
+  )
+}
+
+function Release({ slug, go }) {
+  const rel = CLIPS.find((c) => slugOf(c) === slug) || CLIPS[CLIPS.length - 1]
+  const more = CLIPS.filter((c) => c.title !== rel.title).slice(0, 3).map((c) => ({ ...c, ...linkOf(c) }))
+  const back = () => go('insights/news')
+  return (
+    <div data-screen-label="News — Release">
+      <section style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));background:var(--hw-cool-grey);border-bottom:1.5px solid var(--hw-terracotta)')}>
+        <div style={sx('padding:clamp(40px,5vw,80px) clamp(20px,3vw,40px);display:flex;flex-direction:column;justify-content:space-between;gap:clamp(32px,4vw,56px)')}>
+          <Hv as="button" onClick={back} s={`align-self:flex-start;padding:0;border:0;background:none;cursor:pointer;${MONO};font-size:13px;color:var(--hw-black)`} h="color:var(--hw-terracotta)">
+            ← All news
+          </Hv>
+          <div style={sx('display:flex;flex-direction:column;gap:22px')}>
+            <p style={sx(`margin:0;display:flex;align-items:center;gap:10px;${MONO};font-size:14px;color:var(--hw-terracotta)`)}>
+              <span style={sx('width:8px;height:8px;border-radius:50%;background:var(--hw-terracotta);display:block')} />
+              {rel.type}
+            </p>
+            <h1 style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(36px,4.2vw,62px);line-height:1.02;letter-spacing:-.02em;text-wrap:balance')}>{rel.title}</h1>
+          </div>
+          <div style={sx('display:flex;gap:clamp(20px,3vw,40px);flex-wrap:wrap;padding-top:16px;border-top:1px solid var(--hw-black)')}>
+            {[['Date', rel.date], ['From', rel.outlet]].map(([k, v]) => (
+              <span key={k} style={sx('display:flex;flex-direction:column;gap:4px')}>
+                <span style={sx(`${MONO};font-size:11px`)}>{k}</span>
+                <span style={sx('font-size:17px')}>{v}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+        {rel.person ? (
+          <div style={sx('padding:clamp(40px,5vw,80px) clamp(20px,3vw,40px);display:flex;align-items:flex-end;justify-content:center')}>
+            <figure style={sx('margin:0;width:100%;max-width:400px;display:flex;flex-direction:column;gap:14px')}>
+              <img src={photoOf(rel)} alt={rel.person} style={sx('width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 20%;display:block;filter:grayscale(1)')} />
+              <figcaption style={sx('display:flex;flex-direction:column;gap:4px;padding-top:12px;border-top:1px solid var(--hw-black)')}>
+                <span style={sx('font-family:var(--font-display);font-weight:500;font-size:22px')}>{rel.person}</span>
+                <span style={sx(`${MONO};font-size:12px`)}>{rel.role}</span>
+              </figcaption>
+            </figure>
+          </div>
+        ) : (
+          <div style={sx(`min-height:clamp(320px,38vw,560px);background:var(--hw-brown) url('${photoOf(rel)}') ${posOf(rel)}/cover`)} />
+        )}
+      </section>
+
+      <section style={sx('padding:clamp(48px,6vw,96px) clamp(20px,3vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(32px,5vw,80px)')}>
+        <aside style={sx('display:flex;flex-direction:column;gap:14px;max-width:300px')}>
+          <span style={sx(`${MONO};font-size:12px`)}>Media enquiries</span>
+          <a href="mailto:info@heartwoodinvestments.ca" style={sx('font-size:17px')}>info@heartwoodinvestments.ca</a>
+        </aside>
+        <article style={sx('grid-column:span 2;display:flex;flex-direction:column;gap:28px;max-width:720px')}>
+          <p style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.2vw,32px);line-height:1.25;letter-spacing:-.01em;text-wrap:pretty')}>{rel.dek}</p>
+          {rel.relCta && (
+            <Hv as="button" onClick={() => go(rel.relCta.r)} s={`align-self:flex-start;padding:14px 22px;border:0;background:var(--hw-black);color:var(--hw-white);${MONO};font-size:14px;cursor:pointer`} h="background:var(--hw-terracotta)">
+              {rel.relCta.label} →
+            </Hv>
+          )}
+          {!rel.url && rel.g === 'media' && <p style={sx(`margin:0;${MONO};font-size:13px`)}>Link to the full article coming soon.</p>}
+          <div style={sx('display:flex;flex-direction:column;gap:12px;padding-top:24px;border-top:1px solid var(--hw-black)')}>
+            <span style={sx(`${MONO};font-size:12px;color:var(--hw-terracotta)`)}>About Heartwood Investments</span>
+            <p style={sx('margin:0;font-size:17px;line-height:1.6;text-wrap:pretty')}>
+              Heartwood Investments is a real estate investment platform that builds, owns and operates high-quality, purpose-built rental housing in North America’s supply-constrained markets, through the Heartwood Residential Growth Trust and Heartwood Residential Income Trust.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section style={sx('padding:0 clamp(20px,3vw,40px) clamp(56px,7vw,112px);display:flex;flex-direction:column;gap:20px')}>
+        <div style={sx('display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-top:18px;border-top:1.5px solid var(--hw-black)')}>
+          <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.2vw,32px)')}>More news</span>
+          <Hv as="button" onClick={back} s={`padding:0;border:0;background:none;cursor:pointer;${MONO};font-size:13px`} h="color:var(--hw-terracotta)">
+            All news →
+          </Hv>
+        </div>
+        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px')}>
+          {more.map((m) => (
+            <Hv key={m.title} as="a" href={m.href} target={m.target} rel="noopener" s="display:flex;flex-direction:column;gap:14px;text-decoration:none;color:var(--hw-black)" h="color:var(--hw-terracotta)">
+              <span style={sx(`display:block;aspect-ratio:4/3;background:var(--hw-brown) url('${photoOf(m)}') ${posOf(m)}/cover`)} />
+              <span style={sx(`${MONO};font-size:12px`)}>{m.type} · {m.date}</span>
+              <span style={sx('font-family:var(--font-display);font-weight:500;font-size:22px;line-height:1.15')}>{m.title}</span>
+            </Hv>
+          ))}
+        </div>
+      </section>
+    </div>
   )
 }
 
@@ -258,6 +325,7 @@ function NewsletterLanding({ go }) {
             as="button"
             onClick={i.live ? () => go('insights/newsletter/' + i.no) : undefined}
             disabled={!i.live}
+            data-m-stack=""
             s={`display:grid;grid-template-columns:minmax(0,120px) minmax(0,1fr) minmax(0,220px) auto;gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(18px,2vw,28px) 0;border:0;border-top:1px solid var(--hw-black);background:none;color:var(--hw-black);text-align:left;cursor:${i.live ? 'pointer' : 'default'};opacity:${i.live ? 1 : 0.45}`}
             h={i.live ? 'color:var(--hw-teal)' : undefined}
           >
@@ -380,7 +448,7 @@ function Issue({ go }) {
         <IssueLabel n="05" label="Upcoming" />
         <div style={sx('grid-column:span 2;min-width:0;border-top:1px solid var(--hw-black)')}>
           {EVENTS.map((e) => (
-            <div key={e.d + e.t} style={sx('display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr) auto;gap:24px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--hw-black)')}>
+            <div key={e.d + e.t} data-m-stack="" style={sx('display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr) auto;gap:24px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--hw-black)')}>
               <span style={sx(`${MONO};font-size:13px`)}>{e.d}</span>
               <span style={sx('display:flex;flex-direction:column;gap:4px')}>
                 <span style={sx('font-family:var(--font-display);font-weight:500;font-size:24px')}>{e.t}</span>
@@ -443,13 +511,14 @@ function PageInsights({ sub = '', go }) {
   const isLanding = sub === 'newsletter'
   const isIssue = sub.startsWith('newsletter/')
   const isArticle = sub.startsWith('perspectives/')
-  const isHub = !isLanding && !isIssue && !isArticle
+  const isRelease = sub.startsWith('news/')
+  const isHub = !isLanding && !isIssue && !isArticle && !isRelease
   const [eyebrow, title] = HEADS[sub] || HEADS['']
   const isNews = sub === 'news'
   const notNews = sub !== 'news' && sub !== 'perspectives' && isHub
   const items = sub === 'perspectives'
     ? PERSP
-    : PERSP.concat(CLIPS.slice(0, 3).map((c) => ({ kind: 'News · ' + c.outlet, title: c.title, dek: c.dek, dot: 'var(--hw-terracotta)', more: c.cta, url: c.url || '#' })))
+    : PERSP.concat(CLIPS.slice(0, 3).map((c) => ({ kind: 'News · ' + c.outlet, title: c.title, dek: c.dek, dot: 'var(--hw-terracotta)', more: c.cta, url: c.url, release: slugOf(c) })))
 
   if (isArticle) return <PageArticle slug={sub.slice(13)} go={go} />
 
@@ -500,7 +569,7 @@ function PageInsights({ sub = '', go }) {
                 <Hv
                   key={a.title}
                   as="button"
-                  onClick={() => (a.slug ? go('insights/perspectives/' + a.slug) : window.open(a.url, '_blank', 'noopener'))}
+                  onClick={() => (a.slug ? go('insights/perspectives/' + a.slug) : a.url ? window.open(a.url, '_blank', 'noopener') : go('insights/news/' + a.release))}
                   s="display:flex;flex-direction:column;gap:12px;border:0;border-top:1px solid var(--hw-black);padding:16px 0 0;background:none;text-align:left;color:var(--hw-black);cursor:pointer;font:inherit"
                   h="color:var(--hw-teal)"
                 >
@@ -518,6 +587,7 @@ function PageInsights({ sub = '', go }) {
           {isNews && <News />}
         </>
       )}
+      {isRelease && <Release slug={sub.slice(5)} go={go} />}
       {isLanding && <NewsletterLanding go={go} />}
       {isIssue && <Issue go={go} />}
       {(isLanding || isHub) && <Subscribe />}
