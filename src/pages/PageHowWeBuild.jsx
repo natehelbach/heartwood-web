@@ -22,7 +22,6 @@ const PTS = [
 const R = '/assets/project-renders/'
 const I = R + 'innovation/'
 
-// Third Build image (HW_Innovation_Componentization-Site.png) is left out until it is in a design export.
 const LIFE = [
   {
     k: 'Source',
@@ -52,7 +51,7 @@ const LIFE = [
       'We also prefabricate parts of the building where it makes sense. Wall and envelope panels are built in a factory, where they are insulated, wrapped and fitted with windows before they arrive on site. On select projects, we use mass timber, which is made almost entirely of factory-built components. Building in controlled conditions means better quality, less waste, faster schedules and fewer weather delays.',
       'Because each project builds on the last, we carry forward what works and fix what doesn’t. We don’t make the same mistake twice, and the result is more resilient buildings that are delivered on time.',
     ],
-    imgs: [{ src: I + 'HW_Innovation_Prefab-Envelope_1.jpg', f: 1 }, { src: I + 'HW_Innovation_Prefab-Envelope_2.jpg', f: 1 }],
+    imgs: [{ src: I + 'HW_Innovation_Prefab-Envelope_1.jpg', f: 1 }, { src: I + 'HW_Innovation_Prefab-Envelope_2.jpg', f: 1 }, { src: I + 'HW_Innovation_Componentization-Site.png', f: 2, pos: '100% 100%' }],
   },
   {
     k: 'Leasing & Commissioning',
