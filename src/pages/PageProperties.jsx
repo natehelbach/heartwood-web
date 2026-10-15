@@ -115,14 +115,14 @@ function PropertyDetail({ sub, go }) {
     return () => clearInterval(t)
   }, [c.drawings, dwPaused])
 
-  const images = [{ src: c.img, cap: c.cap1 || 'Rendering' }]
+  const images = [{ src: c.img, cap: c.cap1 || 'Rendering', pos: c.pos }]
     .concat(c.img2 ? [{ src: c.img2, cap: c.cap2 || 'Rendering' }] : [], (c.gallery || []).map((g) => (typeof g === 'string' ? { src: g, cap: '' } : g)))
     .filter((i) => i.src)
   const n = images.length || 1
   const ii = Math.min(img, n - 1)
   const setImgWrap = (k) => setImg(((k % n) + n) % n)
 
-  const groups = [['Units', c.units], ['Design team', c.designTeam], ['Development partner', c.partner], ...(c.owner ? [['Ownership', c.owner]] : []), ['Amenities', c.amenities], ['Key features', c.features]].map(([k, v]) => {
+  const groups = [['Units', c.units], ['Design team', c.designTeam], ...(c.owner ? [['Ownership', c.owner]] : []), ['Amenities', c.amenities], ['Key features', c.features]].map(([k, v]) => {
     const vals = list(v)
     return { k, vals: vals.length ? vals : ['To be confirmed'], op: vals.length ? 1 : 0.45 }
   })
@@ -208,7 +208,7 @@ function PropertyDetail({ sub, go }) {
             <Hv as="button" onClick={() => setImgWrap(ii - 1)} aria-label="Previous image" s={arrow} h="color:var(--hw-teal)">←</Hv>
             <span style={sx('position:relative;display:block;width:100%;aspect-ratio:3/2;overflow:hidden;background:var(--hw-cool-grey)')}>
               {images.map((im, i) => (
-                <img key={im.src} src={im.src} alt={im.cap} style={sx(`position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:${i === ii ? 1 : 0};transition:opacity .4s ease`)} />
+                <img key={im.src} src={im.src} alt={im.cap} style={sx(`position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:${im.pos || 'center'};display:block;opacity:${i === ii ? 1 : 0};transition:opacity .4s ease`)} />
               ))}
               <span style={sx(`position:absolute;inset:0;background:${lock.overlay};pointer-events:none`)} />
               <span data-screen-label="Property — Lockup" style={sx('position:absolute;left:clamp(20px,3vw,48px);bottom:clamp(20px,3vw,48px);display:flex;align-items:center;gap:clamp(16px,2vw,32px);pointer-events:none')}>
@@ -253,7 +253,7 @@ function PropertyDetail({ sub, go }) {
 
         {(c.scroll || []).map((si) => (
           <figure key={si.src} data-screen-label="Property — Photo" style={sx('margin:0 48px;display:flex;flex-direction:column;gap:10px')}>
-            <img src={si.src} alt={si.cap} style={sx('width:100%;aspect-ratio:3/2;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
+            <img src={si.src} alt={si.cap} style={sx('width:100%;height:auto;display:block;background:var(--hw-cool-grey)')} />
             <figcaption style={sx('font-size:14px;font-style:italic')}>{si.cap}</figcaption>
           </figure>
         ))}

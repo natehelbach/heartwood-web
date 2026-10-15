@@ -714,3 +714,13 @@ input::placeholder {
     grid-template-columns: minmax(0, 1fr) !important;
   }
 }
+
+/* How We Build: execution steps stack their image under the text on narrow screens. */
+@media (max-width: 760px) {
+  [data-proc-row] {
+    grid-template-columns: 44px minmax(0, 1fr) !important;
+  }
+  [data-proc-img] {
+    grid-column: 2 !important;
+  }
+}
