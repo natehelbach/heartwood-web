@@ -3,6 +3,7 @@ import { Hv, sx, DotField, HubspotNote } from '../design/ui.jsx'
 import HW_DATA from '../design/site-data.js'
 import HW_ARTICLES from '../design/articles-data.js'
 import PageArticle from './PageArticle.jsx'
+import NotFound from '../components/NotFound.jsx'
 
 // Ported from ui_kits/website/PageInsights.dc.html. `sub` is '' (overview) | perspectives |
 // perspectives/<slug> | news | news/<release> | newsletter | newsletter/<no>.
@@ -216,7 +217,7 @@ function News() {
 }
 
 function Release({ slug, go }) {
-  const rel = CLIPS.find((c) => slugOf(c) === slug) || CLIPS[CLIPS.length - 1]
+  const rel = CLIPS.find((c) => slugOf(c) === slug)
   const more = CLIPS.filter((c) => c.title !== rel.title).slice(0, 3).map((c) => ({ ...c, ...linkOf(c) }))
   const back = () => go('insights/news')
   return (
@@ -510,9 +511,12 @@ function Subscribe() {
 function PageInsights({ sub = '', go }) {
   const isLanding = sub === 'newsletter'
   const isIssue = sub.startsWith('newsletter/')
-  const isArticle = sub.startsWith('perspectives/')
-  const isRelease = sub.startsWith('news/')
-  const isHub = !isLanding && !isIssue && !isArticle && !isRelease
+  const artSlug = sub.startsWith('perspectives/') ? sub.slice(13) : ''
+  const isArticle = !!artSlug && HW_ARTICLES.some((a) => a.slug === artSlug)
+  const isRelease = sub.startsWith('news/') && CLIPS.some((c) => slugOf(c) === sub.slice(5))
+  // Unknown articles, releases and sub-pages show the 404 page.
+  const notFound = (sub.startsWith('news/') && !isRelease) || (!!artSlug && !isArticle) || (!!sub && !isLanding && !isIssue && !sub.startsWith('news/') && !artSlug && !['perspectives', 'news'].includes(sub))
+  const isHub = !isLanding && !isIssue && !isArticle && !isRelease && !notFound
   const [eyebrow, title] = HEADS[sub] || HEADS['']
   const isNews = sub === 'news'
   const notNews = sub !== 'news' && sub !== 'perspectives' && isHub
@@ -520,7 +524,8 @@ function PageInsights({ sub = '', go }) {
     ? PERSP
     : PERSP.concat(CLIPS.slice(0, 3).map((c) => ({ kind: 'News · ' + c.outlet, title: c.title, dek: c.dek, dot: 'var(--hw-terracotta)', more: c.cta, url: c.url, release: slugOf(c) })))
 
-  if (isArticle) return <PageArticle slug={sub.slice(13)} go={go} />
+  if (notFound) return <NotFound actions={[{ label: 'Browse perspectives', go: () => go('insights/perspectives') }, { label: 'Go to home', go: () => go('home') }]} />
+  if (isArticle) return <PageArticle slug={artSlug} go={go} />
 
   return (
     <div style={sx('background:var(--hw-white);color:var(--hw-black);font-family:var(--font-body)')}>

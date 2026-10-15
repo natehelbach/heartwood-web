@@ -29,7 +29,7 @@ function SiteFooter({ go }) {
             <div key={c.label} className="site-footer__col">
               <span className="site-footer__heading">{c.label}</span>
               {c.items.map(([label, r]) => (
-                <button key={label} type="button" className="site-footer__link" onClick={() => go(r)}>
+                <button key={label} type="button" data-tap="" className="site-footer__link" onClick={() => go(r)}>
                   {label}
                 </button>
               ))}
@@ -51,7 +51,7 @@ function SiteFooter({ go }) {
           </form>
           <div className="site-footer__contact">
             <span>{ADDRESS}</span>
-            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" aria-label="Heartwood on LinkedIn">
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" data-tap="" aria-label="Heartwood on LinkedIn">
               <LinkedInIcon />
               LinkedIn
             </a>
@@ -78,7 +78,7 @@ function SiteFooter({ go }) {
         <span>© {new Date().getFullYear()} Heartwood Investments</span>
         <div className="site-footer__legal">
           {LEGAL_LINKS.map(([label, r]) => (
-            <button key={r} type="button" onClick={() => go(r)}>
+            <button key={r} type="button" data-tap="" onClick={() => go(r)}>
               {label}
             </button>
           ))}

@@ -167,6 +167,7 @@ function PropertyDetail({ sub, go }) {
           </div>
         </div>
         <div style={sx('flex:none;padding:clamp(28px,3vw,44px) clamp(20px,2vw,32px) 0;display:flex;flex-direction:column')}>
+          <h1 style={sx('margin:0 0 20px;font-family:var(--font-display);font-weight:500;font-size:clamp(28px,2.6vw,40px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance')}>{c.name}</h1>
           <p style={sx(`margin:0 0 12px;${MONO};font-size:13px;color:var(--hw-terracotta)`)}>Overview</p>
           {meta.map((m) => (
             <div key={m.k} style={sx('display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid var(--hw-black)')}>

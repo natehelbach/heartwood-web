@@ -724,3 +724,27 @@ input::placeholder {
     grid-column: 2 !important;
   }
 }
+
+/* Larger tap targets for footer links on touch screens and narrow windows. */
+@media (pointer: coarse), (max-width: 900px) {
+  [data-tap] {
+    min-height: 44px;
+    display: inline-flex !important;
+    align-items: center;
+  }
+  button,
+  a[href] {
+    min-height: 24px;
+  }
+}
+
+/* Home: stack the two heartwood rings with the arrow pointing down on narrower screens. */
+@media (max-width: 1100px) {
+  [data-hw-rings] {
+    flex-direction: column !important;
+  }
+  [data-hw-arrow] {
+    transform: rotate(90deg);
+    margin: 8px 0;
+  }
+}

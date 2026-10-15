@@ -57,7 +57,7 @@ const PAGES = {
 
 const A = '/assets/'
 const FEATURE_PW = [
-  { tag: 'White paper', t: 'Tax-efficient income from private real estate', m: 'How return of capital and registered accounts can help you keep more of what you earn.', img: A + 'lifestyle/HW_Lifestyle_26.jpg', r: 'insights/perspectives/tax-efficient-income' },
+  { tag: 'Perspective', t: 'Private rental development: why now', m: 'A structural shortage, a supply cliff and a low entry point. Why this is the moment for rental.', img: A + 'lifestyle/HW_Lifestyle_26.jpg', r: 'insights/perspectives/why-now-private-rental-growth' },
   { tag: 'White paper', t: 'Private real estate in a modern portfolio', m: 'Why Canada’s largest pension funds hold alternatives, and what rental housing adds.', img: A + 'project-renders/HW_Render_3385-Lawrence-Courtyard.jpg', r: 'insights/perspectives/private-real-estate-portfolio' },
 ]
 const FEATURE_INST = [
