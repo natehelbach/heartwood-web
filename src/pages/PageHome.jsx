@@ -70,7 +70,6 @@ function PageHome({ go }) {
           <p style={sx('margin:0;max-width:520px;font-size:clamp(17px,1.3vw,18px);line-height:1.5;text-wrap:pretty')}>
             Our intelligence platform consolidates, validates, and organizes these sources into a single environment, resolved to a specific site across neighbourhood, municipal, and metro geographies. Letting our team see how a market, a site, and a building’s actual performance relate to one another, and make decisions with that holistic picture rather than fragments.
           </p>
-          <div style={sx("width:100%;max-width:560px;aspect-ratio:16/9;margin-top:clamp(8px,1.5vw,16px);background:var(--hw-brown) url('/assets/photography/HW_Photo_Market-Intelligence-Screen.png') 35% center/cover no-repeat")} />
         </div>
         <div style={sx('position:relative;overflow:hidden;min-height:clamp(420px,48vw,720px);background:var(--hw-brown)')}>
           <div style={sx("position:absolute;inset:-20px;background:url('/assets/photography/HW_MassTimber_Suite-415_NoSign.jpg') center/cover;filter:blur(8px)")} />

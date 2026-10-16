@@ -23,11 +23,6 @@ const STEPS = [
   ['05', 'Report', 'Measured performance, reported'],
 ]
 
-const PROOF = [
-  { big: '65%', label: 'Typical reduction in energy use intensity for Growth Trust buildings vs. a code-minimum equivalent' },
-  { big: '1.5°C', label: 'Portfolio carbon intensity targeted to align with a 1.5°C pathway (CRREM)' },
-  { big: 'Zero Carbon', label: 'Growth Trust prioritizes CaGBC Zero Carbon Building–certified projects' },
-]
 
 const PROJECTS = [
   { name: '3385 Lawrence Avenue East', loc: 'Toronto, Ontario · 155 homes', img: R + 'HW_Render_3385-Lawrence.jpg', pos: 'center', r: 'properties/3385-lawrence' },
@@ -102,19 +97,11 @@ function PageDevOverview({ go }) {
       <section data-screen-label="Development — Standards" style={sx(SECTION_COL)}>
         <SectionHead
           eyebrow="03 · Our standards"
-          title="Built to a higher standard."
+          title="Built to last. Designed to perform."
           lead="Efficient, durable and healthy buildings cost less to run, stay competitive for longer and are better to live in."
           cta="See our standards"
           onCta={() => go('development/standards')}
         />
-        <div data-do-3="" style={sx('display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,3vw,40px)')}>
-          {PROOF.map((p) => (
-            <div key={p.big} style={sx('display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--hw-black);padding-top:18px')}>
-              <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(44px,4.6vw,64px);letter-spacing:-.03em;line-height:1')}>{p.big}</span>
-              <p style={sx('margin:0;font-size:16px;line-height:1.5;text-wrap:pretty')}>{p.label}</p>
-            </div>
-          ))}
-        </div>
       </section>
 
       <section data-screen-label="Development — Projects" style={sx(SECTION_COL)}>
