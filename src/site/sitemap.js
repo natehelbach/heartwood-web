@@ -9,20 +9,10 @@ export const ADDRESS = '25 King St W, Toronto, Ontario M5L 2A1'
 
 // Top-level menus. `g` groups items in the dropdown and the section sub-nav.
 export const SECTIONS = {
-  investment: {
-    label: 'Investment',
-    items: [
-      { label: 'Overview', r: 'investment/overview' },
-      { label: 'Growth Strategy', r: 'investment/growth-strategy', g: 'Strategies' },
-      { label: 'Income Strategy', r: 'investment/income-strategy', g: 'Strategies' },
-      { label: 'Growth Fund', r: 'investment/growth-fund', g: 'Investment solutions' },
-      { label: 'Income Fund', r: 'investment/income-fund', g: 'Investment solutions' },
-      { label: 'Direct Investments', r: 'investment/direct', g: 'Investment solutions' },
-    ],
-  },
   development: {
     label: 'Development',
     items: [
+      { label: 'Overview', r: 'development/overview' },
       { label: 'Standards', r: 'development/standards' },
       { label: 'How We Build', r: 'development/design' },
       { label: 'Projects', r: 'development/projects' },
@@ -38,8 +28,10 @@ export const SECTIONS = {
   investors: {
     label: 'For Investors',
     items: [
-      { label: 'Private Wealth', r: 'investors/private-wealth' },
-      { label: 'Institutional', r: 'investors/institutional' },
+      { label: 'Overview', r: 'investment/overview' },
+      { label: 'Growth Trust', r: 'investment/growth-strategy' },
+      { label: 'Income Trust', r: 'investment/income-strategy' },
+      { label: 'Direct Investments', r: 'investment/direct' },
     ],
   },
   insights: {
@@ -63,18 +55,18 @@ export const SECTIONS = {
 
 export const FOOTER_COLUMNS = [
   {
-    label: 'Investment',
+    label: 'For Investors',
     items: [
-      ['Growth Strategy', 'investment/growth-strategy'],
-      ['Income Strategy', 'investment/income-strategy'],
-      ['Growth Fund', 'investment/growth-fund'],
-      ['Income Fund', 'investment/income-fund'],
+      ['Overview', 'investment/overview'],
+      ['Growth Trust', 'investment/growth-strategy'],
+      ['Income Trust', 'investment/income-strategy'],
       ['Direct Investments', 'investment/direct'],
     ],
   },
   {
     label: 'Development',
     items: [
+      ['Overview', 'development/overview'],
       ['Standards', 'development/standards'],
       ['How We Build', 'development/design'],
       ['Projects', 'development/projects'],
@@ -85,13 +77,6 @@ export const FOOTER_COLUMNS = [
     items: [
       ['Asset Management', 'management/asset'],
       ['Properties', 'properties'],
-    ],
-  },
-  {
-    label: 'For Investors',
-    items: [
-      ['Private Wealth', 'investors/private-wealth'],
-      ['Institutional', 'investors/institutional'],
     ],
   },
   {
@@ -114,6 +99,15 @@ export const FOOTER_COLUMNS = [
   },
 ]
 
+// Where a desktop menu click goes; hovering still opens its dropdown.
+export const SECTION_LANDING = {
+  development: 'development/overview',
+  management: 'properties',
+  investors: 'investment/overview',
+  insights: 'insights/perspectives',
+  about: 'about/who',
+}
+
 export const LEGAL_LINKS = [
   ['Privacy policy', 'legal/privacy'],
   ['Legal and disclosures (Canada and United States)', 'legal/disclosures'],
@@ -129,14 +123,18 @@ const PAGE_OF = {
   'investment/growth-fund': 'investment/funds',
   'investment/income-fund': 'investment/funds',
   'investment/direct': 'investment/flexible',
-  development: 'properties',
+  development: 'devoverview',
+  'development/overview': 'devoverview',
   'development/projects': 'properties',
   'development/design': 'platform',
   'development/standards': 'about/standards',
   management: 'management/asset',
-  investors: 'investment/hnw',
-  'investors/private-wealth': 'investment/hnw',
-  'investors/institutional': 'investment/institutional',
+  investors: 'investment/overview',
+  investment: 'investment/overview',
+  'investors/private-wealth': 'investment/overview',
+  'investors/institutional': 'investment/overview',
+  'investment/hnw': 'investment/overview',
+  'investment/institutional': 'investment/overview',
 }
 
 // Pages that sit under a different menu than their route's first segment.
@@ -185,7 +183,7 @@ export function parseRoute(navRoute) {
   const section = parts[0]
   const sub = parts.slice(1).join('/')
   const fromDevelopment = navRoute.startsWith('development')
-  const navSection = (fromDevelopment && 'development') || MENU_OF[route] || (section === 'platform' && 'development') || navRoute.split('/')[0]
+  const navSection = (fromDevelopment && 'development') || MENU_OF[route] || { platform: 'development', devoverview: 'development', investment: 'investors' }[section] || navRoute.split('/')[0]
   return {
     route,
     section,

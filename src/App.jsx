@@ -2,6 +2,7 @@ import SiteHeader from './components/SiteHeader.jsx'
 import SiteFooter from './components/SiteFooter.jsx'
 import PageHome from './pages/PageHome.jsx'
 import PageAbout from './pages/PageAbout.jsx'
+import PageDevOverview from './pages/PageDevOverview.jsx'
 import PageHowWeBuild from './pages/PageHowWeBuild.jsx'
 import PageManagement from './pages/PageManagement.jsx'
 import PageProperties from './pages/PageProperties.jsx'
@@ -14,7 +15,7 @@ import HW_DATA from './design/site-data.js'
 import useHashRoute from './site/useHashRoute.js'
 import { parseRoute } from './site/sitemap.js'
 
-const KNOWN = ['home', 'about', 'properties', 'investment', 'insights', 'legal', 'platform', 'management']
+const KNOWN = ['devoverview', 'home', 'about', 'properties', 'investment', 'insights', 'legal', 'platform', 'management']
 
 // Page routing mirrors the <main> of ui_kits/website/Heartwood Website.dc.html.
 function App() {
@@ -30,6 +31,7 @@ function App() {
       <main className="site__main">
         {is('home') && <PageHome go={go} />}
         {is('about') && <PageAbout sub={sub} go={go} />}
+        {is('devoverview') && <PageDevOverview go={go} />}
         {is('platform') && <PageHowWeBuild go={go} />}
         {is('management') && <PageManagement go={go} />}
         {is('properties') && <PageProperties sub={sub} only={propsOnly} go={go} />}

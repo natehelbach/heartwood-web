@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { Hv, sx, RULE_BG, HubspotNote } from '../design/ui.jsx'
+import { Hv, sx, RULE_BG } from '../design/ui.jsx'
 import DotIcon from '../design/DotIcon.jsx'
-import { StandardLogos } from './PageAbout.jsx'
 import { GROWTH, INCOME, VEHICLES, TRUSTS } from '../design/investment-data.js'
 
 // Ported from ui_kits/website/PageInvestment.dc.html. `sub` is overview | growth | income |
@@ -10,8 +9,6 @@ import { GROWTH, INCOME, VEHICLES, TRUSTS } from '../design/investment-data.js'
 const MONO = 'font-family:var(--font-subhead);font-weight:500;text-transform:uppercase'
 const EYEBROW = `margin:0;${MONO};font-size:clamp(18px,1.4vw,22px);color:var(--hw-terracotta)`
 const H2 = 'margin:0;max-width:820px;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.6vw,52px);line-height:1.08;letter-spacing:-.015em;text-wrap:balance'
-const LEDE = 'margin:0;max-width:560px;font-size:clamp(17px,1.35vw,20px);line-height:1.5;text-wrap:pretty'
-const SPLIT_HEAD = 'display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(24px,4vw,72px);align-items:end'
 const RULED_SECTION = `padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:clamp(28px,3vw,48px);background:${RULE_BG}`
 const TAG = `padding:5px 9px;border:1px solid var(--hw-black);${MONO};font-size:12px`
 const FIELD_LABEL = `${MONO};font-size:13px`
@@ -42,39 +39,15 @@ const WHY_NOW = [
   { op: '−', k: 'Supply', theme: 'Less new supply', ca: { big: '−33%', label: 'Condo apartment starts across Canada, from the 2023 peak to 2025 (69,300 to 46,600). Investor-owned condos have long supplied much of Canada’s rental stock.' }, us: { big: '−34%', label: 'Apartments under construction (5+ unit buildings), from the July 2023 peak of 1.02 million to 670,000 at the end of 2025.' } },
   { op: '=', k: 'The gap', theme: 'Long-term shortfall', ca: { big: '3.5M', label: 'Additional homes needed by 2030 to restore affordability.' }, us: { big: '4.3M', label: 'New apartments needed by 2035 to meet demand.' } },
 ]
-const MARKET_GROUPS = [
-  { country: 'Canada', mark: 'CA FLAG', cities: ['Greater Toronto Area', 'Ottawa', 'Montreal', 'Halifax', 'Vancouver', 'Calgary', 'Edmonton'] },
-  { country: 'United States', mark: 'US FLAG', cities: ['Greater Bay Area', 'Seattle', 'San Diego', 'Boston', 'Charlotte', 'Durham'] },
+// Investments › Overview "Investment solutions": cards by investor region. `r` is the design's go(route).
+const GROWTH_CARD = (us) => ({ img: '/assets/project-renders/HW_Render_3385-Lawrence.jpg', tag: us ? 'US feeder · Build to hold' : 'Build to hold', name: us ? 'Heartwood US Growth Feeder' : 'Heartwood Residential Growth Trust', body: us ? 'US access to the Canadian Growth Trust through a separately managed US vehicle.' : 'Develops purpose-built rental in supply-constrained markets and holds through stabilization.', cta: 'Growth Trust', r: 'investment/growth' })
+const INCOME_CARD = (us) => ({ img: '/assets/photography/HW_Photo_517-W-Main_Facade-Trees.jpg', tag: us ? 'US feeder · Core Acquisitions' : 'Core Acquisitions', name: us ? 'Heartwood US Income Feeder' : 'Heartwood Residential Income Trust', body: us ? 'US access to the Canadian Income Trust through a separately managed US vehicle.' : 'Buys modern, efficient, stabilized assets already generating cash flow, at today’s reset pricing.', cta: 'Income Trust', r: 'investment/income' })
+const DIRECT_CARD = (body) => ({ img: '', tag: 'Direct', name: 'Direct Investments', body, cta: 'Direct Investments', r: 'investment/direct' })
+const REGIONS = [
+  { name: 'Canadian investors', mark: 'CA FLAG', count: '3 solutions', cards: [GROWTH_CARD(0), INCOME_CARD(0), DIRECT_CARD('Co-investments, separately managed accounts and development services, built around your goals.')] },
+  { name: 'United States investors', mark: 'US FLAG', count: '3 solutions', cards: [DIRECT_CARD('Co-invest directly in US rental housing alongside Heartwood, or through a separately managed account.'), GROWTH_CARD(1), INCOME_CARD(1)] },
+  { name: 'European investors', mark: 'EU FLAG', count: '1 solution', cards: [DIRECT_CARD('Direct co-investment and separately managed accounts in North American rental housing.')] },
 ]
-const STRATEGIES = [
-  {
-    word: 'Growth', color: 'var(--hw-cool-grey)', ring: '/assets/logos/HW_Growth_Ring_Black.png', h: 'Build to Hold.',
-    lead: 'We develop energy-efficient, community-centric, healthy residential communities in supply-constrained markets.',
-    points: [
-      { k: 'Risk reduction', v: 'Our vertically integrated platform lets us underwrite hard and soft costs more accurately, so actual results vary less from our financial assumptions.' },
-      { k: 'Value creation', v: 'Construction and lease-up create significant value. We take a site and build its highest and best use, which then delivers long-term capital appreciation and stabilized income.' },
-      { k: 'Performance efficiency', v: 'Energy efficiency is more than a set of climate benchmarks. We view it as a financial opportunity to drive asset value and performance.' },
-    ],
-    access: 'Heartwood Residential Growth Trust, joint ventures, Co-GP, co-investments and separately managed accounts.', r: 'investment/growth',
-  },
-  {
-    word: 'Income', color: 'var(--hw-hemlock)', ring: '/assets/logos/HW_Income_Ring_Black.png', h: 'Buy to Hold.',
-    lead: 'We acquire modern, stabilized, institutional-quality rental communities at today’s pricing, then improve them through ownership.',
-    points: [
-      { k: 'Designed to deliver', v: 'Resilient, tax-efficient monthly income, long-term capital appreciation and a conservative capital structure.' },
-      { k: 'Prudent leverage', v: 'Leverage of no more than 50% loan-to-value and disciplined underwriting enhance risk-adjusted returns while protecting investor capital.' },
-      { k: 'Operational efficiency', v: 'Because we build, we understand building operations from first principles, allowing us to create value through acquisitions by recommissioning assets to improve operational efficiency.' },
-    ],
-    access: 'Heartwood Residential Income Trust, joint ventures, co-investments and separately managed accounts.', r: 'investment/income',
-  },
-]
-const ROUTES = [
-  { title: 'Private wealth', body: 'Family offices and high-net-worth investors. Invest directly in either trust from $25,000, or co-invest alongside us.', cta: 'For private wealth', r: 'investment/hnw' },
-  { title: 'Advisors', body: 'Materials, education and a dedicated contact for EMDs, RIAs and wealth managers.', cta: 'For advisors', r: 'investment/advisors' },
-  { title: 'Institutional investors', body: 'Pension funds, foundations, endowments and insurers. Fund commitments, mandates and partnerships.', cta: 'For institutions', r: 'investment/institutional' },
-]
-const INST_TYPES = ['Pension', 'Foundation or endowment', 'Insurer', 'Family office', 'Asset manager', 'Other']
-const INST_INTEREST = ['Our funds', 'Separately managed account', 'Joint venture / Co-GP', 'Co-investment', 'Development or asset management services']
 
 function Field({ label, children }) {
   return (
@@ -215,17 +188,15 @@ function Vehicle({ veh, isFunds, go }) {
 }
 
 function Overview({ go }) {
-  const [instSent, setInstSent] = useState(false)
-
   return (
     <>
       <section data-screen-label="Investment — Hero" style={sx("position:relative;overflow:hidden;min-height:clamp(520px,54vw,800px);background:var(--hw-brown) url('/assets/photography/HW_Photo_Bakers-Place_Garden.jpg') center 60%/cover no-repeat;display:flex;align-items:flex-end")}>
         <div style={sx('position:absolute;inset:0;background:var(--overlay-brown)')} />
         <div style={sx('position:relative;padding:clamp(32px,4vw,56px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:20px;color:var(--hw-white)')}>
-          <p style={sx(`margin:0;${MONO};font-size:clamp(14px,1.2vw,18px)`)}>Investments</p>
-          <h1 style={sx('margin:0;max-width:980px;font-family:var(--font-display);font-weight:500;font-size:clamp(40px,5.4vw,88px);line-height:1;letter-spacing:-.02em;text-wrap:balance')}>Two strategies. One long view.</h1>
+          <p style={sx(`margin:0;${MONO};font-size:clamp(14px,1.2vw,18px)`)}>For Investors</p>
+          <h1 style={sx('margin:0;max-width:980px;font-family:var(--font-display);font-weight:500;font-size:clamp(40px,5.4vw,88px);line-height:1;letter-spacing:-.02em;text-wrap:balance')}>Investing with a long view.</h1>
           <p style={sx('margin:0;max-width:680px;font-size:clamp(18px,1.5vw,22px);line-height:1.5;text-wrap:pretty')}>
-            We focus on the living sector: purpose-built rental housing in supply-constrained North American markets. Our Growth strategy builds it. Our Income strategy buys it. Both are designed to hold for the long term, for durable income and appreciation.
+            We focus on the living sector: purpose-built rental housing in supply-constrained North American markets, designed to hold for the long term, for durable income and appreciation.
           </p>
         </div>
       </section>
@@ -300,211 +271,57 @@ function Overview({ go }) {
         </div>
       </section>
 
-      <section data-screen-label="Investment — Where we invest" style={sx(RULED_SECTION)}>
-        <div style={sx(SPLIT_HEAD)}>
-          <div style={sx('display:flex;flex-direction:column;gap:20px')}>
-            <p style={sx(EYEBROW)}>Where we invest</p>
-            <h2 style={sx(H2)}>High-growth, supply-constrained North American markets.</h2>
-          </div>
-          <p style={sx(LEDE)}>
-            Canada is our founding market, where the condo slowdown has deepened the shortage in cities already short on well-built housing, causing more households to rent. In the United States, we focus on select markets where durable demand is coupled with a decline in new apartment supply.
-          </p>
+      <section data-screen-label="Investment — Solutions" style={sx(`padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:clamp(32px,4vw,56px);background:${RULE_BG}`)}>
+        <div style={sx('display:flex;flex-direction:column;gap:20px')}>
+          <p style={sx(`margin:0;${MONO};font-size:clamp(18px,1.4vw,22px);color:var(--hw-teal)`)}>Investment solutions</p>
+          <h2 style={sx('margin:0;font-family:var(--font-display);font-weight:500;letter-spacing:-.025em;line-height:1.05;text-wrap:balance;font-size:clamp(30px,3.4vw,48px);max-width:820px')}>Ways to invest with Heartwood, by where you are.</h2>
         </div>
-        <div style={sx('display:flex;flex-direction:column;gap:clamp(28px,3vw,40px)')}>
-          {MARKET_GROUPS.map((g) => (
-            <div key={g.country} style={sx('display:flex;flex-direction:column;gap:12px')}>
-              <div style={sx('display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px')}>
+        {REGIONS.map((g) => (
+          <div key={g.name} style={sx('display:flex;flex-direction:column;gap:20px')}>
+            <div style={sx('display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1.5px solid var(--hw-black);padding-bottom:12px')}>
+              <div style={sx('display:flex;align-items:center;gap:14px')}>
                 <DotIcon name={g.mark} color="#BC532D" size={40} />
-                <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.2vw,32px)')}>{g.country}</span>
+                <h3 style={sx('margin:0;font-family:var(--font-display);font-weight:500;letter-spacing:-.025em;line-height:1.05;text-wrap:balance;font-size:clamp(24px,2.4vw,32px)')}>{g.name}</h3>
               </div>
-              <div style={sx('display:flex;flex-wrap:wrap;gap:12px clamp(28px,3vw,48px);padding:18px 0;border-top:1px solid var(--hw-black);border-bottom:1px solid var(--hw-black)')}>
-                {g.cities.map((c) => (
-                  <span key={c} style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(20px,1.8vw,26px);white-space:nowrap')}>{c}</span>
-                ))}
-              </div>
+              <span style={sx(`margin:0;${MONO};font-size:13px;opacity:.7`)}>{g.count}</span>
             </div>
-          ))}
-        </div>
-      </section>
-
-      <section data-screen-label="Investment — Our strategies" style={sx(RULED_SECTION)}>
-        <div style={sx(SPLIT_HEAD)}>
-          <div style={sx('display:flex;flex-direction:column;gap:20px')}>
-            <p style={sx(EYEBROW)}>Our strategies</p>
-            <h2 style={sx(H2)}>Two strategies, built to hold.</h2>
-          </div>
-          <p style={sx(WHY_NOW_P)}>Each strategy plays a different role in our portfolios. However, they share the same standard of quality and the same long-term ownership approach.</p>
-        </div>
-        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(20px,2.4vw,36px)')}>
-          {STRATEGIES.map((s) => (
-            <div key={s.word} style={sx(`display:flex;flex-direction:column;border-top:4px solid ${s.color};background:var(--hw-white)`)}>
-              <div role="img" aria-label={`${s.word} strategy`} style={sx('position:relative;display:flex;align-items:center;justify-content:center;height:clamp(200px,20vw,260px);margin:24px 0 4px;border-bottom:1px solid var(--hw-black);padding-bottom:24px')}>
-                <img src={s.ring} alt="" style={sx('position:absolute;top:0;left:50%;transform:translateX(-50%);height:calc(100% - 24px);width:auto')} />
-                <span style={sx('position:relative;margin-top:-24px;font-family:var(--font-display);font-weight:900;font-size:clamp(40px,4.2vw,58px);line-height:.85;text-transform:uppercase;background:var(--hw-white);padding:6px 12px 2px')}>{s.word}</span>
-              </div>
-              <div style={sx('display:flex;flex-direction:column;gap:14px;padding:24px 0')}>
-                <h3 style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(28px,2.6vw,38px);line-height:1.05;letter-spacing:-.015em')}>{s.h}</h3>
-                <p style={sx('margin:0;font-size:clamp(18px,1.4vw,20px);line-height:1.5;text-wrap:pretty')}>{s.lead}</p>
-              </div>
-              <div style={sx('display:flex;flex-direction:column')}>
-                {s.points.map((pt) => (
-                  <div key={pt.k} style={sx('display:flex;flex-direction:column;gap:6px;padding:16px 0;border-top:1px solid rgba(33,33,33,.3)')}>
-                    <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(19px,1.6vw,22px);line-height:1.2')}>{pt.k}</span>
-                    <span style={sx('font-size:17px;line-height:1.5;text-wrap:pretty')}>{pt.v}</span>
-                  </div>
-                ))}
-              </div>
-              <div style={sx('display:flex;flex-direction:column;gap:16px;margin-top:auto;padding:18px 0 0;border-top:1px solid var(--hw-black)')}>
-                <p style={sx('margin:0;font-size:16px;line-height:1.5')}>
-                  <span style={sx(`${MONO};font-size:12px;margin-right:8px`)}>Access through</span>
-                  {s.access}
-                </p>
-                <Hv as="button" onClick={() => go(s.r)} s={`align-self:flex-start;padding:14px 20px;background:var(--hw-black);color:var(--hw-white);border:0;cursor:pointer;${MONO};font-size:13px`} h={`background:${s.color}`}>
-                  Explore the {s.word} strategy →
-                </Hv>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(20px,4vw,72px);align-items:center;background:var(--hw-white);color:var(--hw-black);border-top:4px solid var(--hw-terracotta);border-bottom:1px solid var(--hw-black);padding:clamp(28px,3.6vw,52px) 0')}>
-          <div style={sx('display:flex;flex-direction:column;gap:12px')}>
-            <span style={sx(`${MONO};font-size:13px;color:var(--hw-terracotta)`)}>03 · Hold · Across both</span>
-            <h3 style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(30px,3vw,46px);line-height:1.05;letter-spacing:-.015em')}>Owned for the long view.</h3>
-          </div>
-          <div style={sx('display:flex;flex-direction:column;gap:18px;align-items:flex-start')}>
-            <p style={sx('margin:0;font-size:clamp(17px,1.35vw,20px);line-height:1.55;text-wrap:pretty')}>
-              Hold isn’t a third product. It’s how both strategies are managed. What we build becomes tomorrow’s income-producing portfolio, and what we buy we keep improving while we own it. Investors in either strategy benefit from the same patient ownership.
-            </p>
-            <Hv as="button" onClick={() => go('about/who')} s={OUTLINE_SM} h="background:var(--hw-black);color:var(--hw-white)">
-              Why we hold →
-            </Hv>
-          </div>
-        </div>
-      </section>
-
-      <section data-screen-label="Investment — Ways to invest" style={sx('background:var(--hw-white);border-top:1.5px solid var(--hw-terracotta);padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:clamp(28px,3vw,48px)')}>
-        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(28px,4vw,64px);align-items:center')}>
-          <div style={sx('display:flex;flex-direction:column;gap:20px')}>
-            <Hv as="button" onClick={() => go('investors/private-wealth')} s={`align-self:flex-start;margin:0;padding:0;border:0;background:none;cursor:pointer;${MONO};font-size:clamp(18px,1.4vw,22px);color:var(--hw-terracotta);display:inline-flex;gap:10px;align-items:center`} h="color:var(--hw-black)">
-              Ways to invest<span aria-hidden="true">→</span>
-            </Hv>
-            <h2 style={sx(H2)}>One platform, several vehicles.</h2>
-            <p style={sx('margin:0;max-width:680px;font-size:clamp(17px,1.35vw,20px);line-height:1.5;text-wrap:pretty')}>
-              Our strategies are broader than our funds. Investors can access them through commingled trusts, specific mandates or deal-level partnerships.
-            </p>
-          </div>
-          <div style={sx("aspect-ratio:4/3;background:var(--hw-cool-grey) url('/assets/photography/HW_MassTimber_Coffee-Table.jpg') center 55%/cover no-repeat")} />
-        </div>
-        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(20px,2.4vw,36px)')}>
-          {VEHICLES.map((v) => (
-            <Hv key={v.slug} as="button" onClick={() => go('investment/' + v.slug)} s="display:flex;flex-direction:column;gap:16px;border:0;border-top:3px solid var(--hw-black);padding:20px 0 0;background:none;text-align:left;cursor:pointer;color:var(--hw-black);font-family:var(--font-body)" h="color:var(--hw-terracotta)">
-              <span style={sx(`position:relative;display:block;width:100%;aspect-ratio:16/9;background:#212121 url('${v.poster}') center/cover no-repeat`)}>
-                <span style={sx(`position:absolute;left:14px;bottom:14px;display:flex;align-items:center;gap:10px;padding:8px 12px 8px 8px;background:var(--hw-white);color:var(--hw-black);${MONO};font-size:12px`)}>
-                  <span style={sx('width:28px;height:28px;border-radius:50%;background:var(--hw-terracotta);color:var(--hw-white);display:flex;align-items:center;justify-content:center;font-size:14px;padding-left:2px')}>▶</span>
-                  Watch · {v.runtime}
-                </span>
-              </span>
-              <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.2vw,32px);line-height:1.1')}>{v.title}</span>
-              <span style={sx(`${MONO};font-size:12px`)}>{v.sub}</span>
-              <span style={sx('display:flex;flex-direction:column;width:100%')}>
-                {v.items.map((it) => (
-                  <span key={it.k} style={sx('display:flex;flex-direction:column;gap:3px;padding:12px 0;border-top:1px solid rgba(33,33,33,.3)')}>
-                    <span style={sx('font-size:18px;line-height:1.3')}>{it.k}</span>
-                    <span style={sx('font-size:18px;line-height:1.45')}>{it.v}</span>
-                  </span>
-                ))}
-              </span>
-              <span style={sx('display:flex;flex-wrap:wrap;gap:6px;margin-top:auto')}>
-                {v.for.map((t) => (
-                  <span key={t} style={sx(`${TAG};color:var(--hw-black)`)}>{t}</span>
-                ))}
-              </span>
-              <span style={sx(`align-self:flex-start;margin-top:8px;padding:14px 20px;border:1.5px solid var(--hw-black);color:var(--hw-black);${MONO};font-size:13px`)}>{v.cta} →</span>
-            </Hv>
-          ))}
-        </div>
-      </section>
-
-      <section data-screen-label="Investment — Invest your way" style={sx('background:var(--hw-white);border-top:1.5px solid var(--hw-terracotta);padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:clamp(28px,3vw,48px)')}>
-        <div style={sx(SPLIT_HEAD)}>
-          <div style={sx('display:flex;flex-direction:column;gap:20px')}>
-            <p style={sx(EYEBROW)}>Invest with us</p>
-            <h2 style={sx(H2)}>Own the future of real estate with us.</h2>
-          </div>
-          <p style={sx(LEDE)}>Start the conversation that fits you. Each path connects you with the team that works with investors like you.</p>
-        </div>
-        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(20px,2.4vw,36px)')}>
-          {ROUTES.map((r) => (
-            <Hv key={r.r} as="button" onClick={() => go(r.r)} s="display:flex;flex-direction:column;gap:14px;padding:20px 0 0;background:none;border:0;border-top:3px solid var(--hw-black);cursor:pointer;color:var(--hw-black);text-align:left;font-family:var(--font-body)" h="color:var(--hw-terracotta)">
-              <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.2vw,32px);line-height:1.1')}>{r.title}</span>
-              <span style={sx('font-size:18px;line-height:1.5;color:var(--hw-black);text-wrap:pretty')}>{r.body}</span>
-              <span style={sx(`align-self:flex-start;margin-top:8px;padding:14px 20px;border:1.5px solid var(--hw-black);color:var(--hw-black);${MONO};font-size:13px`)}>{r.cta} →</span>
-            </Hv>
-          ))}
-        </div>
-        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,4vw,64px);padding-top:clamp(32px,4vw,56px);border-top:1px solid var(--hw-black)')}>
-          <div style={sx('display:flex;flex-direction:column;gap:14px')}>
-            <span style={sx(`${MONO};font-size:13px;color:var(--hw-black)`)}>Institutional enquiries</span>
-            <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(26px,2.6vw,38px);line-height:1.1')}>Talk to our institutional team.</span>
-            <p style={sx('margin:0;max-width:480px;font-size:18px;line-height:1.5;text-wrap:pretty')}>
-              For pensions, foundations, endowments, insurers and family offices exploring our funds, separately managed accounts, joint ventures or co-investments.
-            </p>
-          </div>
-          <div style={sx('background:var(--hw-white);padding:clamp(24px,3vw,40px)')}>
-            {instSent ? (
-              <p style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.4vw,34px);line-height:1.15')}>
-                Thank you — our institutional team will be in touch within two business days.
-              </p>
-            ) : (
-              <>
-                <HubspotNote label="Institutional enquiry" style={{ marginBottom: 16 }} />
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault()
-                    setInstSent(true)
-                  }}
-                  data-hubspot-form="institutional-enquiry"
-                  style={sx('display:flex;flex-direction:column;gap:16px')}
-                >
-                  <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px')}>
-                    <Field label="Name"><input required placeholder="ENTER YOUR NAME" style={sx(FIELD)} /></Field>
-                    <Field label="Organization"><input required placeholder="ENTER YOUR ORGANIZATION" style={sx(FIELD)} /></Field>
-                    <Field label="Email"><input type="email" required placeholder="ENTER YOUR EMAIL" style={sx(FIELD)} /></Field>
-                    <Field label="Investor type">
-                      <select required style={sx(FIELD)}>
-                        {INST_TYPES.map((o) => <option key={o}>{o}</option>)}
-                      </select>
-                    </Field>
-                  </div>
-                  <Field label="Interested in">
-                    <select style={sx(FIELD)}>
-                      {INST_INTEREST.map((o) => <option key={o}>{o}</option>)}
-                    </select>
-                  </Field>
-                  <Field label="Message"><textarea rows={4} placeholder="TELL US ABOUT YOUR MANDATE" style={sx(`${FIELD};resize:vertical`)} /></Field>
-                  <div>
-                    <Hv as="button" type="submit" s={`padding:12px 18px;background:var(--hw-black);color:var(--hw-white);border:0;cursor:pointer;${MONO};font-size:14px`} h="background:var(--hw-terracotta)">
-                      Send enquiry
+            <div data-inv-cards="" style={sx('display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px')}>
+              {g.cards.map((c) =>
+                c.img ? (
+                  <div key={c.name} style={sx(`position:relative;overflow:hidden;min-height:clamp(300px,28vw,360px);padding:28px;display:flex;flex-direction:column;justify-content:space-between;gap:28px;color:var(--hw-white);background:var(--hw-brown) url('${c.img}') center/cover no-repeat`)}>
+                    <div style={sx('position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,35,22,.45),rgba(33,33,33,.72))')} />
+                    <div style={sx('position:relative;display:flex;flex-direction:column;gap:12px')}>
+                      <span style={sx(`margin:0;${MONO};font-size:12px`)}>{c.tag}</span>
+                      <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.2vw,30px);line-height:1.1')}>{c.name}</span>
+                      <p style={sx('margin:0;font-size:16px;line-height:1.5;text-wrap:pretty')}>{c.body}</p>
+                    </div>
+                    <Hv as="button" onClick={() => go(c.r)} s={`position:relative;align-self:flex-start;padding:14px 20px;border:0;cursor:pointer;${MONO};font-size:13px;background:var(--hw-white);color:var(--hw-black)`} h="background:var(--hw-cool-grey)">
+                      {c.cta} →
                     </Hv>
                   </div>
-                </form>
-              </>
-            )}
+                ) : (
+                  <div key={c.name} style={sx('min-height:clamp(300px,28vw,360px);padding:28px;display:flex;flex-direction:column;justify-content:space-between;gap:28px;border:1.5px solid var(--hw-black)')}>
+                    <div style={sx('display:flex;flex-direction:column;gap:12px')}>
+                      <span style={sx(`margin:0;${MONO};font-size:12px`)}>{c.tag}</span>
+                      <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.2vw,30px);line-height:1.1')}>{c.name}</span>
+                      <p style={sx('margin:0;font-size:16px;line-height:1.5;text-wrap:pretty')}>{c.body}</p>
+                    </div>
+                    <Hv as="button" onClick={() => go(c.r)} s={`position:relative;align-self:flex-start;padding:14px 20px;border:0;cursor:pointer;${MONO};font-size:13px;background:var(--hw-black);color:var(--hw-white)`} h="background:var(--hw-terracotta)">
+                      {c.cta} →
+                    </Hv>
+                  </div>
+                ),
+              )}
+            </div>
           </div>
-        </div>
+        ))}
       </section>
 
-      <section data-screen-label="Investment — Standards" style={sx('padding:clamp(40px,5vw,64px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:24px;border-top:1.5px solid var(--hw-terracotta)')}>
-        <div style={sx('display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px 40px')}>
-          <div style={sx('display:flex;flex-direction:column;gap:10px')}>
-            <p style={sx(EYEBROW)}>Signatories and frameworks</p>
-            <p style={sx('margin:0;font-size:clamp(18px,1.4vw,21px);line-height:1.45')}>We design, measure and report against recognized standards.</p>
-          </div>
-          <Hv as="button" onClick={() => go('about/standards')} s={OUTLINE_SM} h="background:var(--hw-black);color:var(--hw-white)">
-            Our standards →
-          </Hv>
-        </div>
-        <StandardLogos />
+      <section data-screen-label="Investment — Overview CTA" style={sx('background:var(--hw-terracotta);color:var(--hw-white);padding:clamp(48px,5vw,72px) clamp(20px,3vw,40px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px 40px')}>
+        <p style={sx('margin:0;font-family:var(--font-display);font-weight:500;letter-spacing:-.025em;line-height:1.05;text-wrap:balance;font-size:clamp(28px,3vw,44px);max-width:720px')}>Talk to our team about which solution fits.</p>
+        <Hv as="button" onClick={() => go('investment/meeting')} s={`padding:16px 24px;background:var(--hw-white);color:var(--hw-black);border:1.5px solid var(--hw-white);cursor:pointer;${MONO};font-size:14px`} h="background:transparent;color:var(--hw-white)">
+          Book a meeting →
+        </Hv>
       </section>
     </>
   )

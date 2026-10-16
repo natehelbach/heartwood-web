@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { SECTIONS, LOGIN_URL, tagColor } from '../site/sitemap.js'
+import { SECTIONS, SECTION_LANDING, LOGIN_URL, tagColor } from '../site/sitemap.js'
 
 // Scroll distance over which the Home header collapses from the full-width
 // wordmark to a compact bar.
@@ -178,10 +178,11 @@ function SiteHeader({ route, section, navSection, activeSub, go }) {
             <nav className="site-nav" aria-label="Main" style={bar.navStyle}>
               {Object.entries(SECTIONS).map(([key, m]) => {
                 // The current section's items are already in the sub-nav, so its menu
-                // doesn't drop down; clicking it goes to its first page instead.
+                // doesn't drop down. Clicking a menu goes to its landing page.
                 const current = navSection === key
                 const drops = !!m.items && !current
                 const open = menu === key && drops
+                const landing = SECTION_LANDING[key]
                 return (
                   <div
                     key={key}
@@ -193,7 +194,13 @@ function SiteHeader({ route, section, navSection, activeSub, go }) {
                       className={`site-nav__link${current ? ' is-current' : ''}`}
                       aria-expanded={drops ? open : undefined}
                       aria-haspopup={drops ? 'true' : undefined}
-                      onClick={drops ? () => setMenu((v) => (v === key ? null : key)) : () => navTo(m.items ? m.items[0].r : m.r)}
+                      onClick={
+                        landing
+                          ? () => navTo(landing)
+                          : drops
+                            ? () => setMenu((v) => (v === key ? null : key))
+                            : () => navTo(m.items ? m.items[0].r : m.r)
+                      }
                     >
                       {m.label}
                     </button>

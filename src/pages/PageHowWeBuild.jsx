@@ -31,7 +31,7 @@ const LIFE = [
       'The platform then places the site in its local market context and pulls in key data for that area: rents at nearby rental and condo buildings, CMHC market benchmarks, population and demographic trends, what renters can afford, how quickly new buildings have filled up, and which competing projects are in the pipeline. Together, this gives us a full picture of the risks before we commit to a deal.',
       'This holistic approach lets us target growth markets, and supply-constrained submarkets within them, where tenant demand and rent fundamentals support the building well beyond lease-up.',
     ],
-    ph: 'Image needed · GIS sourcing map',
+    imgs: [{ src: '/assets/photography/HW_Photo_Market-Intelligence-Screen.png', f: 1 }],
   },
   {
     k: 'Design',
@@ -41,7 +41,7 @@ const LIFE = [
       'We take a product-based approach. Every building we develop uses the same system of standardized, flexible building components and follows the same development and design process. We adapt the system to each site instead of reinventing the building we build over and over again.',
       'This lowers investment risk, sharpens our cost estimates and speeds up construction. And because each building improves on the last, the value compounds across every site we develop, delivering more durable, well-built and efficient buildings.',
     ],
-    imgs: [{ src: R + 'HW_Render_Innovation.jpg', f: 1 }],
+    imgs: [{ src: '/assets/photography/HW_Photo_Design-Review-Plans.png', f: 1 }],
   },
   {
     k: 'Build',

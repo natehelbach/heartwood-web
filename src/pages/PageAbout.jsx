@@ -23,6 +23,9 @@ const GROUPS = [
 const FIELD = sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:12px;text-transform:uppercase;display:flex;flex-direction:column;gap:8px')
 const INPUT = sx('padding:14px 16px;border:1.5px solid var(--hw-black);background:transparent;font-family:var(--font-body);font-size:18px;color:var(--hw-black);text-transform:none')
 
+// 4:5 team portraits, named after the person (assets/team/portrait/).
+const portraitOf = (t) => `/assets/team/portrait/HW_Team_${t.name.replace(/\s+/g, '-')}_4x5_colour.jpg`
+
 function Leadership() {
   const [open, setOpen] = useState(null)
   return (
@@ -50,7 +53,7 @@ function Leadership() {
                     as="button"
                     aria-expanded={isOpen}
                     onClick={() => setOpen((o) => (o === t.id ? null : t.id))}
-                    data-m-stack=""
+                    data-team-row=""
                     s="width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,260px) 48px;gap:24px;align-items:center;padding:clamp(18px,2vw,26px) clamp(20px,3vw,40px);background:none;border:0;cursor:pointer;color:var(--hw-black);text-align:left"
                     h="background:rgba(33,33,33,.04)"
                   >
@@ -62,8 +65,11 @@ function Leadership() {
                     </span>
                   </Hv>
                   {isOpen && (
-                    <div data-m-stack="" style={sx('display:grid;grid-template-columns:minmax(0,200px) minmax(0,640px);gap:clamp(20px,3vw,40px);padding:0 clamp(20px,3vw,40px) clamp(24px,3vw,36px)')}>
-                      <img src={t.photo} alt={t.name} style={sx('width:100%;aspect-ratio:1/1;object-fit:cover;display:block;filter:grayscale(1);background:var(--hw-brown)')} />
+                    <div data-m-stack="" data-team-open="" style={sx('display:grid;grid-template-columns:minmax(0,240px) minmax(0,640px);gap:clamp(20px,3vw,40px);padding:clamp(8px,1vw,12px) clamp(20px,3vw,40px) clamp(28px,3vw,40px)')}>
+                      <div style={sx('position:relative;width:100%;aspect-ratio:4/5;background:var(--hw-cool-grey)')}>
+                        <img src={portraitOf(t)} alt={t.name} style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1)')} />
+                        <div style={sx('position:absolute;inset:0;background:rgba(197,220,234,.2);pointer-events:none')} />
+                      </div>
                       <div style={sx('display:flex;flex-direction:column;gap:24px;align-items:flex-start')}>
                         <p style={sx('margin:0;font-size:clamp(17px,1.35vw,20px);line-height:1.55;text-wrap:pretty;white-space:pre-line')}>{t.bio || 'Full bio coming soon.'}</p>
                         <Hv
@@ -279,6 +285,7 @@ function Standards() {
             ))}
           </div>
         </div>
+        <div style={sx("width:100%;aspect-ratio:21/9;background:var(--hw-brown) url('/assets/photography/HW_Photo_EV-Charging.png') center 45%/cover no-repeat")} />
       </section>
 
       <section data-screen-label="Standards — Frameworks" style={sx('padding:clamp(32px,3.5vw,48px) clamp(20px,3vw,40px) clamp(48px,6vw,88px);display:flex;flex-direction:column;gap:20px')}>

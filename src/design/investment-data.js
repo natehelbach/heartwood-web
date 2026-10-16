@@ -424,54 +424,63 @@ export const VEHICLES = [
   },
   {
     slug: "flexible",
-    hero: "/assets/photography/HW_Photo_Madison-Facade-Sky.jpg",
-    heroPos: "center 30%",
-    heroOv: "rgba(249,249,249,.3)",
-    heroFg: "var(--hw-black)",
-    title: "Project investments",
-    sub: "Direct & custom mandates",
+    hero: "/assets/photography/HW_MassTimber_Exterior.jpg",
+    heroPos: "center",
+    heroOv: "rgba(58,35,22,.5)",
+    heroFg: "var(--hw-white)",
+    title: "Direct Investments",
+    sub: "Canada · United States · Europe",
     runtime: "2 min",
-    cta: "Explore project investments",
+    cta: "Explore direct investing",
     poster: "/assets/project-renders/HW_Render_360-Kennedy-Lane.jpg",
     for: [
-      "Institutions",
-      "Family offices",
-      "Sovereign wealth funds"
+      "Canada",
+      "United States",
+      "Europe"
     ],
     items: [
       {
-        k: "Separately managed accounts",
-        v: "Client-specific mandates"
-      },
-      {
-        k: "Joint ventures / Co-GP",
-        v: "Partnerships with other living-sector managers"
-      },
-      {
         k: "Co-investments",
-        v: "Deal-level access alongside our funds"
+        v: "Deal-level access alongside our strategies"
+      },
+      {
+        k: "Separately managed accounts",
+        v: "Mandates built around your goals"
+      },
+      {
+        k: "General partnerships",
+        v: "Partner with us at the GP level"
+      },
+      {
+        k: "Joint ventures",
+        v: "Your capital or land, our platform"
       }
     ],
-    intro: "For investors who want a mandate built around them. We apply the same development and operating expertise that runs our trusts to your goals, timeline and risk profile.",
-    heading: "Three ways to partner",
+    intro: "Direct investing gives global investors access to our Canadian and United States strategies, structured around their goals. Investors in Canada, the United States and Europe can come in through co-investments, separately managed accounts, general partnerships or joint ventures.",
+    heading: "Four ways to invest directly",
     rows: [
       {
         no: "01",
-        k: "Separately managed accounts",
-        body: "A portfolio built and managed to your specific mandate."
+        k: "Co-investments",
+        body: "Invest alongside Heartwood in specific projects or acquisitions."
       },
       {
         no: "02",
-        k: "Joint ventures / Co-GP",
-        body: "Partnerships with other living-sector managers, sharing risk and reward."
+        k: "Separately managed accounts",
+        body: "A portfolio built and managed to your goals, timeline and risk profile."
       },
       {
         no: "03",
-        k: "Co-investments",
-        body: "Deal-level access to individual projects, alongside our funds."
+        k: "General partnerships",
+        body: "Partner with us at the GP level on a development or portfolio."
+      },
+      {
+        no: "04",
+        k: "Joint ventures",
+        body: "Combine your capital or land with our platform on a shared venture."
       }
     ],
-    ctaLine: "Tell us about your mandate."
+    ctaLine: "Learn more about investing directly with us."
   },
   {
     slug: "services",
