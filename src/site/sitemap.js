@@ -13,9 +13,9 @@ export const SECTIONS = {
     label: 'Development',
     items: [
       { label: 'Overview', r: 'development/overview' },
-      { label: 'Standards', r: 'development/standards' },
       { label: 'How We Build', r: 'development/design' },
       { label: 'Projects', r: 'development/projects' },
+      { label: 'Standards', r: 'development/standards' },
     ],
   },
   management: {
@@ -67,9 +67,9 @@ export const FOOTER_COLUMNS = [
     label: 'Development',
     items: [
       ['Overview', 'development/overview'],
-      ['Standards', 'development/standards'],
       ['How We Build', 'development/design'],
       ['Projects', 'development/projects'],
+      ['Standards', 'development/standards'],
     ],
   },
   {
@@ -102,7 +102,7 @@ export const FOOTER_COLUMNS = [
 // Where a desktop menu click goes; hovering still opens its dropdown.
 export const SECTION_LANDING = {
   development: 'development/overview',
-  management: 'properties',
+  management: 'management/asset',
   investors: 'investment/overview',
   insights: 'insights/perspectives',
   about: 'about/who',

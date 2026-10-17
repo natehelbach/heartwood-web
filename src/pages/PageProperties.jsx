@@ -11,18 +11,16 @@ const list = (v) => (Array.isArray(v) ? v : tbc(v) ? [v] : [])
 
 const FILTERS = [
   ['Market', 'country', ['All', 'Canada', 'United States']],
-  ['Strategy', 'strategy', ['All', 'Growth', 'Income']],
 ]
 
 const MONO = 'font-family:var(--font-subhead);font-weight:500;text-transform:uppercase'
 // The design currently hides the callout row under the project gallery.
 const SHOW_CALLOUTS = false
 
-// `only` limits the list to one strategy (Development › Projects shows Growth) and drops the
-// strategy filter.
+// `only` limits the list to one strategy (Development › Projects shows Growth).
 function PropertyList({ only, go }) {
   const [sel, setSel] = useState({ country: 'All', strategy: 'All' })
-  const filters = only ? FILTERS.slice(0, 1) : FILTERS
+  const filters = FILTERS
   const shown = P.filter((p) => (!only || p.strategy === only) && (sel.country === 'All' || p.country === sel.country) && (sel.strategy === 'All' || p.strategy === sel.strategy))
   return (
     <>
@@ -65,7 +63,7 @@ function PropertyList({ only, go }) {
 
 function ProjectCard({ p, go }) {
   const [hover, setHover] = useState(false)
-  const tag = [p.strategy, p.country].filter(Boolean).join(' · ')
+  const tag = p.country === 'United States' ? 'US' : (p.country || '')
   const dot = p.strategy === 'Income' ? 'var(--hw-teal)' : 'var(--hw-terracotta)'
   return (
     <button
@@ -129,7 +127,6 @@ function PropertyDetail({ sub, go }) {
   const meta = [
     { k: 'Status', v: tbc(c.status) || 'To be confirmed' },
     { k: 'Location', v: c.loc || 'To be confirmed' },
-    { k: 'Strategy', v: c.strategy || 'To be confirmed' },
   ]
   const lock =
     idx % 2 === 0

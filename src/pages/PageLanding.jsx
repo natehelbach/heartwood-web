@@ -181,10 +181,6 @@ const PAPERS = [
 const PLATFORMS = ['YouTube', 'Spotify', 'Apple Podcasts', 'Amazon Music']
 const EPISODES = [
   { no: '01', date: 'Coming soon', title: 'Founding Story', guest: 'With Tim Blair & David Constable, Co-founders', desc: 'Meet the founders behind Heartwood, and why they started the firm.', img: R + 'HW_Render_3385-Lawrence.jpg' },
-  { no: '02', date: 'Coming soon', title: 'Renter Demand', guest: 'With the Heartwood team', desc: 'The habits people have when it comes to how they live, and the trends we’re seeing in how Canadians rent, move and settle.', img: L + 'HW_Lifestyle_28.jpg' },
-  { no: '03', date: 'Coming soon', title: 'The Case for Multifamily', guest: 'With Wendy, Market Expert', desc: 'Why we build, buy and own purpose-built multifamily real estate, and what the market tells us about the decades ahead.', img: R + 'HW_Render_353-Sherbourne.jpg' },
-  { no: '04', date: 'Coming soon', title: 'Design as Value', guest: 'With Michael Green, MGA | Michael Green Architecture', desc: 'High-quality, sustainable design, and why the buildings we build today should perform for the next century.', img: R + 'HW_Render_Innovation.jpg' },
-  { no: '05', date: 'Coming soon', title: 'The Institutional Lens', guest: 'With an institutional investor', desc: 'Why institutional investors have an appetite for purpose-built rental, and what they look for in a long-term partner.', img: R + 'HW_Render_360-Kennedy-Lane.jpg' },
 ]
 const BENEFITS = [
   { title: 'Fund materials', body: 'Offering memorandum, fund overview and track record.' },

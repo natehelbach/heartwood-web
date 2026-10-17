@@ -164,6 +164,11 @@ export const GROWTH = {
       r: 'investment/funds'
     },
     {
+      k: "Heartwood US Growth Feeder",
+      v: "For United States investors: access to the Growth Trust through a separately managed US vehicle.",
+      r: 'investment/meeting'
+    },
+    {
       k: "Joint ventures / Co-GP",
       v: "Project-level partnerships that share risk and reward.",
       r: 'investment/flexible'
@@ -344,6 +349,11 @@ export const INCOME = {
       k: "Heartwood Residential Income Trust",
       v: "Our open-ended trust of modern, stabilized, income-producing rental.",
       r: 'investment/funds'
+    },
+    {
+      k: "Heartwood US Income Feeder",
+      v: "For United States investors: access to the Income Trust through a separately managed US vehicle.",
+      r: 'investment/meeting'
     },
     {
       k: "Co-investments",

@@ -29,7 +29,6 @@ const PAPERS = [
 const PERSP = [
   { kind: 'Perspective', slug: 'nation-of-renters', img: '/assets/photography/HW_Photo_Timber-Living-Room.jpg', title: 'Canada is becoming a nation of renters', dek: 'Renter households grew 35% between 2011 and 2025 — far faster than households overall.' },
   { kind: 'Perspective', slug: 'supply-cliff', img: '/assets/photography/HW_MassTimber_Living-Room-Window.jpg', title: 'The supply cliff: why cancelled condos matter for rental', dek: '7,243 condominium units were cancelled in 2025. What it leaves behind in Ontario’s largest markets.' },
-  { kind: 'Perspective', slug: 'heat-pumps-2050', img: '/assets/photography/HW_MassTimber_Bedroom.jpg', title: 'Heat pumps, envelopes and the 2050 climate', dek: 'How low-energy systems protect residents from utility volatility — and investors from stranded assets.' },
 ]
   .map((a) => ({ ...a, dot: 'var(--hw-teal)', more: 'Read →' }))
   .concat(PAPERS)
@@ -115,7 +114,7 @@ function IssueLabel({ n, label }) {
 
 function Perspectives({ go }) {
   const [topic, setTopic] = useState('All')
-  const all = HW_ARTICLES.map((a) => ({ ...a, topic: TOPIC[a.slug] || 'Market', author: a.author ? a.author.name : '' })).filter((a) => topic === 'All' || a.topic === topic)
+  const all = HW_ARTICLES.filter((a) => a.slug !== 'heat-pumps-2050' && a.slug !== 'distribution-coverage').map((a) => ({ ...a, topic: TOPIC[a.slug] || 'Market', author: a.author ? a.author.name : '' })).filter((a) => topic === 'All' || a.topic === topic)
   const persp = all
   const feat = persp[0]
   const open = (slug) => () => go('insights/perspectives/' + slug)

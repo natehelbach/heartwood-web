@@ -789,3 +789,26 @@ input::placeholder {
     grid-template-columns: minmax(0, 1fr) !important;
   }
 }
+
+@media (max-width: 900px) {
+  [data-am-2] {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  [data-am-row] {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  [data-am-acc] {
+    height: 440px !important;
+  }
+  [data-am-lb] {
+    left: 20px !important;
+    bottom: 24px !important;
+  }
+  [data-am-lb] strong {
+    font-size: 28px !important;
+  }
+}

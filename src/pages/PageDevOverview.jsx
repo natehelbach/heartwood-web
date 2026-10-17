@@ -55,7 +55,7 @@ function PageDevOverview({ go }) {
         <div style={sx('position:absolute;inset:0;background:rgba(58,35,22,.5)')} />
         <div style={sx('position:relative;padding:clamp(32px,4vw,56px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:18px;max-width:820px;color:var(--hw-white)')}>
           <p style={sx(`margin:0;${MONO};font-size:clamp(14px,1.2vw,18px)`)}>Development</p>
-          <h1 style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(40px,5vw,72px);line-height:1;letter-spacing:-.025em;text-wrap:balance')}>We build what we intend to own.</h1>
+          <h1 style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(40px,5vw,72px);line-height:1;letter-spacing:-.025em;text-wrap:balance')}>Rental housing, built for the long term.</h1>
           <p style={sx('margin:0;max-width:640px;font-size:clamp(18px,1.5vw,22px);line-height:1.5;text-wrap:pretty')}>
             New purpose-built rental communities in supply-constrained North American markets, designed and built for decades of ownership.
           </p>

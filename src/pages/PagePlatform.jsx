@@ -239,7 +239,6 @@ function InnovationMap({ showIntro, outcome }) {
                 alt=""
                 style={sx(`position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:${cur.pos};display:block;filter:${zoom ? 'none' : 'sepia(.22) saturate(.88) contrast(1.06) brightness(1.02)'};transform:scale(${zoom ? 1.04 : 1});transition:filter .25s ease,transform .4s ease`)}
               />
-              <span style={sx('position:absolute;right:6px;bottom:6px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;background:rgba(249,249,249,.92);color:var(--hw-black);font-size:14px;line-height:1')}>+</span>
             </button>
           )}
           <div style={sx('padding:18px 20px;display:flex;flex-direction:column;gap:8px')}>
