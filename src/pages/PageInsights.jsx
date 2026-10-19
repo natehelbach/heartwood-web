@@ -4,6 +4,7 @@ import HW_DATA from '../design/site-data.js'
 import HW_ARTICLES from '../design/articles-data.js'
 import PageArticle from './PageArticle.jsx'
 import NotFound from '../components/NotFound.jsx'
+import { HONEYPOT, useNewsletter } from '../site/forms.js'
 
 // Ported from ui_kits/website/PageInsights.dc.html. `sub` is '' (overview) | perspectives |
 // perspectives/<slug> | news | news/<release> | newsletter | newsletter/<no>.
@@ -483,7 +484,7 @@ function Issue({ go }) {
 }
 
 function Subscribe() {
-  const [subbed, setSubbed] = useState(false)
+  const news = useNewsletter()
   return (
     <section style={sx('margin:0 clamp(20px,3vw,40px) clamp(48px,6vw,88px);background:var(--hw-black);color:var(--hw-white);border-top:6px solid var(--hw-terracotta);padding:clamp(28px,4vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:24px;align-items:end')}>
       <div style={sx('display:flex;flex-direction:column;gap:12px')}>
@@ -493,21 +494,23 @@ function Subscribe() {
       <div style={sx('display:flex;flex-direction:column;gap:12px;min-width:0')}>
         <HubspotNote label="The Long View newsletter" />
         <form
-          onSubmit={(e) => {
-            e.preventDefault()
-            setSubbed(true)
-          }}
-          style={sx('display:flex;border:1.5px solid var(--hw-white);min-width:0')}
+          onSubmit={news.onSubmit}
+          noValidate
+          style={sx(`position:relative;display:flex;border:1.5px solid ${news.invalid ? 'var(--hw-terracotta)' : 'var(--hw-white)'};min-width:0`)}
         >
-          <input type="email" required aria-label="Email address" className="hw-input-on-dark" placeholder={subbed ? 'Thanks — you’re subscribed' : 'Enter your email'} style={sx('flex:1;min-width:0;padding:14px 18px;background:transparent;border:0;color:var(--hw-white);font-family:var(--font-subhead);font-size:14px;text-transform:uppercase')} />
-          <button type="submit" style={sx(`padding:14px 22px;background:var(--hw-white);color:var(--hw-black);border:0;cursor:pointer;${MONO};font-size:14px`)}>Subscribe</button>
+          <input name="email" type="email" required autoComplete="email" aria-label="Email address" aria-invalid={news.invalid || undefined} aria-describedby="newsletter-subscribe-status" className="hw-input-on-dark" placeholder="Enter your email" style={sx('flex:1;min-width:0;padding:14px 18px;background:transparent;border:0;color:var(--hw-white);font-family:var(--font-subhead);font-size:14px;text-transform:uppercase')} />
+          <input {...HONEYPOT} />
+          <button type="submit" disabled={news.sending} style={sx(`padding:14px 22px;background:var(--hw-white);color:var(--hw-black);border:0;cursor:${news.sending ? 'progress' : 'pointer'};${MONO};font-size:14px`)}>Subscribe</button>
         </form>
+        <p id="newsletter-subscribe-status" role="status" aria-live="polite" style={sx('margin:0;min-height:1.4em;font-size:14px;line-height:1.4')}>
+          {news.message}
+        </p>
       </div>
     </section>
   )
 }
 
-function PageInsights({ sub = '', go }) {
+function insightsPage(sub) {
   const isLanding = sub === 'newsletter'
   const isIssue = sub.startsWith('newsletter/')
   const artSlug = sub.startsWith('perspectives/') ? sub.slice(13) : ''
@@ -515,6 +518,14 @@ function PageInsights({ sub = '', go }) {
   const isRelease = sub.startsWith('news/') && CLIPS.some((c) => slugOf(c) === sub.slice(5))
   // Unknown articles, releases and sub-pages show the 404 page.
   const notFound = (sub.startsWith('news/') && !isRelease) || (!!artSlug && !isArticle) || (!!sub && !isLanding && !isIssue && !sub.startsWith('news/') && !artSlug && !['perspectives', 'news'].includes(sub))
+  return { isLanding, isIssue, artSlug, isArticle, isRelease, notFound }
+}
+
+// Whether an Insights sub-route is a 404, so the shell can mark the page noindex.
+export const insightsNotFound = (sub = '') => insightsPage(sub).notFound
+
+function PageInsights({ sub = '', go }) {
+  const { isLanding, isIssue, artSlug, isArticle, isRelease, notFound } = insightsPage(sub)
   const isHub = !isLanding && !isIssue && !isArticle && !isRelease && !notFound
   const [eyebrow, title] = HEADS[sub] || HEADS['']
   const isNews = sub === 'news'

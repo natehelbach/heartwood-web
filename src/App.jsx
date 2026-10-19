@@ -7,23 +7,35 @@ import PageHowWeBuild from './pages/PageHowWeBuild.jsx'
 import PageManagement from './pages/PageManagement.jsx'
 import PageProperties from './pages/PageProperties.jsx'
 import PageInvestment from './pages/PageInvestment.jsx'
-import PageInsights from './pages/PageInsights.jsx'
+import PageInsights, { insightsNotFound } from './pages/PageInsights.jsx'
 import PageLanding from './pages/PageLanding.jsx'
 import PageLegal from './pages/PageLegal.jsx'
 import NotFound from './components/NotFound.jsx'
 import HW_DATA from './design/site-data.js'
-import useHashRoute from './site/useHashRoute.js'
+import { VEHICLES } from './design/investment-data.js'
+import useRoute from './site/useRoute.js'
+import { usePageMeta } from './site/meta.js'
 import { parseRoute } from './site/sitemap.js'
 
 const KNOWN = ['devoverview', 'home', 'about', 'properties', 'investment', 'insights', 'legal', 'platform', 'management']
 
+// Sub-pages each section can show; anything else under it is a 404. Insights checks its own.
+const SUBS = {
+  about: ['', 'who', 'leadership', 'standards', 'contact', 'careers'],
+  investment: ['', 'overview', 'growth', 'income', ...VEHICLES.map((v) => v.slug)],
+  legal: ['privacy', 'disclosures', 'terms'],
+  management: ['', 'asset'],
+  properties: ['', ...HW_DATA.projects.map((p) => p.slug)],
+}
+
 // Page routing mirrors the <main> of ui_kits/website/Heartwood Website.dc.html.
 function App() {
-  const [navRoute, go] = useHashRoute()
+  const [navRoute, go] = useRoute()
   const { route, section, sub, navSection, activeSub, propsOnly, landing } = parseRoute(navRoute)
-  // Unknown sections, and property pages for a slug that doesn't exist, show the 404 page.
-  const notFound = !landing && (!KNOWN.includes(section) || (section === 'properties' && !!sub && !HW_DATA.projects.some((p) => p.slug === sub)))
+  // Unknown sections, and unknown pages within a section, show the 404 page.
+  const notFound = !landing && (!KNOWN.includes(section) || (SUBS[section] && !SUBS[section].includes(sub)) || (!SUBS[section] && !!sub && section !== 'insights'))
   const is = (k) => section === k && !landing && !notFound
+  usePageMeta(navRoute, notFound || (is('insights') && insightsNotFound(sub)))
 
   return (
     <div className="site">

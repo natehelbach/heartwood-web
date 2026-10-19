@@ -1,5 +1,6 @@
-import { useState } from 'react'
 import { FOOTER_COLUMNS, LEGAL_LINKS, LINKEDIN_URL, ADDRESS } from '../site/sitemap.js'
+import { linkProps } from '../site/paths.js'
+import { HONEYPOT, useNewsletter } from '../site/forms.js'
 import { DotField, HubspotNote } from '../design/ui.jsx'
 import { HW_BRAND_ICONS } from '../design/hw-icons.js'
 
@@ -12,14 +13,8 @@ function LinkedInIcon() {
 }
 
 function SiteFooter({ go }) {
-  const [subscribed, setSubscribed] = useState(false)
-
-  // Placeholder until the HubSpot "The Long View" form is wired in (see the note above the form).
-  const subscribe = (e) => {
-    e.preventDefault()
-    e.currentTarget.reset()
-    setSubscribed(true)
-  }
+  // Not sent anywhere until the HubSpot "newsletter" form ID is set in src/site/forms.js.
+  const news = useNewsletter()
 
   return (
     <footer className="site-footer">
@@ -29,9 +24,15 @@ function SiteFooter({ go }) {
             <div key={c.label} className="site-footer__col">
               <span className="site-footer__heading">{c.label}</span>
               {c.items.map(([label, r]) => (
-                <button key={label} type="button" data-tap="" className="site-footer__link" onClick={() => go(r)}>
+                <a
+                  key={label}
+                  data-tap=""
+                  className="site-footer__link"
+                  aria-label={label === 'Overview' ? `${c.label} overview` : undefined}
+                  {...linkProps(go, r)}
+                >
                   {label}
-                </button>
+                </a>
               ))}
             </div>
           ))}
@@ -40,15 +41,25 @@ function SiteFooter({ go }) {
         <div className="site-footer__aside">
           <span className="site-footer__heading">The Long View Newsletter — monthly</span>
           <HubspotNote label="The Long View newsletter (footer)" />
-          <form className="site-footer__form" onSubmit={subscribe}>
+          <form className="site-footer__form" onSubmit={news.onSubmit} noValidate aria-invalid={news.invalid || undefined}>
             <input
+              name="email"
               type="email"
               required
+              autoComplete="email"
               aria-label="Email address"
-              placeholder={subscribed ? 'Thanks — you’re subscribed' : 'Enter your email'}
+              aria-invalid={news.invalid || undefined}
+              aria-describedby="footer-subscribe-status"
+              placeholder="Enter your email"
             />
-            <button type="submit">Subscribe</button>
+            <input {...HONEYPOT} />
+            <button type="submit" disabled={news.sending}>
+              Subscribe
+            </button>
           </form>
+          <p id="footer-subscribe-status" className={`site-footer__status${news.isError ? ' is-error' : ''}`} role="status" aria-live="polite">
+            {news.message}
+          </p>
           <div className="site-footer__contact">
             <span>{ADDRESS}</span>
             <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" data-tap="" aria-label="Heartwood on LinkedIn">
@@ -78,9 +89,9 @@ function SiteFooter({ go }) {
         <span>© {new Date().getFullYear()} Heartwood Investments</span>
         <div className="site-footer__legal">
           {LEGAL_LINKS.map(([label, r]) => (
-            <button key={r} type="button" data-tap="" onClick={() => go(r)}>
+            <a key={r} data-tap="" {...linkProps(go, r)}>
               {label}
-            </button>
+            </a>
           ))}
         </div>
       </div>

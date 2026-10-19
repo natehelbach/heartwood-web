@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { Hv, sx, RULE_BG, HubspotNote } from '../design/ui.jsx'
 import { LOGIN_URL } from '../site/sitemap.js'
+import { HONEYPOT, HUBSPOT, isEmail, useFormSubmit } from '../site/forms.js'
 
 // Ported from ui_kits/website/PageLanding.dc.html. `sub` is events | learn | podcast | meeting |
 // portal | advisors | hnw | institutional.
@@ -560,13 +561,100 @@ function Audience({ sub, aud, hero, toForm, go }) {
   )
 }
 
+const ERROR_TEXT = `margin:0;${MONO};font-size:12px;letter-spacing:.02em`
+
+// The landing page form. Checks fields inline, then shows sending, sent or error states.
+// Submissions go to HubSpot once the form's ID is set in src/site/forms.js.
+function LeadForm({ s, form, meeting }) {
+  const { status, send } = useFormSubmit(form.hubspot)
+  const [errors, setErrors] = useState({})
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    const el = e.currentTarget.elements
+    const v = { name: el.name.value.trim(), email: el.email.value.trim(), choice: el.choice ? el.choice.value : '' }
+    const errs = {}
+    if (!v.name) errs.name = 'Enter your name.'
+    if (!isEmail(v.email)) errs.email = 'Enter a valid email address.'
+    if (form.hasSelect && !v.choice) errs.choice = 'Choose an option.'
+    setErrors(errs)
+    const first = Object.keys(errs)[0]
+    if (first) {
+      el[first].focus()
+      return
+    }
+    const [firstname, ...rest] = v.name.split(/\s+/)
+    const fields = { firstname, lastname: rest.join(' '), email: v.email }
+    if (v.choice) fields[HUBSPOT.selectFields[form.hubspot] || 'message'] = v.choice
+    send(fields, el.company_website.value)
+  }
+
+  if (status === 'sent') {
+    return <p role="status" style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(26px,2.6vw,38px);line-height:1.1')}>{form.thanks}</p>
+  }
+
+  const field = (k) => ({
+    name: k,
+    'aria-invalid': errors[k] ? true : undefined,
+    'aria-describedby': errors[k] ? `${s}-${k}-error` : undefined,
+  })
+  const fieldStyle = (k) => sx(`${FIELD}${errors[k] ? ';outline:2px solid var(--hw-black);outline-offset:0' : ''}`)
+  const error = (k) => errors[k] && <span id={`${s}-${k}-error`} style={sx(ERROR_TEXT)}>{errors[k]}</span>
+
+  return (
+    <>
+      <HubspotNote label={HUBSPOT_LABEL[s]} />
+      <form onSubmit={onSubmit} noValidate data-hubspot-form={form.hubspot} style={sx('position:relative;display:flex;flex-direction:column;gap:18px')}>
+        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px')}>
+          <label style={sx('display:flex;flex-direction:column;gap:8px')}>
+            <span style={sx(`${MONO};font-size:13px`)}>Name</span>
+            <input {...field('name')} required autoComplete="name" placeholder="ENTER YOUR NAME" style={fieldStyle('name')} />
+            {error('name')}
+          </label>
+          <label style={sx('display:flex;flex-direction:column;gap:8px')}>
+            <span style={sx(`${MONO};font-size:13px`)}>Email</span>
+            <input {...field('email')} type="email" required autoComplete="email" placeholder="ENTER YOUR EMAIL" style={fieldStyle('email')} />
+            {error('email')}
+          </label>
+        </div>
+        {form.hasSelect && (
+          <label style={sx('display:flex;flex-direction:column;gap:8px')}>
+            <span style={sx(`${MONO};font-size:13px`)}>{form.selectLabel}</span>
+            <select {...field('choice')} required defaultValue="" style={sx(`${FIELD};border-radius:0${errors.choice ? ';outline:2px solid var(--hw-black);outline-offset:0' : ''}`)}>
+              <option value="" disabled>Select one</option>
+              {form.options.map((o) => <option key={o}>{o}</option>)}
+            </select>
+            {error('choice')}
+          </label>
+        )}
+        <input {...HONEYPOT} />
+        {meeting && (
+          <div style={sx('min-height:260px;border:1.5px dashed var(--hw-black);display:flex;align-items:center;justify-content:center;padding:20px;text-align:center;font-family:var(--font-subhead);font-size:13px;text-transform:uppercase;line-height:1.5')}>
+            HubSpot Meetings calendar embeds here
+          </div>
+        )}
+        <div>
+          <Hv as="button" type="submit" disabled={status === 'sending'} s={`padding:12px 18px;background:var(--hw-black);color:var(--hw-white);border:0;cursor:${status === 'sending' ? 'progress' : 'pointer'};${MONO};font-size:14px`} h={`background:${meeting ? 'var(--hw-teal)' : 'var(--hw-terracotta)'}`}>
+            {status === 'sending' ? 'Sending…' : form.cta}
+          </Hv>
+        </div>
+        <p role="status" aria-live="polite" style={sx('margin:0;font-size:15px;line-height:1.45')}>
+          {status === 'error' && (
+            <>
+              Something went wrong and your details weren’t sent. Please try again, or email <a href="mailto:info@heartwoodinvestments.ca" style={{ color: 'inherit' }}>info@heartwoodinvestments.ca</a>.
+            </>
+          )}
+        </p>
+      </form>
+    </>
+  )
+}
+
 function PageLanding({ sub, go }) {
   const s = PAGES[sub] ? sub : 'events'
   const { hero, form } = PAGES[s]
   const aud = AUD[s]
   const formRef = useRef(null)
-  const [sent, setSent] = useState({})
-  const isSent = !!sent[s]
   const meeting = s === 'meeting'
   const plainHero = s === 'events' || s === 'podcast'
 
@@ -671,50 +759,7 @@ function PageLanding({ sub, go }) {
           )}
         </div>
         <div style={sx(`background:${meeting ? 'var(--hw-terracotta)' : 'var(--hw-cool-grey)'};color:${meeting ? 'var(--hw-white)' : 'var(--hw-black)'};padding:clamp(28px,3vw,44px);margin-top:clamp(40px,5vw,72px);display:flex;flex-direction:column;gap:22px`)}>
-          {isSent ? (
-            <p style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(26px,2.6vw,38px);line-height:1.1')}>{form.thanks}</p>
-          ) : (
-            <>
-              <HubspotNote label={HUBSPOT_LABEL[s]} />
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  setSent((x) => ({ ...x, [s]: true }))
-                }}
-                data-hubspot-form={form.hubspot}
-                style={sx('display:flex;flex-direction:column;gap:18px')}
-              >
-                <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px')}>
-                  <label style={sx('display:flex;flex-direction:column;gap:8px')}>
-                    <span style={sx(`${MONO};font-size:13px`)}>Name</span>
-                    <input required placeholder="ENTER YOUR NAME" style={sx(FIELD)} />
-                  </label>
-                  <label style={sx('display:flex;flex-direction:column;gap:8px')}>
-                    <span style={sx(`${MONO};font-size:13px`)}>Email</span>
-                    <input type="email" required placeholder="ENTER YOUR EMAIL" style={sx(FIELD)} />
-                  </label>
-                </div>
-                {form.hasSelect && (
-                  <label style={sx('display:flex;flex-direction:column;gap:8px')}>
-                    <span style={sx(`${MONO};font-size:13px`)}>{form.selectLabel}</span>
-                    <select required style={sx(`${FIELD};border-radius:0`)}>
-                      {form.options.map((o) => <option key={o}>{o}</option>)}
-                    </select>
-                  </label>
-                )}
-                {meeting && (
-                  <div style={sx('min-height:260px;border:1.5px dashed var(--hw-black);display:flex;align-items:center;justify-content:center;padding:20px;text-align:center;font-family:var(--font-subhead);font-size:13px;text-transform:uppercase;line-height:1.5')}>
-                    HubSpot Meetings calendar embeds here
-                  </div>
-                )}
-                <div>
-                  <Hv as="button" type="submit" s={`padding:12px 18px;background:var(--hw-black);color:var(--hw-white);border:0;cursor:pointer;${MONO};font-size:14px`} h={`background:${meeting ? 'var(--hw-teal)' : 'var(--hw-terracotta)'}`}>
-                    {form.cta}
-                  </Hv>
-                </div>
-              </form>
-            </>
-          )}
+          <LeadForm key={s} s={s} form={form} meeting={meeting} />
         </div>
       </section>
     </div>

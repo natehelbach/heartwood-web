@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { SECTIONS, SECTION_LANDING, LOGIN_URL, tagColor } from '../site/sitemap.js'
+import { linkProps } from '../site/paths.js'
 
 // Scroll distance over which the Home header collapses from the full-width
 // wordmark to a compact bar.
@@ -124,12 +125,13 @@ function SiteHeader({ route, section, navSection, activeSub, go }) {
   const cur = SECTIONS[navSection]
   const subGroups = cur?.items && !mob ? buildSubGroups(cur.items, activeSub) : []
 
-  const navTo = (r) => {
+  const closeMenus = () => {
     setMenu(null)
     setSubMenu(null)
     setDrawer(false)
-    go(r)
   }
+  // Menu items are real links: they open in a new tab, and Back returns to the page before.
+  const link = (r) => linkProps(go, r, closeMenus)
 
   const bar = home
     ? mob
@@ -169,9 +171,9 @@ function SiteHeader({ route, section, navSection, activeSub, go }) {
               <img src="/assets/website/Heartwood-Wordmark.svg" alt="Heartwood" />
             </button>
           ) : (
-            <button type="button" className="site-header__logo" onClick={() => navTo('home')}>
+            <a className="site-header__logo" {...link('home')}>
               <img src="/assets/logos/Heartwood_Logo_Black.png" alt="Heartwood" />
-            </button>
+            </a>
           )}
 
           {!mob && (
@@ -189,21 +191,14 @@ function SiteHeader({ route, section, navSection, activeSub, go }) {
                     className="site-nav__item"
                     onMouseEnter={() => canHover() && setMenu(drops ? key : null)}
                   >
-                    <button
-                      type="button"
+                    <a
                       className={`site-nav__link${current ? ' is-current' : ''}`}
                       aria-expanded={drops ? open : undefined}
                       aria-haspopup={drops ? 'true' : undefined}
-                      onClick={
-                        landing
-                          ? () => navTo(landing)
-                          : drops
-                            ? () => setMenu((v) => (v === key ? null : key))
-                            : () => navTo(m.items ? m.items[0].r : m.r)
-                      }
+                      {...link(landing || (m.items ? m.items[0].r : m.r))}
                     >
                       {m.label}
-                    </button>
+                    </a>
                     {open && (
                       <div className="site-nav__menu">
                         {m.items.map((it, i) => (
@@ -211,14 +206,14 @@ function SiteHeader({ route, section, navSection, activeSub, go }) {
                             {it.g && (i === 0 || m.items[i - 1].g !== it.g) && (
                               <span className="site-nav__group">{it.g}</span>
                             )}
-                            <button type="button" className="site-nav__menu-link" onClick={() => navTo(it.r)}>
+                            <a className="site-nav__menu-link" {...link(it.r)}>
                               {it.label}
                               {it.tag && (
                                 <span className="site-nav__tag" style={{ color: tagColor(it.tag) }}>
                                   {it.tag}
                                 </span>
                               )}
-                            </button>
+                            </a>
                           </div>
                         ))}
                       </div>
@@ -227,9 +222,9 @@ function SiteHeader({ route, section, navSection, activeSub, go }) {
                 )
               })}
               <div className="site-nav__actions">
-                <button type="button" className="btn btn--outline" onClick={() => navTo('investment/meeting')}>
+                <a className="btn btn--outline" {...link('investment/meeting')}>
                   Book a call
-                </button>
+                </a>
                 <a className="btn btn--solid" href={LOGIN_URL} target="_blank" rel="noopener noreferrer">
                   Login<span aria-hidden="true">↗</span>
                 </a>
@@ -269,7 +264,7 @@ function SiteHeader({ route, section, navSection, activeSub, go }) {
                   type="button"
                   className="site-drawer__head"
                   aria-expanded={has ? open : undefined}
-                  onClick={has ? () => setDOpen(open ? '' : key) : () => navTo(m.r)}
+                  onClick={has ? () => setDOpen(open ? '' : key) : link(m.r).onClick}
                 >
                   {m.label}
                   <span style={{ color: navSection === key ? 'var(--hw-teal)' : 'var(--hw-black)' }}>
@@ -283,15 +278,15 @@ function SiteHeader({ route, section, navSection, activeSub, go }) {
                         {it.g && (i === 0 || m.items[i - 1].g !== it.g) && (
                           <span className="site-drawer__group">{it.g}</span>
                         )}
-                        <button
-                          type="button"
+                        <a
                           className="site-drawer__link"
                           style={{ textDecoration: it.r === activeSub ? 'underline' : 'none' }}
-                          onClick={() => navTo(it.r)}
+                          aria-current={it.r === activeSub ? 'page' : undefined}
+                          {...link(it.r)}
                         >
                           {it.label}
                           {it.tag && <span style={{ color: tagColor(it.tag), fontSize: 13 }}>{it.tag}</span>}
-                        </button>
+                        </a>
                       </div>
                     ))}
                   </div>
@@ -300,9 +295,9 @@ function SiteHeader({ route, section, navSection, activeSub, go }) {
             )
           })}
           <div className="site-drawer__actions">
-            <button type="button" className="site-drawer__btn" onClick={() => navTo('investment/meeting')}>
+            <a className="site-drawer__btn" {...link('investment/meeting')}>
               Book a call
-            </button>
+            </a>
             <a className="site-drawer__btn site-drawer__btn--solid" href={LOGIN_URL} target="_blank" rel="noopener noreferrer">
               Login<span aria-hidden="true">↗</span>
             </a>
@@ -315,16 +310,15 @@ function SiteHeader({ route, section, navSection, activeSub, go }) {
           <span className="site-subnav__label">● {cur.label}</span>
           {subGroups.map((s) =>
             s.kind === 'link' ? (
-              <button
+              <a
                 key={s.r}
-                type="button"
                 className={`site-subnav__link${s.active ? ' is-current' : ''}`}
                 aria-current={s.active ? 'page' : undefined}
-                onClick={() => navTo(s.r)}
+                {...link(s.r)}
               >
                 {s.label}
                 {s.tag && <span style={{ color: tagColor(s.tag) }}>{s.tag}</span>}
-              </button>
+              </a>
             ) : (
               <div
                 key={s.label}
@@ -345,15 +339,14 @@ function SiteHeader({ route, section, navSection, activeSub, go }) {
                 {subMenu === s.label && (
                   <div className="site-subnav__menu">
                     {s.items.map((x) => (
-                      <button
+                      <a
                         key={x.r}
-                        type="button"
                         className={`site-subnav__menu-link${x.active ? ' is-current' : ''}`}
                         aria-current={x.active ? 'page' : undefined}
-                        onClick={() => navTo(x.r)}
+                        {...link(x.r)}
                       >
                         {x.label}
-                      </button>
+                      </a>
                     ))}
                   </div>
                 )}

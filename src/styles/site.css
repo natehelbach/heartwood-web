@@ -116,6 +116,22 @@ input::placeholder {
   min-height: 64px;
 }
 
+/* Menu and footer links are <a href>s styled like the design's buttons. */
+.site-header__logo,
+.site-nav__link,
+.site-nav__menu-link,
+.site-subnav__link,
+.site-subnav__menu-link,
+.site-drawer__link,
+.site-drawer__btn,
+.site-footer__link,
+.site-footer__legal a {
+  text-decoration: none;
+}
+.site-nav__link {
+  display: inline-block;
+}
+
 .site-header__wordmark,
 .site-header__logo {
   background: none;
@@ -566,6 +582,22 @@ input::placeholder {
 .site-footer__form button:hover {
   background: var(--hw-cool-grey);
 }
+.site-footer__form button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+.site-footer__form[aria-invalid] {
+  border-color: var(--hw-terracotta);
+}
+.site-footer__status {
+  margin: -12px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--hw-white);
+}
+.site-footer__status:empty {
+  margin-top: -20px;
+}
 
 .site-footer__contact {
   display: flex;
@@ -636,6 +668,7 @@ input::placeholder {
   flex-wrap: wrap;
   gap: 12px 28px;
 }
+.site-footer__legal a,
 .site-footer__legal button {
   background: none;
   border: 0;
@@ -645,6 +678,7 @@ input::placeholder {
   font: inherit;
   text-transform: inherit;
 }
+.site-footer__legal a:hover,
 .site-footer__legal button:hover {
   color: var(--hw-teal);
 }
