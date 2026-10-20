@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Hv, sx, RULE_BG } from '../design/ui.jsx'
 import HW_ARTICLES from '../design/articles-data.js'
 import { render as renderGraph } from '../design/graphs.js'
+import { pathFor } from '../site/paths.js'
 
 // Ported from ui_kits/website/PageArticle.dc.html: one Perspective or White paper by slug.
 
@@ -85,11 +86,7 @@ function PageArticle({ slug, go }) {
   const [copied, setCopied] = useState(false)
   const copyTimer = useRef(0)
   useEffect(() => () => clearTimeout(copyTimer.current), [])
-  const pageUrl = () => {
-    const u = new URL(window.location.href)
-    u.hash = '#insights/perspectives/' + (a.slug || '')
-    return u.toString()
-  }
+  const pageUrl = () => window.location.origin + pathFor('insights/perspectives/' + (a.slug || ''))
   const shareLinkedIn = () => window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(pageUrl()), '_blank', 'noopener,width=600,height=640')
   const copyLink = () => {
     const u = pageUrl()

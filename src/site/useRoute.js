@@ -21,8 +21,9 @@ const saveScroll = () => history.replaceState({ ...history.state, scrollY: windo
 
 // The current route lives in the URL path (/investors/growth-trust). Each navigation pushes a
 // history entry, so Back and Forward work and return to where the reader was on the page.
-export default function useRoute() {
-  const [route, setRoute] = useState(readLocation)
+export default function useRoute(initialPath) {
+  // During the build's pre-render there is no window; the page's path is passed in instead.
+  const [route, setRoute] = useState(() => (typeof window === 'undefined' ? routeFor(initialPath) : readLocation()))
   const [scrollTo, setScrollTo] = useState(null)
 
   useEffect(() => {

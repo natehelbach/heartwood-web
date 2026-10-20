@@ -167,6 +167,7 @@ Object.assign(HW_ICONS, {
 
 export const HW_BRAND_ICONS = ['BIKE STORAGE', 'RESTROOM', 'WHEELCHAIR', 'EV CHARGING', 'GARDEN', 'MAIL ROOM', 'COFFEE', 'POOL', 'ELEVATOR', 'STAIRS', 'TRANSIT', 'SOLAR ENERGY', 'PLAYGROUND', 'LOW CARBON', 'LIBRARY', 'ARROW', 'LOCATION PIN', 'TECHNOLOGY', 'DESIGN', 'CONSTRUCTION', 'ASSET MANAGEMENT', 'OPERATIONS']
 
-window.HW_ICONS = Object.assign(window.HW_ICONS || {}, HW_ICONS)
+// The custom elements read icons from window.HW_ICONS; skipped when the build pre-renders in Node.
+if (typeof window !== 'undefined') window.HW_ICONS = Object.assign(window.HW_ICONS || {}, HW_ICONS)
 
-export default window.HW_ICONS
+export default HW_ICONS

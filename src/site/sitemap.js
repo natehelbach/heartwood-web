@@ -1,5 +1,5 @@
 // Site structure, ported from ui_kits/website/Heartwood Website.dc.html.
-// Routes are slash paths ("investment/growth") carried in the URL hash.
+// Routes are slash keys ("investment/growth"); src/site/paths.js maps them to URL paths.
 
 export const LOGIN_URL = 'https://heartwood.sgggfsi.com/'
 

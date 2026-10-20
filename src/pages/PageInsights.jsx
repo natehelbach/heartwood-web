@@ -5,6 +5,8 @@ import HW_ARTICLES from '../design/articles-data.js'
 import PageArticle from './PageArticle.jsx'
 import NotFound from '../components/NotFound.jsx'
 import { HONEYPOT, useNewsletter } from '../site/forms.js'
+import { pathFor } from '../site/paths.js'
+import { CLIPS, slugOf } from '../design/news-data.js'
 
 // Ported from ui_kits/website/PageInsights.dc.html. `sub` is '' (overview) | perspectives |
 // perspectives/<slug> | news | news/<release> | newsletter | newsletter/<no>.
@@ -31,16 +33,10 @@ const PERSP = [
   .map((a) => ({ ...a, dot: 'var(--hw-teal)', more: 'Read →' }))
   .concat(PAPERS)
 
-const CLIPS = [
-  { g: 'press', outlet: 'Heartwood Investments', type: 'Press release', date: 'November 2026', title: 'Heartwood launches the Heartwood Residential Income Trust, now open for investment', relCta: { label: 'Learn more about the Income Strategy', r: 'investment/income' }, dek: 'The Income Trust buys stabilized, modern purpose-built rental buildings in high-growth, supply-constrained Canadian markets, aiming for capital preservation, stable tax-efficient monthly income and long-term capital appreciation.', img: '', cta: 'Read the release →' },
-  { g: 'media', outlet: 'Forbes', type: 'In the press', date: 'June 23, 2025', title: 'Future-proof investing: how Heartwood Trust is redefining real estate for a resilient economy', dek: 'Afdhel Aziz profiles co-founders David Constable and Tim Blair, and our view that design, climate performance and long-term value go hand in hand.', img: 'https://imageio.forbes.com/specials-images/imageserve/68596129797d872e0d01f701/0x0.jpg?format=jpg&height=900&width=1600&fit=bounds', cta: 'Read on Forbes ↗', url: 'https://www.forbes.com/sites/afdhelaziz/2025/06/23/future-proof-investing-how-heartwood-trust-is-redefining-real-estate-for-a-resilient-economy/' },
-]
-// Clips without an outside URL are our own releases, shown at insights/news/<slug>.
-const slugOf = (c) => c.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60)
 const RELEASE_FALLBACK = '/assets/photography/HW_Photo_517-W-Main_Facade-Trees.jpg'
 const photoOf = (c) => c.img || RELEASE_FALLBACK
 const posOf = (c) => (/HW_Team_/.test(c.img || '') ? 'center 20%' : 'center')
-const linkOf = (c) => (c.url ? { href: c.url, target: '_blank' } : { href: '#insights/news/' + slugOf(c), target: '_self' })
+const linkOf = (c) => (c.url ? { href: c.url, target: '_blank' } : { href: pathFor('insights/news/' + slugOf(c)), target: '_self' })
 const NEWS_FILTERS = [
   ['all', 'All'],
   ['press', 'Press releases'],

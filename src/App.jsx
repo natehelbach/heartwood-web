@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import SiteHeader from './components/SiteHeader.jsx'
 import SiteFooter from './components/SiteFooter.jsx'
 import PageHome from './pages/PageHome.jsx'
@@ -28,14 +29,30 @@ const SUBS = {
   properties: ['', ...HW_DATA.projects.map((p) => p.slug)],
 }
 
+// Unknown sections, and unknown pages within a section, show the 404 page.
+function pageNotFound({ section, sub, landing }) {
+  return !landing && (!KNOWN.includes(section) || (SUBS[section] && !SUBS[section].includes(sub)) || (!SUBS[section] && !!sub && section !== 'insights'))
+}
+
+// Whether a route is a 404, including unknown Insights pages; the page is then marked noindex.
+export function isNotFound(navRoute) {
+  const parts = parseRoute(navRoute)
+  return pageNotFound(parts) || (parts.section === 'insights' && !parts.landing && insightsNotFound(parts.sub))
+}
+
 // Page routing mirrors the <main> of ui_kits/website/Heartwood Website.dc.html.
-function App() {
-  const [navRoute, go] = useRoute()
-  const { route, section, sub, navSection, activeSub, propsOnly, landing } = parseRoute(navRoute)
-  // Unknown sections, and unknown pages within a section, show the 404 page.
-  const notFound = !landing && (!KNOWN.includes(section) || (SUBS[section] && !SUBS[section].includes(sub)) || (!SUBS[section] && !!sub && section !== 'insights'))
+// `initialPath` is the page's URL path when the build pre-renders it. `onReady` runs once the page
+// has rendered (or hydrated) in the browser.
+function App({ initialPath, onReady }) {
+  const [navRoute, go] = useRoute(initialPath)
+  useEffect(() => {
+    onReady?.()
+  }, [onReady])
+  const parts = parseRoute(navRoute)
+  const { route, section, sub, navSection, activeSub, propsOnly, landing } = parts
+  const notFound = pageNotFound(parts)
   const is = (k) => section === k && !landing && !notFound
-  usePageMeta(navRoute, notFound || (is('insights') && insightsNotFound(sub)))
+  usePageMeta(navRoute, isNotFound(navRoute))
 
   return (
     <div className="site">
