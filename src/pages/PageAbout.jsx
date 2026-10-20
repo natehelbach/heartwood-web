@@ -30,8 +30,8 @@ function Leadership() {
   const [open, setOpen] = useState(null)
   return (
     <section data-screen-label="Team" style={sx('background:var(--hw-white);color:var(--hw-black)')}>
-      <div data-screen-label="Team — Hero" style={sx("position:relative;overflow:hidden;min-height:clamp(480px,48vw,720px);background:var(--hw-brown) url('/assets/photography/HW_MassTimber_Ceiling-Corner.jpg') center 15%/cover no-repeat;display:flex;align-items:flex-end")}>
-        <div style={sx('position:absolute;inset:0;background:var(--overlay-brown)')} />
+      <div data-screen-label="Team — Hero" style={sx('position:relative;overflow:hidden;min-height:clamp(480px,48vw,720px);background:var(--hw-black);display:flex;align-items:flex-end')}>
+        <div style={sx("position:absolute;top:0;right:0;bottom:-288px;left:0;background:url('/assets/photography/HW_Team_Lobby-Walk.png') center center/cover no-repeat")} />
         <div style={sx('position:relative;padding:clamp(40px,5vw,72px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:20px;color:var(--hw-white)')}>
           <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:clamp(14px,1.2vw,18px);text-transform:uppercase')}>Team</p>
           <h1 style={sx('margin:0;max-width:760px;font-family:var(--font-display);font-weight:500;font-size:clamp(34px,4.4vw,64px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance')}>One integrated team, building, owning and operating homes that last.</h1>
@@ -98,31 +98,23 @@ function Leadership() {
 const STD_PROOF = [
   { big: '65%+', icon: 'SOLAR / ENERGY', label: 'Typical reduction in energy use intensity for buildings we build vs. a functionally equivalent code-minimum building.' },
   { big: '1.5°C-aligned', icon: 'LOW CARBON', label: 'Portfolio carbon intensity targeted to align with a 1.5°C pathway (CRREM).' },
-  { big: 'NZAM · PRI · GRESB', icon: 'RETURNS', label: 'Net Zero Asset Managers signatory, PRI signatory and annual GRESB reporting.' },
-]
-
-const STD_GROUPS = [
-  { k: 'Investors', icon: 'MONEY' },
-  { k: 'Residents', icon: 'HOME' },
-  { k: 'Community', icon: 'PEOPLE' },
-  { k: 'Ecosystem', icon: 'TREE' },
+  { big: 'NZAM · PRI · GRESB · INREV', tags: ['NZAM', 'PRI', 'GRESB', 'INREV'], icon: 'RETURNS', label: 'Net Zero Asset Managers signatory, PRI signatory and annual GRESB and INREV reporting.' },
 ]
 
 const STD_PILLARS = [
-  { n: '01', icon: 'LOW CARBON', k: 'Low impact, by design.', v: 'We measure each building against recognized benchmarks for residential buildings and review the whole portfolio every year.' },
-  { n: '02', icon: 'SOLAR / ENERGY', k: 'Efficient by default.', v: 'We set each property’s energy target based on its location and energy sources. Every unit a building doesn’t need lowers costs and its footprint.' },
-  { n: '03', icon: 'THERMOSTAT', k: 'Measured continuously.', v: 'Our data platform and on-site metering track electricity, gas and water around the clock, so we spot problems early.' },
-  { n: '04', icon: 'BUILDING', k: 'Built to endure.', v: 'We assess climate, regulatory and technology risk, so buildings protect their value and give residents a reason to stay.' },
+  { n: '01', icon: 'LOW CARBON', k: 'Low impact, by design.', v: 'We measure how each building performs against recognized industry benchmarks for residential buildings, and we review the whole portfolio every year.' },
+  { n: '02', icon: 'SOLAR / ENERGY', k: 'Efficient by default.', v: 'Buildings in our Growth Strategy typically use at least 65% less energy than a comparable code-minimum building. We set each property’s target based on its location and fuel sources. Every unit of energy a building saves means lower operating costs and a lighter footprint.' },
+  { n: '03', icon: 'THERMOSTAT', k: 'Measured continuously.', v: 'Our data platform and on-site metering track electricity, gas and water use around the clock, so we can see each building’s footprint and make better operating decisions. We connect directly to building equipment such as air handlers, mixing valves and sump pumps. That shows us how each building performs in extreme weather, helps us spot problems early and lets us fix small issues before they become large ones.' },
+  { n: '04', icon: 'BUILDING', k: 'Built to endure.', v: 'We assess how each building would hold up against flooding, extreme heat, storms and wildfire, using forward-looking data and engineering expertise. We also look ahead to changing regulations, shifting resident expectations and evolving technology. Buildings designed for the decades ahead protect their value and insurance costs, cost less to operate and give residents a reason to stay.' },
 ]
 
 const STD_APPLY = [
   {
     label: 'Growth Strategy · When we build', ring: '/assets/logos/HW_Growth_Ring_Black.png', bg: 'var(--hw-cool-grey)', fg: 'var(--hw-black)', line: 'rgba(33,33,33,.35)', chip: 'var(--hw-black)',
     items: [
-      'All-electric, no fossil fuels on site, low-impact materials. We avoid impact at the source rather than offsetting it later.',
-      'At least 65% less energy than code minimum, powered by 75%+ renewable energy.',
-      'Metering and our data platform built in from day one.',
-      'Natural materials, abundant light, a gym, outdoor space and lounges, in walkable neighbourhoods.',
+      'We build all-electric buildings that burn no fossil fuels on site, and we endeavour to design projects that generate their own renewable energy.',
+      'We choose materials and construction methods that keep the impact of building itself low. Wherever we can, we avoid impact at the source rather than offsetting it later.',
+      'We design spaces that promote well-being for our residents: natural materials, abundant light, and access to gyms, outdoor space and community lounges, in walkable neighbourhoods.',
     ],
   },
 ]
@@ -131,6 +123,7 @@ export const STANDARD_LOGOS = [
   { name: 'CaGBC Zero Carbon Building Standard', url: 'https://www.cagbc.org/our-work/certification/zero-carbon-building-standard/', img: '/assets/logos/partners/CaGBC_Zero-Carbon-Building-Standard.png' },
   { name: 'CRREM', url: 'https://www.crrem.org/', img: '/assets/logos/partners/CRREM.png' },
   { name: 'GRESB', url: 'https://www.gresb.com/', img: '/assets/logos/partners/GRESB.png' },
+  { name: 'INREV', url: 'https://www.inrev.org/', img: '/assets/logos/partners/INREV.png' },
   { name: 'PRI', url: 'https://www.unpri.org/', img: '/assets/logos/partners/PRI.png' },
   { name: 'Net Zero Asset Managers Initiative', url: 'https://www.netzeroassetmanagers.org/', img: '/assets/logos/partners/NZAM.png' },
 ]
@@ -167,14 +160,15 @@ const STD_FOLLOW = [
   ['CRREM', 'We set our emissions targets using national CRREM decarbonization pathways: science-based annual carbon intensity limits from 2020 to 2050, specific to each country and building type.'],
   ['CaGBC Zero Carbon Building Standard', 'The Growth Trust prioritizes projects designed to meet, or already certified to, the Zero Carbon Building standard.'],
   ['Net Zero Asset Managers initiative', 'As a signatory, we have committed Growth Trust assets to be managed toward net zero emissions by 2050 or sooner.'],
-  ['GHG Protocol', 'Our emissions reporting follows the GHG Protocol Corporate Standard. For Growth Trust assets, we also report embodied carbon under the Scope 3 Standard.'],
   ['UN Sustainable Development Goals', 'Using the SDG Compass, we identified the SDGs our sustainability metrics contribute to measurably.'],
 ]
 
 const STD_REPORT = [
   ['PRI', 'We are a signatory to the Principles for Responsible Investment and report annually.'],
   ['GRESB', 'The Growth Trust reports to GRESB annually.'],
-  ['Common Impact Data Standard', 'Our sustainability indicators are published in the Common Impact Data Standard format.'],
+  ['INREV', 'We report sustainability indicators in accordance with INREV reporting guidelines.'],
+  ['Common Impact Data Standard', 'Our sustainability indicators are available in the Common Impact Data Standard format.'],
+  ['GHG Protocol', 'Our emissions reporting follows the GHG Protocol Corporate Standard. For Growth Trust assets, we also report embodied carbon under the Scope 3 Standard.'],
 ]
 
 function FrameworkList({ items, last }) {
@@ -197,9 +191,9 @@ function Standards() {
         <div style={sx('position:absolute;inset:0;background:var(--overlay-brown)')} />
         <div style={sx('position:relative;padding:clamp(32px,4vw,56px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:20px;color:var(--hw-white)')}>
           <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:clamp(14px,1.2vw,18px);text-transform:uppercase')}>Our standards</p>
-          <h1 style={sx('margin:0;max-width:900px;font-family:var(--font-display);font-weight:500;font-size:clamp(40px,5.4vw,88px);line-height:1;letter-spacing:-.02em;text-wrap:balance')}>More efficient buildings. Lower costs to run.</h1>
+          <h1 style={sx('margin:0;max-width:900px;font-family:var(--font-display);font-weight:500;font-size:clamp(40px,5.4vw,88px);line-height:1;letter-spacing:-.02em;text-wrap:balance')}>Built to a higher standard.</h1>
           <p style={sx('margin:0;max-width:680px;font-size:clamp(18px,1.5vw,22px);line-height:1.5;text-wrap:pretty')}>
-            Efficient, durable and healthy buildings cost less to run, stay competitive for longer and are better to live in. That is why environmental performance shapes every building we design and build in our Growth Strategy.
+            Efficient, durable and healthy buildings cost less to run, stay competitive for longer and are better to live in. That is why environmental performance is part of every investment decision we make.
           </p>
         </div>
       </section>
@@ -208,7 +202,15 @@ function Standards() {
         {STD_PROOF.map((p) => (
           <div key={p.big} style={sx('display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--hw-black);padding-top:20px')}>
             <DotIcon name={p.icon} color="#617954" size={48} />
-            <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(36px,3.8vw,58px);line-height:1;letter-spacing:-.02em;color:var(--hw-landscape)')}>{p.big}</span>
+            {p.tags ? (
+              <div style={sx('display:grid;grid-template-columns:repeat(2,max-content);gap:4px clamp(14px,1.4vw,22px);font-family:var(--font-display);font-weight:500;font-size:clamp(36px,3.8vw,58px);line-height:1;letter-spacing:-.02em;color:var(--hw-landscape)')}>
+                {p.tags.map((t) => (
+                  <span key={t}>{t}</span>
+                ))}
+              </div>
+            ) : (
+              <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(36px,3.8vw,58px);line-height:1;letter-spacing:-.02em;color:var(--hw-landscape)')}>{p.big}</span>
+            )}
             <p style={sx('margin:0;max-width:380px;font-size:18px;line-height:1.45;text-wrap:pretty')}>{p.label}</p>
           </div>
         ))}
@@ -227,21 +229,10 @@ function Standards() {
             <p style={sx('margin:0')}>
               We don’t believe any building can have zero impact on our ecosystem, but we do believe a building can come close to neutral. That is the standard we hold ourselves to: the least possible impact on our ecosystem, alongside the strongest possible financial return.
             </p>
+            <p style={sx('margin:0')}>
+              We don’t see these as competing interests. A building that is efficient, durable, healthy and beautiful costs less to run, keeps residents longer, adds to the neighborhood around it and holds its value for decades. Good stewardship and strong returns can derive from the same decisions.
+            </p>
           </div>
-        </div>
-        <div style={sx('display:flex;flex-direction:column;gap:24px')}>
-          <p style={sx('margin:0;max-width:900px;font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-.01em;text-wrap:pretty')}>Every building we build serves four groups.</p>
-          <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));border-top:1px solid var(--hw-black);border-left:1px solid var(--hw-black)')}>
-            {STD_GROUPS.map((g) => (
-              <div key={g.k} style={sx('display:flex;flex-direction:column;gap:16px;padding:clamp(20px,2.4vw,32px);border-right:1px solid var(--hw-black);border-bottom:1px solid var(--hw-black)')}>
-                <DotIcon name={g.icon} color="#212121" size={44} />
-                <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.2vw,32px);line-height:1')}>{g.k}</span>
-              </div>
-            ))}
-          </div>
-          <p style={sx('margin:0;max-width:820px;font-size:clamp(18px,1.4vw,20px);line-height:1.6;text-wrap:pretty')}>
-            We don’t see these as competing interests. A building that is efficient, durable, healthy and beautiful costs less to run, keeps residents longer, adds to the neighborhood around it and holds its value for decades. Good stewardship and strong returns can derive from the same decisions.
-          </p>
         </div>
       </section>
 
@@ -249,7 +240,7 @@ function Standards() {
         <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(28px,4vw,56px);align-items:start')}>
           <div style={sx('display:flex;flex-direction:column;gap:20px')}>
             <p style={sx(STD_EYEBROW)}>Our standard</p>
-            <h2 style={sx(STD_H2)}>To do it, we hold every building we build to a standard.</h2>
+            <h2 style={sx(STD_H2)}>To do it, we hold every building we build and buy to a standard.</h2>
           </div>
           <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,max(240px,calc(50% - 1px))),1fr))')}>
             {STD_PILLARS.map((p) => (
@@ -264,11 +255,12 @@ function Standards() {
             ))}
           </div>
         </div>
-        <div style={sx('display:flex;flex-direction:column;gap:16px')}>
-          <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:clamp(14px,1.2vw,16px);text-transform:uppercase')}>How we apply it</p>
-          <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(12px,1.4vw,16px)')}>
+        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(12px,1.4vw,16px);align-items:stretch')}>
+          <div style={sx("min-height:clamp(320px,34vw,560px);background:var(--hw-brown) url('/assets/photography/HW_Photo_EV-Charging.png') center/cover no-repeat")} />
+          <div style={sx('display:flex;flex-direction:column;gap:16px')}>
+            <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:clamp(14px,1.2vw,16px);text-transform:uppercase')}>How we apply it</p>
             {STD_APPLY.map((c) => (
-              <div key={c.label} style={sx(`background:${c.bg};color:${c.fg};padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:18px`)}>
+              <div key={c.label} style={sx(`background:${c.bg};color:${c.fg};padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:18px;flex:1`)}>
                 <div style={sx('display:flex;align-items:center;gap:14px')}>
                   <img src={c.ring} alt="" style={sx('height:44px;width:auto;display:block')} />
                   <span style={sx('font-family:var(--font-subhead);font-weight:500;font-size:15px;text-transform:uppercase')}>{c.label}</span>
@@ -285,7 +277,6 @@ function Standards() {
             ))}
           </div>
         </div>
-        <div style={sx("width:100%;aspect-ratio:21/9;background:var(--hw-brown) url('/assets/photography/HW_Photo_EV-Charging.png') center 45%/cover no-repeat")} />
       </section>
 
       <section data-screen-label="Standards — Frameworks" style={sx('padding:clamp(32px,3.5vw,48px) clamp(20px,3vw,40px) clamp(48px,6vw,88px);display:flex;flex-direction:column;gap:20px')}>

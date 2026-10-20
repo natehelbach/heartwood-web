@@ -496,13 +496,14 @@ function Subscribe() {
         <form
           onSubmit={news.onSubmit}
           noValidate
+          aria-label="The Long View newsletter sign-up"
           style={sx(`position:relative;display:flex;border:1.5px solid ${news.invalid ? 'var(--hw-terracotta)' : 'var(--hw-white)'};min-width:0`)}
         >
-          <input name="email" type="email" required autoComplete="email" aria-label="Email address" aria-invalid={news.invalid || undefined} aria-describedby="newsletter-subscribe-status" className="hw-input-on-dark" placeholder="Enter your email" style={sx('flex:1;min-width:0;padding:14px 18px;background:transparent;border:0;color:var(--hw-white);font-family:var(--font-subhead);font-size:14px;text-transform:uppercase')} />
+          <input name="email" type="email" required autoComplete="email" aria-label="Email address" aria-invalid={news.invalid || undefined} aria-describedby="newsletter-subscribe-status" onChange={news.onChange} className="hw-input-on-dark" placeholder="Enter your email" style={sx('flex:1;min-width:0;padding:14px 18px;background:transparent;border:0;color:var(--hw-white);font-family:var(--font-subhead);font-size:14px;text-transform:uppercase')} />
           <input {...HONEYPOT} />
-          <button type="submit" disabled={news.sending} style={sx(`padding:14px 22px;background:var(--hw-white);color:var(--hw-black);border:0;cursor:${news.sending ? 'progress' : 'pointer'};${MONO};font-size:14px`)}>Subscribe</button>
+          <button type="submit" disabled={news.sending} style={sx(`padding:14px 22px;background:var(--hw-white);color:var(--hw-black);border:0;cursor:${news.sending ? 'progress' : 'pointer'};${MONO};font-size:14px`)}>{news.button}</button>
         </form>
-        <p id="newsletter-subscribe-status" role="status" aria-live="polite" style={sx('margin:0;min-height:1.4em;font-size:14px;line-height:1.4')}>
+        <p id="newsletter-subscribe-status" role="status" aria-live="polite" style={sx(`margin:0;min-height:18px;${MONO};font-size:12px;letter-spacing:.04em;line-height:1.5;color:var(--hw-white)`)}>
           {news.message}
         </p>
       </div>

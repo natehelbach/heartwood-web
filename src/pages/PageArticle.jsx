@@ -9,13 +9,23 @@ const MONO = 'font-family:var(--font-subhead);font-weight:500;text-transform:upp
 const H2 = 'margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(26px,2.4vw,34px);line-height:1.1'
 const PARA = 'margin:0;font-size:clamp(18px,1.4vw,20px);line-height:1.6;text-wrap:pretty'
 
-function Section({ s }) {
+// `withGraph` draws the section's own dot chart (`s.g`) under its paragraphs; the design does
+// this for every section after the first.
+function Section({ s, withGraph }) {
+  const r = withGraph && s.g ? renderGraph(JSON.parse(JSON.stringify(s.g)), { ink: '#212121', dotSize: 100 }) : null
   return (
     <div style={sx('display:flex;flex-direction:column;gap:16px')}>
       <h2 style={sx(H2)}>{s.h}</h2>
       {s.p.map((para) => (
         <p key={para} style={sx(PARA)}>{para}</p>
       ))}
+      {r && (
+        <figure style={sx('margin:8px 0 0;display:flex;flex-direction:column;gap:12px;padding-top:16px;border-top:1px solid var(--hw-black)')}>
+          <div style={{ width: '100%' }}>
+            <svg viewBox={`0 0 ${r.W} ${r.H}`} style={{ width: '100%', height: 'auto', display: 'block' }} role="img" aria-label={s.g.title || ''} dangerouslySetInnerHTML={{ __html: r.svg }} />
+          </div>
+        </figure>
+      )}
     </div>
   )
 }
@@ -175,7 +185,7 @@ function PageArticle({ slug, go }) {
                 </blockquote>
               )}
               {secs.slice(1).map((s) => (
-                <Section key={s.h} s={s} />
+                <Section key={s.h} s={s} withGraph />
               ))}
               {bars.length > 0 && <Figure a={a} bars={bars} />}
               {charts.length > 0 && (

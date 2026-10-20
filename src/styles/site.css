@@ -57,6 +57,7 @@ input::placeholder {
 .site-footer__heading,
 .site-footer__form input,
 .site-footer__form button,
+.site-footer__status,
 .site-footer__contact,
 .site-footer__mark,
 .site-footer__bottom,
@@ -589,14 +590,19 @@ input::placeholder {
 .site-footer__form[aria-invalid] {
   border-color: var(--hw-terracotta);
 }
-.site-footer__status {
-  margin: -12px 0 0;
-  font-size: 14px;
-  line-height: 1.4;
-  color: var(--hw-white);
+.site-footer__signup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
 }
-.site-footer__status:empty {
-  margin-top: -20px;
+.site-footer__status {
+  margin: 0;
+  min-height: 18px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  color: var(--hw-white);
 }
 
 .site-footer__contact {
@@ -769,6 +775,7 @@ input::placeholder {
   button,
   a[href] {
     min-height: 24px;
+    min-width: 24px;
   }
 }
 

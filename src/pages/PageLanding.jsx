@@ -47,8 +47,8 @@ const PAGES = {
     form: { eyebrow: 'Institutional enquiries', title: 'Contact us.', note: 'Tell us about your mandate. We’ll meet first, then share the data room and DDQ.', cta: 'Send enquiry', thanks: 'Thank you. A senior member of our team will be in touch.', hubspot: 'institutional-enquiry', hasSelect: true, selectLabel: 'Organization type', options: ['Pension fund', 'Foundation or endowment', 'Insurer', 'Sovereign wealth fund', 'Consultant or placement agent', 'Other'] },
   },
   meeting: {
-    hero: { eyebrow: 'Investments · Schedule a meeting', title: 'Meet with our investment team.', intro: 'An introductory meeting with our senior team to understand your objectives, review our Growth and Income strategies and discuss how we can partner.', cta: 'Invest with us', img: '/assets/renders/HW_360-Kennedy-Lane_1.png', faded: true },
-    form: { eyebrow: 'Schedule a meeting', title: 'Pick a time that works.', note: 'You’ll receive a short prep email with what to expect and who you’ll be speaking with.', cta: 'Schedule a meeting', thanks: 'Booked. A confirmation and prep email are on the way.', hubspot: 'meeting-booking', hasSelect: true, selectLabel: 'Which best describes you?', options: ['Advisor (EMD, RIA, wealth manager)', 'Private wealth (family office or high-net-worth)', 'Institutional investor'] },
+    hero: { eyebrow: 'Investments · Schedule a meeting', title: 'Meet with our investment team.', intro: 'An introductory meeting with our senior team to understand your objectives and discuss how we can partner.', cta: 'Invest with us', img: '/assets/renders/HW_360-Kennedy-Lane_1.png', faded: true },
+    form: { eyebrow: 'Schedule a meeting', title: 'Pick a time that works.', note: '', cta: 'Schedule a meeting', thanks: 'Booked. A confirmation and prep email are on the way.', hubspot: 'meeting-booking', hasSelect: true, selectLabel: 'Which best describes you?', options: ['Advisor (EMD, RIA, wealth manager)', 'Private wealth (family office or high-net-worth)', 'Institutional investor'] },
   },
   portal: {
     hero: { eyebrow: 'Investments · Investor portal', title: 'Everything you need to invest, in one place.', intro: 'Create an account to review fund materials, start a subscription and track your investment.', cta: 'Create your account', img: R + 'HW_Render_3385-Lawrence-Courtyard.jpg' },
@@ -190,8 +190,8 @@ const BENEFITS = [
   { title: 'Reporting', body: 'Quarterly reports, statements and distributions in one place.' },
 ]
 const MEETING_TEAM = [
-  { name: 'Dustin Buenaventura', title: 'Director, Business Development', img: '/assets/team/HW_Team_Dustin-Buenaventura.png' },
-  { name: 'Dylan Kent', title: 'Director, Capital Markets', img: '/assets/team/HW_Team_Dylan-Kent_HR.jpg' },
+  { name: 'Dustin Buenaventura', title: 'Director, Business Development', img: '/assets/team/headshots/HW_Team_Dustin-Buenaventura_2026_Toned.jpg', nowrap: true },
+  { name: 'Dylan Kent', title: 'Director, Capital Markets', img: '/assets/team/headshots/HW_Team_Dylan-Kent_2026_Toned.jpg' },
 ]
 
 const chipStyle = (on) => `border:1.5px solid var(--hw-black);background:${on ? '#212121' : 'transparent'};color:${on ? '#F9F9F9' : '#212121'};cursor:pointer;${MONO};font-size:13px`
@@ -561,7 +561,7 @@ function Audience({ sub, aud, hero, toForm, go }) {
   )
 }
 
-const ERROR_TEXT = `margin:0;${MONO};font-size:12px;letter-spacing:.02em`
+const ERROR_TEXT = `${MONO};font-size:12px;letter-spacing:.06em;line-height:1.4`
 
 // The landing page form. Checks fields inline, then shows sending, sent or error states.
 // Submissions go to HubSpot once the form's ID is set in src/site/forms.js.
@@ -589,6 +589,12 @@ function LeadForm({ s, form, meeting }) {
     send(fields, el.company_website.value)
   }
 
+  // A field's error clears as soon as it is edited.
+  const clearError = (e) => {
+    const n = e.target.name
+    if (errors[n]) setErrors((x) => ({ ...x, [n]: undefined }))
+  }
+
   if (status === 'sent') {
     return <p role="status" style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(26px,2.6vw,38px);line-height:1.1')}>{form.thanks}</p>
   }
@@ -604,7 +610,7 @@ function LeadForm({ s, form, meeting }) {
   return (
     <>
       <HubspotNote label={HUBSPOT_LABEL[s]} />
-      <form onSubmit={onSubmit} noValidate data-hubspot-form={form.hubspot} style={sx('position:relative;display:flex;flex-direction:column;gap:18px')}>
+      <form onSubmit={onSubmit} onInput={clearError} onChange={clearError} noValidate data-hubspot-form={form.hubspot} style={sx('position:relative;display:flex;flex-direction:column;gap:18px')}>
         <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px')}>
           <label style={sx('display:flex;flex-direction:column;gap:8px')}>
             <span style={sx(`${MONO};font-size:13px`)}>Name</span>
@@ -633,18 +639,18 @@ function LeadForm({ s, form, meeting }) {
             HubSpot Meetings calendar embeds here
           </div>
         )}
-        <div>
+        <div style={sx('display:flex;flex-direction:column;align-items:flex-start;gap:12px')}>
           <Hv as="button" type="submit" disabled={status === 'sending'} s={`padding:12px 18px;background:var(--hw-black);color:var(--hw-white);border:0;cursor:${status === 'sending' ? 'progress' : 'pointer'};${MONO};font-size:14px`} h={`background:${meeting ? 'var(--hw-teal)' : 'var(--hw-terracotta)'}`}>
             {status === 'sending' ? 'Sending…' : form.cta}
           </Hv>
+          <p role="status" aria-live="polite" style={sx('margin:0;max-width:560px;font-size:15px;line-height:1.45;text-wrap:pretty')}>
+            {status === 'error' && (
+              <>
+                Something went wrong and your details weren’t sent. Please try again, or email <a href="mailto:info@heartwoodinvestments.ca" style={{ color: 'inherit' }}>info@heartwoodinvestments.ca</a>.
+              </>
+            )}
+          </p>
         </div>
-        <p role="status" aria-live="polite" style={sx('margin:0;font-size:15px;line-height:1.45')}>
-          {status === 'error' && (
-            <>
-              Something went wrong and your details weren’t sent. Please try again, or email <a href="mailto:info@heartwoodinvestments.ca" style={{ color: 'inherit' }}>info@heartwoodinvestments.ca</a>.
-            </>
-          )}
-        </p>
       </form>
     </>
   )
@@ -742,15 +748,15 @@ function PageLanding({ sub, go }) {
         <div style={sx(`display:flex;flex-direction:column;gap:20px;padding-top:clamp(40px,5vw,72px);border-top:${meeting ? '0' : '1.5px solid var(--hw-terracotta)'}`)}>
           <p style={sx(EYEBROW)}>{form.eyebrow}</p>
           <h2 style={sx('margin:0;max-width:560px;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.6vw,52px);line-height:1.08;letter-spacing:-.015em;text-wrap:balance')}>{form.title}</h2>
-          <p style={sx('margin:0;max-width:520px;font-size:18px;line-height:1.5;text-wrap:pretty')}>{form.note}</p>
+          {form.note && <p style={sx('margin:0;max-width:520px;font-size:18px;line-height:1.5;text-wrap:pretty')}>{form.note}</p>}
           {meeting && (
             <div style={sx('display:flex;flex-direction:column;gap:20px;padding-top:12px')}>
               <span style={sx(`${MONO};font-size:13px;color:var(--hw-black)`)}>You’ll be meeting with one of our investment experts</span>
-              <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(0,200px) minmax(0,200px));gap:clamp(16px,2vw,28px)')}>
+              <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,220px));gap:clamp(24px,3vw,48px)')}>
                 {MEETING_TEAM.map((m) => (
                   <div key={m.name} style={sx('display:flex;flex-direction:column;gap:10px')}>
-                    <img src={m.img} alt={m.name} style={sx('width:100%;aspect-ratio:1;object-fit:cover;filter:grayscale(1);display:block;background:var(--hw-cool-grey)')} />
-                    <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(20px,1.7vw,24px)')}>{m.name}</span>
+                    <img src={m.img} alt={m.name} style={sx('width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
+                    <span style={sx(`font-family:var(--font-display);font-weight:500;font-size:clamp(20px,1.7vw,24px)${m.nowrap ? ';white-space:nowrap' : ''}`)}>{m.name}</span>
                     <span style={sx('font-family:var(--font-subhead);font-size:13px;text-transform:uppercase;line-height:1.35')}>{m.title}</span>
                   </div>
                 ))}

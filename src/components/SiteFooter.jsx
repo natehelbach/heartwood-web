@@ -41,25 +41,28 @@ function SiteFooter({ go }) {
         <div className="site-footer__aside">
           <span className="site-footer__heading">The Long View Newsletter — monthly</span>
           <HubspotNote label="The Long View newsletter (footer)" />
-          <form className="site-footer__form" onSubmit={news.onSubmit} noValidate aria-invalid={news.invalid || undefined}>
-            <input
-              name="email"
-              type="email"
-              required
-              autoComplete="email"
-              aria-label="Email address"
-              aria-invalid={news.invalid || undefined}
-              aria-describedby="footer-subscribe-status"
-              placeholder="Enter your email"
-            />
-            <input {...HONEYPOT} />
-            <button type="submit" disabled={news.sending}>
-              Subscribe
-            </button>
-          </form>
-          <p id="footer-subscribe-status" className={`site-footer__status${news.isError ? ' is-error' : ''}`} role="status" aria-live="polite">
-            {news.message}
-          </p>
+          <div className="site-footer__signup">
+            <form className="site-footer__form" onSubmit={news.onSubmit} noValidate aria-label="The Long View newsletter sign-up" aria-invalid={news.invalid || undefined}>
+              <input
+                name="email"
+                type="email"
+                required
+                autoComplete="email"
+                aria-label="Email address"
+                aria-invalid={news.invalid || undefined}
+                aria-describedby="footer-subscribe-status"
+                placeholder="Enter your email"
+                onChange={news.onChange}
+              />
+              <input {...HONEYPOT} />
+              <button type="submit" disabled={news.sending}>
+                {news.button}
+              </button>
+            </form>
+            <p id="footer-subscribe-status" className="site-footer__status" role="status" aria-live="polite">
+              {news.message}
+            </p>
+          </div>
           <div className="site-footer__contact">
             <span>{ADDRESS}</span>
             <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" data-tap="" aria-label="Heartwood on LinkedIn">
