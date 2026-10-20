@@ -58,7 +58,7 @@ export const HW_ARTICLES = [
     ],
     figure: { title: 'Loan-to-value', source: 'Illustrative, data to be confirmed.', bars: [{ l: 'Heartwood target', v: 55, label: '≤55%' }, { l: 'Typical private fund', v: 70, label: '65–75%' }] },
     sources: ['CMHC MLI Select program guide', 'Heartwood analysis'] },
-  { slug: 'nimble-fund', kind: 'Perspective', no: '07', title: 'An income fund with no legacy assets', dek: 'A newer portfolio with no older assets to fix, so capital goes into new, efficient buildings.', date: 'October 2026', read: '8 min read', author: TB, img: '/assets/lifestyle/HW_Lifestyle_40.jpg',
+  { slug: 'nimble-fund', kind: 'Perspective', no: '07', title: 'An income fund with no legacy assets', dek: 'A newer portfolio with no older assets to fix, so capital goes into new, efficient buildings.', date: 'October 2026', read: '8 min read', author: TB, img: '/assets/photography/HW_Photo_Timber-Open-Plan.jpg',
     keyPoints: ['No older buildings needing costly retrofits.', 'New capital goes to new projects, not repairs.', 'A smaller fund can move quickly on the right opportunity.'],
     sections: [
       { h: 'The legacy problem', p: ['Many established funds hold older buildings that need major capital work: new systems, envelopes and units. That spending competes with new investment.'] },
