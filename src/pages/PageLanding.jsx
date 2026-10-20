@@ -62,7 +62,6 @@ const FEATURE_PW = [
   { tag: 'White paper', t: 'Private real estate in a modern portfolio', m: 'Why Canada’s largest pension funds hold alternatives, and what rental housing adds.', img: A + 'project-renders/HW_Render_3385-Lawrence-Courtyard.jpg', r: 'insights/perspectives/private-real-estate-portfolio' },
 ]
 const FEATURE_INST = [
-  { tag: 'White paper', t: 'Rental fundamentals: why the housing gap persists', m: 'Short-term softness hides a long-term shortage. The data behind our outlook.', img: A + 'project-renders/HW_Render_353-Sherbourne.jpg', r: 'insights/perspectives/housing-gap' },
   { tag: 'White paper', t: 'Low leverage, lower risk', m: 'Why we keep debt conservative, and what that means when rates or values move.', img: A + 'photography/HW_MassTimber_Studio.jpg', r: 'insights/perspectives/low-leverage' },
 ]
 const QUOTE_PW = { q: '[Quote to confirm] We started Heartwood to give private investors access to the kind of long-term rental housing that institutions have held for decades, built and run by one team.', n: 'Tim Blair', t: 'Founding Partner', img: A + 'team/HW_Team_Tim-Blair_HR.jpg' }

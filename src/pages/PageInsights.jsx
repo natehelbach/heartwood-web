@@ -12,17 +12,14 @@ import { HONEYPOT, useNewsletter } from '../site/forms.js'
 const MONO = 'font-family:var(--font-subhead);font-weight:500;text-transform:uppercase'
 
 const TOPIC = {
-  'nation-of-renters': 'Market', 'supply-cliff': 'Market', 'housing-gap': 'Market', 'rental-vs-condo': 'Market',
-  'heat-pumps-2050': 'Sustainability', 'tax-efficient-income': 'Tax & income', 'distribution-coverage': 'Tax & income',
+  'nation-of-renters': 'Market', 'supply-cliff': 'Market',
+  'tax-efficient-income': 'Tax & income',
   'private-real-estate-portfolio': 'Portfolio & risk', 'low-leverage': 'Portfolio & risk', 'nimble-fund': 'Portfolio & risk',
 }
 const TOPICS = ['All', 'Market', 'Tax & income', 'Portfolio & risk', 'Sustainability']
 
 const PAPERS = [
-  { kind: 'White paper', slug: 'housing-gap', img: '/assets/photography/HW_MassTimber_Living-Room.jpg', title: 'Rental fundamentals: why the housing gap persists', dek: 'Short-term softness hides a long-term shortage. The data behind our outlook for purpose-built rental.' },
   { kind: 'White paper', slug: 'private-real-estate-portfolio', img: '/assets/photography/HW_MassTimber_Coffee-Table.jpg', title: 'Private real estate in a modern portfolio', dek: 'Why Canada’s largest pension funds hold alternatives, and what private rental housing adds to client portfolios.' },
-  { kind: 'White paper', slug: 'rental-vs-condo', img: '/assets/photography/HW_MassTimber_Kitchen.jpg', title: 'Why purpose-built rental is not a condo', dek: 'Ownership, tenure and operations: why rental buildings behave differently from condos through a housing cycle.' },
-  { kind: 'White paper', slug: 'distribution-coverage', img: '/assets/photography/HW_MassTimber_Dining.jpg', title: 'Distributions covered by cash flow', dek: 'How we fund distributions from net operating income, not new capital, and how we report coverage each quarter.' },
   { kind: 'White paper', slug: 'low-leverage', img: '/assets/photography/HW_MassTimber_Lounge-Corner.jpg', title: 'Low leverage, lower risk', dek: 'Why we keep debt conservative, and what that means for investors when rates or values move.' },
   { kind: 'White paper', slug: 'nimble-fund', img: '/assets/photography/HW_MassTimber_Studio.jpg', title: 'A nimble fund with no legacy assets', dek: 'A newer portfolio with no older assets to fix, so capital goes into new, efficient buildings.' },
 ].map((a) => ({ ...a, dot: 'var(--hw-black)', more: 'Read →' }))
@@ -115,7 +112,7 @@ function IssueLabel({ n, label }) {
 
 function Perspectives({ go }) {
   const [topic, setTopic] = useState('All')
-  const all = HW_ARTICLES.filter((a) => a.slug !== 'heat-pumps-2050' && a.slug !== 'distribution-coverage').map((a) => ({ ...a, topic: TOPIC[a.slug] || 'Market', author: a.author ? a.author.name : '' })).filter((a) => topic === 'All' || a.topic === topic)
+  const all = HW_ARTICLES.map((a) => ({ ...a, topic: TOPIC[a.slug] || 'Market', author: a.author ? a.author.name : '' })).filter((a) => topic === 'All' || a.topic === topic)
   const persp = all
   const feat = persp[0]
   const open = (slug) => () => go('insights/perspectives/' + slug)
