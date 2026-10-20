@@ -79,7 +79,7 @@ function PageWhoB({ go }) {
 
   return (
     <div style={sx('background:var(--hw-white);color:var(--hw-black);font-family:var(--font-body)')}>
-      <section data-screen-label="Who we are B — Hero" style={sx('background:var(--hw-brown);color:var(--hw-white);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));align-items:stretch;min-height:clamp(560px,50vw,800px)')}>
+      <section data-screen-label="Who we are B — Hero" style={sx('background:#F4F4F4;color:var(--hw-black);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));align-items:stretch;min-height:clamp(560px,50vw,800px)')}>
         <div style={sx('padding:clamp(56px,7vw,112px) clamp(20px,3vw,40px);display:flex;flex-direction:column;justify-content:space-between;gap:clamp(40px,6vw,96px)')}>
           <h1 style={sx('margin:0;max-width:9ch;font-family:var(--font-display);font-weight:500;font-size:clamp(56px,7.6vw,144px);line-height:.92;letter-spacing:-.035em;text-wrap:balance')}>Investments that grow over time.</h1>
           <div style={sx('display:flex;flex-direction:column;gap:18px;max-width:520px;border-top:1.5px solid var(--hw-terracotta);padding-top:20px')}>
@@ -88,9 +88,7 @@ function PageWhoB({ go }) {
             </p>
           </div>
         </div>
-        <div style={sx('padding:clamp(40px,5vw,80px) clamp(20px,3vw,40px);display:flex;align-items:center;justify-content:center')}>
-          <div style={sx("width:100%;max-width:600px;aspect-ratio:1/1;border-radius:50%;background:radial-gradient(circle closest-side,transparent 96.5%,var(--hw-brown) 97.5%) center/100% 100% no-repeat,url('/assets/brand/HW_Tree-Slice_HR.jpg') 48.7% 44%/215% auto no-repeat var(--hw-brown)")} />
-        </div>
+        <div style={sx("min-height:420px;background:url('/assets/brand/HW_Tree-Slice-Bark_HR.jpg') center/cover no-repeat #F4F4F4")} />
       </section>
 
       <div ref={wrapRef} style={sx(`display:grid;grid-template-columns:${wide ? 'minmax(0,220px) minmax(0,1fr)' : 'minmax(0,1fr)'};gap:clamp(32px,5vw,96px);padding:0 clamp(20px,3vw,40px)`)}>
