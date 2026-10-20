@@ -89,19 +89,6 @@ function Vehicle({ veh, isFunds, go }) {
         </div>
       </section>
 
-      {!isFunds && (
-        <section data-screen-label="Investment — Vehicle film" style={sx('padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px) 0')}>
-          <div style={sx(`position:relative;width:100%;aspect-ratio:16/9;background:#212121 url('${veh.poster}') center/cover no-repeat`)}>
-            <div style={sx('position:absolute;inset:0;background:rgba(33,33,33,.25)')} />
-            <div style={sx(`position:absolute;left:clamp(16px,2vw,32px);bottom:clamp(16px,2vw,32px);display:flex;align-items:center;gap:14px;padding:12px 18px 12px 12px;background:var(--hw-white);${MONO};font-size:14px`)}>
-              <span style={sx('width:40px;height:40px;border-radius:50%;background:var(--hw-terracotta);color:var(--hw-white);display:flex;align-items:center;justify-content:center;padding-left:3px')}>▶</span>
-              Watch the film · {veh.runtime}
-            </div>
-            <span style={sx(`position:absolute;top:16px;right:16px;padding:6px 10px;border:1.5px dashed var(--hw-white);color:var(--hw-white);${MONO};font-size:12px`)}>Video placeholder</span>
-          </div>
-        </section>
-      )}
-
       {isFunds && (
         <section data-screen-label="Our funds — Trusts" style={sx('padding:clamp(40px,4vw,56px) clamp(20px,3vw,40px) clamp(48px,6vw,88px);border-top:1.5px solid var(--hw-terracotta);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,max(440px,calc(50% - 16px))),1fr));gap:clamp(48px,5vw,64px) clamp(12px,1.5vw,20px)')}>
           {FUNDS.map((f) => (

@@ -33,7 +33,6 @@ const PERSP = [
 
 const CLIPS = [
   { g: 'press', outlet: 'Heartwood Investments', type: 'Press release', date: 'November 2026', title: 'Heartwood launches the Heartwood Residential Income Trust, now open for investment', relCta: { label: 'Learn more about the Income Strategy', r: 'investment/income' }, dek: 'The Income Trust buys stabilized, modern purpose-built rental buildings in high-growth, supply-constrained Canadian markets, aiming for capital preservation, stable tax-efficient monthly income and long-term capital appreciation.', img: '', cta: 'Read the release →' },
-  { g: 'press', outlet: 'Heartwood Investments', type: 'Press release', date: 'July 2026', title: 'Heartwood welcomes Dustin Buenaventura to our team', person: 'Dustin Buenaventura', role: 'Director, Business Development', dek: 'Dustin joins as Director, Business Development, bringing more than a decade in Canadian financial services from Equiton, Horizons ETFs and Sun Life Global Investments. He will lead our advisor and dealer relationships, helping EMDs and wealth managers bring the Growth and Income trusts to their clients.', img: '/assets/team/HW_Team_Dustin-Buenaventura.png', cta: 'Read the release →' },
   { g: 'media', outlet: 'Forbes', type: 'In the press', date: 'June 23, 2025', title: 'Future-proof investing: how Heartwood Trust is redefining real estate for a resilient economy', dek: 'Afdhel Aziz profiles co-founders David Constable and Tim Blair, and our view that design, climate performance and long-term value go hand in hand.', img: 'https://imageio.forbes.com/specials-images/imageserve/68596129797d872e0d01f701/0x0.jpg?format=jpg&height=900&width=1600&fit=bounds', cta: 'Read on Forbes ↗', url: 'https://www.forbes.com/sites/afdhelaziz/2025/06/23/future-proof-investing-how-heartwood-trust-is-redefining-real-estate-for-a-resilient-economy/' },
 ]
 // Clips without an outside URL are our own releases, shown at insights/news/<slug>.
@@ -85,14 +84,6 @@ const MARKET = [
   'As buyers and operators, we are seeing Canadian multifamily pricing reset. Institutional-quality rental assets are trading at roughly 4.0–5.5% capitalization rates, well above the 2021–2022 lows. With our newly launched Heartwood Residential Income Trust starting with no legacy assets, every acquisition we make is underwritten at today’s pricing rather than defended at yesterday’s.',
   'This is where our Growth and Income strategies meet the market: building into the supply gap, and acquiring modern, stabilized communities at reset pricing.',
 ]
-const EVENTS = [
-  { d: 'Oct 7, 2026', t: 'Investor webinar', p: 'Monthly live update with David and Tim, followed by Q&A.', c: 'Register' },
-  { d: 'Oct 14, 2026', t: 'Site tour — Waterdown', p: 'A small-group walk-through for investors and advisors.', c: 'Request a spot' },
-  { d: 'Nov 1, 2026', t: 'Wine tasting', p: 'An evening with the Heartwood team and fellow investors.', c: 'RSVP' },
-  { d: 'Nov 4, 2026', t: 'Investor webinar', p: 'Monthly live update with David and Tim, followed by Q&A.', c: 'Register' },
-  { d: 'Dec 2, 2026', t: 'Investor webinar', p: 'Monthly live update with David and Tim, followed by Q&A.', c: 'Register' },
-]
-
 const CHIP = (on) =>
   `padding:10px 16px;border:1.5px solid var(--hw-black);background:${on ? 'var(--hw-black)' : 'transparent'};color:${on ? 'var(--hw-white)' : 'var(--hw-black)'};cursor:pointer;${MONO};font-size:12px;letter-spacing:.03em`
 const ROW_LINK = 'display:grid;grid-template-columns:140px minmax(0,1fr);gap:20px;align-items:start;padding:20px 0 0;border:0;border-top:1px solid var(--hw-black);background:none;text-align:left;cursor:pointer;color:var(--hw-black);font:inherit'
@@ -439,22 +430,6 @@ function Issue({ go }) {
             <p key={p} style={sx(`margin:0 0 1.1em;${BODY20};text-wrap:pretty`)}>{p}</p>
           ))}
           <p style={sx('margin:12px 0 0;font-size:18px;line-height:1.45')}>1. Urbanation, Year-End 2025 Condominium Market Survey.</p>
-        </div>
-      </section>
-
-      <section style={sx(ISSUE_SECTION)}>
-        <IssueLabel n="05" label="Upcoming" />
-        <div style={sx('grid-column:span 2;min-width:0;border-top:1px solid var(--hw-black)')}>
-          {EVENTS.map((e) => (
-            <div key={e.d + e.t} data-m-stack="" style={sx('display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr) auto;gap:24px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--hw-black)')}>
-              <span style={sx(`${MONO};font-size:13px`)}>{e.d}</span>
-              <span style={sx('display:flex;flex-direction:column;gap:4px')}>
-                <span style={sx('font-family:var(--font-display);font-weight:500;font-size:24px')}>{e.t}</span>
-                <span style={sx('font-size:18px')}>{e.p}</span>
-              </span>
-              <span style={sx(`${MONO};font-size:13px;color:var(--hw-teal)`)}>{e.c}</span>
-            </div>
-          ))}
         </div>
       </section>
 

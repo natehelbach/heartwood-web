@@ -102,10 +102,10 @@ const STD_PROOF = [
 ]
 
 const STD_PILLARS = [
-  { n: '01', icon: 'LOW CARBON', k: 'Low impact, by design.', v: 'We measure how each building performs against recognized industry benchmarks for residential buildings, and we review the whole portfolio every year.' },
-  { n: '02', icon: 'SOLAR / ENERGY', k: 'Efficient by default.', v: 'Buildings in our Growth Strategy typically use at least 65% less energy than a comparable code-minimum building. We set each property’s target based on its location and fuel sources. Every unit of energy a building saves means lower operating costs and a lighter footprint.' },
-  { n: '03', icon: 'THERMOSTAT', k: 'Measured continuously.', v: 'Our data platform and on-site metering track electricity, gas and water use around the clock, so we can see each building’s footprint and make better operating decisions. We connect directly to building equipment such as air handlers, mixing valves and sump pumps. That shows us how each building performs in extreme weather, helps us spot problems early and lets us fix small issues before they become large ones.' },
-  { n: '04', icon: 'BUILDING', k: 'Built to endure.', v: 'We assess how each building would hold up against flooding, extreme heat, storms and wildfire, using forward-looking data and engineering expertise. We also look ahead to changing regulations, shifting resident expectations and evolving technology. Buildings designed for the decades ahead protect their value and insurance costs, cost less to operate and give residents a reason to stay.' },
+  { n: '01', icon: 'BUILDING', k: 'Built to endure.', v: 'We assess how each building would respond to flooding, extreme heat, storms and wildfire, using forward-looking data and engineering expertise. We also look ahead to changing regulations, shifting resident expectations and evolving technology. Buildings designed for the decades ahead protect their value and insurance costs, cost less to operate and give residents a reason to stay.' },
+  { n: '02', icon: 'SOLAR / ENERGY', k: 'Efficient by default.', v: 'Buildings in our Growth Trust typically use at least 65% less energy than a comparable code-minimum building. We set each property’s energy efficiency target based on its location and the fuel sources feeding the local electricity grid. Every unit of energy saved means lower operating costs and a lighter footprint.' },
+  { n: '03', icon: 'THERMOSTAT', k: 'Measured continuously.', v: 'Our data platform and on-site meters track electricity, gas and water use around the clock, so we can see each building’s footprint and make better operating decisions. By connecting directly to building equipment such as air handlers, mixing valves and sump pumps, we understand how each building performs under varying weather conditions, and we can spot problems early and fix small issues before they become large ones.' },
+  { n: '04', icon: 'LOW CARBON', k: 'Low impact, by design.', v: 'We measure how each building performs against recognized industry benchmarks for residential buildings, and we review the whole portfolio every year.' },
 ]
 
 const STD_APPLY = [
@@ -191,7 +191,7 @@ function Standards() {
         <div style={sx('position:absolute;inset:0;background:var(--overlay-brown)')} />
         <div style={sx('position:relative;padding:clamp(32px,4vw,56px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:20px;color:var(--hw-white)')}>
           <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:clamp(14px,1.2vw,18px);text-transform:uppercase')}>Our standards</p>
-          <h1 style={sx('margin:0;max-width:900px;font-family:var(--font-display);font-weight:500;font-size:clamp(40px,5.4vw,88px);line-height:1;letter-spacing:-.02em;text-wrap:balance')}>Built to a higher standard.</h1>
+          <h1 style={sx('margin:0;max-width:900px;font-family:var(--font-display);font-weight:500;font-size:clamp(40px,5.4vw,88px);line-height:1;letter-spacing:-.02em;text-wrap:balance')}>Sustainability, to us, is practical: it’s building and operating with the future in mind.</h1>
           <p style={sx('margin:0;max-width:680px;font-size:clamp(18px,1.5vw,22px);line-height:1.5;text-wrap:pretty')}>
             Efficient, durable and healthy buildings cost less to run, stay competitive for longer and are better to live in. That is why environmental performance is part of every investment decision we make.
           </p>
@@ -224,13 +224,13 @@ function Standards() {
           </div>
           <div style={sx('display:flex;flex-direction:column;gap:20px;font-size:clamp(18px,1.4vw,20px);line-height:1.6;text-wrap:pretty')}>
             <p style={sx('margin:0')}>
-              They draw heavily on energy, water and materials, and they deplete our land and the communities around them. We approach sustainability through the mindset of environmental stewardship. That means asking not only how to reduce emissions, but how to create healthy, well-built spaces that are regenerative by nature for the residents who live in them and the communities that surround them.
+              They draw heavily on energy, water and materials, and many are not built for hotter summers, heavier storms, rising energy costs or tighter regulation. Those buildings get more expensive to run, insure and keep leased every year.
             </p>
             <p style={sx('margin:0')}>
-              We don’t believe any building can have zero impact on our ecosystem, but we do believe a building can come close to neutral. That is the standard we hold ourselves to: the least possible impact on our ecosystem, alongside the strongest possible financial return.
+              We build and operate the other way. All-electric systems, high-performance envelopes and durable materials cut energy and water use, lower emissions and reduce wear on equipment. The same choices keep operating and insurance costs down and residents comfortable in extreme weather.
             </p>
             <p style={sx('margin:0')}>
-              We don’t see these as competing interests. A building that is efficient, durable, healthy and beautiful costs less to run, keeps residents longer, adds to the neighborhood around it and holds its value for decades. Good stewardship and strong returns can derive from the same decisions.
+              That is how we see stewardship: a building that takes less from its surroundings is also one that costs less to own, keeps residents longer and holds its value for decades. Lower impact and stronger long-term returns come from the same decisions.
             </p>
           </div>
         </div>
@@ -240,7 +240,7 @@ function Standards() {
         <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(28px,4vw,56px);align-items:start')}>
           <div style={sx('display:flex;flex-direction:column;gap:20px')}>
             <p style={sx(STD_EYEBROW)}>Our standard</p>
-            <h2 style={sx(STD_H2)}>To do it, we hold every building we build and buy to a standard.</h2>
+            <h2 style={sx(STD_H2)}>Every building we build or buy is held to the same four commitments.</h2>
           </div>
           <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,max(240px,calc(50% - 1px))),1fr))')}>
             {STD_PILLARS.map((p) => (

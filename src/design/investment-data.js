@@ -156,7 +156,7 @@ export const GROWTH = {
     ],
     note: ""
   },
-  accessP: "Our Growth strategy is broader than our Growth Trust. Investors can access it through a commingled trust, project partnerships or a mandate built around them.",
+  accessP: "Our Growth strategy is broader than our Growth Trust. Investors can access it through our commingled trust, or through our US feeder for United States investors.",
   access: [
     {
       k: "Heartwood Residential Growth Trust",
@@ -167,21 +167,6 @@ export const GROWTH = {
       k: "Heartwood US Growth Feeder",
       v: "For United States investors: access to the Growth Trust through a separately managed US vehicle.",
       r: 'investment/meeting'
-    },
-    {
-      k: "Joint ventures / Co-GP",
-      v: "Project-level partnerships that share risk and reward.",
-      r: 'investment/flexible'
-    },
-    {
-      k: "Separately managed accounts",
-      v: "Development mandates built around your goals and timeline.",
-      r: 'investment/flexible'
-    },
-    {
-      k: "Development services",
-      v: "Our development team, working on your land.",
-      r: 'investment/services'
     }
   ],
   marketsLabel: "Where we build",

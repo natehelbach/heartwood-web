@@ -103,25 +103,24 @@ const STAT_N = 'font-family:var(--font-display);font-weight:500;font-size:24px;l
 const STAT_T = 'font-size:13px;line-height:1.4'
 
 const CX_BARS = [
-  ['Heating demand (TEDI)', '18', 'kWh/m²/yr', '56%', 'Limit 32 · 44% below'],
-  ['Energy use (EUI)', '69', 'kWh/m²/yr', '69%', 'Limit 100 · 31% below'],
+  ['Heating demand (TEDI)', '18', 'kWh/m²/yr', '15%', 'Reference building 122 · 85% below'],
+  ['Energy use (EUI)', '69', 'kWh/m²/yr', '31%', 'Reference building 222 · 69% below'],
 ]
 const CX_SPLIT = [
   [27, 'background:var(--hw-black)', 'Plug loads 27%'],
   [20, 'background:var(--hw-terracotta)', 'Hot water 20%'],
-  [20, 'background:var(--hw-teal)', 'Fans 20%'],
-  [15, 'background:var(--hw-brown)', 'Lighting 15%'],
+  [20, 'background:var(--hw-teal)', 'Ventilation 20%'],
+  [15, 'background:var(--hw-hemlock)', 'Lighting 15%'],
   [10, 'background:var(--hw-cool-grey)', 'Heating 10%'],
   [8, 'background:var(--hw-white);border:1px solid var(--hw-black)', 'Cooling 8%'],
 ]
 const CX_STATS = [
-  ['0.12', 'Air leakage, L/s·m² at 5 Pa. Code default is 0.25.'],
-  ['86.7%', 'Heat recovered by the ventilation system.'],
-  ['129%', 'Of annual energy use produced by rooftop solar.'],
+  ['0.12', 'Air leakage at 5 Pa. Code default is 0.25.', 'L/s·m²'],
+  ['87%', 'Heat recovered by the ventilation system.'],
+  ['22%', 'Of annual energy use produced by rooftop solar.'],
 ]
 const RP_BARS = [
   ['Energy use (EUI)', '70', 'vs. 286 kWh/m²/yr', '24.5%'],
-  ['Heating demand (TEDI)', '22', 'vs. 160 kWh/m²/yr', '13.8%'],
   ['Operating emissions', '3.6', 'vs. 26.6 kgCO₂e/m²/yr', '13.5%'],
 ]
 const RP_SOLAR = [['’26', '16.4%'], ['’27', '20.4%'], ['’28', '48.2%'], ['’29', '65.8%'], ['’30', '87.3%'], ['’31', '90.4%'], ['’32', '96.7%'], ['’33', '96.7%']]
@@ -134,9 +133,9 @@ const RP_STATS = [
 function PanelStats({ stats }) {
   return (
     <div style={sx(PANEL_STATS)}>
-      {stats.map(([n, t], i) => (
+      {stats.map(([n, t, u], i) => (
         <div key={n} style={sx(i < stats.length - 1 ? `${STAT};border-right:1px solid var(--hw-black)` : STAT)}>
-          <span style={sx(STAT_N)}>{n}</span>
+          <span style={sx(STAT_N)}>{n}{u && <> <span style={sx(PANEL_UNIT)}>{u}</span></>}</span>
           <span style={sx(STAT_T)}>{t}</span>
         </div>
       ))}
