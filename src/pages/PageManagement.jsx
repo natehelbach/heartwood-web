@@ -25,7 +25,7 @@ const BTN_H = 'background:var(--hw-teal);border-color:var(--hw-teal)'
 const PILLARS = [
   { n: '01', t: 'Built for connection', p: 'Shared spaces, on-site teams and everyday programming that turn a building into a community. Residents who know their neighbours stay longer.', img: '/assets/lifestyle/HW_Lifestyle_10.jpg' },
   { n: '02', t: 'Healthy residents', p: 'Fresh, filtered air, natural light, healthy materials and quiet, comfortable homes. Buildings that support wellbeing are buildings people don’t want to leave.', img: PH + 'HW_MassTimber_Living-Room.jpg', filter: true },
-  { n: '03', t: 'Efficiently managed', p: 'All-electric systems, continuous commissioning and live building data keep energy and maintenance costs down and catch problems before residents notice them.', img: PH + 'HW_Photo_Mechanical-Room-CO2-Heat-Pumps.png', filter: true },
+  { n: '03', t: 'Efficiently managed', p: 'All-electric systems, continuous commissioning and live building data keep energy and maintenance costs down and catch problems before residents notice them.', img: PH + 'HW_Photo_Mechanical-Room-Electrical.jpg', filter: true },
 ]
 
 function PageManagement({ go }) {

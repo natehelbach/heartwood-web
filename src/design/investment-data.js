@@ -44,10 +44,6 @@ export const GROWTH = {
     h: "Discipline at every step.",
     items: [
       {
-        k: "Entitlement first",
-        v: "Projects are advanced through planning and approvals before construction capital goes in, and land comes in at cost with no markup."
-      },
-      {
         k: "Cost certainty",
         v: "Because investment, design and construction sit on one platform, we underwrite hard and soft costs more accurately. Fixed-price construction contracts limit overruns."
       },
@@ -99,7 +95,7 @@ export const GROWTH = {
       }
     ]
   },
-  hasCompare: true,
+  hasCompare: false,
   compareIntro: "A building designed to be sold at lease-up is built for the exit. A building designed to be held is built for every year that follows.",
   compare: {
     a: "Typical merchant development",
@@ -170,15 +166,10 @@ export const GROWTH = {
     }
   ],
   marketsLabel: "Where we build",
-  markets: [
-    "Canada · Greater Toronto Area",
-    "Canada · Vancouver",
-    "Canada · Halifax",
-    "Canada · Calgary",
-    "US · Greater Bay Area",
-    "US · San Diego",
-    "US · Seattle"
-  ]
+  // [city, province or state]; each row shows that region's pennant.
+  markets: [["Greater Toronto Area", "ON"], ["Vancouver", "BC"], ["Halifax", "NS"], ["Calgary", "AB"], ["Greater Bay Area", "CA"], ["San Diego", "CA"], ["Seattle", "WA"]],
+  marketsCount: "7 markets",
+  marketsFlags: [{ k: "CA FLAG", t: "Canada" }, { k: "US FLAG", t: "United States" }]
 }
 
 export const INCOME = {
@@ -276,7 +267,7 @@ export const INCOME = {
       }
     ]
   },
-  hasCompare: true,
+  hasCompare: false,
   compareIntro: "Most Canadian rental stock was built before 1980. Aging elevators, boilers and building envelopes keep drawing cash out of older buildings year after year.",
   compare: {
     a: "Typical older stock",
@@ -328,7 +319,7 @@ export const INCOME = {
     ],
     note: ""
   },
-  accessP: "Our Income strategy is broader than our Income Trust. Investors can access it through a commingled trust, deal-level co-investment or a mandate built around them.",
+  accessP: "Our Income strategy is broader than our Income Trust. Investors can access it through our commingled trust, or through our US feeder for United States investors.",
   access: [
     {
       k: "Heartwood Residential Income Trust",
@@ -339,33 +330,12 @@ export const INCOME = {
       k: "Heartwood US Income Feeder",
       v: "For United States investors: access to the Income Trust through a separately managed US vehicle.",
       r: 'investment/meeting'
-    },
-    {
-      k: "Co-investments",
-      v: "Deal-level access to individual acquisitions, alongside our trust.",
-      r: 'investment/flexible'
-    },
-    {
-      k: "Separately managed accounts",
-      v: "Core acquisition mandates built around your goals.",
-      r: 'investment/flexible'
-    },
-    {
-      k: "Asset management services",
-      v: "Our operating platform, working for your buildings.",
-      r: 'investment/services'
     }
   ],
   marketsLabel: "Where we buy",
-  markets: [
-    "Greater Toronto Area",
-    "Ottawa",
-    "Montreal",
-    "Halifax",
-    "Vancouver",
-    "Calgary",
-    "Edmonton"
-  ]
+  markets: [["Greater Toronto Area", "ON"], ["Ottawa", "ON"], ["Montreal", "QC"], ["Halifax", "NS"], ["Vancouver", "BC"], ["Calgary", "AB"], ["Edmonton", "AB"]],
+  marketsCount: "7 markets",
+  marketsFlags: [{ k: "CA FLAG", t: "Canada" }]
 }
 
 export const VEHICLES = [
@@ -433,6 +403,8 @@ export const VEHICLES = [
       "United States",
       "Europe"
     ],
+    forLabel: "Our core investor markets",
+    forNote: "Our strategies are also open to qualified investors worldwide, and we welcome a conversation about how we can partner.",
     items: [
       {
         k: "Co-investments",

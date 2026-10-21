@@ -2,7 +2,7 @@
 // (window.HW_ARTICLES). Copy and figures are placeholders for layout review.
 const R = '/assets/renders/', T = '/assets/website/'
 const DC = { name: 'David Constable', role: 'Co-founder & CEO', photo: T + 'HW_Team_David-Constable.jpg' }
-const TB = { name: 'Tim Blair', role: 'Co-founder & President', photo: T + 'HW_Team_Tim-Blair.jpg' }
+const TB = { name: 'Tim Blair', role: 'Founding Partner', photo: T + 'HW_Team_Tim-Blair.jpg' }
 const GT = { name: 'Geoffrey Turnbull', role: 'Director, Innovation & Sustainability', photo: '' }
 const TBRC = { name: 'Tim Blair', role: 'Founding Partner', photo: '/assets/team/HW_Team_Tim-Blair_HR.jpg' }
 
@@ -49,7 +49,7 @@ export const HW_ARTICLES = [
     ],
     figure: { title: 'Alternatives as a share of Canada’s largest pension plans', source: 'Annual reports of CPP Investments, OMERS, OTPP, CDPQ and others. Figures to verify.', bars: [{ l: '2005', v: 25, label: '14%' }, { l: '2015', v: 61, label: '35%' }, { l: '2024', v: 100, label: '57%' }] },
     sources: ['Annual reports of the Maple Eight pension plans', 'MSCI/REALpac Canada Quarterly Property Fund Index, Private Apartments', 'Statistics Canada, Consumer Price Index'] },
-  { slug: 'low-leverage', kind: 'Perspective', no: '06', title: 'Low leverage, lower risk', dek: 'Why we keep debt conservative, and what that means for investors when rates or values move.', date: 'October 2026', read: '10 min read', author: DC, img: '/assets/photography/HW_MassTimber_Dining.jpg',
+  { slug: 'low-leverage', kind: 'Perspective', no: '06', title: 'Low leverage, lower risk', dek: 'Why we keep debt conservative, and what that means for investors when rates or values move.', date: 'October 2026', read: '10 min read', author: TB, img: '/assets/photography/HW_MassTimber_Dining.jpg',
     keyPoints: ['Lower loan-to-value means more room before values put pressure on the fund.', 'Long-term, insured financing reduces refinancing risk.', 'Conservative debt keeps more cash flow available for distributions.'],
     sections: [
       { h: 'Our approach to debt', p: ['We target loan-to-value well below many peers and favour long-term CMHC-insured financing where available.'] },

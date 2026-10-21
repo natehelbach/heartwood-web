@@ -3,6 +3,7 @@ import { Hv, sx, RULE_BG, HubspotNote } from '../design/ui.jsx'
 import HW_DATA from '../design/site-data.js'
 import DotIcon from '../design/DotIcon.jsx'
 import PageWhoB from './PageWhoB.jsx'
+import { linkProps } from '../site/paths.js'
 
 // Ported from ui_kits/website/PageAbout.dc.html. `sub` is who | leadership | standards | careers | contact.
 // "Who we are" uses the design's default layout, B (PageWhoB.dc.html).
@@ -184,7 +185,7 @@ function FrameworkList({ items, last }) {
   )
 }
 
-function Standards() {
+function Standards({ go }) {
   return (
     <>
       <section data-screen-label="Standards — Hero" style={sx("position:relative;overflow:hidden;min-height:clamp(440px,44vw,640px);background:var(--hw-brown) url('/assets/photography/HW_Wood-Slice-Rings.jpg') 30% 15%/cover no-repeat;display:flex;align-items:flex-end")}>
@@ -240,7 +241,7 @@ function Standards() {
         <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(28px,4vw,56px);align-items:start')}>
           <div style={sx('display:flex;flex-direction:column;gap:20px')}>
             <p style={sx(STD_EYEBROW)}>Our standard</p>
-            <h2 style={sx(STD_H2)}>Every building we build or buy is held to the same four commitments.</h2>
+            <h2 style={sx(STD_H2)}>Four commitments shape every building we develop.</h2>
           </div>
           <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,max(240px,calc(50% - 1px))),1fr))')}>
             {STD_PILLARS.map((p) => (
@@ -256,7 +257,7 @@ function Standards() {
           </div>
         </div>
         <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(12px,1.4vw,16px);align-items:stretch')}>
-          <div style={sx("min-height:clamp(320px,34vw,560px);background:var(--hw-brown) url('/assets/photography/HW_Photo_EV-Charging.png') center/cover no-repeat")} />
+          <div style={sx("min-height:clamp(320px,34vw,560px);background:var(--hw-brown) url('/assets/photography/HW_Photo_EV-Charging_NoLogo.jpg') center/cover no-repeat")} />
           <div style={sx('display:flex;flex-direction:column;gap:16px')}>
             <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:clamp(14px,1.2vw,16px);text-transform:uppercase')}>How we apply it</p>
             {STD_APPLY.map((c) => (
@@ -273,6 +274,9 @@ function Standards() {
                     </div>
                   ))}
                 </div>
+                <Hv as="a" {...linkProps(go, 'investment/growth')} s="align-self:flex-start;margin-top:auto;padding:14px 22px;background:var(--hw-black);color:var(--hw-white);text-decoration:none;font-family:var(--font-subhead);font-weight:500;font-size:14px;text-transform:uppercase" h="background:var(--hw-terracotta);color:var(--hw-white)">
+                  Invest in what we build →
+                </Hv>
               </div>
             ))}
           </div>
@@ -384,7 +388,7 @@ function PageAbout({ sub, go }) {
     <div style={sx('background:var(--hw-white);color:var(--hw-black);font-family:var(--font-body)')}>
       {s === 'who' && <PageWhoB go={go} />}
       {s === 'leadership' && <Leadership />}
-      {s === 'standards' && <Standards />}
+      {s === 'standards' && <Standards go={go} />}
       {s === 'contact' && <Contact />}
       {s === 'careers' && <Careers />}
     </div>

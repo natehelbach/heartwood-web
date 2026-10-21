@@ -10,7 +10,6 @@ const MONO = 'font-family:var(--font-subhead);font-weight:500;text-transform:upp
 const EYEBROW = `margin:0;${MONO};font-size:clamp(18px,1.4vw,22px);color:var(--hw-terracotta)`
 const H2 = 'margin:0;max-width:820px;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.6vw,52px);line-height:1.08;letter-spacing:-.015em;text-wrap:balance'
 const RULED_SECTION = `padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:clamp(28px,3vw,48px);background:${RULE_BG}`
-const TAG = `padding:5px 9px;border:1px solid var(--hw-black);${MONO};font-size:12px`
 const FIELD_LABEL = `${MONO};font-size:13px`
 const OUTLINE_SM = `padding:13px 20px;background:transparent;color:var(--hw-black);border:1.5px solid var(--hw-black);cursor:pointer;${MONO};font-size:13px`
 const WHY_NOW_P = 'margin:0;max-width:600px;font-size:clamp(17px,1.35vw,20px);line-height:1.55;text-wrap:pretty'
@@ -155,11 +154,14 @@ function Vehicle({ veh, isFunds, go }) {
               </div>
             ))}
           </div>
-          <div style={sx('display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding-top:12px')}>
-            <span style={sx(`${MONO};font-size:13px`)}>Available to</span>
-            {veh.for.map((t) => (
-              <span key={t} style={sx(TAG)}>{t}</span>
-            ))}
+          <div style={sx('display:flex;flex-direction:column;gap:20px;margin-top:clamp(16px,2vw,28px);padding-top:20px;border-top:1.5px solid var(--hw-terracotta)')}>
+            <p style={sx(`margin:0;${MONO};font-size:clamp(16px,1.3vw,20px);color:var(--hw-terracotta)`)}>{veh.forLabel || 'Available to'}</p>
+            <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));border-top:1px solid var(--hw-black);border-left:1px solid var(--hw-black)')}>
+              {veh.for.map((t) => (
+                <span key={t} style={sx('padding:clamp(20px,2.4vw,32px) clamp(16px,2vw,24px);border-right:1px solid var(--hw-black);border-bottom:1px solid var(--hw-black);font-family:var(--font-display);font-weight:500;font-size:clamp(26px,2.8vw,40px);line-height:1.05;letter-spacing:-.02em')}>{t}</span>
+              ))}
+            </div>
+            {veh.forNote && <p style={sx('margin:0;max-width:640px;font-size:18px;line-height:1.5;text-wrap:pretty')}>{veh.forNote}</p>}
           </div>
         </section>
       )}
@@ -327,16 +329,61 @@ function Chapter({ id, n, label, h, children }) {
   )
 }
 
-function KeyRows({ items, k = 'k', v = 'v' }) {
+// `grid` lays rows out as a 1:2 grid that stacks on phones (the design's "How we build" rows).
+function KeyRows({ items, k = 'k', v = 'v', grid }) {
   return (
     <div style={sx('display:flex;flex-direction:column;border-bottom:1px solid var(--hw-black)')}>
-      {items.map((it) => (
-        <div key={it[k]} style={sx('display:flex;flex-wrap:wrap;gap:8px 32px;padding:20px 0;border-top:1px solid var(--hw-black)')}>
-          <span style={sx(`${CH_ROW_K};flex:0 0 min(100%,240px)`)}>{it[k]}</span>
-          <p style={sx(`${CH_P};font-size:18px;flex:1 1 300px`)}>{it[v]}</p>
-        </div>
-      ))}
+      {items.map((it) =>
+        grid ? (
+          <div key={it[k]} data-m-stack="" style={sx('display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:8px 32px;padding:20px 0;border-top:1px solid var(--hw-black)')}>
+            <span style={sx(CH_ROW_K)}>{it[k]}</span>
+            <p style={sx('margin:0;font-size:clamp(18px,1.4vw,20px);line-height:1.55;text-wrap:pretty;font-size:18px')}>{it[v]}</p>
+          </div>
+        ) : (
+          <div key={it[k]} style={sx('display:flex;flex-wrap:wrap;gap:8px 32px;padding:20px 0;border-top:1px solid var(--hw-black)')}>
+            <span style={sx(`${CH_ROW_K};flex:0 0 min(100%,240px)`)}>{it[k]}</span>
+            <p style={sx(`${CH_P};font-size:18px;flex:1 1 300px`)}>{it[v]}</p>
+          </div>
+        ),
+      )}
     </div>
+  )
+}
+
+const REGION = { ON: 'Ontario', QC: 'Quebec', NS: 'Nova Scotia', BC: 'British Columbia', AB: 'Alberta', CA: 'California', WA: 'Washington' }
+
+// Where a strategy builds or buys: one row per city with its province or state pennant.
+function Markets({ f, n }) {
+  return (
+    <section data-chapter="mkt" data-screen-label="Strategy — mkt" style={sx(CH_SECTION)}>
+      <div style={sx('display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap')}>
+        <div style={sx('display:flex;gap:16px;align-items:baseline')}>
+          <span style={sx(`${MONO};font-size:15px;color:var(--hw-terracotta)`)}>{n}</span>
+          <p style={sx(`margin:0;${MONO};font-size:clamp(16px,1.3vw,20px);color:var(--hw-black)`)}>{f.marketsLabel}</p>
+        </div>
+        <div style={sx('display:flex;align-items:center;gap:16px')}>
+          <span style={sx(`${MONO};font-size:13px`)}>{f.marketsCount}</span>
+          <div style={sx('display:flex;align-items:center;gap:10px')}>
+            {f.marketsFlags.map((fl) => (
+              <span key={fl.k} title={fl.t} style={sx('display:block;line-height:0;height:24px;overflow:hidden')}>
+                <DotIcon name={fl.k} color="#212121" size={44} style={{ marginTop: -10 }} />
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));column-gap:clamp(24px,4vw,56px);border-bottom:1px solid var(--hw-black)')}>
+        {f.markets.map(([c, r], i) => (
+          <div key={c} style={sx('display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px 0;border-top:1px solid var(--hw-black)')}>
+            <span style={sx('font-family:var(--font-subhead);font-size:13px;color:var(--hw-terracotta)')}>{String(i + 1).padStart(2, '0')}</span>
+            <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2vw,28px);letter-spacing:-.01em')}>{c}</span>
+            <span title={REGION[r] || r} style={sx('display:block;line-height:0;height:32px;overflow:hidden')}>
+              <DotIcon name={'PENNANT ' + r} color="#BC532D" size={66} style={{ marginTop: -17 }} />
+            </span>
+          </div>
+        ))}
+      </div>
+    </section>
   )
 }
 
@@ -347,7 +394,7 @@ function Fund({ f, go }) {
   const [chap, setChap] = useState('why')
   const [wide, setWide] = useState(true)
 
-  const all = [['why', f.why.label], ['now', f.hasWhyNow && f.whyNow.label], ['path', f.path.label], ['buy', f.hasHowBuy && f.howBuy.label], ['own', f.own.label], ['del', 'What it delivers'], ['cmp', f.hasCompare && 'Comparison'], ['acc', 'Ways to access']].filter((x) => x[1])
+  const all = [['why', f.why.label], ['now', f.hasWhyNow && f.whyNow.label], ['path', f.path.label], ['mkt', f.marketsLabel], ['buy', f.hasHowBuy && f.howBuy.label], ['own', f.own.label], ['del', 'What it delivers'], ['cmp', f.hasCompare && 'Comparison'], ['acc', 'Ways to access']].filter((x) => x[1])
   const cn = {}
   all.forEach(([k], i) => { cn[k] = '0' + (i + 1) })
   const jump = (k) => {
@@ -434,9 +481,11 @@ function Fund({ f, go }) {
             </div>
           </Chapter>
 
+          <Markets f={f} n={cn.mkt} />
+
           {f.hasHowBuy && (
             <Chapter id="buy" n={cn.buy} label={f.howBuy.label} h={f.howBuy.h}>
-              <KeyRows items={f.howBuy.items} />
+              <KeyRows items={f.howBuy.items} grid />
             </Chapter>
           )}
 
@@ -487,12 +536,6 @@ function Fund({ f, go }) {
                   <span style={sx(`${CH_ROW_K};flex:0 0 min(100%,240px)`)}>{a.k} →</span>
                   <span style={sx('font-size:18px;line-height:1.5;flex:1 1 300px')}>{a.v}</span>
                 </Hv>
-              ))}
-            </div>
-            <span style={sx(`${MONO};font-size:13px;color:var(--hw-terracotta)`)}>{f.marketsLabel}</span>
-            <div style={sx('display:flex;flex-wrap:wrap;gap:8px')}>
-              {f.markets.map((m) => (
-                <span key={m} style={sx(`padding:7px 11px;border:1px solid var(--hw-black);${MONO};font-size:13px`)}>{m}</span>
               ))}
             </div>
           </Chapter>
