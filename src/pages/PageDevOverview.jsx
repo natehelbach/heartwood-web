@@ -27,7 +27,7 @@ const STEPS = [
 const PROJECTS = [
   { name: '3385 Lawrence Avenue East', loc: 'Toronto, Ontario · 155 homes', img: R + 'HW_Render_3385-Lawrence.jpg', pos: 'center', r: 'properties/3385-lawrence' },
   { name: '360 Kennedy Lane', loc: 'Ottawa, Ontario · 81 homes', img: R + 'HW_Render_360-Kennedy-Lane.jpg', pos: 'center', r: 'properties/360-kennedy' },
-  { name: '175 Oxford Street', loc: 'Orillia, Ontario · 48 homes', img: P + 'HW_Photo_175-Oxford_Townhomes-Sky.png', pos: 'center 85%', r: 'properties/175-oxford' },
+  { name: '175 Oxford Street', loc: 'Orillia, Ontario · 48 homes', img: P + 'HW_Photo_175-Oxford_Townhomes-Sky.jpg', pos: 'center 85%', r: 'properties/175-oxford' },
 ]
 
 function SectionHead({ eyebrow, title, lead, cta, onCta }) {
@@ -82,7 +82,7 @@ function PageDevOverview({ go }) {
           cta="Explore how we build"
           onCta={() => go('development/design')}
         />
-        <div style={sx(`width:100%;aspect-ratio:21/9;background:var(--hw-brown) url('${P}HW_Photo_Design-Review-Plans.png') center 40%/cover no-repeat`)} />
+        <div style={sx(`width:100%;aspect-ratio:21/9;background:var(--hw-brown) url('${P}HW_Photo_Design-Review-Plans.jpg') center 40%/cover no-repeat`)} />
         <div data-do-steps="" style={sx('display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--hw-black)')}>
           {STEPS.map(([n, k, t], i) => (
             <div key={n} style={sx(`padding:20px 20px 0;border-left:${i ? '1px solid var(--hw-black)' : '0'};display:flex;flex-direction:column;gap:10px`)}>

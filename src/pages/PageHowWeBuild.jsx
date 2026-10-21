@@ -31,7 +31,7 @@ const LIFE = [
       'The platform then places the site in its local market context and pulls in key data for that area: rents at nearby rental and condo buildings, CMHC market benchmarks, population and demographic trends, what renters can afford, how quickly new buildings have filled up, and which competing projects are in the pipeline. Together, this gives us a full picture of the risks before we commit to a deal.',
       'This holistic approach lets us target growth markets, and supply-constrained submarkets within them, where tenant demand and rent fundamentals support the building well beyond lease-up.',
     ],
-    imgs: [{ src: '/assets/photography/HW_Photo_Market-Intelligence-Screen.png', f: 1 }],
+    imgs: [{ src: '/assets/photography/HW_Photo_Market-Intelligence-Screen.jpg', f: 1 }],
   },
   {
     k: 'Design',
@@ -41,7 +41,7 @@ const LIFE = [
       'We take a product-based approach. Every building we develop uses the same system of standardized, flexible building components and follows the same development and design process. We adapt the system to each site instead of reinventing the building we build over and over again.',
       'This lowers investment risk, sharpens our cost estimates and speeds up construction. And because each building improves on the last, the value compounds across every site we develop, delivering more durable, well-built and efficient buildings.',
     ],
-    imgs: [{ src: '/assets/photography/HW_Photo_Design-Review-Plans.png', f: 1 }],
+    imgs: [{ src: '/assets/photography/HW_Photo_Design-Review-Plans.jpg', f: 1 }],
   },
   {
     k: 'Build',
@@ -51,7 +51,7 @@ const LIFE = [
       'We also prefabricate parts of the building where it makes sense. Wall and envelope panels are built in a factory, where they are insulated, wrapped and fitted with windows before they arrive on site. On select projects, we use mass timber, which is made almost entirely of factory-built components. Building in controlled conditions means better quality, less waste, faster schedules and fewer weather delays.',
       'Because each project builds on the last, we carry forward what works and fix what doesn’t. We don’t make the same mistake twice, and the result is more resilient buildings that are delivered on time.',
     ],
-    imgs: [{ src: I + 'HW_Innovation_Prefab-Envelope_1.jpg', f: 1 }, { src: I + 'HW_Innovation_Componentization-Site.png', f: 2, pos: '100% 100%' }],
+    imgs: [{ src: I + 'HW_Innovation_Prefab-Envelope_1.jpg', f: 1 }, { src: I + 'HW_Innovation_Componentization-Site.jpg', f: 2, pos: '100% 100%' }],
   },
   {
     k: 'Leasing & Commissioning',

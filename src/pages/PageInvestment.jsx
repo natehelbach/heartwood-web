@@ -98,7 +98,7 @@ function Vehicle({ veh, isFunds, go }) {
               </div>
               <div style={sx(`position:relative;aspect-ratio:16/10;background:var(--hw-brown) url('${f.img}') ${f.pos}/cover no-repeat;display:flex;align-items:flex-end;padding:clamp(24px,3vw,40px)`)}>
                 <div style={sx('position:absolute;inset:0;background:linear-gradient(to top,rgba(33,33,33,.6),rgba(33,33,33,0) 60%)')} />
-                <img src={f.logoW} alt={f.name} style={sx('position:relative;width:100%;max-width:380px;height:auto;display:block')} />
+                <img loading="lazy" decoding="async" src={f.logoW} alt={f.name} style={sx('position:relative;width:100%;max-width:380px;height:auto;display:block')} />
               </div>
               <div style={sx('padding:44px 0 0;display:flex;flex-direction:column;gap:22px;flex:1')}>
                 <p style={sx(`margin:0;${MONO};font-size:16px;color:var(--hw-terracotta)`)}>{f.kind}</p>
@@ -422,7 +422,7 @@ function Fund({ f, go }) {
         <p style={sx(`position:relative;margin:0;${MONO};font-size:clamp(13px,1.1vw,15px)`)}>Investments · {f.kind}</p>
         <div style={sx('position:relative;display:flex;flex-direction:column;gap:clamp(20px,2.2vw,28px);max-width:860px')}>
           <div role="img" aria-label={`${f.word} strategy`} style={sx('display:flex;align-items:center;gap:clamp(16px,2.8vw,36px)')}>
-            <img src={f.ringW} alt="" style={sx('height:clamp(96px,16vw,210px);width:auto;display:block;flex:none')} />
+            <img loading="lazy" decoding="async" src={f.ringW} alt="" style={sx('height:clamp(96px,16vw,210px);width:auto;display:block;flex:none')} />
             <span style={sx('font-family:var(--font-display);font-weight:900;font-size:clamp(44px,8.6vw,112px);line-height:.85;letter-spacing:-.01em;text-transform:uppercase')}>{f.word}</span>
           </div>
           <h1 style={sx('margin:0;max-width:640px;font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2.3vw,30px);line-height:1.18;letter-spacing:-.01em;text-wrap:pretty')}>{f.intro}</h1>

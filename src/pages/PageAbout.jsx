@@ -32,7 +32,7 @@ function Leadership() {
   return (
     <section data-screen-label="Team" style={sx('background:var(--hw-white);color:var(--hw-black)')}>
       <div data-screen-label="Team — Hero" style={sx('position:relative;overflow:hidden;min-height:clamp(480px,48vw,720px);background:var(--hw-black);display:flex;align-items:flex-end')}>
-        <div style={sx("position:absolute;top:0;right:0;bottom:-288px;left:0;background:url('/assets/photography/HW_Team_Lobby-Walk.png') center center/cover no-repeat")} />
+        <div style={sx("position:absolute;top:0;right:0;bottom:-288px;left:0;background:url('/assets/photography/HW_Team_Lobby-Walk.jpg') center center/cover no-repeat")} />
         <div style={sx('position:relative;padding:clamp(40px,5vw,72px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:20px;color:var(--hw-white)')}>
           <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:clamp(14px,1.2vw,18px);text-transform:uppercase')}>Team</p>
           <h1 style={sx('margin:0;max-width:760px;font-family:var(--font-display);font-weight:500;font-size:clamp(34px,4.4vw,64px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance')}>One integrated team, building, owning and operating homes that last.</h1>
@@ -68,7 +68,7 @@ function Leadership() {
                   {isOpen && (
                     <div data-m-stack="" data-team-open="" style={sx('display:grid;grid-template-columns:minmax(0,240px) minmax(0,640px);gap:clamp(20px,3vw,40px);padding:clamp(8px,1vw,12px) clamp(20px,3vw,40px) clamp(28px,3vw,40px)')}>
                       <div style={sx('position:relative;width:100%;aspect-ratio:4/5;background:var(--hw-cool-grey)')}>
-                        <img src={portraitOf(t)} alt={t.name} style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1)')} />
+                        <img loading="lazy" decoding="async" src={portraitOf(t)} alt={t.name} style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1)')} />
                         <div style={sx('position:absolute;inset:0;background:rgba(197,220,234,.2);pointer-events:none')} />
                       </div>
                       <div style={sx('display:flex;flex-direction:column;gap:24px;align-items:flex-start')}>
@@ -144,7 +144,7 @@ export function StandardLogos() {
           s="min-height:110px;display:flex;align-items:center;justify-content:center;padding:16px 20px;border-right:1px solid var(--hw-black);border-bottom:1px solid var(--hw-black);text-align:center;font-family:var(--font-subhead);font-weight:500;font-size:14px;text-transform:uppercase;line-height:1.3;color:var(--hw-black);text-decoration:none;transition:background .15s"
           h="background:rgba(197,220,234,.35)"
         >
-          <img src={l.img} alt={l.name} style={sx('max-width:100%;max-height:64px;width:auto;height:auto;display:block;mix-blend-mode:multiply')} />
+          <img loading="lazy" decoding="async" src={l.img} alt={l.name} style={sx('max-width:100%;max-height:64px;width:auto;height:auto;display:block;mix-blend-mode:multiply')} />
         </Hv>
       ))}
     </div>
@@ -263,7 +263,7 @@ function Standards({ go }) {
             {STD_APPLY.map((c) => (
               <div key={c.label} style={sx(`background:${c.bg};color:${c.fg};padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:18px;flex:1`)}>
                 <div style={sx('display:flex;align-items:center;gap:14px')}>
-                  <img src={c.ring} alt="" style={sx('height:44px;width:auto;display:block')} />
+                  <img loading="lazy" decoding="async" src={c.ring} alt="" style={sx('height:44px;width:auto;display:block')} />
                   <span style={sx('font-family:var(--font-subhead);font-weight:500;font-size:15px;text-transform:uppercase')}>{c.label}</span>
                 </div>
                 <div style={sx(`display:flex;flex-direction:column;border-top:1px solid ${c.line}`)}>

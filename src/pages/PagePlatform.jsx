@@ -222,7 +222,7 @@ function InnovationMap({ showIntro, outcome }) {
         <div ref={cardRef} style={sx(`position:absolute;z-index:4;left:${card.l};top:${card.t};bottom:${card.b};width:min(360px,calc(100% - 32px));background:rgba(249,249,249,.96);box-shadow:0 12px 32px rgba(33,33,33,.22);display:grid;grid-template-columns:${cur.img ? '140px minmax(0,1fr)' : 'minmax(0,1fr)'};gap:0;transition:left .3s ease,right .3s ease,top .3s ease,bottom .3s ease`)}>
           {zoom && cur.img && (
             <div style={sx(`position:absolute;z-index:3;right:0;top:${card.zt};bottom:${card.zb};width:100%;aspect-ratio:4/3;max-height:260px;max-height:calc(100vh - var(--nav-h,82px) - 340px);min-height:160px;background:var(--hw-cool-grey);pointer-events:none;box-shadow:0 12px 32px rgba(33,33,33,.22)`)}>
-              <img src={cur.img} alt={cur.title} style={sx(`width:100%;height:100%;object-fit:cover;object-position:${cur.pos};display:block`)} />
+              <img loading="lazy" decoding="async" src={cur.img} alt={cur.title} style={sx(`width:100%;height:100%;object-fit:cover;object-position:${cur.pos};display:block`)} />
             </div>
           )}
           {cur.img && (

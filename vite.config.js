@@ -25,5 +25,8 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   return {
     plugins: [react(), seoFiles(env.VITE_SITE_URL || DEFAULT_SITE_URL)],
+    // Hashed JS and CSS go to /_app/, apart from the images in public/assets, so vercel.json can
+    // cache them for a year. Images keep their names and get a shorter cache.
+    build: { assetsDir: '_app' },
   }
 })

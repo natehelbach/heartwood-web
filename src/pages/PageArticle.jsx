@@ -53,7 +53,7 @@ function Figure({ a, bars, prefix = '' }) {
 
 // One dot chart from the article's `charts` list (drawn with the Heartwood Tool renderer).
 function Chart({ c }) {
-  if (!c.g) return <img src={c.src} alt={c.t} style={{ width: '100%', display: 'block' }} />
+  if (!c.g) return <img loading="lazy" decoding="async" src={c.src} alt={c.t} style={{ width: '100%', display: 'block' }} />
   const g = JSON.parse(JSON.stringify(c.g))
   if (g.style === 'lines') g.labelsOut = true
   const r = renderGraph(g, { ink: '#212121', dotSize: 100 })
@@ -137,7 +137,7 @@ function PageArticle({ slug, go }) {
             <div style={sx('display:flex;flex-wrap:wrap;gap:16px 32px')}>
               {authors.map((p) => (
                 <div key={p.name} style={sx('display:flex;align-items:center;gap:14px')}>
-                  {p.photo && <img src={p.photo} alt="" style={sx('width:48px;height:48px;border-radius:50%;object-fit:cover;display:block')} />}
+                  {p.photo && <img loading="lazy" decoding="async" src={p.photo} alt="" style={sx('width:48px;height:48px;border-radius:50%;object-fit:cover;display:block')} />}
                   <span style={sx('display:flex;flex-direction:column;gap:2px')}>
                     <span style={sx('font-family:var(--font-display);font-weight:500;font-size:18px')}>{p.name}</span>
                     <span style={sx('font-size:18px')}>{p.role}</span>
@@ -147,7 +147,7 @@ function PageArticle({ slug, go }) {
             </div>
           </header>
           <div style={sx('padding:0 clamp(20px,3vw,40px)')}>
-            <img src={a.img} alt="" style={sx('width:100%;aspect-ratio:16/7;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
+            <img loading="lazy" decoding="async" src={a.img} alt="" style={sx('width:100%;aspect-ratio:16/7;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
           </div>
           <section data-screen-label="Perspective — Body" style={sx('padding:clamp(40px,5vw,80px) clamp(20px,3vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(32px,5vw,96px);align-items:start;max-width:1280px')}>
             <aside data-m-unstick="" style={sx('position:sticky;top:96px;display:flex;flex-direction:column;gap:18px;max-width:340px')}>
@@ -231,11 +231,11 @@ function PageArticle({ slug, go }) {
             </div>
             <div style={sx('justify-self:center;width:min(100%,340px);aspect-ratio:8.5/11;background:var(--hw-white);color:var(--hw-black);border:1.5px solid var(--hw-black);display:flex;flex-direction:column;overflow:hidden')}>
               <div style={sx('padding:22px;display:flex;flex-direction:column;gap:12px;flex:1')}>
-                <img src="/assets/website/Heartwood-Wordmark.svg" alt="Heartwood" style={sx('height:16px;width:auto;align-self:flex-start;display:block')} />
+                <img loading="lazy" decoding="async" src="/assets/website/Heartwood-Wordmark.svg" alt="Heartwood" style={sx('height:16px;width:auto;align-self:flex-start;display:block')} />
                 <span style={sx(`margin-top:18px;${MONO};font-size:12px;color:var(--hw-black)`)}>White paper No. {a.no}</span>
                 <span style={sx('font-family:var(--font-display);font-weight:500;font-size:24px;line-height:1.08')}>{a.title}</span>
               </div>
-              <img src={a.img} alt="" style={sx('width:100%;height:42%;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
+              <img loading="lazy" decoding="async" src={a.img} alt="" style={sx('width:100%;height:42%;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
             </div>
           </header>
           <section data-screen-label="White paper — Body" style={sx(`padding:clamp(40px,5vw,80px) clamp(20px,3vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(32px,5vw,96px);align-items:start;max-width:1280px;background:${RULE_BG}`)}>

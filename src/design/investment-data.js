@@ -5,7 +5,7 @@ export const GROWTH = {
   ringW: "/assets/logos/HW_Growth_Ring_White.png",
   kind: "Growth strategy · Build to Hold",
   dot: "#617954",
-  img: "/assets/photography/HW_Photo_Timber-Townhomes-Courtyard.png",
+  img: "/assets/photography/HW_Photo_Timber-Townhomes-Courtyard.jpg",
   imgPos: "center 85%",
   intro: "We develop new purpose-built rental communities in North America’s supply-constrained markets, then hold them for the long term so the value we create in construction and lease-up becomes durable income for our investors.",
   why: {
@@ -499,7 +499,7 @@ export const TRUSTS = [
     kind: "Growth strategy · Build to Hold",
     tag: "Build to Hold",
     big: "Build.",
-    img: "/assets/photography/HW_Photo_Timber-Townhomes-Courtyard.png",
+    img: "/assets/photography/HW_Photo_Timber-Townhomes-Courtyard.jpg",
     pos: "center 85%",
     intro: "We develop new purpose-built rental communities in North America’s supply-constrained markets, then hold them for the long term so the value we create in construction and lease-up becomes durable income for our investors.",
     how: [

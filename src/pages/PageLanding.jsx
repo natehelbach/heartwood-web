@@ -47,7 +47,7 @@ const PAGES = {
     form: { eyebrow: 'Institutional enquiries', title: 'Contact us.', note: 'Tell us about your mandate. We’ll meet first, then share the data room and DDQ.', cta: 'Send enquiry', thanks: 'Thank you. A senior member of our team will be in touch.', hubspot: 'institutional-enquiry', hasSelect: true, selectLabel: 'Organization type', options: ['Pension fund', 'Foundation or endowment', 'Insurer', 'Sovereign wealth fund', 'Consultant or placement agent', 'Other'] },
   },
   meeting: {
-    hero: { eyebrow: 'Investments · Schedule a meeting', title: 'Meet with our investment team.', intro: 'An introductory meeting with our senior team to understand your objectives and discuss how we can partner.', cta: 'Invest with us', img: '/assets/renders/HW_360-Kennedy-Lane_1.png', faded: true },
+    hero: { eyebrow: 'Investments · Schedule a meeting', title: 'Meet with our investment team.', intro: 'An introductory meeting with our senior team to understand your objectives and discuss how we can partner.', cta: 'Invest with us', img: '/assets/renders/HW_360-Kennedy-Lane_1.jpg', faded: true },
     form: { eyebrow: 'Schedule a meeting', title: 'Pick a time that works.', note: '', cta: 'Schedule a meeting', thanks: 'Booked. A confirmation and prep email are on the way.', hubspot: 'meeting-booking', hasSelect: true, selectLabel: 'Which best describes you?', options: ['Advisor (EMD, RIA, wealth manager)', 'Private wealth (family office or high-net-worth)', 'Institutional investor'] },
   },
   portal: {
@@ -242,7 +242,7 @@ function Events({ toForm, go }) {
             return (
               <article key={e.id} style={sx('display:flex;flex-direction:column;gap:14px')}>
                 <div style={sx('position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--hw-cool-grey)')}>
-                  <img src={e.img} alt="" style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block')} />
+                  <img loading="lazy" decoding="async" src={e.img} alt="" style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block')} />
                   <span style={sx(`position:absolute;left:0;top:0;padding:10px 14px;background:var(--hw-white);${MONO};font-size:13px`)}>{e.date}</span>
                 </div>
                 <div style={sx(`display:flex;justify-content:space-between;gap:12px;${MONO};font-size:13px`)}>
@@ -320,7 +320,7 @@ function Learn({ go }) {
           const cta = unlocked[r.id] ? 'Link sent to your email ✓' : r.gated ? 'Download the report' : 'Watch the replay'
           return (
             <article key={r.id} style={sx('display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--hw-black);padding-top:16px')}>
-              <img src={r.img} alt="" style={sx('width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
+              <img loading="lazy" decoding="async" src={r.img} alt="" style={sx('width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
               <span style={sx(`display:flex;gap:10px;align-items:center;${MONO};font-size:12px`)}>
                 <span style={sx('width:8px;height:8px;border-radius:50%;background:var(--hw-terracotta)')} />
                 {r.type}
@@ -367,7 +367,7 @@ function Podcast() {
       {EPISODES.map((ep) => (
         <div key={ep.no} data-m-stack="" style={sx('display:grid;grid-template-columns:minmax(0,clamp(140px,24vw,300px)) minmax(0,1fr) auto;gap:16px clamp(20px,3vw,48px);align-items:center;padding:24px 0;border-bottom:1px solid var(--hw-black)')}>
           <div style={sx('position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--hw-brown)')}>
-            <img src={ep.img} alt="" style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block')} />
+            <img loading="lazy" decoding="async" src={ep.img} alt="" style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block')} />
             <div style={sx('position:absolute;inset:0;background:var(--overlay-brown)')} />
             <span style={sx('position:absolute;left:14px;bottom:10px;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.4vw,48px);line-height:1;color:var(--hw-white)')}>#{ep.no}</span>
           </div>
@@ -414,7 +414,7 @@ function Audience({ sub, aud, hero, toForm, go }) {
       <section data-screen-label="Audience — Featured insights" style={sx('padding:0 clamp(20px,3vw,40px) clamp(56px,6vw,96px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(16px,2vw,24px)')}>
         {feature.map((ft) => (
           <Hv key={ft.t} as="button" onClick={() => go(ft.r)} s="position:relative;display:flex;align-items:flex-end;min-height:clamp(320px,30vw,460px);padding:0;border:0;cursor:pointer;text-align:left;overflow:hidden;background:var(--hw-brown);color:var(--hw-white);font-family:var(--font-body);transition:transform .25s ease" h="transform:translateY(-4px)">
-            <img src={ft.img} alt="" style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block')} />
+            <img loading="lazy" decoding="async" src={ft.img} alt="" style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block')} />
             <span style={sx('position:absolute;inset:0;background:linear-gradient(0deg,rgba(33,33,33,.75),rgba(33,33,33,0) 70%)')} />
             <span style={sx('position:relative;display:flex;flex-direction:column;gap:12px;padding:clamp(24px,2.6vw,36px);width:100%;box-sizing:border-box')}>
               <span style={sx(`${MONO};font-size:13px`)}>{ft.tag}</span>
@@ -457,7 +457,7 @@ function Audience({ sub, aud, hero, toForm, go }) {
         </div>
       </section>
       <section data-screen-label="Audience — Quote" style={sx('padding:0 clamp(20px,3vw,40px) clamp(56px,6vw,96px);display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,72px);align-items:center')}>
-        <img src={quote.img} alt={quote.n} style={sx('flex:1 1 260px;width:100%;max-width:420px;aspect-ratio:1;object-fit:cover;object-position:center top;display:block;background:var(--hw-cool-grey)')} />
+        <img loading="lazy" decoding="async" src={quote.img} alt={quote.n} style={sx('flex:1 1 260px;width:100%;max-width:420px;aspect-ratio:1;object-fit:cover;object-position:center top;display:block;background:var(--hw-cool-grey)')} />
         <div style={sx('flex:2 1 420px;min-width:0;display:flex;flex-direction:column;gap:24px')}>
           <p style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(26px,2.8vw,42px);line-height:1.18;letter-spacing:-.01em;text-wrap:pretty')}>“{quote.q}”</p>
           <Hv as="button" onClick={() => go('about/leadership')} s="align-self:flex-start;display:flex;flex-direction:column;gap:4px;background:none;border:0;padding:0;cursor:pointer;text-align:left;color:var(--hw-black)" h="color:var(--hw-terracotta)">
@@ -544,7 +544,7 @@ function Audience({ sub, aud, hero, toForm, go }) {
         <div style={sx('display:flex;flex-direction:column;gap:18px')}>
           <p style={sx(`margin:0;${MONO};font-size:clamp(14px,1.2vw,18px);color:var(--hw-terracotta)`)}>Your Heartwood contact</p>
           <div data-m-stack="" style={sx('display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr);gap:clamp(16px,2vw,28px);align-items:end;padding-top:16px;border-top:1px solid var(--hw-black)')}>
-            <img src={aud.contact.img} alt={aud.contact.n} style={sx('width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
+            <img loading="lazy" decoding="async" src={aud.contact.img} alt={aud.contact.n} style={sx('width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
             <div style={sx('display:flex;flex-direction:column;gap:8px')}>
               <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.2vw,32px)')}>{aud.contact.n}</span>
               <span style={sx(`${MONO};font-size:13px`)}>{aud.contact.t}</span>
@@ -672,7 +672,7 @@ function PageLanding({ sub, go }) {
     <div style={sx('background:var(--hw-white);color:var(--hw-black);font-family:var(--font-body)')}>
       {aud ? (
         <section data-screen-label={'Landing — ' + s} style={sx('position:relative;overflow:hidden;height:clamp(480px,52vw,760px);background:var(--hw-brown)')}>
-          <img src={hero.img} alt="" style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block')} />
+          <img loading="lazy" decoding="async" src={hero.img} alt="" style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block')} />
           <div style={sx('position:absolute;inset:0;background:var(--overlay-brown)')} />
           <div style={sx('position:absolute;left:0;right:0;bottom:0;padding:clamp(40px,5vw,72px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:20px;color:var(--hw-white)')}>
             <p style={sx(`margin:0;${MONO};font-size:clamp(14px,1.2vw,18px)`)}>{hero.eyebrow}</p>
@@ -709,7 +709,7 @@ function PageLanding({ sub, go }) {
             </div>
           </div>
           <div style={sx('position:relative;overflow:hidden;min-height:340px;background:var(--hw-brown)')}>
-            <img src={hero.img} alt="" style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block')} />
+            <img loading="lazy" decoding="async" src={hero.img} alt="" style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block')} />
             {!hero.faded && <div style={sx('position:absolute;inset:0;background:var(--overlay-brown)')} />}
           </div>
         </section>
@@ -754,7 +754,7 @@ function PageLanding({ sub, go }) {
               <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,220px));gap:clamp(24px,3vw,48px)')}>
                 {MEETING_TEAM.map((m) => (
                   <div key={m.name} style={sx('display:flex;flex-direction:column;gap:10px')}>
-                    <img src={m.img} alt={m.name} style={sx('width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
+                    <img loading="lazy" decoding="async" src={m.img} alt={m.name} style={sx('width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
                     <span style={sx(`font-family:var(--font-display);font-weight:500;font-size:clamp(20px,1.7vw,24px)${m.nowrap ? ';white-space:nowrap' : ''}`)}>{m.name}</span>
                     <span style={sx('font-family:var(--font-subhead);font-size:13px;text-transform:uppercase;line-height:1.35')}>{m.title}</span>
                   </div>

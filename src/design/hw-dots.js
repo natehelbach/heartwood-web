@@ -11,11 +11,13 @@ class HWDots extends HTMLElement{
     this.reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.ro=new ResizeObserver(()=>this.layout());this.ro.observe(this);
     this.io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)&&this.t0==null)this.t0=performance.now();},{threshold:.2});this.io.observe(this);
+    // Heartwood change: skip drawing while the element is well off-screen (the design draws every frame).
+    this.vio=new IntersectionObserver(es=>{this.vis=es.some(e=>e.isIntersecting);},{rootMargin:'200px'});this.vio.observe(this);this.vis=true;
     this._fb=setTimeout(()=>{if(this.t0==null)this.t0=performance.now();},1500);
-    var loop=t=>{this.draw(t);this.raf=requestAnimationFrame(loop);};this.raf=requestAnimationFrame(loop);
+    var loop=t=>{if(this.vis)this.draw(t);this.raf=requestAnimationFrame(loop);};this.raf=requestAnimationFrame(loop);
     this.layout();this._lt=setTimeout(()=>{this.layout();this.draw(performance.now());},100);
   }
-  disconnectedCallback(){cancelAnimationFrame(this.raf);clearTimeout(this._fb);clearTimeout(this._lt);this.ro&&this.ro.disconnect();this.io&&this.io.disconnect();}
+  disconnectedCallback(){cancelAnimationFrame(this.raf);clearTimeout(this._fb);clearTimeout(this._lt);this.ro&&this.ro.disconnect();this.io&&this.io.disconnect();this.vio&&this.vio.disconnect();}
   attributeChangedCallback(){this.layout();}
   get opts(){return{mode:this.getAttribute('mode')||this.mode||'ring',count:+(this.getAttribute('count')||this.count||240),color:this.getAttribute('color')||this.color||'#C5DCEA',seed:+(this.getAttribute('seed')||this.seed||7),spread:+(this.getAttribute('spread')||.09),size:+(this.getAttribute('size')||1)};}
   layout(){

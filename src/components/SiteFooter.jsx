@@ -85,7 +85,7 @@ function SiteFooter({ go }) {
       </div>
 
       <div className="site-footer__logo">
-        <img src="/assets/logos/Heartwood_Logo_White.png" alt="Heartwood" />
+        <img loading="lazy" decoding="async" src="/assets/logos/Heartwood_Logo_White.png" alt="Heartwood" />
       </div>
 
       <div className="site-footer__bottom">

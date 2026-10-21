@@ -83,7 +83,7 @@ function ProjectCard({ p, go }) {
         </span>
       </span>
       <span style={sx('display:block;width:100%;aspect-ratio:2/3;overflow:hidden;background:var(--hw-cool-grey)')}>
-        <img src={p.img} alt={p.name} style={sx(`width:100%;height:100%;object-fit:cover;object-position:${p.pos || 'center'};display:block;transition:transform .6s ease;transform:${hover ? 'scale(1.03)' : 'none'}`)} />
+        <img loading="lazy" decoding="async" src={p.img} alt={p.name} style={sx(`width:100%;height:100%;object-fit:cover;object-position:${p.pos || 'center'};display:block;transition:transform .6s ease;transform:${hover ? 'scale(1.03)' : 'none'}`)} />
       </span>
     </button>
   )
@@ -190,7 +190,7 @@ function PropertyDetail({ sub, go }) {
             <span style={sx(`${MONO};font-size:12px`)}>Material board</span>
             {c.materialBoard ? (
               <>
-                <img src={c.materialBoard.src} alt="Material board" style={sx('width:100%;max-width:520px;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
+                <img loading="lazy" decoding="async" src={c.materialBoard.src} alt="Material board" style={sx('width:100%;max-width:520px;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
                 <figcaption style={sx('font-size:14px;max-width:520px')}>{c.materialBoard.cap}</figcaption>
               </>
             ) : (
@@ -206,11 +206,11 @@ function PropertyDetail({ sub, go }) {
             <Hv as="button" onClick={() => setImgWrap(ii - 1)} aria-label="Previous image" s={arrow} h="color:var(--hw-teal)">←</Hv>
             <span style={sx('position:relative;display:block;width:100%;aspect-ratio:3/2;overflow:hidden;background:var(--hw-cool-grey)')}>
               {images.map((im, i) => (
-                <img key={im.src} src={im.src} alt={im.cap} style={sx(`position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:${im.pos || 'center'};display:block;opacity:${i === ii ? 1 : 0};transition:opacity .4s ease`)} />
+                <img loading="lazy" decoding="async" key={im.src} src={im.src} alt={im.cap} style={sx(`position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:${im.pos || 'center'};display:block;opacity:${i === ii ? 1 : 0};transition:opacity .4s ease`)} />
               ))}
               <span style={sx(`position:absolute;inset:0;background:${lock.overlay};pointer-events:none`)} />
               <span data-screen-label="Property — Lockup" style={sx('position:absolute;left:clamp(20px,3vw,48px);bottom:clamp(20px,3vw,48px);display:flex;align-items:center;gap:clamp(16px,2vw,32px);pointer-events:none')}>
-                <img src={lock.icon} alt="" style={sx('width:clamp(125px,11vw,180px);height:auto;display:block')} />
+                <img loading="lazy" decoding="async" src={lock.icon} alt="" style={sx('width:clamp(125px,11vw,180px);height:auto;display:block')} />
                 <span style={sx(`font-family:var(--font-display);font-weight:500;font-size:clamp(36px,4.2vw,72px);line-height:1.02;letter-spacing:-.01em;color:${lock.fg};display:flex;flex-direction:column`)}>
                   {stack.map((ln) => (
                     <span key={ln}>{ln}</span>
@@ -241,7 +241,7 @@ function PropertyDetail({ sub, go }) {
             {images.slice(1).map((im, i) => (
               <button key={im.src} onClick={() => setImgWrap(i + 1)} style={sx('background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;gap:8px;text-align:left;font-family:var(--font-body);color:var(--hw-black)')}>
                 <span style={sx('display:block;width:100%;aspect-ratio:4/5;overflow:hidden;background:var(--hw-cool-grey)')}>
-                  <img src={im.src} alt={im.cap} style={sx('width:100%;height:100%;object-fit:cover;display:block')} />
+                  <img loading="lazy" decoding="async" src={im.src} alt={im.cap} style={sx('width:100%;height:100%;object-fit:cover;display:block')} />
                 </span>
                 <span style={sx('font-size:14px;font-style:italic')}>{im.cap}</span>
               </button>
@@ -251,7 +251,7 @@ function PropertyDetail({ sub, go }) {
 
         {(c.scroll || []).map((si) => (
           <figure key={si.src} data-screen-label="Property — Photo" style={sx('margin:0 48px;display:flex;flex-direction:column;gap:10px')}>
-            <img src={si.src} alt={si.cap} style={sx('width:100%;height:auto;display:block;background:var(--hw-cool-grey)')} />
+            <img loading="lazy" decoding="async" src={si.src} alt={si.cap} style={sx('width:100%;height:auto;display:block;background:var(--hw-cool-grey)')} />
             <figcaption style={sx('font-size:14px;font-style:italic')}>{si.cap}</figcaption>
           </figure>
         ))}
@@ -264,7 +264,7 @@ function PropertyDetail({ sub, go }) {
             </div>
             <button onClick={() => setDw((d) => (d + 1) % drawings.length)} aria-label="Next drawing" style={sx('position:relative;display:block;width:100%;aspect-ratio:1155/832;background:transparent;border:0;padding:0;cursor:pointer;font-family:var(--font-body);color:var(--hw-black)')}>
               {drawings.map((d, i) => (
-                <img key={d.src} src={d.src} alt={d.cap} style={sx(`position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;mix-blend-mode:multiply;opacity:${i === dwi ? 1 : 0};transition:opacity .5s ease`)} />
+                <img loading="lazy" decoding="async" key={d.src} src={d.src} alt={d.cap} style={sx(`position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;mix-blend-mode:multiply;opacity:${i === dwi ? 1 : 0};transition:opacity .5s ease`)} />
               ))}
               <span style={sx('position:absolute;right:16px;top:16px;font-size:28px;font-weight:300;line-height:1')}>+</span>
             </button>

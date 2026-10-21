@@ -13,3 +13,5 @@ React (Vite) port of the Heartwood website designed in Claude Design
 
 - Each page in `src/pages/` is a hand port of the matching `.dc.html` file; style strings are kept verbatim via `sx()` and `Hv` in `src/design/ui.jsx`.
 - The Claude Design connector can't download files over 256 KB, so images come from the owner's downloads of the design project on the OneDrive Desktop (`webassets_N/project/assets/`, newest N). Copy them into `public/assets/` at the same paths, resized and compressed.
+- Photos are served as compressed JPEG (max 2000px, about quality 74–82), even where the design uses a `.png` name, and the code references the `.jpg` (e.g. `HW_517-W-Main_Corner.png` → `.jpg`). When a design change names a `.png` photo, check `public/assets/` for the `.jpg` first. Keep PNG only for logos, icons, drawings and images that need transparency.
+- Built JS/CSS go to `/_app/` (cached for a year by `vercel.json`); `public/assets/` images get a one-day cache, so replace an image under a new name if it must update at once.

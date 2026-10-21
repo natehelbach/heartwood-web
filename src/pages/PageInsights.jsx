@@ -113,7 +113,7 @@ function Perspectives({ go }) {
       </div>
       {feat && (
         <Hv as="button" onClick={open(feat.slug)} s="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,4vw,64px);align-items:center;padding:0;border:0;background:none;text-align:left;cursor:pointer;color:var(--hw-black);font:inherit" h="color:var(--hw-teal)">
-          <img src={feat.img} alt="" style={sx('width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
+          <img loading="lazy" decoding="async" src={feat.img} alt="" style={sx('width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
           <span style={sx('display:flex;flex-direction:column;gap:18px')}>
             <span style={sx(`display:flex;gap:10px;align-items:center;${MONO};font-size:12px`)}>
               <span style={sx('width:8px;height:8px;border-radius:50%;background:var(--hw-teal);display:block')} />
@@ -131,7 +131,7 @@ function Perspectives({ go }) {
           <div style={sx('display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:clamp(20px,2.5vw,36px)')}>
             {persp.slice(1).map((m) => (
               <Hv key={m.slug} as="button" onClick={open(m.slug)} data-m-stack="" s={ROW_LINK} h="color:var(--hw-teal)">
-                <img src={m.img} alt="" style={sx('width:140px;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
+                <img loading="lazy" decoding="async" src={m.img} alt="" style={sx('width:140px;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
                 <span style={sx('display:flex;flex-direction:column;gap:8px')}>
                   <span style={sx(`${MONO};font-size:12px`)}>{m.topic} · {m.read}</span>
                   <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(21px,1.8vw,26px);line-height:1.15;text-wrap:balance')}>{m.title}</span>
@@ -160,7 +160,7 @@ function News() {
       </div>
       {lead && (
         <Hv as="a" href={lead.href} target={lead.target} rel="noopener" s="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,4vw,64px);align-items:center;color:var(--hw-black);text-decoration:none" h="color:var(--hw-teal)">
-          {lead.img && <img src={lead.img} alt="" style={sx('width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />}
+          {lead.img && <img loading="lazy" decoding="async" src={lead.img} alt="" style={sx('width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />}
           <span style={sx('display:flex;flex-direction:column;gap:18px')}>
             <span style={sx(`display:flex;gap:10px;align-items:center;${MONO};font-size:12px`)}>
               <span style={sx('width:8px;height:8px;border-radius:50%;background:var(--hw-terracotta);display:block')} />
@@ -230,7 +230,7 @@ function Release({ slug, go }) {
         {rel.person ? (
           <div style={sx('padding:clamp(40px,5vw,80px) clamp(20px,3vw,40px);display:flex;align-items:flex-end;justify-content:center')}>
             <figure style={sx('margin:0;width:100%;max-width:400px;display:flex;flex-direction:column;gap:14px')}>
-              <img src={photoOf(rel)} alt={rel.person} style={sx('width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 20%;display:block;filter:grayscale(1)')} />
+              <img loading="lazy" decoding="async" src={photoOf(rel)} alt={rel.person} style={sx('width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 20%;display:block;filter:grayscale(1)')} />
               <figcaption style={sx('display:flex;flex-direction:column;gap:4px;padding-top:12px;border-top:1px solid var(--hw-black)')}>
                 <span style={sx('font-family:var(--font-display);font-weight:500;font-size:22px')}>{rel.person}</span>
                 <span style={sx(`${MONO};font-size:12px`)}>{rel.role}</span>
@@ -343,7 +343,7 @@ function Issue({ go }) {
         </div>
       </header>
       <figure style={sx('margin:0 0 clamp(40px,5vw,72px)')}>
-        <img src="/assets/website/HW_3385-Lawrence-Av-E_1.png" alt="Rendering of 3385 Lawrence Avenue East" style={sx('width:100%;aspect-ratio:16/8;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
+        <img loading="lazy" decoding="async" src="/assets/website/HW_3385-Lawrence-Av-E_1.jpg" alt="Rendering of 3385 Lawrence Avenue East" style={sx('width:100%;aspect-ratio:16/8;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
         <figcaption style={sx('margin-top:12px;font-family:var(--font-subhead);font-size:12px;text-transform:uppercase')}>3385 Lawrence Avenue East, Toronto — rendering</figcaption>
       </figure>
 
@@ -358,7 +358,7 @@ function Issue({ go }) {
           <div style={sx('display:flex;gap:40px;flex-wrap:wrap;margin-top:32px')}>
             {SIGNERS.map((s) => (
               <div key={s.name} style={sx('display:flex;gap:16px;align-items:center')}>
-                <img src={s.photo} alt={s.name} style={sx('width:72px;height:72px;object-fit:cover;display:block;filter:grayscale(1)')} />
+                <img loading="lazy" decoding="async" src={s.photo} alt={s.name} style={sx('width:72px;height:72px;object-fit:cover;display:block;filter:grayscale(1)')} />
                 <span style={sx('display:flex;flex-direction:column;gap:2px;font-size:18px')}>
                   {s.name}
                   <span style={sx('font-family:var(--font-subhead);font-size:12px;text-transform:uppercase')}>Founding Partner</span>
@@ -393,7 +393,7 @@ function Issue({ go }) {
       <section style={sx(ISSUE_SECTION)}>
         <IssueLabel n="03" label="Featured project" />
         <div style={sx('grid-column:span 2;min-width:0')}>
-          <img src="/assets/website/HW_Render_3385-Lawrence-Courtyard.jpg" alt="Courtyard at 3385 Lawrence Avenue East" style={sx('width:100%;aspect-ratio:3/2;object-fit:cover;display:block;margin-bottom:28px')} />
+          <img loading="lazy" decoding="async" src="/assets/website/HW_Render_3385-Lawrence-Courtyard.jpg" alt="Courtyard at 3385 Lawrence Avenue East" style={sx('width:100%;aspect-ratio:3/2;object-fit:cover;display:block;margin-bottom:28px')} />
           <h2 style={sx(`margin:0 0 20px;${ISSUE_H2}`)}>3385 Lawrence Avenue East</h2>
           <p style={sx(`margin:0 0 1.1em;max-width:680px;${BODY20}`)}>
             A purpose-built rental community in Scarborough, organised around a shared landscaped courtyard. The project reflects how we approach resilience: building systems chosen for long-term operating cost, generous amenity space residents actually use, and a design intended to age well rather than simply lease up quickly.
@@ -536,7 +536,7 @@ function PageInsights({ sub = '', go }) {
           {sub === '' && (
             <section style={sx('padding:0 clamp(20px,3vw,40px) clamp(40px,5vw,72px)')}>
               <Hv as="button" onClick={() => go('insights/newsletter/01')} s="width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:0;background:var(--hw-white);color:var(--hw-black);border:0;padding:0;cursor:pointer;text-align:left" h="background:var(--hw-cool-grey)">
-                <img src="/assets/website/HW_3385-Lawrence-Av-E_1.png" alt="" style={sx('width:100%;height:100%;min-height:340px;object-fit:cover;display:block')} />
+                <img loading="lazy" decoding="async" src="/assets/website/HW_3385-Lawrence-Av-E_1.jpg" alt="" style={sx('width:100%;height:100%;min-height:340px;object-fit:cover;display:block')} />
                 <span style={sx('padding:clamp(24px,3vw,48px);display:flex;flex-direction:column;gap:16px;justify-content:center')}>
                   <span style={sx(`${MONO};font-size:13px;color:var(--hw-black)`)}>The Long View · No. 01 · October 2026</span>
                   <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(28px,3vw,46px);line-height:1.05;letter-spacing:-.015em')}>Why we take the long view in real estate</span>

@@ -11,8 +11,8 @@ const L = [
   ['353-sherbourne', '353 Sherbourne', 'Toronto, Ontario', R + 'HW_Render_353-Sherbourne_web.jpg'],
   ['3385-lawrence', '3385 Lawrence', 'Toronto, Ontario', R + 'HW_Render_3385-Lawrence_web.jpg'],
   ['360-kennedy', '360 Kennedy', 'Ottawa, Ontario', R + 'HW_Render_360-Kennedy-Lane.jpg'],
-  ['175-oxford', '175 Oxford', 'Orillia, Ontario', PH + 'HW_Photo_175-Oxford_Townhomes-Sky.png'],
-  ['308-parkside', '308 Parkside', 'Hamilton, Ontario', PH + 'HW_Photo_308-Parkside_Townhomes-Day.png'],
+  ['175-oxford', '175 Oxford', 'Orillia, Ontario', PH + 'HW_Photo_175-Oxford_Townhomes-Sky.jpg'],
+  ['308-parkside', '308 Parkside', 'Hamilton, Ontario', PH + 'HW_Photo_308-Parkside_Townhomes-Day.jpg'],
   ['4094-tomken', '4094 Tomken', 'Mississauga, Ontario', R + 'HW_Render_4094-Tomken-Road_web.jpg'],
   ['2102-lawrence', '2102 Lawrence', 'Toronto, Ontario', R + 'HW_Render_2102-Lawrence.jpg'],
 ]
