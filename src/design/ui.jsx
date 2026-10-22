@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // Helpers that let the design's markup be ported almost verbatim.
 //
@@ -84,6 +84,48 @@ export function DotField({ preset, icons, iconSize, interval, color, style }) {
 // The terracotta section rule the design draws as a 1.5px background line across the top.
 export const RULE_BG =
   'linear-gradient(var(--hw-terracotta),var(--hw-terracotta)) no-repeat top center/calc(100% - 2 * clamp(20px,3vw,40px)) 1.5px'
+
+// HubSpot portal and the design's embedded form IDs (ui_kits/website, Oct 22).
+export const HS_PORTAL = '343688725'
+export const HS_FORMS = {
+  newsletter: 'da801a25-5c50-4ddf-96c6-75e365397071',
+  contact: '1f581465-19ec-4534-917a-f6f37a117d55',
+  meeting: 'd895b98a-cec2-4ded-b3ed-c705de75becd',
+  podcast: 'ba426d0d-5cb2-4057-8ec5-fd40a0679dd4',
+}
+
+// Port of the design's hsLoad(): once new empty .hs-form-frame divs are on the page, re-add
+// HubSpot's embed script so it scans for them (it only scans when it loads).
+function hsLoad() {
+  clearTimeout(window.__hwHsT)
+  window.__hwHsT = setTimeout(() => {
+    const fr = [...document.querySelectorAll('.hs-form-frame')].filter((el) => !el.childElementCount && !el.dataset.hwHs)
+    if (!fr.length) return
+    fr.forEach((el) => (el.dataset.hwHs = '1'))
+    const id = 'hs-embed-' + HS_PORTAL
+    document.getElementById(id)?.remove()
+    const sc = document.createElement('script')
+    sc.id = id
+    sc.src = `https://js-na3.hsforms.net/forms/embed/${HS_PORTAL}.js`
+    sc.defer = true
+    document.body.appendChild(sc)
+  }, 150)
+}
+
+// A live HubSpot form embed, as the design's <div class="hs-form-frame" …>.
+export function HsForm({ form }) {
+  useEffect(hsLoad, [form])
+  return (
+    <div
+      key={form}
+      className="hs-form-frame"
+      data-region="na3"
+      data-form-id={HS_FORMS[form]}
+      data-portal-id={HS_PORTAL}
+      style={{ minHeight: 60, minWidth: 0 }}
+    />
+  )
+}
 
 // The dashed "HubSpot form needed" note the design places beside every placeholder form.
 export function HubspotNote({ label, style }) {

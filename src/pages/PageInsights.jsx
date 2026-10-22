@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import { Hv, sx, DotField, HubspotNote } from '../design/ui.jsx'
+import { Hv, sx, DotField, HsForm } from '../design/ui.jsx'
 import HW_DATA from '../design/site-data.js'
 import HW_ARTICLES from '../design/articles-data.js'
 import PageArticle from './PageArticle.jsx'
 import NotFound from '../components/NotFound.jsx'
-import { HONEYPOT, useNewsletter } from '../site/forms.js'
 import { pathFor } from '../site/paths.js'
 import { CLIPS, slugOf } from '../design/news-data.js'
 
@@ -14,7 +13,7 @@ import { CLIPS, slugOf } from '../design/news-data.js'
 const MONO = 'font-family:var(--font-subhead);font-weight:500;text-transform:uppercase'
 
 const TOPIC = {
-  'nation-of-renters': 'Market', 'supply-cliff': 'Market',
+  'nation-of-renters': 'Market',
   'tax-efficient-income': 'Tax & income',
   'private-real-estate-portfolio': 'Portfolio & risk', 'low-leverage': 'Portfolio & risk', 'nimble-fund': 'Portfolio & risk',
 }
@@ -28,7 +27,6 @@ const PAPERS = [
 
 const PERSP = [
   { kind: 'Perspective', slug: 'nation-of-renters', img: '/assets/photography/HW_Photo_Timber-Living-Room.jpg', title: 'Canada is becoming a nation of renters', dek: 'Renter households grew 35% between 2011 and 2025 — far faster than households overall.' },
-  { kind: 'Perspective', slug: 'supply-cliff', img: '/assets/photography/HW_MassTimber_Living-Room-Window.jpg', title: 'The supply cliff: why cancelled condos matter for rental', dek: '7,243 condominium units were cancelled in 2025. What it leaves behind in Ontario’s largest markets.' },
 ]
   .map((a) => ({ ...a, dot: 'var(--hw-teal)', more: 'Read →' }))
   .concat(PAPERS)
@@ -258,7 +256,7 @@ function Release({ slug, go }) {
           <div style={sx('display:flex;flex-direction:column;gap:12px;padding-top:24px;border-top:1px solid var(--hw-black)')}>
             <span style={sx(`${MONO};font-size:12px;color:var(--hw-terracotta)`)}>About Heartwood Investments</span>
             <p style={sx('margin:0;font-size:17px;line-height:1.6;text-wrap:pretty')}>
-              Heartwood Investments is a real estate investment platform that builds, owns and operates high-quality, purpose-built rental housing in North America’s supply-constrained markets, through the Heartwood Residential Growth Trust and Heartwood Residential Income Trust.
+              Heartwood Investments is an investment manager that invests in, develops and manages high-quality real estate in high-growth North American markets. As one integrated team, Heartwood oversees every stage of the investment, from acquisition and development to long-term ownership and management, on behalf of its investors.
             </p>
           </div>
         </article>
@@ -452,28 +450,14 @@ function Issue({ go }) {
 }
 
 function Subscribe() {
-  const news = useNewsletter()
   return (
-    <section style={sx('margin:0 clamp(20px,3vw,40px) clamp(48px,6vw,88px);background:var(--hw-black);color:var(--hw-white);border-top:6px solid var(--hw-terracotta);padding:clamp(28px,4vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:24px;align-items:end')}>
+    <section style={sx('margin:0 clamp(20px,3vw,40px) clamp(48px,6vw,88px);background:var(--hw-black);color:var(--hw-white);border-top:6px solid var(--hw-terracotta);padding:clamp(28px,4vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:24px;align-items:center')}>
       <div style={sx('display:flex;flex-direction:column;gap:12px')}>
         <span style={sx(`${MONO};font-size:14px`)}>Subscribe</span>
         <p style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(26px,2.6vw,40px);line-height:1.1')}>Get The Long View in your inbox each month.</p>
       </div>
       <div style={sx('display:flex;flex-direction:column;gap:12px;min-width:0')}>
-        <HubspotNote label="The Long View newsletter" />
-        <form
-          onSubmit={news.onSubmit}
-          noValidate
-          aria-label="The Long View newsletter sign-up"
-          style={sx(`position:relative;display:flex;border:1.5px solid ${news.invalid ? 'var(--hw-terracotta)' : 'var(--hw-white)'};min-width:0`)}
-        >
-          <input name="email" type="email" required autoComplete="email" aria-label="Email address" aria-invalid={news.invalid || undefined} aria-describedby="newsletter-subscribe-status" onChange={news.onChange} className="hw-input-on-dark" placeholder="Enter your email" style={sx('flex:1;min-width:0;padding:14px 18px;background:transparent;border:0;color:var(--hw-white);font-family:var(--font-subhead);font-size:14px;text-transform:uppercase')} />
-          <input {...HONEYPOT} />
-          <button type="submit" disabled={news.sending} style={sx(`padding:14px 22px;background:var(--hw-white);color:var(--hw-black);border:0;cursor:${news.sending ? 'progress' : 'pointer'};${MONO};font-size:14px`)}>{news.button}</button>
-        </form>
-        <p id="newsletter-subscribe-status" role="status" aria-live="polite" style={sx(`margin:0;min-height:18px;${MONO};font-size:12px;letter-spacing:.04em;line-height:1.5;color:var(--hw-white)`)}>
-          {news.message}
-        </p>
+        <HsForm form="newsletter" />
       </div>
     </section>
   )

@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { Hv, sx, RULE_BG, HubspotNote } from '../design/ui.jsx'
+import { Hv, sx, RULE_BG, HubspotNote, HsForm } from '../design/ui.jsx'
 import { LOGIN_URL } from '../site/sitemap.js'
 import { HONEYPOT, HUBSPOT, isEmail, useFormSubmit } from '../site/forms.js'
 
@@ -47,8 +47,8 @@ const PAGES = {
     form: { eyebrow: 'Institutional enquiries', title: 'Contact us.', note: 'Tell us about your mandate. We’ll meet first, then share the data room and DDQ.', cta: 'Send enquiry', thanks: 'Thank you. A senior member of our team will be in touch.', hubspot: 'institutional-enquiry', hasSelect: true, selectLabel: 'Organization type', options: ['Pension fund', 'Foundation or endowment', 'Insurer', 'Sovereign wealth fund', 'Consultant or placement agent', 'Other'] },
   },
   meeting: {
-    hero: { eyebrow: 'Investments · Schedule a meeting', title: 'Meet with our investment team.', intro: 'An introductory meeting with our senior team to understand your objectives and discuss how we can partner.', cta: 'Invest with us', img: '/assets/renders/HW_360-Kennedy-Lane_1.jpg', faded: true },
-    form: { eyebrow: 'Schedule a meeting', title: 'Pick a time that works.', note: '', cta: 'Schedule a meeting', thanks: 'Booked. A confirmation and prep email are on the way.', hubspot: 'meeting-booking', hasSelect: true, selectLabel: 'Which best describes you?', options: ['Advisor (EMD, RIA, wealth manager)', 'Private wealth (family office or high-net-worth)', 'Institutional investor'] },
+    hero: { eyebrow: 'Start a conversation with us', title: 'Meet with our investment team.', intro: 'An introductory meeting with our senior team to understand your objectives and discuss how we can partner.', cta: '', img: '/assets/project-renders/HW_Render_3385-Lawrence_web.jpg' },
+    form: { eyebrow: 'Schedule a meeting', title: 'Request a meeting.', note: 'Whether you’re interested in investing with us, or in how we develop and manage rental housing, we’d love to meet. Fill out the form and a member of our team will be in touch shortly.', cta: 'Schedule a meeting', thanks: 'Booked. A confirmation and prep email are on the way.', hubspot: 'meeting-booking', hasSelect: true, selectLabel: 'Which best describes you?', options: ['Advisor (EMD, RIA, wealth manager)', 'Private wealth (family office or high-net-worth)', 'Institutional investor'] },
   },
   portal: {
     hero: { eyebrow: 'Investments · Investor portal', title: 'Everything you need to invest, in one place.', intro: 'Create an account to review fund materials, start a subscription and track your investment.', cta: 'Create your account', img: R + 'HW_Render_3385-Lawrence-Courtyard.jpg' },
@@ -662,6 +662,9 @@ function PageLanding({ sub, go }) {
   const formRef = useRef(null)
   const meeting = s === 'meeting'
   const plainHero = s === 'events' || s === 'podcast'
+  // The design swaps the native placeholder form for live HubSpot embeds on these two pages.
+  const hsForm = s === 'meeting' ? 'meeting' : s === 'podcast' ? 'podcast' : ''
+  const eyebrow = sx(`${EYEBROW};color:${meeting ? 'var(--hw-hemlock)' : 'var(--hw-terracotta)'}`)
 
   const toForm = () => {
     const el = formRef.current
@@ -694,9 +697,10 @@ function PageLanding({ sub, go }) {
       ) : (
         <section data-screen-label={'Landing — ' + s} style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));min-height:clamp(440px,42vw,640px)')}>
           <div style={sx('padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:22px;justify-content:flex-end')}>
-            <p style={sx(EYEBROW)}>{hero.eyebrow}</p>
+            <p style={eyebrow}>{hero.eyebrow}</p>
             <h1 style={sx('margin:0;max-width:760px;font-family:var(--font-display);font-weight:500;font-size:clamp(40px,5.2vw,80px);line-height:1;letter-spacing:-.025em;text-wrap:balance')}>{hero.title}</h1>
             <p style={sx('margin:0;max-width:580px;font-size:clamp(18px,1.5vw,22px);line-height:1.5;text-wrap:pretty')}>{hero.intro}</p>
+            {hero.cta && (
             <div style={sx('display:flex;flex-wrap:wrap;gap:12px')}>
               <Hv as="button" onClick={toForm} s={`padding:14px 20px;background:var(--hw-black);color:var(--hw-white);border:0;cursor:pointer;${MONO};font-size:14px`} h="background:var(--hw-terracotta)">
                 {hero.cta}
@@ -707,8 +711,9 @@ function PageLanding({ sub, go }) {
                 </Hv>
               )}
             </div>
+            )}
           </div>
-          <div style={sx('position:relative;overflow:hidden;min-height:340px;background:var(--hw-brown)')}>
+          <div style={sx('position:relative;overflow:hidden;min-height:340px;margin-top:clamp(12px,1.5vw,20px);background:var(--hw-brown)')}>
             <img loading="lazy" decoding="async" src={hero.img} alt="" style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block')} />
             {!hero.faded && <div style={sx('position:absolute;inset:0;background:var(--overlay-brown)')} />}
           </div>
@@ -745,12 +750,12 @@ function PageLanding({ sub, go }) {
 
       <section ref={formRef} data-screen-label={'Landing — ' + s + ' form'} style={sx('padding:0 clamp(20px,3vw,40px) clamp(48px,6vw,88px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(32px,4vw,64px);align-items:stretch')}>
         <div style={sx(`display:flex;flex-direction:column;gap:20px;padding-top:clamp(40px,5vw,72px);border-top:${meeting ? '0' : '1.5px solid var(--hw-terracotta)'}`)}>
-          <p style={sx(EYEBROW)}>{form.eyebrow}</p>
+          <p style={eyebrow}>{form.eyebrow}</p>
           <h2 style={sx('margin:0;max-width:560px;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.6vw,52px);line-height:1.08;letter-spacing:-.015em;text-wrap:balance')}>{form.title}</h2>
           {form.note && <p style={sx('margin:0;max-width:520px;font-size:18px;line-height:1.5;text-wrap:pretty')}>{form.note}</p>}
           {meeting && (
             <div style={sx('display:flex;flex-direction:column;gap:20px;padding-top:12px')}>
-              <span style={sx(`${MONO};font-size:13px;color:var(--hw-black)`)}>You’ll be meeting with one of our investment experts</span>
+              <span style={sx(`${MONO};font-size:13px;color:var(--hw-black)`)}>Investors will meet with one of our investment experts</span>
               <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,220px));gap:clamp(24px,3vw,48px)')}>
                 {MEETING_TEAM.map((m) => (
                   <div key={m.name} style={sx('display:flex;flex-direction:column;gap:10px')}>
@@ -763,8 +768,8 @@ function PageLanding({ sub, go }) {
             </div>
           )}
         </div>
-        <div style={sx(`background:${meeting ? 'var(--hw-terracotta)' : 'var(--hw-cool-grey)'};color:${meeting ? 'var(--hw-white)' : 'var(--hw-black)'};padding:clamp(28px,3vw,44px);margin-top:clamp(40px,5vw,72px);display:flex;flex-direction:column;gap:22px`)}>
-          <LeadForm key={s} s={s} form={form} meeting={meeting} />
+        <div style={sx(`background:${hsForm ? 'transparent' : 'var(--hw-cool-grey)'};color:var(--hw-black);padding:clamp(28px,3vw,44px);margin-top:clamp(40px,5vw,72px);display:flex;flex-direction:column;gap:22px`)}>
+          {hsForm ? <HsForm form={hsForm} /> : <LeadForm key={s} s={s} form={form} meeting={meeting} />}
         </div>
       </section>
     </div>

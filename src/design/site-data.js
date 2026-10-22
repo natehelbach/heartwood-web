@@ -64,12 +64,12 @@ const pillars = [
 ]
 
 const systems = [
-  { title: 'Rooftop Solar PV', img: I + 'HW_Innovation_Rooftop-Solar-PV.png', body: 'Reduces energy costs for building operations and improves resilience to changes in the electrical grid.' },
+  { title: 'Rooftop Solar PV', img: I + 'HW_Innovation_Rooftop-Solar-PV.png', body: 'Reduces energy costs for building operations and improves resilience to instability in the electrical grid.' },
   { title: 'Green Roofs', img: I + 'HW_Innovation_Green-Roof.jpg', body: 'Improves insulation, passively manages stormwater and reduces urban heat island effects.' },
-  { title: 'Componentized Envelopes', img: I + 'HW_Innovation_Prefab-Envelope_1.jpg', body: 'Shortens construction timeframes and improves performance, saving costs in construction and operations.' },
+  { title: 'Componentized Building Envelope', img: I + 'HW_Innovation_Prefab-Envelope_1.jpg', body: 'Shortens construction timeframe and improves thermal performance, saving costs in construction and operations. Decreases energy use intensity, improves comfort and tenant satisfaction.' },
   { title: 'Smart Building Controls', img: I + 'HW_Innovation_Smart-Building-Controls.png', body: 'Cloud-based controls monitor, operate and automate our buildings, improving performance and reducing operating costs.' },
-  { title: 'Low-energy Heating & Cooling', img: I + 'HW_Innovation_Heating-Cooling-Geothermal.jpg', body: 'Heat pump-based systems deliver 3–4 times greater energy efficiency than traditional gas boilers, with lower maintenance costs.' },
-  { title: 'Prefabricated Mass Timber', img: I + 'HW_Innovation_Mass-Timber.png', body: 'Repeatable mass-timber structures improve construction speed and reduce costs — a natural, beautiful, long-lasting material residents love.' },
+  { title: 'Low-energy Heating & Cooling', img: I + 'HW_Innovation_Heating-Cooling-Geothermal.jpg', body: 'Heat pump-based systems are 3–4 times more energy efficient than traditional gas boiler systems, cost less to operate and maintain, and give residents greater control over temperature in their suites.' },
+  { title: 'Prefabricated Mass Timber', img: I + 'HW_Innovation_Mass-Timber.png', body: 'Standardized and repeatable mass timber structures improve construction speed and reduce costs. Mass timber is also a natural, biophilic building material that is local, beautiful, long-lasting, and desirable to our residents.' },
 ]
 
 const stats = [

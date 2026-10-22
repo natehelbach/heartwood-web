@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Hv, sx, RULE_BG } from '../design/ui.jsx'
+import { Hv, sx, RULE_BG, HsForm } from '../design/ui.jsx'
 import DotIcon from '../design/DotIcon.jsx'
 import { GROWTH, INCOME, VEHICLES, TRUSTS } from '../design/investment-data.js'
 
@@ -10,7 +10,6 @@ const MONO = 'font-family:var(--font-subhead);font-weight:500;text-transform:upp
 const EYEBROW = `margin:0;${MONO};font-size:clamp(18px,1.4vw,22px);color:var(--hw-terracotta)`
 const H2 = 'margin:0;max-width:820px;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.6vw,52px);line-height:1.08;letter-spacing:-.015em;text-wrap:balance'
 const RULED_SECTION = `padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:clamp(28px,3vw,48px);background:${RULE_BG}`
-const FIELD_LABEL = `${MONO};font-size:13px`
 const OUTLINE_SM = `padding:13px 20px;background:transparent;color:var(--hw-black);border:1.5px solid var(--hw-black);cursor:pointer;${MONO};font-size:13px`
 const WHY_NOW_P = 'margin:0;max-width:600px;font-size:clamp(17px,1.35vw,20px);line-height:1.55;text-wrap:pretty'
 const COMPARE_ROW = 'display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:24px'
@@ -19,7 +18,6 @@ const CH_H2 = 'margin:0;max-width:880px;font-family:var(--font-display);font-wei
 const CH_P = 'margin:0;max-width:720px;font-size:clamp(18px,1.4vw,20px);line-height:1.55;text-wrap:pretty'
 const CH_ROW_K = 'font-family:var(--font-display);font-weight:500;font-size:clamp(20px,1.7vw,24px);line-height:1.2;letter-spacing:-.01em'
 const TRUST_LABEL = `${MONO};font-size:12px;letter-spacing:.02em;color:var(--hw-terracotta);padding-top:8px`
-const FIELD = 'padding:12px 14px;border:1px solid var(--hw-black);background:var(--hw-white);font-family:var(--font-subhead);font-size:14px;color:var(--hw-black);border-radius:0'
 
 // The two trusts, as shown on Investments › Our funds: strategy data plus the per-trust card and key terms.
 const FUNDS = [
@@ -47,15 +45,6 @@ const REGIONS = [
   { name: 'United States investors', mark: 'US FLAG', count: '3 solutions', cards: [DIRECT_CARD('Co-invest directly in US rental housing alongside Heartwood, or through a separately managed account.'), GROWTH_CARD(1), INCOME_CARD(1)] },
   { name: 'European investors', mark: 'EU FLAG', count: '1 solution', cards: [DIRECT_CARD('Direct co-investment and separately managed accounts in North American rental housing.')] },
 ]
-
-function Field({ label, children }) {
-  return (
-    <label style={sx('display:flex;flex-direction:column;gap:8px')}>
-      <span style={sx(FIELD_LABEL)}>{label}</span>
-      {children}
-    </label>
-  )
-}
 
 function NumList({ items }) {
   return (
@@ -390,7 +379,6 @@ function Markets({ f, n }) {
 function Fund({ f, go }) {
   const formRef = useRef(null)
   const wrapRef = useRef(null)
-  const [sent, setSent] = useState(false)
   const [chap, setChap] = useState('why')
   const [wide, setWide] = useState(true)
 
@@ -545,35 +533,10 @@ function Fund({ f, go }) {
       <section ref={formRef} data-screen-label="Investment — Form" style={sx('padding:0 clamp(20px,3vw,40px) clamp(40px,5vw,72px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(32px,4vw,64px);align-items:stretch')}>
         <div style={sx('display:flex;flex-direction:column;gap:20px;padding-top:clamp(40px,5vw,72px)')}>
           <p style={sx(`margin:0;${MONO};font-size:clamp(14px,1.2vw,18px);color:var(--hw-hemlock)`)}>Invest with us</p>
-          <h2 style={sx('margin:0;max-width:560px;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.6vw,52px);line-height:1.08;letter-spacing:-.015em;text-wrap:balance')}>Own the future of real estate with us.</h2>
+          <h2 style={sx('margin:0;max-width:560px;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.6vw,52px);line-height:1.08;letter-spacing:-.015em;text-wrap:balance')}>{f === GROWTH ? 'Build the next generation of real estate with us.' : 'Own the future of real estate with us.'}</h2>
         </div>
-        <div style={sx('background:var(--hw-hemlock);padding:clamp(28px,3vw,44px);margin-top:clamp(40px,5vw,72px);display:flex;flex-direction:column;gap:22px')}>
-          <p style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(26px,2.6vw,38px);line-height:1.1;letter-spacing:-.01em;max-width:480px')}>Build the next generation of real estate with us.</p>
-          {/* The design embeds the live HubSpot "investment deck" form; the fallback form below
-              shows only if HubSpot never loads. */}
-          <hw-hubspot-form portal="343688725" form="ca449e76-cdb2-413e-9ea0-51baf9f9f13f" region="na3" data-hubspot-form="investment-deck">
-            {sent ? (
-              <p style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(26px,2.6vw,38px);line-height:1.1')}>Thank you. Our team will be in touch shortly.</p>
-            ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  setSent(true)
-                }}
-                style={sx('display:flex;flex-direction:column;gap:22px')}
-              >
-                <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px')}>
-                  <Field label="Name"><input required placeholder="ENTER YOUR NAME" style={sx(FIELD)} /></Field>
-                  <Field label="Email"><input type="email" required placeholder="ENTER YOUR EMAIL" style={sx(FIELD)} /></Field>
-                </div>
-                <div>
-                  <Hv as="button" type="submit" s={`padding:12px 18px;background:var(--hw-black);color:var(--hw-white);border:0;cursor:pointer;${MONO};font-size:14px`} h="background:var(--hw-teal)">
-                    Learn more
-                  </Hv>
-                </div>
-              </form>
-            )}
-          </hw-hubspot-form>
+        <div style={sx('margin-top:clamp(40px,5vw,72px);display:flex;flex-direction:column;gap:22px')}>
+          <HsForm form="meeting" />
         </div>
       </section>
     </>

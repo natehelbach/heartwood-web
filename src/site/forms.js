@@ -2,11 +2,10 @@ import { useState } from 'react'
 
 // HubSpot form settings. Until a form's ID is filled in, submitting it only shows the success
 // message in the browser (and logs a warning); nothing is sent anywhere.
-// Keys match the design's data-hubspot-form names; 'newsletter' is The Long View sign-up.
+// Keys match the design's data-hubspot-form names.
 export const HUBSPOT = {
   portalId: '',
   forms: {
-    newsletter: '',
     'meeting-booking': '',
     'event-registration': '',
     'learn-subscribe': '',
@@ -60,37 +59,6 @@ export function useFormSubmit(key) {
     }
   }
   return { status, send, reset: () => setStatus('idle') }
-}
-
-// The Long View email sign-up (footer and newsletter page). Validates the email inline and
-// returns the message to show in an aria-live region under the form.
-export function useNewsletter() {
-  const { status, send, reset } = useFormSubmit('newsletter')
-  const [invalid, setInvalid] = useState(false)
-  const onSubmit = async (e) => {
-    e.preventDefault()
-    if (status === 'sending') return
-    const form = e.currentTarget
-    const input = form.elements.email
-    if (!isEmail(input.value)) {
-      setInvalid(true)
-      reset()
-      input.focus()
-      return
-    }
-    setInvalid(false)
-    if (await send({ email: input.value.trim() }, form.elements.company_website?.value)) form.reset()
-  }
-  // Editing the email clears an "invalid" or "something went wrong" message.
-  const onChange = () => {
-    if (invalid) setInvalid(false)
-    if (status === 'error') reset()
-  }
-  const message = invalid
-    ? 'Enter a valid email address.'
-    : { sending: 'Subscribing…', sent: 'Thanks — you’re subscribed.', error: 'Something went wrong. Please try again, or email info@heartwoodinvestments.ca.' }[status] || ''
-  const sending = status === 'sending'
-  return { onSubmit, onChange, invalid, sending, button: sending ? 'Subscribing…' : 'Subscribe', message, isError: invalid || status === 'error' }
 }
 
 // Visually hidden field bots tend to fill in. Spread onto an <input>.

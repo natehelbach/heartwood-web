@@ -42,7 +42,7 @@ const META = {
   'investment/portal': ['Investor Portal', 'Create an account to review Heartwood fund materials, start a subscription and track your investment.'],
   'insights/learn': ['Learn', 'Webinar replays, research, market outlooks and case studies on purpose-built rental housing from the Heartwood team.'],
   'investment/meeting': ['Book a Call', 'Schedule a meeting with one of Heartwood’s investment experts.'],
-  'legal/privacy': ['Privacy Policy', 'How Heartwood collects, uses and protects personal information shared through this website.'],
+  'legal/privacy': ['Privacy Policy', 'How Heartwood collects, uses, discloses and protects your personal information.'],
   'legal/disclosures': ['Legal and Disclosures', 'Legal information and important disclosures for investors in Canada and the United States.'],
   'legal/terms': ['Terms & Conditions', 'The terms governing use of the Heartwood Investments website.'],
 }

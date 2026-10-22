@@ -223,7 +223,7 @@ function SiteHeader({ route, section, navSection, activeSub, go }) {
               })}
               <div className="site-nav__actions">
                 <a className="btn btn--outline" {...link('investment/meeting')}>
-                  Book a call
+                  Meet with us
                 </a>
                 <a className="btn btn--solid" href={LOGIN_URL} target="_blank" rel="noopener noreferrer">
                   Login<span aria-hidden="true">↗</span>
@@ -296,7 +296,7 @@ function SiteHeader({ route, section, navSection, activeSub, go }) {
           })}
           <div className="site-drawer__actions">
             <a className="site-drawer__btn" {...link('investment/meeting')}>
-              Book a call
+              Meet with us
             </a>
             <a className="site-drawer__btn site-drawer__btn--solid" href={LOGIN_URL} target="_blank" rel="noopener noreferrer">
               Login<span aria-hidden="true">↗</span>

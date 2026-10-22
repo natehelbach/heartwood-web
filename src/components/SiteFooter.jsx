@@ -1,7 +1,6 @@
 import { FOOTER_COLUMNS, LEGAL_LINKS, LINKEDIN_URL, ADDRESS } from '../site/sitemap.js'
 import { linkProps } from '../site/paths.js'
-import { HONEYPOT, useNewsletter } from '../site/forms.js'
-import { DotField, HubspotNote } from '../design/ui.jsx'
+import { DotField, HsForm } from '../design/ui.jsx'
 import { HW_BRAND_ICONS } from '../design/hw-icons.js'
 
 function LinkedInIcon() {
@@ -13,9 +12,6 @@ function LinkedInIcon() {
 }
 
 function SiteFooter({ go }) {
-  // Not sent anywhere until the HubSpot "newsletter" form ID is set in src/site/forms.js.
-  const news = useNewsletter()
-
   return (
     <footer className="site-footer">
       <div className="site-footer__top">
@@ -40,29 +36,7 @@ function SiteFooter({ go }) {
 
         <div className="site-footer__aside">
           <span className="site-footer__heading">The Long View Newsletter — monthly</span>
-          <HubspotNote label="The Long View newsletter (footer)" />
-          <div className="site-footer__signup">
-            <form className="site-footer__form" onSubmit={news.onSubmit} noValidate aria-label="The Long View newsletter sign-up" aria-invalid={news.invalid || undefined}>
-              <input
-                name="email"
-                type="email"
-                required
-                autoComplete="email"
-                aria-label="Email address"
-                aria-invalid={news.invalid || undefined}
-                aria-describedby="footer-subscribe-status"
-                placeholder="Enter your email"
-                onChange={news.onChange}
-              />
-              <input {...HONEYPOT} />
-              <button type="submit" disabled={news.sending}>
-                {news.button}
-              </button>
-            </form>
-            <p id="footer-subscribe-status" className="site-footer__status" role="status" aria-live="polite">
-              {news.message}
-            </p>
-          </div>
+          <HsForm form="newsletter" />
           <div className="site-footer__contact">
             <span>{ADDRESS}</span>
             <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" data-tap="" aria-label="Heartwood on LinkedIn">

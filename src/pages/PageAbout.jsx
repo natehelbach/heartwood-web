@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Hv, sx, RULE_BG, HubspotNote } from '../design/ui.jsx'
+import { Hv, sx, RULE_BG, HsForm } from '../design/ui.jsx'
 import HW_DATA from '../design/site-data.js'
 import DotIcon from '../design/DotIcon.jsx'
 import PageWhoB from './PageWhoB.jsx'
@@ -21,8 +21,6 @@ const GROUPS = [
   ['Team', 'team'],
 ]
 
-const FIELD = sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:12px;text-transform:uppercase;display:flex;flex-direction:column;gap:8px')
-const INPUT = sx('padding:14px 16px;border:1.5px solid var(--hw-black);background:transparent;font-family:var(--font-body);font-size:18px;color:var(--hw-black);text-transform:none')
 
 // 4:5 team portraits, named after the person (assets/team/portrait/).
 const portraitOf = (t) => `/assets/team/portrait/HW_Team_${t.name.replace(/\s+/g, '-')}_4x5_colour.jpg`
@@ -297,7 +295,6 @@ function Standards({ go }) {
 }
 
 function Contact() {
-  const [sent, setSent] = useState(false)
   return (
     <>
       <section data-screen-label="Contact — Hero" style={sx("position:relative;overflow:hidden;min-height:clamp(480px,48vw,720px);background:var(--hw-brown) url('/assets/photography/HW_MassTimber_Living-Room-Window.jpg') center 75%/cover no-repeat;display:flex;align-items:flex-end")}>
@@ -310,32 +307,12 @@ function Contact() {
     <section data-screen-label="Contact" style={sx(`padding:clamp(48px,6vw,96px) clamp(20px,3vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(32px,5vw,80px);align-items:start;background:${RULE_BG}`)}>
       <div style={sx('display:flex;flex-direction:column;gap:24px')}>
         <p style={sx('margin:0;max-width:520px;font-size:clamp(18px,1.5vw,22px);line-height:1.5')}>
-          We’d love to hear from you, whether it’s about Heartwood, our properties or working together. Send us a note and we’ll reply within one business day.
+          We’d love to hear from you, whether it’s about Heartwood, our properties or working together. Send us a message and we’ll reply promptly.
         </p>
         <iframe src="/contact-map.html" title="Heartwood offices: Toronto and San Francisco" style={sx('width:100%;max-width:640px;aspect-ratio:16/10;border:0;display:block')} />
       </div>
       <div style={sx('display:flex;flex-direction:column;gap:18px')}>
-        <HubspotNote label="General contact" />
-        {sent ? (
-          <p style={sx('margin:0;font-family:var(--font-display);font-size:clamp(22px,2.2vw,32px)')}>Thanks. We’ll be in touch shortly.</p>
-        ) : (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-              setSent(true)
-            }}
-            style={sx('display:flex;flex-direction:column;gap:18px')}
-          >
-            <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px')}>
-              <label style={FIELD}>Name<input required style={INPUT} /></label>
-              <label style={FIELD}>Email<input type="email" required style={INPUT} /></label>
-            </div>
-            <label style={FIELD}>Message<textarea rows={5} style={{ ...INPUT, resize: 'vertical' }} /></label>
-            <Hv as="button" type="submit" s="align-self:flex-start;padding:16px 26px;background:var(--hw-black);color:var(--hw-white);border:0;cursor:pointer;font-family:var(--font-subhead);font-weight:500;font-size:15px;text-transform:uppercase" h="background:var(--hw-terracotta)">
-              Send message
-            </Hv>
-          </form>
-        )}
+        <HsForm form="contact" />
       </div>
     </section>
     </>

@@ -10,14 +10,28 @@ const MONO = 'font-family:var(--font-subhead);font-weight:500;text-transform:upp
 const H2 = 'margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(26px,2.4vw,34px);line-height:1.1'
 const PARA = 'margin:0;font-size:clamp(18px,1.4vw,20px);line-height:1.6;text-wrap:pretty'
 
-// `withGraph` draws the section's own dot chart (`s.g`) under its paragraphs; the design does
-// this for every section after the first.
-function Section({ s, withGraph }) {
-  const r = withGraph && s.g ? renderGraph(JSON.parse(JSON.stringify(s.g)), { ink: '#212121', dotSize: 100 }) : null
+// `rest` marks a section after the first. As in the design, those also draw an equation box
+// (`s.eq`), more paragraphs (`s.p2`), the section's own dot chart (`s.g`), link buttons
+// (`s.links`) and, when given, the article's bar figure (`figure`).
+function Section({ s, rest, go, figure }) {
+  const r = rest && s.g ? renderGraph(JSON.parse(JSON.stringify(s.g)), { ink: '#212121', dotSize: 100 }) : null
   return (
     <div style={sx('display:flex;flex-direction:column;gap:16px')}>
       <h2 style={sx(H2)}>{s.h}</h2>
       {s.p.map((para) => (
+        <p key={para} style={sx(PARA)}>{para}</p>
+      ))}
+      {rest && s.eq && (
+        <div role="math" aria-label={`${s.eq.l} equals ${s.eq.num} divided by ${s.eq.den}`} style={sx('display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:clamp(20px,2.4vw,28px);background:var(--hw-white);border:1.5px solid var(--hw-black)')}>
+          <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.2vw,30px)')}>{s.eq.l}</span>
+          <span style={sx('font-family:var(--font-display);font-size:clamp(24px,2.2vw,30px)')}>=</span>
+          <span style={sx('display:inline-flex;flex-direction:column;align-items:center;text-align:center;font-size:clamp(17px,1.3vw,19px)')}>
+            <span style={sx('padding:0 8px 8px')}>{s.eq.num}</span>
+            <span style={sx('padding:8px 8px 0;border-top:1.5px solid var(--hw-black);align-self:stretch')}>{s.eq.den}</span>
+          </span>
+        </div>
+      )}
+      {rest && (s.p2 || []).map((para) => (
         <p key={para} style={sx(PARA)}>{para}</p>
       ))}
       {r && (
@@ -27,13 +41,23 @@ function Section({ s, withGraph }) {
           </div>
         </figure>
       )}
+      {rest && s.links?.length > 0 && (
+        <div style={sx('display:flex;flex-wrap:wrap;gap:12px;padding-top:8px')}>
+          {s.links.map((l) => (
+            <Hv key={l.t} as="button" onClick={() => go(l.r)} s={`padding:16px 24px;background:var(--hw-terracotta);color:var(--hw-white);border:0;cursor:pointer;${MONO};font-size:14px`} h="background:var(--hw-black)">
+              {l.t}
+            </Hv>
+          ))}
+        </div>
+      )}
+      {figure}
     </div>
   )
 }
 
-function Figure({ a, bars, prefix = '' }) {
+function Figure({ a, bars, prefix = '', margin = '0' }) {
   return (
-    <figure style={sx('margin:0;padding:clamp(20px,2.4vw,32px);background:var(--hw-white);border:1.5px solid var(--hw-black);display:flex;flex-direction:column;gap:18px')}>
+    <figure style={sx(`margin:${margin};padding:clamp(20px,2.4vw,32px);background:var(--hw-white);border:1.5px solid var(--hw-black);display:flex;flex-direction:column;gap:18px`)}>
       <figcaption style={sx(`${MONO};font-size:13px`)}>{prefix}{a.figure.title}</figcaption>
       {bars.map((b) => (
         <div key={b.l} style={sx('display:flex;flex-direction:column;gap:6px')}>
@@ -176,15 +200,16 @@ function PageArticle({ slug, go }) {
               {secs.slice(0, 1).map((s) => (
                 <Section key={s.h} s={s} />
               ))}
+              {bars.length > 0 && a.figTop && <Figure a={a} bars={bars} />}
               {a.quote && (
                 <blockquote style={sx('margin:0;padding:clamp(8px,1vw,16px) 0;font-family:var(--font-display);font-weight:500;font-size:clamp(28px,3vw,42px);line-height:1.12;letter-spacing:-.01em;color:var(--hw-terracotta);text-wrap:balance')}>
                   “{a.quote}”
                 </blockquote>
               )}
               {secs.slice(1).map((s) => (
-                <Section key={s.h} s={s} withGraph />
+                <Section key={s.h} s={s} rest go={go} figure={bars.length > 0 && a.figAfter === s.h && <Figure a={a} bars={bars} margin="8px 0 0" />} />
               ))}
-              {bars.length > 0 && <Figure a={a} bars={bars} />}
+              {bars.length > 0 && !a.figTop && !a.figAfter && <Figure a={a} bars={bars} />}
               {charts.length > 0 && (
                 <div style={sx('display:flex;flex-direction:column;gap:20px;border-top:1.5px solid var(--hw-terracotta);padding-top:20px')}>
                   <h2 style={sx(H2)}>{a.chartsTitle}</h2>

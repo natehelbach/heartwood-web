@@ -27,11 +27,11 @@ const LIFE = [
     k: 'Source',
     t: 'Data-Driven Site Sourcing',
     v: [
-      'When we begin sourcing and underwriting new sites, we gather the latest data to understand the risks more holistically. We use a mapping platform a Geographic Information System (“GIS”) to check each site’s zoning and see what we can build there today, and what would require a rezoning through the entitlement process.',
+      'When we begin sourcing and underwriting new sites, we gather the latest data to understand the risks more holistically. We use a Geographic Information System (“GIS”) to check each site’s zoning and see what we can build there today, and what would require a rezoning through the entitlement process.',
       'The platform then places the site in its local market context and pulls in key data for that area: rents at nearby rental and condo buildings, CMHC market benchmarks, population and demographic trends, what renters can afford, how quickly new buildings have filled up, and which competing projects are in the pipeline. Together, this gives us a full picture of the risks before we commit to a deal.',
       'This holistic approach lets us target growth markets, and supply-constrained submarkets within them, where tenant demand and rent fundamentals support the building well beyond lease-up.',
     ],
-    imgs: [{ src: '/assets/photography/HW_Photo_Market-Intelligence-Screen.jpg', f: 1 }],
+    imgs: [{ src: '/assets/photography/HW_Photo_Market-Intelligence-Screen_Brand.jpg', f: 1 }],
   },
   {
     k: 'Design',
@@ -48,7 +48,7 @@ const LIFE = [
     t: 'Efficient Construction',
     v: [
       'Our product-based approach carries through from design into construction. Many of our construction methods aren’t new. What makes us more efficient is that we build every project using the same rigorous system, with one consistent sequence from start to finish.',
-      'We also prefabricate parts of the building where it makes sense. Wall and envelope panels are built in a factory, where they are insulated, wrapped and fitted with windows before they arrive on site. On select projects, we use mass timber, which is made almost entirely of factory-built components. Building in controlled conditions means better quality, less waste, faster schedules and fewer weather delays.',
+      'We also prefabricate parts of the building where it makes sense. Wall panels are built in a factory, where they are insulated, wrapped and fitted with windows before they arrive on site. On select projects, we use mass timber, which is made almost entirely of factory-built components. Building in controlled conditions means better quality, less waste, faster schedules and fewer weather delays.',
       'Because each project builds on the last, we carry forward what works and fix what doesn’t. We don’t make the same mistake twice, and the result is more resilient buildings that are delivered on time.',
     ],
     imgs: [{ src: I + 'HW_Innovation_Prefab-Envelope_1.jpg', f: 1 }, { src: I + 'HW_Innovation_Componentization-Site.jpg', f: 2, pos: '100% 100%' }],
@@ -78,7 +78,7 @@ const LIFE = [
     v: [
       'Every building is energy modelled before it is built. Each project’s model sets targets for energy use, heating demand, solar production and carbon emissions, and we track the building against them for its life.',
       'Once a building is operating, our proprietary data platform and on-site metering continuously track electricity, gas and water use. Connected building automation systems send live data from equipment such as air handlers and pumps, so we can catch faults early, plan maintenance and understand each building’s resilience to extreme weather.',
-      'Investors see the results in every quarterly report. Alongside the financial statements, our Responsible Investing section, based on the Canadian Sustainability Disclosure Standards, reports each project’s targeted emissions, energy use, heating demand and solar production, its alignment with the CRREM 1.5°C pathway, and the share of units addressing core housing need. The Growth Trust also reports to GRESB each year.',
+      'Investors see the results in every quarterly report. Alongside the financial statements, our Responsible Investing section reports each project’s targeted emissions, energy use, heating demand and solar production, its alignment with the CRREM 1.5°C pathway, and the share of units addressing core housing need. The Growth Trust also reports to GRESB each year.',
     ],
     rp: true,
   },
