@@ -59,7 +59,7 @@ function FoundationBand({ variant }) {
     )
   }
   return (
-    <div data-zone="band" data-screen-label="How we build — Foundation · Ports" style={sx('position:relative;height:clamp(230px,24vw,310px);margin-top:clamp(24px,3vw,40px);border:1.5px solid var(--hw-black);background:var(--hw-white);display:flex;align-items:center;justify-content:center')}>
+    <div data-zone="band" data-screen-label="How we build — Foundation · Ports" style={sx('position:relative;height:clamp(130px,11vw,170px);margin-top:clamp(16px,2vw,28px);border:1.5px solid var(--hw-black);background:var(--hw-white);display:flex;align-items:center;justify-content:center')}>
       {['top:-1.5px', 'bottom:-1.5px'].map((edge) => (
         <div key={edge} style={sx(`${PORTS};${edge}`)}>
           {[0, 1, 2, 3, 4].map((i) => (
