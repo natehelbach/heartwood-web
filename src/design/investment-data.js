@@ -1,20 +1,24 @@
-// Generated from the design's PageInvestment.dc.html data (Oct 10). Access routes are hash routes.
+// Generated from the design's PageInvestment.dc.html data (Oct 10; strategies and Direct Investments refreshed Oct 26). Access routes are hash routes.
 export const GROWTH = {
   name: "Growth strategy",
   word: "Growth",
   ringW: "/assets/logos/HW_Growth_Ring_White.png",
-  kind: "Growth strategy · Build to Hold",
+  kind: "Heartwood Residential Growth Trust · Build to Hold",
   dot: "#617954",
   img: "/assets/photography/HW_Photo_Timber-Townhomes-Courtyard.jpg",
   imgPos: "center 85%",
-  intro: "We develop new purpose-built rental communities in North America’s supply-constrained markets, then hold them for the long term so the value we create in construction and lease-up becomes durable income for our investors.",
+  intro: "Build to Hold, from construction to income.",
+  hasHeroP: true,
+  heroP: [
+    "The Heartwood Residential Growth Trust invests in entitled, purpose-built rental housing in supply-constrained Canadian markets. It builds institutional-quality, energy-efficient assets and holds them long-term, so the value created during construction and lease-up becomes durable income.",
+    "A deep pipeline of projects at various stages of development gives the Trust a scalable path to deploy capital and deliver new rental homes over time."
+  ],
+  hasContact: true,
   why: {
     label: "Why growth",
-    h: "We build what we want to own.",
+    h: "Development value, then recurring income.",
     p: [
-      "We are not merchant builders. Most rental buildings are built to be sold once they’re leased, so every decision is made with the exit in mind. We build to own, and we build homes we would be glad to have our own families live in. That means designing for the decades a building will stand: lower operating costs, healthier homes and a building that stays competitive long after it opens.",
-      "In some cases, the buildings we want to own trade at prices that don’t support accretive investment returns. That is why we also build. Our integrated development, construction and operations team, supported by our own systems and data, lets us deliver high-quality buildings at a cost basis that adds to returns.",
-      "Taking on development, construction and lease-up captures the value created as a site becomes a finished, income-producing building. The result is a growing portfolio of high-quality, healthy, community-focused rental homes, and each project makes us better at the next."
+      "The Trust typically invests once projects are entitled, which reduces entitlement risk. Investors take part in the development value from construction through stabilization, followed by recurring income. Because the Trust both develops and holds, it controls the design decisions that set a building’s operating performance and resilience over its whole life."
     ],
     quote: "Would we want our families living here? That’s the test. Quality doesn’t mean expensive. It means making the right design decisions, the ones that keep a building from becoming obsolete, valuable for decades and earning returns for generations.",
     by: "David Constable, Founding Partner"
@@ -22,23 +26,28 @@ export const GROWTH = {
   hasWhyNow: true,
   whyNow: {
     label: "Why now",
-    h: "A rare window to build.",
+    h: "A rare development window.",
     items: [
       {
-        k: "More people are renting",
-        v: "Affordability, population growth and immigration keep pushing demand for rental housing higher, and renter households are growing faster than households overall."
+        k: "Demand",
+        v: "Housing affordability, population growth and immigration are driving long-term demand for purpose-built rental, and renter households are growing faster than households overall."
       },
       {
-        k: "Less is being built",
-        v: "Across North America, starts have fallen sharply and projects are being cancelled. Buildings started today will deliver just as new supply is at its lowest."
+        k: "Supply",
+        v: "New housing supply is being switched off. Condo projects are being cancelled and starts have fallen sharply, just as the Trust’s pipeline is positioned to deliver."
       },
       {
         k: "Public support for rental",
-        v: "In Canada, substantial government-backed construction financing and incentives for purpose-built rental lower the cost of building today. That support may not last once the cycle turns."
+        v: "Governments at every level are backing new rental supply through low-cost financing and relief on development fees and taxes, which improves project economics."
+      },
+      {
+        k: "Tax treatment for builders who hold",
+        v: "Accelerated depreciation on new purpose-built rental can reduce the taxable income allocated to unitholders and defer tax."
       }
-    ]
+    ],
+    src: "Sources: CMHC, Statistics Canada, CoStar, Urbanation. Program availability and eligibility vary by project."
   },
-  hasHowBuy: true,
+  hasHowBuy: false,
   howBuy: {
     label: "How we build",
     h: "Discipline at every step.",
@@ -59,11 +68,12 @@ export const GROWTH = {
   },
   deliversH: "Development value today. Stabilized income tomorrow.",
   delivers: [
-    "Value creation through construction and lease-up",
-    "Long-term capital appreciation",
-    "Durable income once buildings are stabilized",
-    "Lower operating costs that support consistent NOI for decades",
-    "Beautiful buildings that create community and well-being"
+    "Development value from construction through stabilization",
+    "Long-term appreciation",
+    "Recurring income after stabilization",
+    "Lower operating costs supporting steady NOI",
+    "A tax-aware structure for long-term holders",
+    "Resilient, institutional-quality assets"
   ],
   path: {
     label: "What we build",
@@ -72,26 +82,26 @@ export const GROWTH = {
       {
         n: "01",
         t: "Location",
-        k: "Core growth markets",
-        v: "Sites in supply-constrained North American cities with strong long-term rental demand, close to transit and amenities."
+        k: "Supply-constrained markets",
+        v: "Well-located, supply-constrained Canadian markets near transit and amenities."
       },
       {
         n: "02",
         t: "Product",
         k: "Institutional-quality rental",
-        v: "Purpose-built rental homes residents want to live in: healthy, beautiful, community-centred and built to institutional quality."
+        v: "Institutional-quality, community-centred rental homes with mixed-income housing and active ground-level community space."
       },
       {
         n: "03",
         t: "Design",
-        k: "Built for the future",
-        v: "All-electric buildings with heat pumps, high-performing walls and windows, natural materials such as mass timber, and renewable energy systems such as solar and geothermal, designed for the decades ahead."
+        k: "Built for 2050",
+        v: "All-electric buildings designed for the 2050 climate, with heat pumps, prefabricated mass timber and rooftop solar."
       },
       {
         n: "04",
         t: "Scale",
         k: "Repeatable by design",
-        v: "Systems-based designs and prefabricated components we can repeat across projects, so each building is faster and more predictable to deliver than the last."
+        v: "Standardized design and prefabrication from a 25+ person in-house team."
       }
     ]
   },
@@ -129,9 +139,9 @@ export const GROWTH = {
     ]
   },
   own: {
-    label: "How we operate",
-    h: "We build every building to run like we will own it for the long haul.",
-    p: "Because we will own long past construction delivery, every design decision is connected to how the building will operate. Investment goals shape design, design shapes construction, and construction sets the operating costs we live with for decades.",
+    label: "Sustainability",
+    h: "Beyond sustainability, the financial imperative.",
+    p: "Low-energy, resilient buildings are a risk-mitigation and value-creation strategy, not a premium sustainability play. Heartwood builds them as institutional assets that hedge against energy costs, regulation and climate risk.",
     items: [
       {
         v: "Efficiency",
@@ -152,24 +162,37 @@ export const GROWTH = {
     ],
     note: ""
   },
-  accessP: "Our Growth strategy is broader than our Growth Trust. Investors can access it through our commingled trust, or through our US feeder for United States investors.",
+  accessP: "Units of the Growth Trust are available to qualified Canadian investors through a registered dealer, by way of the offering memorandum.",
   access: [
     {
       k: "Heartwood Residential Growth Trust",
       v: "Our open-ended Build to Hold trust for Canadian purpose-built rental.",
       r: 'investment/funds'
-    },
-    {
-      k: "Heartwood US Growth Feeder",
-      v: "For United States investors: access to the Growth Trust through a separately managed US vehicle.",
-      r: 'investment/meeting'
     }
   ],
   marketsLabel: "Where we build",
+  marketsP: "Purpose-built rental communities in growing, supply-constrained Canadian markets. Each site is selected for transit access, depth of rental demand and a clear path to approvals.",
   // [city, province or state]; each row shows that region's pennant.
-  markets: [["Greater Toronto Area", "ON"], ["Vancouver", "BC"], ["Halifax", "NS"], ["Calgary", "AB"], ["Greater Bay Area", "CA"], ["San Diego", "CA"], ["Seattle", "WA"]],
-  marketsCount: "7 markets",
-  marketsFlags: [{ k: "CA FLAG", t: "Canada" }, { k: "US FLAG", t: "United States" }]
+  markets: [],
+  marketsCount: "",
+  marketsFlags: [{ k: "CA FLAG", t: "Canada" }],
+  hasAccess: false,
+  hasTeam: true,
+  team: {
+    label: "Team and governance",
+    h: "Experienced leadership, independent oversight.",
+    p: "Founding partners Tim Blair and David Constable lead a 25+ person team. Five independent trustees provide oversight.",
+    items: [
+      {
+        k: "Founding partners",
+        v: "Tim Blair and David Constable"
+      },
+      {
+        k: "Independent trustees",
+        v: "Sam Sivarajan, Miriam Gurza, Sarah Saso, Ray Williams and Mike Evan"
+      }
+    ]
+  }
 }
 
 export const INCOME = {
@@ -177,16 +200,21 @@ export const INCOME = {
   word: "Income",
   ringW: "/assets/logos/HW_Income_Ring_White.png",
   imgPos: "center 30%",
-  kind: "Income strategy · Buy to Hold",
+  kind: "Heartwood Residential Income Trust · Buy to Hold",
   dot: "#2697AA",
   img: "/assets/photography/HW_Photo_517-W-Main_Facade-Trees.jpg",
-  intro: "We acquire modern, well-located rental communities in North America’s supply-constrained markets at today’s reset pricing, then apply our operating systems to grow income and value over time.",
+  intro: "Buy to Hold: modern rental communities for resilient income.",
+  hasHeroP: true,
+  heroP: [
+    "The Heartwood Residential Income Trust acquires modern, stabilized, institutional-quality rental communities in Canada’s high-demand urban markets. It holds them long term to deliver resilient income and the potential for long-term appreciation.",
+    "A deep pipeline of well-located rental communities gives the Trust a scalable path to deploy capital as opportunities arise."
+  ],
+  hasContact: true,
   why: {
     label: "Why income",
-    h: "Contrarian to buy. Patient to hold. Data-driven to sell.",
+    h: "Income from day one, held for the long term.",
     p: [
-      "Real estate moves in cycles, and the managers who do well are the ones who stay patient through them. We buy high-quality, modern buildings in markets that have low supply and rental growth when pricing is attractive. When it isn’t, we are content to hold, collect cash flow and let appreciation compound until the next opportunity comes. We let the data tell us when it’s time to sell.",
-      "We buy like builders. Our Growth strategy gives our Income strategy an edge: we know from first principles of real estate development what it takes to design, build and run an efficient, healthy building, and we look at every acquisition through that lens."
+      "The Trust buys modern, stabilized rental communities in neighbourhoods where people want to live, so tenant demand is steadfast. These buildings produce income from day one. The Trust holds them long-term to collect recurring cash flow that grows over time."
     ],
     quote: "A great building bought at the wrong price is still a poor investment. We wait for quality and value to meet.",
     by: "Tim Blair, Founding Partner"
@@ -194,38 +222,52 @@ export const INCOME = {
   hasWhyNow: true,
   whyNow: {
     label: "Why now",
-    h: "A rare point in the cycle.",
+    h: "A compelling entry point.",
     items: [
       {
-        k: "More people are renting",
-        v: "Affordability, population growth and changing preferences keep pushing demand for rental housing higher."
+        k: "Demand",
+        v: "Affordability, population growth and changing housing preferences are driving long-term demand for purpose-built rental, and renter households are growing faster than households overall."
       },
       {
-        k: "Less is being built",
-        v: "New construction has slowed sharply, and supply is projected to stay limited for years. Less new competition makes well-built existing buildings more valuable."
+        k: "Supply",
+        v: "New construction has slowed sharply, and a thinner pipeline is expected to limit supply and reinforce the value of existing buildings."
       },
       {
-        k: "Prices have reset",
-        v: "Higher yields and owners needing to refinance or pay down debt are creating buying opportunities. Many owners are still carrying buildings bought at the 2021–2022 peak. A buyer starting today can acquire at today’s prices with nothing from the last cycle weighing on investment returns."
+        k: "Opportunity",
+        v: "Higher yields, refinancing maturities and owners who need to deleverage are creating buying opportunities in high-quality, stabilized assets."
       }
-    ]
+    ],
+    src: "Sources: CMHC, Statistics Canada, CoStar, Urbanation."
   },
   hasHowBuy: true,
   howBuy: {
     label: "How we buy",
-    h: "Discipline at every step.",
+    h: "From the neighbourhood in to the building.",
+    p: "We start at the neighbourhood and work in toward the building. Every acquisition is underwritten against the same question: will people keep choosing to live here? And we answer it with data, not just market comparables.",
     items: [
       {
-        k: "Diligence",
-        v: "Before closing, every acquisition goes through building condition, environmental, engineering and energy reviews, and independent underwriting of rents and operating costs."
+        k: "Know the neighbourhood",
+        v: "We assess the transit connections, walkability, amenities, employment base and rental demand around each building, and compare in-place rents with the surrounding market."
+      },
+      {
+        k: "Know the building",
+        v: "Condition, environmental, engineering and energy reviews show how the building will perform and what capital it will need."
+      },
+      {
+        k: "Data-driven underwriting",
+        v: "Every deal is benchmarked against operating results, including rents, turnover, operating costs, energy use and capital spending. We stress-test key assumptions before we commit."
+      },
+      {
+        k: "Know the risks",
+        v: "Resilience and insurance reviews, whether or not a lender requires them."
       },
       {
         k: "Prudent leverage",
-        v: "We borrow conservatively and use insured, lower-cost financing where it’s available. Lower leverage protects equity if values fall."
+        v: "Conservative borrowing, with a target loan-to-value of 40%, using insured, lower-cost financing where available."
       },
       {
         k: "Independent oversight",
-        v: "A majority-independent investment committee reviews acquisitions, sales and refinancings."
+        v: "An independent investment committee reviews acquisitions, sales and refinancings."
       }
     ]
   },
@@ -235,7 +277,7 @@ export const INCOME = {
     "Long-term capital appreciation",
     "A conservative approach to leverage",
     "High-quality, inflation-resistant real estate",
-    "Beautiful buildings that create community and well-being"
+    "Attractive timing in the market cycle"
   ],
   path: {
     label: "What we buy",
@@ -245,25 +287,25 @@ export const INCOME = {
         n: "01",
         t: "Location",
         k: "Core growth markets",
-        v: "Large North American cities with strong population growth, diverse economies, low vacancy and high barriers to new supply."
+        v: "Core growth markets near rapid transit, with walkable amenities, strong population growth, diverse economies and low vacancy."
       },
       {
         n: "02",
         t: "Asset quality",
         k: "Modern and stabilized",
-        v: "Well-leased, institutional-quality buildings that produce income from day one, close to transit, have amenities, and can be commissioned efficiently."
+        v: "Modern, stabilized, institutional-quality buildings that produce income from day one."
       },
       {
         n: "03",
         t: "Capital profile",
         k: "Low capital needs",
-        v: "Modern buildings need less near-term reinvestment, so more of their operating income can flow to investors."
+        v: "Low near-term capital needs, so more operating income can reach investors."
       },
       {
         n: "04",
         t: "Room to grow",
         k: "Rents below market",
-        v: "Buildings where in-place rents sit below market give income room to grow as leases turn over, and a cushion if the market softens."
+        v: "In-place rents below market, which supports income growth as leases turn over."
       }
     ]
   },
@@ -297,45 +339,87 @@ export const INCOME = {
   },
   own: {
     label: "How we operate",
-    h: "We operate every building like we built it.",
-    p: "After we buy a building, we apply the same thinking that shapes our new buildings. The goal is a better resident experience, more efficient operations and stronger long-term value.",
+    h: "Knowing buildings makes us better owners.",
+    p: "Heartwood’s team has designed, built and operated rental housing, so we know how a building works. That building-level knowledge makes us better owners. We manage actively and measure everything that drives income.",
     items: [
       {
-        v: "Spaces",
-        k: "Common areas redesigned for connection and community."
+        v: "Measure",
+        k: "We track energy, water and utility consumption building by building, advancing toward real-time monitoring, so we see how each building is performing and where it drifts."
       },
       {
-        v: "Well-being",
-        k: "Health and well-being features added for residents."
+        v: "Optimize",
+        k: "When a building varies from its expected performance, we respond quickly and tune its systems and operations, so operating margins improve continuously."
       },
       {
-        v: "Stewardship",
-        k: "Within two years of acquisition, a plan to bring each building up to our environmental standard."
+        v: "Plan ahead",
+        k: "We map the life of every major system, so we know what will need replacing and when. When the time comes, we already know which replacement saves the most energy and lowers operating costs, so each upgrade is a planned improvement, not an emergency repair."
       },
       {
-        v: "Systems",
-        k: "Our management workflow and building data, applied from day one."
+        v: "Direct capital where it pays",
+        k: "Capital goes only where it lifts performance and income, and efficiency gains convert into NOI growth."
+      },
+      {
+        v: "Apply what we learn",
+        k: "What the data shows about operating buildings shapes how we underwrite the next acquisition."
       }
     ],
     note: ""
   },
-  accessP: "Our Income strategy is broader than our Income Trust. Investors can access it through our commingled trust, or through our US feeder for United States investors.",
+  accessP: "Units of the Income Trust are available to qualified Canadian investors through a registered dealer, by way of the offering memorandum.",
   access: [
     {
       k: "Heartwood Residential Income Trust",
       v: "Our open-ended trust of modern, stabilized, income-producing rental.",
       r: 'investment/funds'
-    },
-    {
-      k: "Heartwood US Income Feeder",
-      v: "For United States investors: access to the Income Trust through a separately managed US vehicle.",
-      r: 'investment/meeting'
     }
   ],
   marketsLabel: "Where we buy",
-  markets: [["Greater Toronto Area", "ON"], ["Ottawa", "ON"], ["Montreal", "QC"], ["Halifax", "NS"], ["Vancouver", "BC"], ["Calgary", "AB"], ["Edmonton", "AB"]],
-  marketsCount: "7 markets",
-  marketsFlags: [{ k: "CA FLAG", t: "Canada" }]
+  marketsP: "Neighbourhoods people want to live in. We buy in Canada’s largest urban markets, close to rapid transit, with shops, restaurants, parks and everyday amenities within walking distance. Those are the places renters choose and stay in, which is what keeps tenant demand steadfast and occupancy high.",
+  // [city, province or state]; each row shows that region's pennant.
+  markets: [["Greater Toronto Area","ON"], ["Vancouver","BC"], ["Calgary","AB"], ["Other Canadian high-growth markets","Canada"]],
+  marketsCount: "Canada",
+  marketsFlags: [{ k: "CA FLAG", t: "Canada" }],
+  hasAccess: false,
+  hasRes: true,
+  res: {
+    label: "Resilience",
+    h: "Underwritten at acquisition, managed for life.",
+    p: "Resilience is underwritten at acquisition and managed over the life of the building, to protect asset value and income.",
+    items: [
+      {
+        k: "Resilient buildings",
+        v: "Each building is assessed against its exposure to extreme weather, flood and other long-term risks, and the findings inform maintenance planning and capital decisions."
+      },
+      {
+        k: "Insurability",
+        v: "Mitigating physical risks helps maintain long-term insurability and reduces exposure to loss."
+      },
+      {
+        k: "Lower energy and carbon over the building life",
+        v: "Because replacements are planned in advance, each one moves the building toward lower energy use and lower carbon, while minimizing capital spending."
+      },
+      {
+        k: "Clean energy",
+        v: "On-site renewable generation is added where the risk-adjusted return supports it."
+      }
+    ]
+  },
+  hasTeam: true,
+  team: {
+    label: "Team and governance",
+    h: "Experienced leadership, independent oversight.",
+    p: "Founding partners Tim Blair and David Constable lead a 25+ person team. An independent investment committee provides oversight.",
+    items: [
+      {
+        k: "Founding partners",
+        v: "Tim Blair and David Constable"
+      },
+      {
+        k: "Independent investment committee",
+        v: "Sam Sivarajan, Miriam Gurza and Mike Even"
+      }
+    ]
+  }
 }
 
 export const VEHICLES = [
@@ -393,8 +477,8 @@ export const VEHICLES = [
     heroPos: "center",
     heroOv: "rgba(58,35,22,.5)",
     heroFg: "var(--hw-white)",
-    title: "Direct Investments",
-    sub: "Canada · United States · Europe",
+    title: "Flexible by design.",
+    sub: "Direct investments",
     runtime: "2 min",
     cta: "Explore direct investing",
     poster: "/assets/project-renders/HW_Render_360-Kennedy-Lane.jpg",
@@ -423,7 +507,7 @@ export const VEHICLES = [
         v: "Your capital or land, our platform"
       }
     ],
-    intro: "Direct investing gives global investors access to our Canadian and United States strategies, structured around their goals. Investors in Canada, the United States and Europe can come in through co-investments, separately managed accounts, general partnerships or joint ventures.",
+    intro: "",
     heading: "Four ways to invest directly",
     rows: [
       {
@@ -447,7 +531,7 @@ export const VEHICLES = [
         body: "Combine your capital or land with our platform on a shared venture."
       }
     ],
-    ctaLine: "Learn more about investing directly with us."
+    ctaLine: "Tell us what you’re looking for."
   },
   {
     slug: "services",

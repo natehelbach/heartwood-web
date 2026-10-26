@@ -23,9 +23,9 @@ const BTN = 'padding:16px 24px;background:var(--hw-black);color:var(--hw-white);
 const BTN_H = 'background:var(--hw-teal);border-color:var(--hw-teal)'
 
 const PILLARS = [
-  { n: '01', t: 'Built for connection', p: 'Shared spaces, on-site teams and everyday programming that turn a building into a community. Residents who know their neighbours stay longer.', img: '/assets/lifestyle/HW_Lifestyle_10.jpg' },
-  { n: '02', t: 'Healthy residents', p: 'Fresh, filtered air, natural light, healthy materials and quiet, comfortable homes. Buildings that support wellbeing are buildings people don’t want to leave.', img: PH + 'HW_MassTimber_Living-Room.jpg', filter: true },
-  { n: '03', t: 'Efficiently managed', p: 'All-electric systems, continuous commissioning and live building data keep energy and maintenance costs down and catch problems before residents notice them.', img: PH + 'HW_Photo_Mechanical-Room-Electrical.jpg', filter: true },
+  { n: '01', t: 'Built for connection', p: 'We create communities where residents feel connected and valued. Through thoughtful use of shared spaces, resident engagement and community programming, we foster a sense of belonging that supports satisfaction, retention and long-term occupancy.', img: '/assets/lifestyle/HW_Lifestyle_10.jpg' },
+  { n: '02', t: 'Healthy living', p: 'Our experience in building design, development and operations informs how we manage every asset. We prioritize building performance, resident comfort and healthy living environments, creating homes where people want to stay.', img: PH + 'HW_MassTimber_Living-Room.jpg', filter: true },
+  { n: '03', t: 'Operational efficiency', p: 'We combine development expertise, institutional property management and real-time operating data to drive asset performance. Through active oversight, disciplined capital planning and continuous evaluation of operating costs, we identify opportunities to improve efficiency, protect asset value and strengthen long-term returns.', img: PH + 'HW_Photo_Mechanical-Room-Electrical.jpg', filter: true },
 ]
 
 function PageManagement({ go }) {
@@ -42,7 +42,7 @@ function PageManagement({ go }) {
             <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:14px;text-transform:uppercase;color:var(--hw-terracotta)')}>Asset Management</p>
             <h1 style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(48px,6.6vw,96px);line-height:1;letter-spacing:-.025em;text-wrap:balance')}>Operational excellence.</h1>
           </div>
-          <p style={sx('margin:0;font-size:clamp(18px,1.5vw,22px);line-height:1.45;text-wrap:pretty')}>Well-run, healthy, community-focused homes keep residents longer, and residents who stay are the foundation of durable investor returns.</p>
+          <p style={sx('margin:0;font-size:clamp(18px,1.5vw,22px);line-height:1.45;text-wrap:pretty')}>Well-run, healthy, community-focused homes attract and retain residents. Strong resident relationships, consistent occupancy and disciplined operations support predictable cash flow, long-term asset value and durable returns for our investors.</p>
         </div>
       </section>
       <section data-screen-label="Asset Management — Portfolio" style={sx('padding:0 clamp(20px,3vw,40px)')}>
@@ -65,10 +65,12 @@ function PageManagement({ go }) {
         <div data-am-2="" style={sx('display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px clamp(32px,5vw,64px);align-items:start')}>
           <div style={sx('display:flex;flex-direction:column;gap:20px')}>
             <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:14px;text-transform:uppercase;color:var(--hw-cool-grey)')}>Our roots</p>
-            <h2 style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.6vw,46px);line-height:1.04;letter-spacing:-.02em;text-wrap:balance')}>The first principles of a developer. The patience of a long-term owner.</h2>
+            <h2 style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.6vw,46px);line-height:1.04;letter-spacing:-.02em;text-wrap:balance')}>The first principles of a developer. The discipline of an investor. The patience of a long-term owner.</h2>
           </div>
           <div style={sx('display:flex;flex-direction:column;gap:28px')}>
-            <p style={sx('margin:0;font-size:clamp(18px,1.5vw,22px);line-height:1.45;text-wrap:pretty')}>Our team came up through design, development and investment management, so we approach asset management differently. We see each building the way an owner does, and also the way a developer does: how it was designed, what it cost to build and where its value really comes from. Working from first principles, and backed by our own data, we solve problems in living real estate that others may not see. One team, one dataset and one set of standards, all working toward durable returns for our investors.</p>
+            <p style={sx('margin:0;font-size:clamp(18px,1.5vw,22px);line-height:1.45;text-wrap:pretty')}>Our approach to asset management brings together expertise in investment banking, real estate underwriting, design, development and operations. We understand buildings from the ground up, from how they are designed and constructed to how they are leased, operated and valued.</p>
+            <p style={sx('margin:0;font-size:clamp(18px,1.5vw,22px);line-height:1.45;text-wrap:pretty')}>We manage each asset with the same rigour we bring to underwriting an investment. Leasing strategy, rental performance, operating costs and capital decisions are continuously evaluated against their impact on cash flow, asset value and long-term returns. Our financial models evolve with the buildings, informed by real-time operating data and the experience of the teams managing them.</p>
+            <p style={sx('margin:0;font-size:clamp(18px,1.5vw,22px);line-height:1.45;text-wrap:pretty')}>One integrated team, one dataset and one set of standards, connecting decisions on the ground to investment performance and long-term value creation.</p>
             <div style={sx('display:flex;flex-wrap:wrap;align-items:center;row-gap:8px')}>
               <span style={sx(CHIP)}>Development</span>
               <span style={sx(LINK)} />

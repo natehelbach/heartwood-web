@@ -145,14 +145,16 @@ function placeCard(m, c, x, y) {
 
 function InnovationMap({ showIntro, outcome }) {
   const [filter, setFilter] = useState('all')
-  const [hot, setHot] = useState(4)
+  // No dot is open at first; tapping the open dot again closes its card.
+  const [hot, setHot] = useState(-1)
   const [zoom, setZoom] = useState(false)
   const [cp, setCp] = useState(null)
   const mapRef = useRef(null)
   const cardRef = useRef(null)
-  const cur = { note: '', pos: '50% 50%', ...HOTSPOTS[hot] }
+  const hasHot = hot >= 0 && !!HOTSPOTS[hot]
+  const cur = { note: '', pos: '50% 50%', title: '', body: '', ...(hasHot ? HOTSPOTS[hot] : {}) }
   const pick = (i) => {
-    setHot(i)
+    setHot((h) => (h === i ? -1 : i))
     setZoom(false)
   }
 
@@ -210,7 +212,6 @@ function InnovationMap({ showIntro, outcome }) {
               key={h.title}
               type="button"
               onClick={() => pick(i)}
-              onMouseEnter={() => pick(i)}
               aria-label={h.title}
               aria-pressed={on}
               style={sx(`position:absolute;left:${h.x};top:${h.y};transform:translate(-50%,-50%);width:36px;height:36px;padding:0;border:0;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:${dim};transition:opacity .3s`)}
@@ -219,6 +220,7 @@ function InnovationMap({ showIntro, outcome }) {
             </button>
           )
         })}
+        {hasHot && (
         <div ref={cardRef} style={sx(`position:absolute;z-index:4;left:${card.l};top:${card.t};bottom:${card.b};width:min(360px,calc(100% - 32px));background:rgba(249,249,249,.96);box-shadow:0 12px 32px rgba(33,33,33,.22);display:grid;grid-template-columns:${cur.img ? '140px minmax(0,1fr)' : 'minmax(0,1fr)'};gap:0;transition:left .3s ease,right .3s ease,top .3s ease,bottom .3s ease`)}>
           {zoom && cur.img && (
             <div style={sx(`position:absolute;z-index:3;right:0;top:${card.zt};bottom:${card.zb};width:100%;aspect-ratio:4/3;max-height:260px;max-height:calc(100vh - var(--nav-h,82px) - 340px);min-height:160px;background:var(--hw-cool-grey);pointer-events:none;box-shadow:0 12px 32px rgba(33,33,33,.22)`)}>
@@ -247,8 +249,9 @@ function InnovationMap({ showIntro, outcome }) {
             <span style={sx('font-family:var(--font-subhead);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hw-black)')}>{cur.note}</span>
           </div>
         </div>
+        )}
         <span style={sx('position:absolute;right:clamp(16px,2vw,28px);top:clamp(16px,2vw,28px);color:var(--hw-white);font-family:var(--font-subhead);font-size:12px;letter-spacing:.04em;text-transform:uppercase')}>
-          {`0${hot + 1} / 0${HOTSPOTS.length}`} · Tap a dot
+          {hasHot ? `0${hot + 1} / 0${HOTSPOTS.length} · Tap again to close` : 'Tap a dot to explore'}
         </span>
       </div>
       {outcome && <Outcome text={outcome} stacked />}

@@ -148,6 +148,7 @@ const D = {
   'INCOME MARK':g=>{[13,10,7,4].forEach((y,i)=>{g.line(2,y,14,y);g.line(2,y+2,14,y+2);g.pt(1,y+1);g.pt(15,y+1)});g.circ(8,1,1)},
   'BRICK':g=>{g.rect(0,2,17,13);g.line(0,6,16,6);g.line(0,10,16,10);[5,11].forEach(x=>{g.line(x,2,x,6);g.line(x,10,x,14)});[2,8,14].forEach(x=>g.line(x,6,x,10))},
   RISK: (g) => { g.line(8, 0, 0, 15); g.line(8, 0, 16, 15); g.line(0, 15, 16, 15); g.line(8, 5, 8, 10); g.pt(8, 12) },
+  'BAR CHART': (g) => { g.line(0, 0, 0, 16); g.line(0, 16, 16, 16); g.rect(2, 10, 3, 6); g.rect(7, 6, 3, 10); g.rect(12, 2, 3, 14) },
   RETURNS: (g) => { g.line(0, 0, 0, 16); g.line(0, 16, 16, 16); g.line(2, 13, 6, 9); g.line(6, 9, 9, 11); g.line(9, 11, 15, 4); g.line(12, 4, 15, 4); g.line(15, 4, 15, 7) },
 }
 Object.keys(D).forEach((k) => (HW_ICONS[k] = mk(D[k])))

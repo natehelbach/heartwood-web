@@ -16,6 +16,8 @@ const FILTERS = [
 const MONO = 'font-family:var(--font-subhead);font-weight:500;text-transform:uppercase'
 // The design currently hides the callout row under the project gallery.
 const SHOW_CALLOUTS = false
+// The design turns off the name lockup over the main image (its showLockup prop).
+const SHOW_LOCKUP = false
 
 // `only` limits the list to one strategy (Development › Projects shows Growth).
 function PropertyList({ only, go }) {
@@ -120,7 +122,7 @@ function PropertyDetail({ sub, go }) {
   const ii = Math.min(img, n - 1)
   const setImgWrap = (k) => setImg(((k % n) + n) % n)
 
-  const groups = [['Units', c.units], ['Design team', c.designTeam], ...(c.owner ? [['Ownership', c.owner]] : []), ['Amenities', c.amenities], ['Key features', c.features]].map(([k, v]) => {
+  const groups = [['Units', c.units], ...(list(c.designTeam).length ? [['Design team', c.designTeam]] : []), ...(c.owner ? [['Ownership', c.owner]] : []), ['Amenities', c.amenities], ['Key features', c.features]].map(([k, v]) => {
     const vals = list(v)
     return { k, vals: vals.length ? vals : ['To be confirmed'], op: vals.length ? 1 : 0.45 }
   })
@@ -186,17 +188,13 @@ function PropertyDetail({ sub, go }) {
               ))}
             </div>
           ))}
-          <figure data-screen-label="Property — Material board" style={sx('margin:0;padding-top:12px;border-top:1px solid var(--hw-black);display:flex;flex-direction:column;gap:10px')}>
-            <span style={sx(`${MONO};font-size:12px`)}>Material board</span>
-            {c.materialBoard ? (
-              <>
-                <img loading="lazy" decoding="async" src={c.materialBoard.src} alt="Material board" style={sx('width:100%;max-width:520px;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
-                <figcaption style={sx('font-size:14px;max-width:520px')}>{c.materialBoard.cap}</figcaption>
-              </>
-            ) : (
-              <div style={sx(`width:100%;max-width:520px;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;border:1.5px dashed rgba(33,33,33,.4);background:var(--hw-cool-grey);${MONO};font-size:12px;opacity:.7`)}>Material board to come</div>
-            )}
-          </figure>
+          {c.materialBoard && (
+            <figure data-screen-label="Property — Material board" style={sx('margin:0;padding-top:12px;border-top:1px solid var(--hw-black);display:flex;flex-direction:column;gap:10px')}>
+              <span style={sx(`${MONO};font-size:12px`)}>Material board</span>
+              <img loading="lazy" decoding="async" src={c.materialBoard.src} alt="Material board" style={sx('width:100%;max-width:520px;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
+              <figcaption style={sx('font-size:14px;max-width:520px')}>{c.materialBoard.cap}</figcaption>
+            </figure>
+          )}
         </div>
       </aside>
 
@@ -204,19 +202,23 @@ function PropertyDetail({ sub, go }) {
         <>
           <figure style={sx('margin:0;display:grid;grid-template-columns:40px minmax(0,1fr) 40px;align-items:center;gap:8px')}>
             <Hv as="button" onClick={() => setImgWrap(ii - 1)} aria-label="Previous image" s={arrow} h="color:var(--hw-teal)">←</Hv>
-            <span style={sx('position:relative;display:block;width:100%;aspect-ratio:3/2;overflow:hidden;background:var(--hw-cool-grey)')}>
+            <span style={sx(`position:relative;display:block;width:100%;aspect-ratio:${c.ratio || '3/2'};overflow:hidden;background:var(--hw-cool-grey)`)}>
               {images.map((im, i) => (
                 <img loading="lazy" decoding="async" key={im.src} src={im.src} alt={im.cap} style={sx(`position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:${im.pos || 'center'};display:block;opacity:${i === ii ? 1 : 0};transition:opacity .4s ease`)} />
               ))}
-              <span style={sx(`position:absolute;inset:0;background:${lock.overlay};pointer-events:none`)} />
-              <span data-screen-label="Property — Lockup" style={sx('position:absolute;left:clamp(20px,3vw,48px);bottom:clamp(20px,3vw,48px);display:flex;align-items:center;gap:clamp(16px,2vw,32px);pointer-events:none')}>
-                <img loading="lazy" decoding="async" src={lock.icon} alt="" style={sx('width:clamp(125px,11vw,180px);height:auto;display:block')} />
-                <span style={sx(`font-family:var(--font-display);font-weight:500;font-size:clamp(36px,4.2vw,72px);line-height:1.02;letter-spacing:-.01em;color:${lock.fg};display:flex;flex-direction:column`)}>
-                  {stack.map((ln) => (
-                    <span key={ln}>{ln}</span>
-                  ))}
+              {SHOW_LOCKUP && (
+                <>
+                <span style={sx(`position:absolute;inset:0;background:${lock.overlay};pointer-events:none`)} />
+                <span data-screen-label="Property — Lockup" style={sx('position:absolute;left:clamp(20px,3vw,48px);bottom:clamp(20px,3vw,48px);display:flex;align-items:center;gap:clamp(16px,2vw,32px);pointer-events:none')}>
+                  <img loading="lazy" decoding="async" src={lock.icon} alt="" style={sx('width:clamp(125px,11vw,180px);height:auto;display:block')} />
+                  <span style={sx(`font-family:var(--font-display);font-weight:500;font-size:clamp(36px,4.2vw,72px);line-height:1.02;letter-spacing:-.01em;color:${lock.fg};display:flex;flex-direction:column`)}>
+                    {stack.map((ln) => (
+                      <span key={ln}>{ln}</span>
+                    ))}
+                  </span>
                 </span>
-              </span>
+                </>
+              )}
             </span>
             <Hv as="button" onClick={() => setImgWrap(ii + 1)} aria-label="Next image" s={arrow} h="color:var(--hw-teal)">→</Hv>
             <figcaption style={sx('grid-column:2;display:flex;justify-content:space-between;gap:16px;font-size:14px')}>
@@ -236,7 +238,7 @@ function PropertyDetail({ sub, go }) {
           )}
         </>
 
-        {images.length > 2 && (
+        {images.length > 1 && (
           <div style={sx('margin:0 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px')}>
             {images.slice(1).map((im, i) => (
               <button key={im.src} onClick={() => setImgWrap(i + 1)} style={sx('background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;gap:8px;text-align:left;font-family:var(--font-body);color:var(--hw-black)')}>

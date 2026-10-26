@@ -14,16 +14,40 @@ const VALUES = [
   { n: '03', k: 'One team', v: 'Investing, building and managing sit at the same table.' },
 ]
 
+// The design hides the advisory board for now; restore by re-adding ['Advisory board', 'board'].
 const GROUPS = [
   ['Partners', 'partners'],
-  ['Advisory board', 'board'],
   ['Senior advisors', 'advisors'],
   ['Team', 'team'],
 ]
 
+// Team and senior advisors are listed by last name.
+const lastName = (t) => t.name.trim().split(/\s+/).slice(-1)[0]
+const groupMembers = (g) => {
+  const l = HW_DATA.team.filter((t) => t.group === g)
+  if (g === 'team' || g === 'advisors') l.sort((a, b) => lastName(a).localeCompare(lastName(b)) || a.name.localeCompare(b.name))
+  return l
+}
+
+// People without a portrait yet get the dotted silhouette.
+const NO_PORTRAIT = ['andrew', 'hendrenique', 'babak', 'michael', 'davena']
 
 // 4:5 team portraits, named after the person (assets/team/portrait/).
 const portraitOf = (t) => `/assets/team/portrait/HW_Team_${t.name.replace(/\s+/g, '-')}_4x5_colour.jpg`
+
+// Silhouette rows: [cy, first cx, last cx], dots every 5 units.
+const SILHOUETTE = [
+  [27.5, 42.5, 57.5], ...[32.5, 37.5, 42.5, 47.5, 52.5, 57.5].map((y) => [y, 37.5, 62.5]), ...[62.5, 67.5, 72.5, 77.5].map((y) => [y, 42.5, 57.5]),
+  [82.5, 32.5, 67.5], [87.5, 27.5, 72.5], [92.5, 22.5, 77.5], [97.5, 17.5, 82.5], [102.5, 17.5, 82.5], ...[107.5, 112.5, 117.5, 122.5].map((y) => [y, 12.5, 87.5]),
+]
+
+function NoPortrait() {
+  return (
+    <svg viewBox="0 0 100 125" preserveAspectRatio="xMidYMax meet" aria-label="Photo coming soon" style={sx('position:absolute;inset:0;width:100%;height:100%;display:block')} fill="#212121">
+      {SILHOUETTE.flatMap(([y, x0, x1]) => Array.from({ length: (x1 - x0) / 5 + 1 }, (_, i) => <circle key={y + '-' + i} cx={x0 + i * 5} cy={y} r="1.3" />))}
+    </svg>
+  )
+}
 
 function Leadership() {
   const [open, setOpen] = useState(null)
@@ -42,9 +66,7 @@ function Leadership() {
       {GROUPS.map(([label, key]) => (
         <div key={key}>
           <div style={sx('padding:clamp(28px,3vw,40px) clamp(20px,3vw,40px) 14px;font-family:var(--font-subhead);font-weight:500;font-size:13px;text-transform:uppercase;color:var(--hw-teal)')}>{label}</div>
-          {HW_DATA.team
-            .filter((t) => t.group === key)
-            .map((t) => {
+          {groupMembers(key).map((t) => {
               const isOpen = open === t.id
               return (
                 <div key={t.id} style={sx('border-top:1.5px solid rgba(33,33,33,.3)')}>
@@ -66,7 +88,7 @@ function Leadership() {
                   {isOpen && (
                     <div data-m-stack="" data-team-open="" style={sx('display:grid;grid-template-columns:minmax(0,240px) minmax(0,640px);gap:clamp(20px,3vw,40px);padding:clamp(8px,1vw,12px) clamp(20px,3vw,40px) clamp(28px,3vw,40px)')}>
                       <div style={sx('position:relative;width:100%;aspect-ratio:4/5;background:var(--hw-cool-grey)')}>
-                        <img loading="lazy" decoding="async" src={portraitOf(t)} alt={t.name} style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1)')} />
+                        {NO_PORTRAIT.includes(t.id) ? <NoPortrait /> : <img loading="lazy" decoding="async" src={portraitOf(t)} alt={t.name} style={sx('position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1)')} />}
                         <div style={sx('position:absolute;inset:0;background:rgba(197,220,234,.2);pointer-events:none')} />
                       </div>
                       <div style={sx('display:flex;flex-direction:column;gap:24px;align-items:flex-start')}>
@@ -86,7 +108,7 @@ function Leadership() {
                   )}
                 </div>
               )
-            })}
+          })}
         </div>
       ))}
       <div style={sx('border-top:1.5px solid rgba(33,33,33,.3);height:clamp(40px,5vw,72px)')} />
@@ -101,10 +123,10 @@ const STD_PROOF = [
 ]
 
 const STD_PILLARS = [
-  { n: '01', icon: 'BUILDING', k: 'Built to endure.', v: 'We assess how each building would respond to flooding, extreme heat, storms and wildfire, using forward-looking data and engineering expertise. We also look ahead to changing regulations, shifting resident expectations and evolving technology. Buildings designed for the decades ahead protect their value and insurance costs, cost less to operate and give residents a reason to stay.' },
-  { n: '02', icon: 'SOLAR / ENERGY', k: 'Efficient by default.', v: 'Buildings in our Growth Trust typically use at least 65% less energy than a comparable code-minimum building. We set each property’s energy efficiency target based on its location and the fuel sources feeding the local electricity grid. Every unit of energy saved means lower operating costs and a lighter footprint.' },
-  { n: '03', icon: 'THERMOSTAT', k: 'Measured continuously.', v: 'Our data platform and on-site meters track electricity, gas and water use around the clock, so we can see each building’s footprint and make better operating decisions. By connecting directly to building equipment such as air handlers, mixing valves and sump pumps, we understand how each building performs under varying weather conditions, and we can spot problems early and fix small issues before they become large ones.' },
-  { n: '04', icon: 'LOW CARBON', k: 'Low impact, by design.', v: 'We measure how each building performs against recognized industry benchmarks for residential buildings, and we review the whole portfolio every year.' },
+  { n: '01', icon: 'RETURNS', k: 'Cost efficiency and enhanced asset value.', v: 'Energy performance improvements are a direct, quantifiable driver of investment returns.' },
+  { n: '02', icon: 'BAR CHART', k: 'Reduced exposure to operating cost fluctuations and inflation.', v: 'The average multi-residential building in Ontario uses 64% of its energy for space heating. In Heartwood projects, that share falls to 16%.' },
+  { n: '03', icon: 'RISK', k: 'Improved resilience: protection against physical climate and regulatory risks.', v: 'Physical and regulatory risks are an integral part of the energy transition, and they increasingly shape long-term asset performance.' },
+  { n: '04', icon: 'PEOPLE', k: 'Driving quality and resident demand.', v: 'Three qualities of a more resilient building drive resident demand: physical comfort and health, lower energy costs, and the appeal of living in a zero-carbon or energy-efficient home.' },
 ]
 
 const STD_APPLY = [
@@ -155,28 +177,31 @@ const STD_BODY = 'margin:0;font-size:clamp(16px,1.2vw,18px);line-height:1.5;text
 
 const STD_H3 = 'margin:24px 0 0;font-family:var(--font-display);font-weight:500;font-size:clamp(22px,1.9vw,28px);line-height:1.15;letter-spacing:-.01em'
 
+// [name, logo, text]
 const STD_FOLLOW = [
-  ['CRREM', 'We set our emissions targets using national CRREM decarbonization pathways: science-based annual carbon intensity limits from 2020 to 2050, specific to each country and building type.'],
-  ['CaGBC Zero Carbon Building Standard', 'The Growth Trust prioritizes projects designed to meet, or already certified to, the Zero Carbon Building standard.'],
-  ['Net Zero Asset Managers initiative', 'As a signatory, we have committed Growth Trust assets to be managed toward net zero emissions by 2050 or sooner.'],
-  ['UN Sustainable Development Goals', 'Using the SDG Compass, we identified the SDGs our sustainability metrics contribute to measurably.'],
+  ['CRREM', '/assets/logos/partners/CRREM.png', 'We set our emissions targets using national CRREM decarbonization pathways: science-based annual carbon intensity limits from 2020 to 2050, specific to each country and building type.'],
+  ['CaGBC Zero Carbon Building Standard', '/assets/logos/partners/CaGBC_Zero-Carbon-Building-Standard.png', 'The Growth Trust prioritizes projects designed to meet, or already certified to, the Zero Carbon Building standard.'],
+  ['Net Zero Asset Managers initiative', '/assets/logos/partners/NZAM.png', 'As a signatory, we have committed Growth Trust assets to be managed toward net zero emissions by 2050 or sooner.'],
+  ['UN Sustainable Development Goals', '/assets/logos/partners/UN-SDGs-wheel.png', 'Using the SDG Compass, we identified the SDGs our sustainability metrics contribute to measurably.'],
 ]
 
 const STD_REPORT = [
-  ['PRI', 'We are a signatory to the Principles for Responsible Investment and report annually.'],
-  ['GRESB', 'The Growth Trust reports to GRESB annually.'],
-  ['INREV', 'We report sustainability indicators in accordance with INREV reporting guidelines.'],
-  ['Common Impact Data Standard', 'Our sustainability indicators are available in the Common Impact Data Standard format.'],
-  ['GHG Protocol', 'Our emissions reporting follows the GHG Protocol Corporate Standard. For Growth Trust assets, we also report embodied carbon under the Scope 3 Standard.'],
+  ['PRI', '/assets/logos/partners/PRI.png', 'We are a signatory to the Principles for Responsible Investment and report annually.'],
+  ['GRESB', '/assets/logos/partners/GRESB.png', 'The Growth Trust reports to GRESB annually.'],
+  ['INREV', '/assets/logos/partners/INREV.png', 'We report sustainability indicators in accordance with INREV reporting guidelines.'],
+  ['Common Impact Data Standard', '/assets/logos/partners/Common-Impact-Data-Standard.png', 'Our sustainability indicators are available in the Common Impact Data Standard format.'],
+  ['GHG Protocol', '/assets/logos/partners/GHG-Protocol.png', 'Our emissions reporting follows the GHG Protocol Corporate Standard. For Growth Trust assets, we also report embodied carbon under the Scope 3 Standard.'],
 ]
 
 function FrameworkList({ items, last }) {
   return (
     <div style={sx(`display:flex;flex-direction:column;border-bottom:1px solid var(--hw-black)${last ? ';margin-bottom:24px' : ''}`)}>
-      {items.map(([k, v]) => (
-        <div key={k} style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:8px clamp(20px,3vw,48px);padding:18px 0;border-top:1px solid var(--hw-black)')}>
-          <span style={sx('font-family:var(--font-subhead);font-weight:500;font-size:15px;text-transform:uppercase;line-height:1.35')}>{k}</span>
-          <p style={sx('margin:0;max-width:720px;font-size:18px;line-height:1.5;text-wrap:pretty')}>{v}</p>
+      {items.map(([k, img, v]) => (
+        <div key={k} style={sx('display:flex;flex-wrap:wrap;gap:8px clamp(20px,2.4vw,40px);align-items:center;padding:18px 0;border-top:1px solid var(--hw-black)')}>
+          <span style={sx('display:flex;align-items:center;height:56px;flex:0 0 200px')}>
+            <img loading="lazy" decoding="async" src={img} alt={k} style={sx('max-height:56px;max-width:180px;width:auto;height:auto;display:block;object-fit:contain;mix-blend-mode:multiply')} />
+          </span>
+          <p style={sx('flex:1 1 360px;margin:0;max-width:720px;font-size:18px;line-height:1.5;text-wrap:pretty')}>{v}</p>
         </div>
       ))}
     </div>
@@ -192,7 +217,7 @@ function Standards({ go }) {
           <p style={sx('margin:0;font-family:var(--font-subhead);font-weight:500;font-size:clamp(14px,1.2vw,18px);text-transform:uppercase')}>Our standards</p>
           <h1 style={sx('margin:0;max-width:900px;font-family:var(--font-display);font-weight:500;font-size:clamp(40px,5.4vw,88px);line-height:1;letter-spacing:-.02em;text-wrap:balance')}>Sustainability, to us, is practical: it’s building and operating with the future in mind.</h1>
           <p style={sx('margin:0;max-width:680px;font-size:clamp(18px,1.5vw,22px);line-height:1.5;text-wrap:pretty')}>
-            Efficient, durable and healthy buildings cost less to run, stay competitive for longer and are better to live in. That is why environmental performance is part of every investment decision we make.
+            Efficient, durable and healthy buildings cost less to run, stay competitive for longer and are better to live in. That is why resilience is part of every investment decision we make.
           </p>
         </div>
       </section>
@@ -219,18 +244,13 @@ function Standards({ go }) {
         <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(24px,4vw,72px);align-items:start')}>
           <div style={sx('display:flex;flex-direction:column;gap:20px')}>
             <p style={sx(STD_EYEBROW)}>Stewardship</p>
-            <h2 style={sx(STD_H2)}>Most buildings take from their surroundings without a thought for what they leave behind.</h2>
+            <h2 style={sx(STD_H2)}>Resilient, low-energy buildings are a risk-mitigation and value-creation strategy, not a premium sustainability play.</h2>
           </div>
           <div style={sx('display:flex;flex-direction:column;gap:20px;font-size:clamp(18px,1.4vw,20px);line-height:1.6;text-wrap:pretty')}>
             <p style={sx('margin:0')}>
-              They draw heavily on energy, water and materials, and many are not built for hotter summers, heavier storms, rising energy costs or tighter regulation. Those buildings get more expensive to run, insure and keep leased every year.
+              We are working to shift the conversation about climate strategy in real estate away from environmental marketing and toward rigorous financial analysis. That means anticipating and managing material climate-related risks, prioritizing risk mitigation and value creation without adding unnecessary cost.
             </p>
-            <p style={sx('margin:0')}>
-              We build and operate the other way. All-electric systems, high-performance envelopes and durable materials cut energy and water use, lower emissions and reduce wear on equipment. The same choices keep operating and insurance costs down and residents comfortable in extreme weather.
-            </p>
-            <p style={sx('margin:0')}>
-              That is how we see stewardship: a building that takes less from its surroundings is also one that costs less to own, keeps residents longer and holds its value for decades. Lower impact and stronger long-term returns come from the same decisions.
-            </p>
+            <p style={sx('margin:0')}>The same qualities also improve the resident experience, driving enduring demand.</p>
           </div>
         </div>
       </section>
@@ -239,7 +259,7 @@ function Standards({ go }) {
         <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(28px,4vw,56px);align-items:start')}>
           <div style={sx('display:flex;flex-direction:column;gap:20px')}>
             <p style={sx(STD_EYEBROW)}>Our standard</p>
-            <h2 style={sx(STD_H2)}>Four commitments shape every building we develop.</h2>
+            <h2 style={sx(STD_H2)}>Four opportunities shape every building we develop.</h2>
           </div>
           <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,max(240px,calc(50% - 1px))),1fr))')}>
             {STD_PILLARS.map((p) => (

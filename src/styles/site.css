@@ -555,9 +555,10 @@ input::placeholder {
 .site-footer__contact {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: 12px 28px;
+  grid-column: 1 / -1;
+  padding-top: 8px;
   font-size: 13px;
   line-height: 1.5;
 }
@@ -697,13 +698,15 @@ input::placeholder {
   }
 }
 
-/* How We Build: execution steps stack their image under the text on narrow screens. */
-@media (max-width: 760px) {
-  [data-proc-row] {
-    grid-template-columns: 44px minmax(0, 1fr) !important;
+/* How We Build: the six execution steps drop to three, then two, per row. */
+@media (max-width: 1100px) {
+  [data-exec-row] {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
-  [data-proc-img] {
-    grid-column: 2 !important;
+}
+@media (max-width: 760px) {
+  [data-exec-row] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
 

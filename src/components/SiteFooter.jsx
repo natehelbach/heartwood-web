@@ -32,11 +32,6 @@ function SiteFooter({ go }) {
               ))}
             </div>
           ))}
-        </div>
-
-        <div className="site-footer__aside">
-          <span className="site-footer__heading">The Long View Newsletter — monthly</span>
-          <HsForm form="newsletter" />
           <div className="site-footer__contact">
             <span>{ADDRESS}</span>
             <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" data-tap="" aria-label="Heartwood on LinkedIn">
@@ -44,6 +39,11 @@ function SiteFooter({ go }) {
               LinkedIn
             </a>
           </div>
+        </div>
+
+        <div className="site-footer__aside">
+          <span className="site-footer__heading">The Long View Newsletter — monthly</span>
+          <HsForm form="newsletter" />
         </div>
       </div>
 

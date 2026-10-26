@@ -14,10 +14,10 @@ const MONO = 'font-family:var(--font-subhead);font-weight:500;text-transform:upp
 
 const TOPIC = {
   'nation-of-renters': 'Market',
-  'tax-efficient-income': 'Tax & income',
+  'tax-efficient-income': 'Portfolio & risk',
   'private-real-estate-portfolio': 'Portfolio & risk', 'low-leverage': 'Portfolio & risk', 'nimble-fund': 'Portfolio & risk',
 }
-const TOPICS = ['All', 'Market', 'Tax & income', 'Portfolio & risk', 'Sustainability']
+const TOPICS = ['All', 'Market', 'Portfolio & risk', 'Sustainability']
 
 const PAPERS = [
   { kind: 'White paper', slug: 'private-real-estate-portfolio', img: '/assets/photography/HW_MassTimber_Coffee-Table.jpg', title: 'Private real estate in a modern portfolio', dek: 'Why Canada’s largest pension funds hold alternatives, and what private rental housing adds to client portfolios.' },

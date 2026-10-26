@@ -7,11 +7,6 @@ import { GROWTH, INCOME, VEHICLES, TRUSTS } from '../design/investment-data.js'
 // funds | flexible | services.
 
 const MONO = 'font-family:var(--font-subhead);font-weight:500;text-transform:uppercase'
-const EYEBROW = `margin:0;${MONO};font-size:clamp(18px,1.4vw,22px);color:var(--hw-terracotta)`
-const H2 = 'margin:0;max-width:820px;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.6vw,52px);line-height:1.08;letter-spacing:-.015em;text-wrap:balance'
-const RULED_SECTION = `padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:clamp(28px,3vw,48px);background:${RULE_BG}`
-const OUTLINE_SM = `padding:13px 20px;background:transparent;color:var(--hw-black);border:1.5px solid var(--hw-black);cursor:pointer;${MONO};font-size:13px`
-const WHY_NOW_P = 'margin:0;max-width:600px;font-size:clamp(17px,1.35vw,20px);line-height:1.55;text-wrap:pretty'
 const COMPARE_ROW = 'display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:24px'
 const CH_SECTION = 'padding:clamp(56px,6vw,80px) 0;border-top:1.5px solid var(--hw-terracotta);display:flex;flex-direction:column;gap:clamp(24px,2.6vw,32px);scroll-margin-top:110px'
 const CH_H2 = 'margin:0;max-width:880px;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.6vw,52px);line-height:1.04;letter-spacing:-.025em;text-wrap:balance'
@@ -26,23 +21,13 @@ const FUNDS = [
 ]
 const TERMS_DISCLAIMER = 'The key terms above are a summary only, are provided for information purposes and are qualified in their entirety by the offering memorandum, declaration of trust and subscription documents of the applicable trust, which prevail in the event of any inconsistency. This is not an offer to sell, or a solicitation of an offer to buy, any securities. Units are offered only to eligible investors in reliance on exemptions from the prospectus requirements of applicable Canadian securities laws, and only by way of the offering memorandum. Minimum investments, eligibility, fees, distributions, redemption rights, leverage limits and other terms vary by series and jurisdiction and are subject to change without notice. Distributions are not guaranteed, may be reduced or suspended, and may include a return of capital, which reduces the adjusted cost base of units. Redemptions may be subject to notice periods, early-redemption fees, monthly or aggregate limits, and suspension in certain circumstances. Target leverage and other targets reflect current intentions only and are not guaranteed. An investment in the trusts is speculative, involves a high degree of risk, including the possible loss of the entire investment, and is suitable only for investors who can bear that risk and do not require liquidity. Past performance is not indicative of future results. Investors should read the offering memorandum, including its risk factors, and consult their own financial, legal and tax advisors before investing.'
 
-const WHY_LIVING = [
-  { no: '01', title: 'Built-in inflation protection', body: 'Residential rents can be reset every year, rather than being locked into the long-term fixed escalations typical of office, industrial and retail leases.' },
-  { no: '02', title: 'Structural demand', body: 'Canada needs an additional 3.5 million homes by 2030 to restore affordability, and the United States is short an estimated 4.03 million homes. This shortage will sustain occupancy and rental growth for the next several years.' },
-  { no: '03', title: 'A shortage of durable buildings', body: 'There is too little well-built housing across North America and growing demand for beautiful, healthy, community-centred buildings. That is why our mandate is to build and buy great quality homes that residents love to live in.' },
-]
-const WHY_NOW = [
-  { op: '+', k: 'Demand', theme: 'More renters', ca: { big: '+539,900', label: 'New renter households across Canada, 2021–2026 (5.06 million to 5.60 million), vs. +478,200 owner households.' }, us: { big: '+898,000', label: 'New renter households in 2025 alone (to a record 46.1 million), vs. +234,000 owner households.' } },
-  { op: '−', k: 'Supply', theme: 'Less new supply', ca: { big: '−33%', label: 'Condo apartment starts across Canada, from the 2023 peak to 2025 (69,300 to 46,600). Investor-owned condos have long supplied much of Canada’s rental stock.' }, us: { big: '−34%', label: 'Apartments under construction (5+ unit buildings), from the July 2023 peak of 1.02 million to 670,000 at the end of 2025.' } },
-  { op: '=', k: 'The gap', theme: 'Long-term shortfall', ca: { big: '3.5M', label: 'Additional homes needed by 2030 to restore affordability.' }, us: { big: '4.3M', label: 'New apartments needed by 2035 to meet demand.' } },
-]
 // Investments › Overview "Investment solutions": cards by investor region. `r` is the design's go(route).
 const GROWTH_CARD = (us) => ({ img: '/assets/project-renders/HW_Render_3385-Lawrence.jpg', tag: us ? 'US feeder · Build to hold' : 'Build to hold', name: us ? 'Heartwood US Growth Feeder' : 'Heartwood Residential Growth Trust', body: us ? 'US access to the Canadian Growth Trust through a separately managed US vehicle.' : 'Develops purpose-built rental in supply-constrained markets and holds through stabilization.', cta: 'Growth Trust', r: 'investment/growth' })
 const INCOME_CARD = (us) => ({ img: '/assets/photography/HW_Photo_517-W-Main_Facade-Trees.jpg', tag: us ? 'US feeder · Core Acquisitions' : 'Core Acquisitions', name: us ? 'Heartwood US Income Feeder' : 'Heartwood Residential Income Trust', body: us ? 'US access to the Canadian Income Trust through a separately managed US vehicle.' : 'Buys modern, efficient, stabilized assets already generating cash flow, at today’s reset pricing.', cta: 'Income Trust', r: 'investment/income' })
 const DIRECT_CARD = (body) => ({ img: '', tag: 'Direct', name: 'Direct Investments', body, cta: 'Direct Investments', r: 'investment/direct' })
 const REGIONS = [
   { name: 'Canadian investors', mark: 'CA FLAG', count: '3 solutions', cards: [GROWTH_CARD(0), INCOME_CARD(0), DIRECT_CARD('Co-investments, separately managed accounts and development services, built around your goals.')] },
-  { name: 'United States investors', mark: 'US FLAG', count: '3 solutions', cards: [DIRECT_CARD('Co-invest directly in US rental housing alongside Heartwood, or through a separately managed account.'), GROWTH_CARD(1), INCOME_CARD(1)] },
+  { name: 'United States investors', mark: 'US FLAG', count: '1 solution', cards: [DIRECT_CARD('Co-invest directly in US rental housing alongside Heartwood, or through a separately managed account.')] },
   { name: 'European investors', mark: 'EU FLAG', count: '1 solution', cards: [DIRECT_CARD('Direct co-investment and separately managed accounts in North American rental housing.')] },
 ]
 
@@ -130,7 +115,7 @@ function Vehicle({ veh, isFunds, go }) {
         </section>
       )}
 
-      {!isFunds && (
+      {!isFunds && veh.slug !== 'flexible' && (
         <section data-screen-label="Investment — Vehicle options" style={sx(`padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:28px;background:${RULE_BG}`)}>
           <div style={sx('height:1.5px;background:var(--hw-terracotta)')} />
           <h2 style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(30px,3.2vw,46px);line-height:1.05')}>{veh.heading}</h2>
@@ -155,11 +140,152 @@ function Vehicle({ veh, isFunds, go }) {
         </section>
       )}
 
+      {veh.slug === 'flexible' && <Direct go={go} />}
+
       <section data-screen-label="Investment — Vehicle CTA" style={sx('background:var(--hw-terracotta);color:var(--hw-white);padding:clamp(48px,5vw,72px) clamp(20px,3vw,40px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px 40px')}>
         <p style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(28px,3vw,44px);line-height:1.1;max-width:720px;text-wrap:balance')}>{veh.ctaLine}</p>
         <Hv as="button" onClick={() => go('investment/meeting')} s={`padding:16px 24px;background:var(--hw-white);color:var(--hw-black);border:1.5px solid var(--hw-white);cursor:pointer;${MONO};font-size:14px`} h="background:var(--hw-black);color:var(--hw-white);border-color:var(--hw-black)">
           Book a call
         </Hv>
+      </section>
+    </>
+  )
+}
+
+// Direct Investments (investment/flexible): statement, partnership map, ways to partner and markets.
+const AXIS = 'font-family:var(--font-subhead);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.03em'
+const DIRECT_RULE = 'height:1.5px;background:var(--hw-terracotta)'
+const DIRECT_SECTION = 'padding:0 clamp(20px,3vw,40px) clamp(48px,6vw,88px);display:flex;flex-direction:column;gap:32px'
+const DIRECT_H2 = 'margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(30px,3.2vw,46px);line-height:1.05;letter-spacing:-.02em;text-wrap:balance'
+const DIRECT_EYEBROW = `${MONO};font-size:15px;color:var(--hw-terracotta)`
+const HOLLOW_DOT = 'width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;border:1.5px solid #777;box-sizing:border-box'
+// [left %, top %, colour, label, label on the left]
+const MAP_POINTS = [
+  [14, 70, 'var(--hw-black)', 'Co-investment'],
+  [22, 26, 'var(--hw-teal)', 'Joint venture'],
+  [60, 80, 'var(--hw-landscape)', 'Separately managed account'],
+  [78, 34, 'var(--hw-hemlock)', 'Programmatic partnership', true],
+  [32, 88, 'var(--hw-brown)', 'Land partnership'],
+]
+const MAP_OTHER = [[38, 36], [70, 58], [86, 72], [26, 52], [54, 22], [44, 74]]
+const PARTNER_WAYS = [
+  ['Invest in a specific project', 'Invest alongside us in a development or acquisition.'],
+  ['Build a dedicated portfolio', 'A mandate built around your capital and timeline.'],
+  ['Partner on land', 'Bring a site, and we bring the platform.'],
+  ['Deploy capital at scale', 'Programmatic partnerships across our pipeline.'],
+  ['Enter one of our core markets', 'A local partner in Canada, the United States or Europe.'],
+]
+const PARTNER_CARD = 'padding:28px;border-right:1px solid var(--hw-black);border-bottom:1px solid var(--hw-black);display:flex;flex-direction:column;gap:10px;min-height:170px;box-sizing:border-box'
+const PARTNER_H3 = 'margin:0;font-family:var(--font-display);font-weight:500;font-size:24px;line-height:1.1;letter-spacing:-.015em'
+const PARTNER_P = 'margin:0;font-size:16px;line-height:1.5;text-wrap:pretty'
+
+function Direct({ go }) {
+  return (
+    <>
+      <section data-screen-label="Direct — Statement" style={sx('padding:clamp(48px,6vw,88px) clamp(20px,3vw,40px) clamp(48px,6vw,88px);display:flex;flex-direction:column;gap:32px')}>
+        <div style={sx(DIRECT_RULE)} />
+        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:24px 56px;align-items:end')}>
+          <p style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(28px,3.2vw,44px);line-height:1.12;letter-spacing:-.02em;text-wrap:pretty;grid-column:span 2;max-width:900px')}>Each partnership is built around the investor’s risk profile and investment requirements.</p>
+          <p style={sx('margin:0;font-size:17px;line-height:1.55;text-wrap:pretty')}>Partners invest alongside us in a single building, across a portfolio, or on a site they own, with as much or as little involvement in governance as their mandate requires.</p>
+        </div>
+      </section>
+
+      <section data-screen-label="Direct — Map" style={sx(DIRECT_SECTION)}>
+        <div style={sx(DIRECT_RULE)} />
+        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr));gap:40px 56px;align-items:center')}>
+          <div style={sx('display:flex;flex-direction:column;gap:20px')}>
+            <h2 style={sx(DIRECT_H2)}>Structured to your mandate.</h2>
+            <p style={sx('margin:0;font-size:18px;line-height:1.55;max-width:560px;text-wrap:pretty')}>From a single asset to a dedicated portfolio, and from fully delegated to shared governance, we work with you to find the right point of partnership together.</p>
+          </div>
+          <div style={sx('overflow-x:auto;padding:12px 4px 4px')}>
+            <div data-screen-label="Direct — Partnership map" style={sx('min-width:360px;display:grid;grid-template-columns:28px 64px minmax(0,1fr);grid-template-rows:clamp(320px,32vw,440px) 28px 24px auto')}>
+              <div style={sx('grid-row:1;grid-column:1;display:flex;align-items:center;justify-content:center')}>
+                <span style={sx(`${AXIS};transform:rotate(-90deg);white-space:nowrap`)}>Governance</span>
+              </div>
+              <div style={sx(`grid-row:1;grid-column:2;position:relative;${AXIS};color:#555`)}>
+                <span style={sx('position:absolute;right:10px;top:0;transform:translateY(-50%)')}>Shared</span>
+                <span style={sx('position:absolute;right:10px;top:50%;transform:translateY(-50%)')}>Advisory</span>
+                <span style={sx('position:absolute;right:10px;bottom:0;transform:translateY(50%)')}>Delegated</span>
+              </div>
+              <div style={sx('grid-row:1;grid-column:3;position:relative;border-left:1.5px solid var(--hw-black);border-bottom:1.5px solid var(--hw-black)')}>
+                {[25, 50, 75].map((p) => (
+                  <span key={p}>
+                    <span style={sx(`position:absolute;left:${p}%;top:0;bottom:0;border-left:1px solid rgba(33,33,33,.12)`)} />
+                    <span style={sx(`position:absolute;top:${p}%;left:0;right:0;border-top:1px solid rgba(33,33,33,.12)`)} />
+                  </span>
+                ))}
+                <span style={sx('position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--hw-terracotta)')} />
+                <span style={sx(`position:absolute;left:50%;top:50%;transform:translate(12px,-50%);${AXIS};font-size:12px;white-space:nowrap`)}>Your mandate</span>
+                {MAP_POINTS.map(([x, y, c, label, left]) => (
+                  <span key={label}>
+                    <span style={sx(`position:absolute;left:${x}%;top:${y}%;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:${c}`)} />
+                    <span style={sx(`position:absolute;left:${x}%;top:${y}%;transform:${left ? 'translate(calc(-100% - 10px),-50%)' : 'translate(10px,-50%)'};font-size:14px;line-height:1.2;white-space:nowrap`)}>{label}</span>
+                  </span>
+                ))}
+                {MAP_OTHER.map(([x, y]) => (
+                  <span key={x + '-' + y} style={sx(`position:absolute;left:${x}%;top:${y}%;${HOLLOW_DOT}`)} />
+                ))}
+              </div>
+              <div style={sx(`grid-row:2;grid-column:3;position:relative;${AXIS};color:#555`)}>
+                <span style={sx('position:absolute;left:0;top:8px')}>Single asset</span>
+                <span style={sx('position:absolute;left:50%;top:8px;transform:translateX(-50%)')}>Multi-asset</span>
+                <span style={sx('position:absolute;right:0;top:8px')}>Portfolio</span>
+              </div>
+              <div style={sx(`grid-row:3;grid-column:3;text-align:center;${AXIS}`)}>Scale of investment</div>
+              <div style={sx('grid-row:4;grid-column:3;display:flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;color:#555')}>
+                <span style={sx(HOLLOW_DOT.replace('margin:-5px 0 0 -5px;', ''))} />
+                Other bespoke structures
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section data-screen-label="Direct — Ways to partner" style={sx(DIRECT_SECTION)}>
+        <div style={sx(DIRECT_RULE)} />
+        <span style={sx(DIRECT_EYEBROW)}>Ways to partner</span>
+        <h2 style={sx(DIRECT_H2)}>Where partnerships often start.</h2>
+        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));border-top:1px solid var(--hw-black);border-left:1px solid var(--hw-black)')}>
+          {PARTNER_WAYS.map(([h, p]) => (
+            <div key={h} style={sx(PARTNER_CARD)}>
+              <h3 style={sx(PARTNER_H3)}>{h}</h3>
+              <p style={sx(PARTNER_P)}>{p}</p>
+            </div>
+          ))}
+          <div style={sx(`${PARTNER_CARD};background:var(--hw-black);color:var(--hw-white)`)}>
+            <h3 style={sx(PARTNER_H3)}>Something else</h3>
+            <p style={sx(PARTNER_P)}>If it fits our strategies, we’re open to it.</p>
+            <Hv as="button" onClick={() => go('investment/meeting')} s={`margin-top:auto;align-self:flex-start;padding:12px 18px;background:var(--hw-white);color:var(--hw-black);border:0;cursor:pointer;${MONO};font-size:13px`} h="background:var(--hw-terracotta);color:var(--hw-white)">
+              Meet with us →
+            </Hv>
+          </div>
+        </div>
+      </section>
+
+      <section data-screen-label="Direct — Markets" style={sx(DIRECT_SECTION)}>
+        <div style={sx(DIRECT_RULE)} />
+        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:40px 56px;align-items:stretch')}>
+          <div style={sx('display:flex;flex-direction:column;gap:20px')}>
+            <span style={sx(DIRECT_EYEBROW)}>Our core markets</span>
+            <div style={sx('display:flex;flex-direction:column;border-bottom:1px solid var(--hw-black)')}>
+              {['Canada', 'United States', 'Europe'].map((m) => (
+                <div key={m} style={sx('padding:18px 0;border-top:1px solid var(--hw-black)')}>
+                  <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.2vw,44px);line-height:1;letter-spacing:-.02em')}>{m}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={sx('background:var(--hw-cool-grey);padding:clamp(24px,3vw,36px);display:flex;flex-direction:column;justify-content:space-between;gap:28px')}>
+            <div style={sx('display:flex;flex-direction:column;gap:16px')}>
+              <span style={sx(`${MONO};font-size:15px;color:var(--hw-black)`)}>A global investor base</span>
+              <p style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.4vw,30px);line-height:1.15;letter-spacing:-.015em;text-wrap:pretty')}>Our partners invest from around the world.</p>
+              <p style={sx(PARTNER_P)}>Alongside our core markets, we work with qualified private wealth investors, family offices and institutions globally, and structure each partnership to suit their investment requirements.</p>
+            </div>
+            <Hv as="button" onClick={() => go('investment/meeting')} s={`align-self:flex-start;background:none;border:0;border-bottom:1.5px solid var(--hw-black);padding:0 0 4px;cursor:pointer;${MONO};font-size:13px;color:var(--hw-black)`} h="color:var(--hw-terracotta);border-color:var(--hw-terracotta)">
+              Talk to our investor team →
+            </Hv>
+          </div>
+        </div>
       </section>
     </>
   )
@@ -176,76 +302,6 @@ function Overview({ go }) {
           <p style={sx('margin:0;max-width:680px;font-size:clamp(18px,1.5vw,22px);line-height:1.5;text-wrap:pretty')}>
             We focus on the living sector: purpose-built rental housing in supply-constrained North American markets, designed to hold for the long term, for durable income and appreciation.
           </p>
-        </div>
-      </section>
-
-      <section data-screen-label="Investment — Why living" style={sx(RULED_SECTION)}>
-        <div style={sx('display:flex;flex-direction:column;gap:20px')}>
-          <p style={sx(EYEBROW)}>Why living</p>
-          <h2 style={sx(H2)}>Why we focus on rental housing.</h2>
-        </div>
-        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(20px,3vw,48px)')}>
-          {WHY_LIVING.map((w) => (
-            <div key={w.no} style={sx('display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--hw-black);padding-top:18px')}>
-              <span style={sx('font-family:var(--font-subhead);font-weight:500;font-size:clamp(36px,3.4vw,52px);line-height:1;color:var(--hw-terracotta)')}>{w.no}</span>
-              <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(20px,1.8vw,26px);line-height:1.15')}>{w.title}</span>
-              <p style={sx('margin:0;font-size:18px;line-height:1.5;text-wrap:pretty')}>{w.body}</p>
-            </div>
-          ))}
-        </div>
-        <p style={sx('margin:0;font-family:var(--font-subhead);font-size:12px;text-transform:uppercase;line-height:1.5')}>
-          Sources: CMHC, Canada’s Housing Supply Shortages: Moving to a New Framework; Realtor.com, 2026 Housing Supply Gap Report (March 2026).
-        </p>
-      </section>
-
-      <section data-screen-label="Investment — Why now" style={sx(RULED_SECTION)}>
-        <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(24px,4vw,72px);align-items:start')}>
-          <div style={sx('display:flex;flex-direction:column;gap:20px')}>
-            <p style={sx(EYEBROW)}>Why now</p>
-            <h2 style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(40px,5vw,76px);line-height:1;letter-spacing:-.02em')}>
-              Rising demand.
-              <br />
-              Shrinking supply.
-            </h2>
-          </div>
-          <div style={sx('display:flex;flex-direction:column;gap:18px')}>
-            <p style={sx(WHY_NOW_P)}>
-              We are seeing an economic sea change in the rental housing market across North America. Demand continues to grow while new supply remains constrained, creating a generational opportunity to build and acquire high-quality assets.
-            </p>
-            <p style={sx(WHY_NOW_P)}>
-              With new supply pulling back in both countries and pricing reset from 2022 levels, we believe today’s environment creates an attractive entry point for long-term investors. We do not need to predict when rates will fall or cap rates will compress. We invest based on fundamentals that make sense today. That is the long view: build and buy quality assets, hold through the cycles, and remain patient until the right opportunity to sell emerges. We cannot predict when the cycle will turn, but we can position ourselves to benefit when it does.
-            </p>
-          </div>
-        </div>
-        <div style={sx('display:flex;flex-direction:column;border-bottom:1px solid var(--hw-black)')}>
-          {WHY_NOW.map((r) => (
-            <div key={r.k} style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px clamp(20px,3vw,48px);padding:clamp(22px,2.6vw,32px) 0;border-top:1px solid var(--hw-black)')}>
-              <div style={sx('display:flex;gap:16px;align-items:flex-start')}>
-                <span style={sx('font-family:var(--font-subhead);font-weight:500;font-size:clamp(36px,3.6vw,56px);line-height:.8;color:var(--hw-terracotta);width:.8em;flex:none')}>{r.op}</span>
-                <div style={sx('display:flex;flex-direction:column;gap:6px')}>
-                  <span style={sx(`${MONO};font-size:13px;color:var(--hw-terracotta)`)}>{r.k}</span>
-                  <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.2vw,32px);line-height:1.05')}>{r.theme}</span>
-                </div>
-              </div>
-              {[
-                ['Canada', r.ca],
-                ['United States', r.us],
-              ].map(([label, d]) => (
-                <div key={label} style={sx('display:flex;flex-direction:column;gap:8px')}>
-                  <span style={sx(`${MONO};font-size:12px`)}>{label}</span>
-                  <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(36px,3.6vw,56px);line-height:1;letter-spacing:-.02em')}>{d.big}</span>
-                  <span style={sx('font-size:17px;line-height:1.45;max-width:420px;text-wrap:pretty')}>{d.label}</span>
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-        <p style={sx('margin:0;font-size:14px;line-height:1.5;max-width:1100px')}>
-          Sources: Canada demand: Environics Analytics, household tenure, all ten provinces, 2021–2026. US demand: U.S. Census Bureau data, via Arbor Realty Trust and Chandan Economics, Renters Now Represent 80% of Household Growth (2026). Canada supply: CMHC Starts and Completions Survey, condominium apartment starts, all ten provinces, 2021–2025. US supply: U.S. Census Bureau and HUD, New Residential Construction, via NAHB and Multifamily Dive. Long-term gap: CMHC, Canada’s Housing Supply Shortages; National Multifamily Housing Council.
-        </p>
-        <div style={sx('display:flex;gap:12px;flex-wrap:wrap')}>
-          <Hv as="button" onClick={() => go('about/who')} s={OUTLINE_SM} h="background:var(--hw-black);color:var(--hw-white)">Why we hold →</Hv>
-          <Hv as="button" onClick={() => go('insights/newsletter')} s={OUTLINE_SM} h="background:var(--hw-black);color:var(--hw-white)">Subscribe to The Long View →</Hv>
         </div>
       </section>
 
@@ -339,9 +395,16 @@ function KeyRows({ items, k = 'k', v = 'v', grid }) {
   )
 }
 
+// "Speak with our investment team" beside the strategy pages' form: [name, title, photo, keep name on one line].
+const INVEST_CONTACTS = [
+  ['Dylan Kent', 'Director, Capital Markets', '/assets/team/headshots/HW_Team_Dylan-Kent_2026_Toned.jpg'],
+  ['Dustin Buenaventura', 'Director, Business Development', '/assets/team/headshots/HW_Team_Dustin-Buenaventura_2026_Toned.jpg', true],
+]
+
 const REGION = { ON: 'Ontario', QC: 'Quebec', NS: 'Nova Scotia', BC: 'British Columbia', AB: 'Alberta', CA: 'California', WA: 'Washington' }
 
-// Where a strategy builds or buys: one row per city with its province or state pennant.
+// Where a strategy builds or buys: an optional paragraph, then one row per city with its province or state pennant
+// (or the Canadian flag for a country-wide row).
 function Markets({ f, n }) {
   return (
     <section data-chapter="mkt" data-screen-label="Strategy — mkt" style={sx(CH_SECTION)}>
@@ -355,23 +418,26 @@ function Markets({ f, n }) {
           <div style={sx('display:flex;align-items:center;gap:10px')}>
             {f.marketsFlags.map((fl) => (
               <span key={fl.k} title={fl.t} style={sx('display:block;line-height:0;height:24px;overflow:hidden')}>
-                <DotIcon name={fl.k} color="#212121" size={44} style={{ marginTop: -10 }} />
+                <DotIcon name={fl.k} color="#BC532D" size={44} style={{ marginTop: -10 }} />
               </span>
             ))}
           </div>
         </div>
       </div>
+      {f.marketsP && <p style={sx(CH_P)}>{f.marketsP}</p>}
+      {f.markets.length > 0 && (
       <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));column-gap:clamp(24px,4vw,56px);border-bottom:1px solid var(--hw-black)')}>
         {f.markets.map(([c, r], i) => (
           <div key={c} style={sx('display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px 0;border-top:1px solid var(--hw-black)')}>
             <span style={sx('font-family:var(--font-subhead);font-size:13px;color:var(--hw-terracotta)')}>{String(i + 1).padStart(2, '0')}</span>
             <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2vw,28px);letter-spacing:-.01em')}>{c}</span>
             <span title={REGION[r] || r} style={sx('display:block;line-height:0;height:32px;overflow:hidden')}>
-              <DotIcon name={'PENNANT ' + r} color="#BC532D" size={66} style={{ marginTop: -17 }} />
+              <DotIcon name={r === 'Canada' ? 'CA FLAG' : 'PENNANT ' + r} color="#BC532D" size={66} style={{ marginTop: -17 }} />
             </span>
           </div>
         ))}
       </div>
+      )}
     </section>
   )
 }
@@ -382,9 +448,9 @@ function Fund({ f, go }) {
   const [chap, setChap] = useState('why')
   const [wide, setWide] = useState(true)
 
-  const all = [['why', f.why.label], ['now', f.hasWhyNow && f.whyNow.label], ['path', f.path.label], ['mkt', f.marketsLabel], ['buy', f.hasHowBuy && f.howBuy.label], ['own', f.own.label], ['del', 'What it delivers'], ['cmp', f.hasCompare && 'Comparison'], ['acc', 'Ways to access']].filter((x) => x[1])
+  const all = [['why', f.why.label], ['now', f.hasWhyNow && f.whyNow.label], ['path', f.path.label], ['mkt', f.marketsLabel], ['buy', f.hasHowBuy && f.howBuy.label], ['own', f.own.label], ['res', f.hasRes && f.res.label], ['del', 'What it delivers'], ['cmp', f.hasCompare && 'Comparison'], ['team', f.hasTeam && f.team.label], ['acc', f.hasAccess !== false && 'Ways to access']].filter((x) => x[1])
   const cn = {}
-  all.forEach(([k], i) => { cn[k] = '0' + (i + 1) })
+  all.forEach(([k], i) => { cn[k] = (i < 9 ? '0' : '') + (i + 1) })
   const jump = (k) => {
     const el = document.querySelector(`[data-chapter="${k}"]`)
     if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' })
@@ -409,11 +475,18 @@ function Fund({ f, go }) {
         <div style={sx('position:absolute;inset:0;background:rgba(58,35,22,.55)')} />
         <p style={sx(`position:relative;margin:0;${MONO};font-size:clamp(13px,1.1vw,15px)`)}>Investments · {f.kind}</p>
         <div style={sx('position:relative;display:flex;flex-direction:column;gap:clamp(20px,2.2vw,28px);max-width:860px')}>
-          <div role="img" aria-label={`${f.word} strategy`} style={sx('display:flex;align-items:center;gap:clamp(16px,2.8vw,36px)')}>
+          <div role="img" aria-label={`${f.word} Trust`} style={sx('display:flex;align-items:center;gap:clamp(16px,2.8vw,36px)')}>
             <img loading="lazy" decoding="async" src={f.ringW} alt="" style={sx('height:clamp(96px,16vw,210px);width:auto;display:block;flex:none')} />
             <span style={sx('font-family:var(--font-display);font-weight:900;font-size:clamp(44px,8.6vw,112px);line-height:.85;letter-spacing:-.01em;text-transform:uppercase')}>{f.word}</span>
           </div>
           <h1 style={sx('margin:0;max-width:640px;font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2.3vw,30px);line-height:1.18;letter-spacing:-.01em;text-wrap:pretty')}>{f.intro}</h1>
+          {f.hasHeroP && (
+            <div style={sx('display:flex;flex-direction:column;gap:14px;max-width:680px')}>
+              {f.heroP.map((p) => (
+                <p key={p} style={sx('margin:0;font-size:clamp(17px,1.3vw,19px);line-height:1.55;text-wrap:pretty')}>{p}</p>
+              ))}
+            </div>
+          )}
           <div style={sx('display:flex;gap:12px;flex-wrap:wrap')}>
             <Hv as="button" onClick={() => go('investment/meeting')} s={`padding:14px 22px;background:var(--hw-white);color:var(--hw-black);border:0;cursor:pointer;${MONO};font-size:14px`} h="background:var(--hw-cool-grey)">
               Book a meeting
@@ -435,13 +508,13 @@ function Fund({ f, go }) {
         )}
         <div style={sx('min-width:0')}>
           <Chapter id="why" n={cn.why} label={f.why.label} h={f.why.h}>
-            <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(24px,3vw,40px);align-items:stretch')}>
+            <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(24px,3vw,40px);align-items:center')}>
               <div style={sx('display:flex;flex-direction:column;gap:20px')}>
                 {f.why.p.map((p) => (
                   <p key={p} style={sx(CH_P)}>{p}</p>
                 ))}
               </div>
-              <figure style={sx('margin:0;padding:clamp(28px,3vw,40px);background:var(--hw-terracotta);color:var(--hw-white);display:flex;flex-direction:column;gap:20px;justify-content:flex-start;align-self:start')}>
+              <figure style={sx('margin:0;padding:clamp(28px,3vw,40px);background:var(--hw-terracotta);color:var(--hw-white);display:flex;flex-direction:column;gap:20px;justify-content:flex-start;align-self:center')}>
                 <blockquote style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.2vw,32px);line-height:1.2;letter-spacing:-.01em;text-wrap:pretty')}>“{f.why.quote}”</blockquote>
                 <figcaption style={sx(`${MONO};font-size:13px`)}>{f.why.by}</figcaption>
               </figure>
@@ -451,6 +524,7 @@ function Fund({ f, go }) {
           {f.hasWhyNow && (
             <Chapter id="now" n={cn.now} label={f.whyNow.label} h={f.whyNow.h}>
               <KeyRows items={f.whyNow.items} />
+              {f.whyNow.src && <p style={sx('margin:0;font-size:14px;line-height:1.5;max-width:880px')}>{f.whyNow.src}</p>}
             </Chapter>
           )}
 
@@ -473,6 +547,7 @@ function Fund({ f, go }) {
 
           {f.hasHowBuy && (
             <Chapter id="buy" n={cn.buy} label={f.howBuy.label} h={f.howBuy.h}>
+              {f.howBuy.p && <p style={sx(CH_P)}>{f.howBuy.p}</p>}
               <KeyRows items={f.howBuy.items} grid />
             </Chapter>
           )}
@@ -482,6 +557,13 @@ function Fund({ f, go }) {
             <KeyRows items={f.own.items} k="v" v="k" />
             {f.own.note && <p style={sx(`margin:0;${MONO};font-size:12px;line-height:1.5`)}>{f.own.note}</p>}
           </Chapter>
+
+          {f.hasRes && (
+            <Chapter id="res" n={cn.res} label={f.res.label} h={f.res.h}>
+              <p style={sx(CH_P)}>{f.res.p}</p>
+              <KeyRows items={f.res.items} />
+            </Chapter>
+          )}
 
           <Chapter id="del" n={cn.del} label="What it delivers" h={f.deliversH}>
             <div style={sx('display:flex;flex-direction:column;border-bottom:1px solid var(--hw-black)')}>
@@ -516,24 +598,47 @@ function Fund({ f, go }) {
             </Chapter>
           )}
 
-          <Chapter id="acc" n={cn.acc} label="Ways to access">
-            <p style={sx(CH_P)}>{f.accessP}</p>
-            <div style={sx('display:flex;flex-direction:column;border-bottom:1px solid var(--hw-black)')}>
-              {f.access.map((a) => (
-                <Hv key={a.k} as="button" onClick={() => go(a.r)} s="display:flex;flex-wrap:wrap;gap:8px 32px;padding:20px 0;border:0;border-top:1px solid var(--hw-black);background:none;text-align:left;cursor:pointer;color:var(--hw-black);font-family:var(--font-body)" h="color:var(--hw-terracotta)">
-                  <span style={sx(`${CH_ROW_K};flex:0 0 min(100%,240px)`)}>{a.k} →</span>
-                  <span style={sx('font-size:18px;line-height:1.5;flex:1 1 300px')}>{a.v}</span>
-                </Hv>
-              ))}
-            </div>
-          </Chapter>
+          {f.hasTeam && (
+            <Chapter id="team" n={cn.team} label={f.team.label} h={f.team.h}>
+              <p style={sx(CH_P)}>{f.team.p}</p>
+              <KeyRows items={f.team.items} />
+            </Chapter>
+          )}
+
+          {f.hasAccess !== false && (
+            <Chapter id="acc" n={cn.acc} label="Ways to access">
+              <p style={sx(CH_P)}>{f.accessP}</p>
+              <div style={sx('display:flex;flex-direction:column;border-bottom:1px solid var(--hw-black)')}>
+                {f.access.map((a) => (
+                  <Hv key={a.k} as="button" onClick={() => go(a.r)} s="display:flex;flex-wrap:wrap;gap:8px 32px;padding:20px 0;border:0;border-top:1px solid var(--hw-black);background:none;text-align:left;cursor:pointer;color:var(--hw-black);font-family:var(--font-body)" h="color:var(--hw-terracotta)">
+                    <span style={sx(`${CH_ROW_K};flex:0 0 min(100%,240px)`)}>{a.k} →</span>
+                    <span style={sx('font-size:18px;line-height:1.5;flex:1 1 300px')}>{a.v}</span>
+                  </Hv>
+                ))}
+              </div>
+            </Chapter>
+          )}
         </div>
       </div>
 
-      <section ref={formRef} data-screen-label="Investment — Form" style={sx('padding:0 clamp(20px,3vw,40px) clamp(40px,5vw,72px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(32px,4vw,64px);align-items:stretch')}>
-        <div style={sx('display:flex;flex-direction:column;gap:20px;padding-top:clamp(40px,5vw,72px)')}>
+      <section ref={formRef} data-screen-label="Investment — Form" style={sx('padding:0 clamp(20px,3vw,40px) clamp(40px,5vw,72px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(32px,4vw,64px);align-items:center')}>
+        <div style={sx('display:flex;flex-direction:column;gap:20px;padding-top:clamp(40px,5vw,72px);align-self:start')}>
           <p style={sx(`margin:0;${MONO};font-size:clamp(14px,1.2vw,18px);color:var(--hw-hemlock)`)}>Invest with us</p>
           <h2 style={sx('margin:0;max-width:560px;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,3.6vw,52px);line-height:1.08;letter-spacing:-.015em;text-wrap:balance')}>{f === GROWTH ? 'Build the next generation of real estate with us.' : 'Own the future of real estate with us.'}</h2>
+          {f.hasContact && (
+            <div style={sx('display:flex;flex-direction:column;gap:20px;padding-top:12px')}>
+              <span style={sx(`${MONO};font-size:13px;color:var(--hw-black)`)}>Speak with our investment team</span>
+              <div style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,220px));gap:clamp(24px,3vw,48px)')}>
+                {INVEST_CONTACTS.map(([name, title, photo, nowrap]) => (
+                  <div key={name} style={sx('display:flex;flex-direction:column;gap:10px')}>
+                    <img loading="lazy" decoding="async" src={photo} alt={name} style={sx('width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--hw-cool-grey)')} />
+                    <span style={sx(`font-family:var(--font-display);font-weight:500;font-size:clamp(20px,1.7vw,24px)${nowrap ? ';white-space:nowrap' : ''}`)}>{name}</span>
+                    <span style={sx('font-family:var(--font-subhead);font-size:13px;text-transform:uppercase;line-height:1.35')}>{title}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
         <div style={sx('margin-top:clamp(40px,5vw,72px);display:flex;flex-direction:column;gap:22px')}>
           <HsForm form="meeting" />

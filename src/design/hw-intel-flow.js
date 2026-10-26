@@ -26,7 +26,7 @@ class HWIntelFlow extends HTMLElement{
   connectedCallback(){
     Object.assign(this.style,{display:'block',position:'absolute',inset:'0',pointerEvents:'none'});
     if(!this.cv){this.cv=document.createElement('canvas');Object.assign(this.cv.style,{width:'100%',height:'100%',display:'block'});this.appendChild(this.cv);}
-    this.reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.mid=this.getAttribute('mid')?hex(this.getAttribute('mid')):C1;this.cols=this.getAttribute('colors')?this.getAttribute('colors').split('|').map(hex):null;this.reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.ro=new ResizeObserver(()=>this.layout());this.ro.observe(this);
     this.vis=false;this.io=new IntersectionObserver(es=>{this.vis=es.some(e=>e.isIntersecting);if(this.vis&&this.t0==null)this.t0=performance.now();},{threshold:.15});this.io.observe(this);
     var loop=t=>{if(this.vis||this.t0==null)this.draw(t);this.raf=requestAnimationFrame(loop);};this.raf=requestAnimationFrame(loop);
@@ -41,11 +41,11 @@ class HWIntelFlow extends HTMLElement{
     var zi=z('in'),zb=z('band'),zo=z('out');if(!zi||!zb||!zo)return;
     var names=(this.getAttribute('icons')||'MONEY|CONSTRUCTION|PEOPLE|THERMOSTAT|SOLAR ENERGY').split('|'),N=names.length,cw=zi.w/N,r=rng(+(this.getAttribute('seed')||7));
     var box=Math.min(cw*.62,zi.h*.92),dots=[],cellMin=99;
-    names.forEach(function(nm,i){var ox=zi.x+cw*(i+.5)-box/2,oy=zi.y+zi.h/2-box/2;
+    var GC=this.cols;names.forEach(function(nm,i){var gc=GC&&GC[i];var ox=zi.x+cw*(i+.5)-box/2,oy=zi.y+zi.h/2-box/2;
       if(nm==='GRAPH'){var gb={x:ox,y:oy+box*.08,w:box,h:box*.84},H=[.3,.45,.4,.62,.78,1],cols=2,s=box/(6*3),rows=Math.max(6,Math.floor(box*.84/s)),bw=box/6;cellMin=Math.min(cellMin,s*.9);
-        H.forEach(function(hh,bi){var rr=Math.max(1,Math.round(hh*rows));for(var y=0;y<rr;y++)for(var c=0;c<cols;c++)dots.push({a:[gb.x+bw*(bi+.5)+(c-.5)*s,gb.y+gb.h-s*(y+.5)],s:[ox+r()*box,oy+r()*box]});});return;}
+        H.forEach(function(hh,bi){var rr=Math.max(1,Math.round(hh*rows));for(var y=0;y<rr;y++)for(var c=0;c<cols;c++)dots.push({a:[gb.x+bw*(bi+.5)+(c-.5)*s,gb.y+gb.h-s*(y+.5)],s:[ox+r()*box,oy+r()*box],g:gc});});return;}
       var rows=I[nm];if(!rows)return;var g=cells(rows),cell=box/g.nn;cellMin=Math.min(cellMin,cell);
-      g.c.forEach(function(c){dots.push({a:[ox+(c[0]+.5)*cell,oy+(c[1]+.5)*cell]});});});
+      g.c.forEach(function(c){dots.push({a:[ox+(c[0]+.5)*cell,oy+(c[1]+.5)*cell],g:gc});});});
     if(!dots.length)return;
     var rad=Math.max(1.3,Math.min(3.2,cellMin*.36));this.rad=rad;
     var bx=zb.x+zb.w*.03,bw=zb.w*.94,by=zb.y+zb.h*.34,bh=zb.h*.56;
@@ -59,7 +59,7 @@ class HWIntelFlow extends HTMLElement{
     if(!this.dots)return;var c=this.cv.getContext('2d');c.setTransform(this.dpr,0,0,this.dpr,0,0);c.clearRect(0,0,this.w,this.h);
     var el=this.t0==null?0:(now-this.t0)/1000,T=this.reduce?PH[0]+PH[1]+PH[2]+PH[3]+.1:el%TOT,ph=0,acc=0;
     while(ph<PH.length-1&&T>acc+PH[ph]){acc+=PH[ph];ph++;}var u=(T-acc)/PH[ph];
-    var R=this.rad;
+    var R=this.rad,C1=this.mid;
     for(var i=0;i<this.dots.length;i++){var d=this.dots[i],P,Q,cp,cq,k;
       if(ph===0){if(d.s){P=d.s;Q=d.a;cp=cq=C0;k=Math.min(1,u*1.6);}else{P=Q=d.a;cp=cq=C0;k=0;}}
       else if(ph===1){P=d.a;Q=d.b;cp=C0;cq=C1;k=u;}
@@ -67,7 +67,7 @@ class HWIntelFlow extends HTMLElement{
       else if(ph===3){P=d.b;Q=d.c;cp=C1;cq=C2;k=u;}
       else if(ph===4){P=Q=d.c;cp=cq=C2;k=0;}
       else{P=d.c;Q=d.s||d.a;cp=C2;cq=C0;k=u;}
-      var e=k===0?0:ease(Math.max(0,Math.min(1,(k-d.d)/.6)));
+      if(d.g){cp=cq=d.g;}var e=k===0?0:ease(Math.max(0,Math.min(1,(k-d.d)/.6)));
       var x=P[0]+(Q[0]-P[0])*e,y=P[1]+(Q[1]-P[1])*e;
       var inBand=ph===2||(ph===1&&e>.98)||(ph===3&&e<.02);if(inBand&&!this.reduce){x+=Math.sin(el*d.sp+d.ph)*6;y+=Math.cos(el*d.sp*.8+d.ph)*4;}
       c.fillStyle='rgb('+Math.round(cp[0]+(cq[0]-cp[0])*e)+','+Math.round(cp[1]+(cq[1]-cp[1])*e)+','+Math.round(cp[2]+(cq[2]-cp[2])*e)+')';

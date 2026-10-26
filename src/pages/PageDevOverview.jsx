@@ -15,19 +15,10 @@ const LINK_BTN_HOVER = 'color:var(--hw-terracotta);border-color:var(--hw-terraco
 const R = '/assets/project-renders/'
 const P = '/assets/photography/'
 
-const STEPS = [
-  ['01', 'Source', 'Data-Driven Site Sourcing'],
-  ['02', 'Design', 'System-based design'],
-  ['03', 'Build', 'Efficient Construction'],
-  ['04', 'Operate', 'Homes people don’t want to leave'],
-  ['05', 'Report', 'Measured performance, reported'],
-]
-
-
 const PROJECTS = [
   { name: '3385 Lawrence Avenue East', loc: 'Toronto, Ontario · 155 homes', img: R + 'HW_Render_3385-Lawrence.jpg', pos: 'center', r: 'properties/3385-lawrence' },
-  { name: '360 Kennedy Lane', loc: 'Ottawa, Ontario · 81 homes', img: R + 'HW_Render_360-Kennedy-Lane.jpg', pos: 'center', r: 'properties/360-kennedy' },
-  { name: '175 Oxford Street', loc: 'Orillia, Ontario · 48 homes', img: P + 'HW_Photo_175-Oxford_Townhomes-Sky.jpg', pos: 'center 85%', r: 'properties/175-oxford' },
+  { name: '1570 Main Street West', loc: 'Hamilton, Ontario · 176 homes', img: R + 'HW_Render_1570-Main-Street_web.jpg', pos: 'center', r: 'properties/1570-main' },
+  { name: '4094 Tomken Road', loc: 'Mississauga, Ontario · 250 homes', img: R + 'HW_Render_4094-Tomken-Road.jpg', pos: 'center', r: 'properties/4094-tomken' },
 ]
 
 function SectionHead({ eyebrow, title, lead, cta, onCta }) {
@@ -38,7 +29,7 @@ function SectionHead({ eyebrow, title, lead, cta, onCta }) {
         <h2 style={sx(H2)}>{title}</h2>
       </div>
       <div style={sx('display:flex;flex-direction:column;gap:24px;align-items:flex-start')}>
-        <p style={sx(LEAD)}>{lead}</p>
+        {lead && <p style={sx(LEAD)}>{lead}</p>}
         <Hv as="button" onClick={onCta} s={LINK_BTN} h={LINK_BTN_HOVER}>
           <span>{cta}</span>
           <span>→</span>
@@ -62,43 +53,22 @@ function PageDevOverview({ go }) {
         </div>
       </section>
 
-      <section data-screen-label="Development — Overview" style={sx(SECTION)}>
-        <div data-do-2="" style={sx(TWO_COL)}>
-          <div style={sx('display:flex;flex-direction:column;gap:18px')}>
-            <p style={sx(EYEBROW)}>01 · Overview</p>
-            <h2 style={sx(H2)}>One integrated team, from site to stabilized building.</h2>
-          </div>
-          <p style={sx(LEAD)}>
-            We are not merchant builders. Investment, design, construction and operations sit on one platform, so every decision is made for the decades a building will stand: lower operating costs, healthier homes and a building that stays competitive long after it opens.
-          </p>
-        </div>
-      </section>
-
       <section data-screen-label="Development — How we build" style={sx(SECTION_COL)}>
         <SectionHead
-          eyebrow="02 · How we build"
-          title="One system, from sourcing to stabilization."
-          lead="Every building follows the same development and design process, so each one improves on the last."
+          eyebrow="01 · How we build"
+          title="Integrated systems across every stage of development."
+          lead="A repeatable, systems-based approach to design, development, delivery and operations. Every building follows the same process, so each one improves on the last."
           cta="Explore how we build"
           onCta={() => go('development/design')}
         />
         <div style={sx(`width:100%;aspect-ratio:21/9;background:var(--hw-brown) url('${P}HW_Photo_Design-Review-Plans.jpg') center 40%/cover no-repeat`)} />
-        <div data-do-steps="" style={sx('display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--hw-black)')}>
-          {STEPS.map(([n, k, t], i) => (
-            <div key={n} style={sx(`padding:20px 20px 0;border-left:${i ? '1px solid var(--hw-black)' : '0'};display:flex;flex-direction:column;gap:10px`)}>
-              <span style={sx('font-family:var(--font-subhead);font-size:32px;color:var(--hw-terracotta)')}>{n}</span>
-              <span style={sx(`${MONO};font-size:13px;opacity:.7`)}>{k}</span>
-              <span style={sx('font-family:var(--font-display);font-weight:500;font-size:clamp(18px,1.6vw,21px);line-height:1.15')}>{t}</span>
-            </div>
-          ))}
-        </div>
       </section>
 
       <section data-screen-label="Development — Standards" style={sx(SECTION_COL)}>
         <SectionHead
-          eyebrow="03 · Our standards"
+          eyebrow="02 · Our standards"
           title="Built to last. Designed to perform."
-          lead="Efficient, durable and healthy buildings cost less to run, stay competitive for longer and are better to live in."
+          lead="Efficient, durable and healthy buildings cost less to run, stay competitive over time and are better to live in."
           cta="See our standards"
           onCta={() => go('development/standards')}
         />
@@ -106,9 +76,8 @@ function PageDevOverview({ go }) {
 
       <section data-screen-label="Development — Projects" style={sx(SECTION_COL)}>
         <SectionHead
-          eyebrow="04 · Projects"
+          eyebrow="03 · Projects"
           title="Communities in our pipeline."
-          lead="From approvals to completion, a look at what we are building across Canada and the United States."
           cta="View all projects"
           onCta={() => go('development/projects')}
         />

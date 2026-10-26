@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { SECTIONS, SECTION_LANDING, LOGIN_URL, tagColor } from '../site/sitemap.js'
+import { SECTIONS, NAV_SECTIONS, SECTION_LANDING, LOGIN_URL, tagColor } from '../site/sitemap.js'
 import { linkProps } from '../site/paths.js'
 
 // Scroll distance over which the Home header collapses from the full-width
@@ -178,7 +178,7 @@ function SiteHeader({ route, section, navSection, activeSub, go }) {
 
           {!mob && (
             <nav className="site-nav" aria-label="Main" style={bar.navStyle}>
-              {Object.entries(SECTIONS).map(([key, m]) => {
+              {NAV_SECTIONS.map(([key, m]) => {
                 // The current section's items are already in the sub-nav, so its menu
                 // doesn't drop down. Clicking a menu goes to its landing page.
                 const current = navSection === key
@@ -255,7 +255,7 @@ function SiteHeader({ route, section, navSection, activeSub, go }) {
 
       {mob && drawer && (
         <div className="site-drawer">
-          {Object.entries(SECTIONS).map(([key, m]) => {
+          {NAV_SECTIONS.map(([key, m]) => {
             const has = !!m.items
             const open = has && openKey === key
             return (

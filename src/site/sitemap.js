@@ -3,7 +3,7 @@
 
 export const LOGIN_URL = 'https://heartwood.sgggfsi.com/'
 
-export const LINKEDIN_URL = 'https://www.linkedin.com/company/heartwood-investments'
+export const LINKEDIN_URL = 'https://www.linkedin.com/company/heartwood-investments1'
 
 export const ADDRESS = '25 King St W, Toronto, Ontario M5L 2A1'
 
@@ -53,6 +53,11 @@ export const SECTIONS = {
   },
 }
 
+// The design hides Insights from the menus and footer for now (its showInsights toggle).
+// Its pages still resolve by URL.
+export const SHOW_INSIGHTS = false
+export const NAV_SECTIONS = Object.entries(SECTIONS).filter(([k]) => SHOW_INSIGHTS || k !== 'insights')
+
 export const FOOTER_COLUMNS = [
   {
     label: 'For Investors',
@@ -97,7 +102,7 @@ export const FOOTER_COLUMNS = [
       ['Contact', 'about/contact'],
     ],
   },
-]
+].filter((c) => SHOW_INSIGHTS || c.label !== 'Insights')
 
 // Where a desktop menu click goes; hovering still opens its dropdown.
 export const SECTION_LANDING = {

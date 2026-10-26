@@ -14,9 +14,10 @@ const CHAPTERS = [
 ]
 
 const TIERS = [
-  { n: '01', w: 'Build', k: 'Build to Hold development', p: 'Our building strategy is focused on purpose-built rental communities in supply-constrained markets, built in an efficient and innovative manner to create resilient assets designed for the future.', f: 'Development', r: 'development/overview' },
+  { n: '01', w: 'Build', k: 'Development', p: 'Our building strategy is focused on purpose-built rental communities in supply-constrained markets, built in an efficient and innovative manner to create resilient assets designed for the future.', f: 'Development', r: 'development/overview' },
   { n: '02', w: 'Acquire', k: 'Core acquisition', p: 'We acquire well-located, modern, stabilized, institutional-quality rental properties at attractive entry points. Through our management system and operating efficiency, we increase rental income, reduce expenses by optimizing building operations, and hold for the long term to capture cash flow and appreciation.', f: 'For Investors', r: 'investment/overview' },
-  { n: '03', w: 'Hold', k: 'Long-term ownership', p: 'We hold to capture development value on what we build, and income and appreciation on what we acquire.', f: 'Subscribe to The Long View', r: 'insights/newsletter' },
+  { n: '03', w: 'Manage', k: 'Asset management', p: 'We manage every asset with the same rigour we bring to underwriting it. Healthy, community-focused homes, disciplined operations and real-time operating data support resident retention, steady occupancy and predictable cash flow.', f: 'Asset Management', r: 'management/asset' },
+  { n: '04', w: 'Hold', k: 'Long-term ownership', p: 'We hold to capture development value on what we build, and income and appreciation on what we acquire.', f: 'Subscribe to The Long View', r: 'insights/newsletter' },
 ]
 
 const HOLD = [
@@ -31,7 +32,6 @@ const EYEBROW = 'margin:0;font-family:var(--font-subhead);font-weight:500;font-s
 const H2 = 'margin:0;max-width:880px;font-family:var(--font-display);font-weight:500;font-size:clamp(36px,4.4vw,72px);line-height:1.02;letter-spacing:-.025em;text-wrap:balance'
 const LEDE = 'margin:0;max-width:820px;font-size:clamp(20px,1.8vw,28px);line-height:1.4;text-wrap:pretty'
 const BODY = 'margin:0;max-width:680px;font-size:clamp(18px,1.3vw,20px);line-height:1.6;text-wrap:pretty'
-const BODY_GRID = 'display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px clamp(24px,3vw,48px)'
 const MORE_LINK = 'align-self:flex-start;background:none;border:0;padding:0;cursor:pointer;color:var(--hw-black);font-family:var(--font-subhead);font-weight:500;font-size:14px;text-transform:uppercase;display:inline-flex;gap:10px'
 
 const TREE_SLICE = "position:absolute;inset:0;border-radius:50%;background:#F9F9F9 url('/assets/brand/HW_Tree-Slice-Bark_HR.jpg') 50% 43%/186% auto no-repeat"
@@ -114,22 +114,15 @@ function PageWhoB({ go }) {
           <div ref={refs.who} data-screen-label="Who we are B — Who we are" style={sx(CHAPTER_RULED)}>
             <p style={sx(EYEBROW)}>01 · Who we are</p>
             <h2 style={sx(H2)}>A real estate platform built for long-term ownership.</h2>
-            <p style={sx(LEDE)}>Heartwood is a next-generation real estate platform focused on enduring buildings, healthier homes, stronger communities, and durable investment returns.</p>
-            <div style={sx(BODY_GRID)}>
-              <p style={sx(BODY)}>We bring investment, development, construction and asset management together in one vertically integrated platform. That lets us build, acquire, and own residential real estate from a single, consistent perspective: that of a long view.</p>
-              <p style={sx(BODY)}>We believe real estate value is created over long periods of time. The best investments are not simply the ones that work at acquisition or at stabilization. They are the ones that keep performing across economic cycles, through demographic trends, and amidst a changing world. That requires alignment between how we design, what we develop, what we acquire and how we own it.</p>
-            </div>
+            <p style={sx(LEDE)}>Heartwood is a next-generation real estate investment manager focused on investing in, developing and managing enduring assets, healthier homes and resilient investments.</p>
             <Illustration tree={TREE_SLICE} wrap="padding:clamp(16px,2vw,32px) 0;overflow:hidden;background:#F9F9F9" rowPad={['24px', '24px']} />
-            <p style={sx('margin:0;max-width:900px;padding-left:clamp(20px,2.4vw,36px);border-left:3px solid var(--hw-terracotta);font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.4vw,38px);line-height:1.2;letter-spacing:-.01em;text-wrap:balance')}>
-              That belief is organized around three simple words: Build. Acquire. Hold.
-            </p>
           </div>
 
           <div ref={refs.what} data-screen-label="Who we are B — What we do" style={sx(CHAPTER_RULED)}>
             <p style={sx(EYEBROW)}>02 · What we do</p>
-            <h2 style={sx(H2)}>Build. Acquire. Hold.</h2>
-            <p style={sx(LEDE)}>Heartwood’s living platform develops high-quality, energy-efficient communities, acquires modern stabilized core properties, and holds them for long-term appreciation.</p>
-            <p style={sx(BODY)}>Building is part of our growth strategy, acquiring is part of our income strategy, and holding is a philosophy about a long view with the future in mind.</p>
+            <h2 style={sx(H2)}>Build. Acquire. Manage. Hold.</h2>
+            <p style={sx(LEDE)}>Heartwood is an investment manager focused on the living sector. We invest in, develop and manage high-quality real estate in high-growth North American markets, and hold it for long-term value.</p>
+            <p style={sx(BODY)}>One integrated team oversees every stage, from underwriting and acquisition through development, operations and long-term ownership. We believe real estate value is created over long periods of time. The best investments keep performing across economic cycles, demographic shifts and a changing world, so we take the long view, with the future in mind.</p>
             <div style={sx('display:flex;flex-direction:column;border-top:1px solid var(--hw-black)')}>
               {TIERS.map((t) => (
                 <div key={t.n} style={sx('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px clamp(24px,3vw,48px);padding:clamp(24px,3vw,40px) 0;border-bottom:1px solid var(--hw-black);align-items:start')}>
@@ -150,16 +143,16 @@ function PageWhoB({ go }) {
           </div>
 
           <div ref={refs.build} data-screen-label="Who we are B — How we build" style={sx(CHAPTER_RULED)}>
-            <p style={sx(EYEBROW)}>03 · How we build · Growth strategy</p>
+            <p style={sx(EYEBROW)}>03 · How we build</p>
             <h2 style={sx(H2)}>Designed to perform for decades.</h2>
-            <p style={sx(LEDE)}>We don’t develop buildings simply to complete construction or reach lease-up and turn around to sell them as merchants. We develop assets we intend to own for the long term.</p>
+            <p style={sx(LEDE)}>We develop through a product-based, repeatable system rather than designing each building from scratch. Proven designs, components and processes carry from one project to the next, so every building benefits from what the last one taught us and is built to be owned for the long term.</p>
             <Hv as="button" type="button" onClick={() => go('development/design')} s={MORE_LINK} h="color:var(--hw-terracotta)">
               How we build<span aria-hidden="true">→</span>
             </Hv>
           </div>
 
           <div ref={refs.acquire} data-screen-label="Who we are B — How we acquire" style={sx(CHAPTER_RULED)}>
-            <p style={sx(EYEBROW)}>04 · How we acquire · Income strategy</p>
+            <p style={sx(EYEBROW)}>04 · How we acquire</p>
             <h2 style={sx(H2)}>Institutional discipline. Entrepreneurial pace.</h2>
             <p style={sx(LEDE)}>We bring an institutional investor’s rigour to every acquisition, with the speed and flexibility of an entrepreneur to act when the right opportunity appears.</p>
             <Hv as="button" type="button" onClick={() => go('investment/income')} s={MORE_LINK} h="color:var(--hw-terracotta)">
@@ -195,7 +188,7 @@ function PageWhoB({ go }) {
 
       <section data-screen-label="Who we are B — Close" style={sx('background:#3A2316;color:var(--hw-white);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(32px,5vw,80px);align-items:center;padding:clamp(56px,7vw,112px) clamp(20px,3vw,40px)')}>
         <div style={sx('display:flex;flex-direction:column;gap:20px')}>
-          <p style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(48px,6.4vw,112px);line-height:.95;letter-spacing:-.03em')}>Build. Acquire. Hold.</p>
+          <p style={sx('margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(48px,6.4vw,112px);line-height:.95;letter-spacing:-.03em')}>Build. Acquire. Manage. Hold.</p>
           <p style={sx('margin:0;max-width:520px;font-size:clamp(18px,1.5vw,22px);line-height:1.5')}>A simple model built around a long view of real estate.</p>
         </div>
         <div style={sx('display:flex;flex-direction:column;gap:20px;align-items:flex-start;border-top:1.5px solid var(--hw-terracotta);padding-top:24px')}>

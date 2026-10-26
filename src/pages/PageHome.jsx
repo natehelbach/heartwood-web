@@ -35,7 +35,7 @@ function PageHome({ go }) {
           <div style={sx('position:absolute;top:var(--nav-h,82px);left:0;right:0;bottom:0;overflow:hidden')}>
             <DotField preset="landing" />
             <p style={sx('position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:clamp(16rem,34vw,30rem);margin:0;font-family:var(--font-subhead);font-weight:500;text-transform:uppercase;font-size:clamp(0.875rem,1.15vw,1.5rem);line-height:1.5;color:#F9F9F9;text-align:center;text-wrap:pretty;pointer-events:none')}>
-              Heartwood is a real estate investment manager focused on the living sector and owning high-quality assets.
+              Partnering to create durable real estate investments and enduring returns through buildings that last, healthier homes, and stronger communities.
             </p>
             <p style={sx('position:absolute;bottom:clamp(1.5rem,4vh,3rem);left:30px;margin:0;font-family:var(--font-subhead);font-weight:500;text-transform:uppercase;font-size:clamp(0.875rem,1.15vw,1.5rem);line-height:1.15;color:#F9F9F9;pointer-events:none')}>
               Future<br />built.
