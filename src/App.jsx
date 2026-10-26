@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import SiteHeader from './components/SiteHeader.jsx'
 import SiteFooter from './components/SiteFooter.jsx'
 import PageHome from './pages/PageHome.jsx'
@@ -72,8 +73,9 @@ function App({ initialPath, onReady }) {
         {notFound && <NotFound actions={[{ label: 'Go to home', go: () => go('home') }, { label: 'View properties', go: () => go('properties') }]} />}
       </main>
       <SiteFooter go={go} />
-      {/* Vercel Web Analytics; counts client-side page changes too. */}
+      {/* Vercel Web Analytics and Speed Insights; both count client-side page changes too. */}
       <Analytics />
+      <SpeedInsights />
     </div>
   )
 }
