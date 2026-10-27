@@ -3,8 +3,8 @@
 // bar ("/investors/growth-trust") and back. Plain JS with no imports from the page code, so
 // vite.config.js can read it to build sitemap.xml.
 
-// The live site until VITE_SITE_URL names the production domain.
-export const DEFAULT_SITE_URL = 'https://heartwood-web-one.vercel.app'
+// The official production domain (www redirects here, see vercel.json). VITE_SITE_URL overrides it.
+export const DEFAULT_SITE_URL = 'https://heartwoodinvestments.ca'
 
 // [path, route, ...other routes that show the same page]. The first route is the one a path opens.
 const PATHS = [

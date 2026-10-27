@@ -4,7 +4,7 @@ import { pathFor, DEFAULT_SITE_URL } from './src/site/paths.js'
 import { PAGE_ROUTES } from './src/site/routes.js'
 
 // Writes sitemap.xml and robots.txt into the build from the site's route table.
-// Set VITE_SITE_URL (e.g. in Vercel) to the production domain once it is live.
+// The domain comes from DEFAULT_SITE_URL in src/site/paths.js unless VITE_SITE_URL is set.
 function seoFiles(siteUrl) {
   const base = siteUrl.replace(/\/$/, '')
   return {
