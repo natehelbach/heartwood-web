@@ -5,9 +5,9 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/:path(.*)",
       "has": [{ "type": "host", "value": "www.heartwoodinvestments.ca" }],
-      "destination": "https://heartwoodinvestments.ca/:path*",
+      "destination": "https://heartwoodinvestments.ca/:path",
       "permanent": true
     }
   ],
