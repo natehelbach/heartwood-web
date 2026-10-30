@@ -21,8 +21,8 @@ const GROUPS = [
   ['Team', 'team'],
 ]
 
-// Team and senior advisors are listed by last name.
-const lastName = (t) => t.name.trim().split(/\s+/).slice(-1)[0]
+// Team and senior advisors are listed by last name (ignoring a credential after a comma, like ", PMP").
+const lastName = (t) => t.name.split(',')[0].trim().split(/\s+/).slice(-1)[0]
 const groupMembers = (g) => {
   const l = HW_DATA.team.filter((t) => t.group === g)
   if (g === 'team' || g === 'advisors') l.sort((a, b) => lastName(a).localeCompare(lastName(b)) || a.name.localeCompare(b.name))
@@ -30,7 +30,7 @@ const groupMembers = (g) => {
 }
 
 // People without a portrait yet get the dotted silhouette.
-const NO_PORTRAIT = ['andrew', 'hendrenique', 'babak', 'michael', 'davena']
+const NO_PORTRAIT = ['andrew', 'hendrenique', 'babak', 'michael', 'davena', 'daria']
 
 // 4:5 team portraits, named after the person (assets/team/portrait/).
 const portraitOf = (t) => `/assets/team/portrait/HW_Team_${t.name.replace(/\s+/g, '-')}_4x5_colour.jpg`

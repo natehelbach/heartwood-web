@@ -32,6 +32,8 @@ const team = [
   {id:'katie',group:'team',linkedin:'',name:'Katie Ungard',title:'Community Engagement Manager',photo:'',bio:'Katie has more than 10 years of experience in community engagement and project management across real estate and sustainability. She holds a BA in Psychology and English from the University of Guelph and a Master of Environmental Studies from York University.'},
   {id:'radhika',group:'team',linkedin:'',name:'Radhika Gurav',title:'Senior Corporate Accountant',photo:T+'HW_Team_Radhika-Gurav_HR.jpg',bio:''},
   {id:'davena',group:'team',linkedin:'',name:'Davena Gobin',title:'Administrator, Property Management',photo:'',bio:''},
+  {id:'babak',group:'team',linkedin:'',name:'Babak Khazaei, PMP',title:'Senior Property Coordinator',photo:'',bio:''},
+  {id:'daria',group:'team',linkedin:'',name:'Daria Behas',title:'Junior Accounting Analyst',photo:'',bio:''},
   {id:'matt',group:'team',linkedin:'https://www.linkedin.com/in/matthew-sardellitti/',name:'Matthew Sardellitti',title:'Analyst, Development and Investments',photo:T+'headshots/HW_Team_Matthew-Sardellitti_2026.jpg',bio:'Matthew has worked across commercial and residential real estate, with roles at Cushman & Wakefield and Dunpar Homes. He holds an HBA from the Ivey Business School and brings a strong grounding in real estate financial modelling, investment analysis and market fundamentals.'}
 ]
 
