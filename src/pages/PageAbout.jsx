@@ -14,26 +14,21 @@ const VALUES = [
   { n: '03', k: 'One team', v: 'Investing, building and managing sit at the same table.' },
 ]
 
-// The design hides the advisory board for now; restore by re-adding ['Advisory board', 'board'].
-const GROUPS = [
-  ['Partners', 'partners'],
-  ['Senior advisors', 'advisors'],
-  ['Team', 'team'],
-]
+// Partners, senior advisors and staff are listed together as one team. The design hides the
+// advisory board (group 'board') for now.
+const GROUPS = [['Team', ['partners', 'advisors', 'team']]]
 
-// Team and senior advisors are listed by last name (ignoring a credential after a comma, like ", PMP").
-const lastName = (t) => t.name.split(',')[0].trim().split(/\s+/).slice(-1)[0]
-const groupMembers = (g) => {
-  const l = HW_DATA.team.filter((t) => t.group === g)
-  if (g === 'team' || g === 'advisors') l.sort((a, b) => lastName(a).localeCompare(lastName(b)) || a.name.localeCompare(b.name))
-  return l
-}
+// Listed by last name, ignoring a credential after a comma ("Babak Khazaei, PMP").
+const nameOnly = (t) => t.name.split(',')[0].trim()
+const lastName = (t) => nameOnly(t).split(/\s+/).slice(-1)[0]
+const groupMembers = (groups) =>
+  HW_DATA.team.filter((t) => groups.includes(t.group)).sort((a, b) => lastName(a).localeCompare(lastName(b)) || a.name.localeCompare(b.name))
 
 // People without a portrait yet get the dotted silhouette.
-const NO_PORTRAIT = ['andrew', 'hendrenique', 'babak', 'michael', 'davena', 'daria']
+const NO_PORTRAIT = ['andrew', 'hendrenique', 'michael', 'davena', 'daria']
 
 // 4:5 team portraits, named after the person (assets/team/portrait/).
-const portraitOf = (t) => `/assets/team/portrait/HW_Team_${t.name.replace(/\s+/g, '-')}_4x5_colour.jpg`
+const portraitOf = (t) => `/assets/team/portrait/HW_Team_${nameOnly(t).replace(/\s+/g, '-')}_4x5_colour.jpg`
 
 // Silhouette rows: [cy, first cx, last cx], dots every 5 units.
 const SILHOUETTE = [
@@ -63,10 +58,10 @@ function Leadership() {
           </p>
         </div>
       </div>
-      {GROUPS.map(([label, key]) => (
-        <div key={key}>
+      {GROUPS.map(([label, groups]) => (
+        <div key={label}>
           <div style={sx('padding:clamp(28px,3vw,40px) clamp(20px,3vw,40px) 14px;font-family:var(--font-subhead);font-weight:500;font-size:13px;text-transform:uppercase;color:var(--hw-teal)')}>{label}</div>
-          {groupMembers(key).map((t) => {
+          {groupMembers(groups).map((t) => {
               const isOpen = open === t.id
               return (
                 <div key={t.id} style={sx('border-top:1.5px solid rgba(33,33,33,.3)')}>
