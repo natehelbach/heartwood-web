@@ -239,11 +239,11 @@ function PropertyDetail({ sub, go }) {
         </>
 
         {images.length > 1 && (
-          <div style={sx('margin:0 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px')}>
+          <div style={sx('margin:0 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));align-items:start;gap:20px')}>
             {images.slice(1).map((im, i) => (
               <button key={im.src} onClick={() => setImgWrap(i + 1)} style={sx('background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;gap:8px;text-align:left;font-family:var(--font-body);color:var(--hw-black)')}>
-                <span style={sx('display:block;width:100%;aspect-ratio:4/5;overflow:hidden;background:var(--hw-cool-grey)')}>
-                  <img loading="lazy" decoding="async" src={im.src} alt={im.cap} style={sx('width:100%;height:100%;object-fit:cover;display:block')} />
+                <span style={sx('display:block;width:100%;overflow:hidden;background:var(--hw-cool-grey)')}>
+                  <img loading="lazy" decoding="async" src={im.src} alt={im.cap} style={sx('width:100%;height:auto;display:block')} />
                 </span>
                 <span style={sx('font-size:14px;font-style:italic')}>{im.cap}</span>
               </button>

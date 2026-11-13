@@ -25,7 +25,7 @@ const groupMembers = (groups) =>
   HW_DATA.team.filter((t) => groups.includes(t.group)).sort((a, b) => lastName(a).localeCompare(lastName(b)) || a.name.localeCompare(b.name))
 
 // People without a portrait yet get the dotted silhouette.
-const NO_PORTRAIT = ['andrew', 'hendrenique', 'michael', 'davena', 'daria']
+const NO_PORTRAIT = ['andrew', 'michael', 'davena', 'daria']
 
 // 4:5 team portraits, named after the person (assets/team/portrait/).
 const portraitOf = (t) => `/assets/team/portrait/HW_Team_${nameOnly(t).replace(/\s+/g, '-')}_4x5_colour.jpg`
