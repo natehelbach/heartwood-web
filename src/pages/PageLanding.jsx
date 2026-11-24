@@ -189,7 +189,6 @@ const BENEFITS = [
   { title: 'Reporting', body: 'Quarterly reports, statements and distributions in one place.' },
 ]
 const MEETING_TEAM = [
-  { name: 'Dustin Buenaventura', title: 'Director, Business Development', img: '/assets/team/headshots/HW_Team_Dustin-Buenaventura_2026_Toned.jpg', nowrap: true },
   { name: 'Dylan Kent', title: 'Director, Capital Markets', img: '/assets/team/headshots/HW_Team_Dylan-Kent_2026_Toned.jpg' },
 ]
 
