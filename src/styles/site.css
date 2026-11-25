@@ -586,6 +586,13 @@ input::placeholder {
   transform: translateX(-50%);
   width: 36%;
 }
+/* Phones: the icon sits further right and larger (design, Nov 25). */
+@media (max-width: 600px) {
+  .site-footer__dots {
+    left: 40%;
+    width: 70%;
+  }
+}
 
 .site-footer__mark {
   position: absolute;

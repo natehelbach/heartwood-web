@@ -34,7 +34,7 @@ var L = {
     return { pos: p };
   },
   icon: function (n, w, h, o) { var size = Math.min(w, h) * o.size, cell = size / 25, ox = w / 2 - size / 2, oy = h / 2 - size / 2; return { pos: ICONS[o.icon].map(function (c) { return { x: ox + (c[0] + .5) * cell, y: oy + (c[1] + .5) * cell, diam: cell * .7 }; }) }; },
-  tool: function (n, w, h, o) { var rows = (window.HW_ICONS || {})[o.icon]; if (!rows) return { pos: [] }; var nn = Math.max(rows.length, rows[0].length), size = Math.min(w, h) * o.size, cell = size / nn, ox = w / 2 - rows[0].length * cell / 2, oy = h / 2 - rows.length * cell / 2, p = []; rows.forEach(function (r, y) { for (var x = 0; x < r.length; x++) if (r[x] === '#') p.push({ x: ox + (x + .5) * cell, y: oy + (y + .5) * cell, diam: cell * .62 }); }); return { pos: p }; },
+  tool: function (n, w, h, o) { var rows = (window.HW_ICONS || {})[o.icon]; if (!rows) return { pos: [] }; var nn = Math.max(rows.length, rows[0].length), size = Math.min(w, h) * o.size, cell = size / nn, ox = w / 2 - rows[0].length * cell / 2, oy = h / 2 - rows.length * cell / 2, p = []; rows.forEach(function (r, y) { for (var x = 0; x < r.length; x++) if (r[x] === '#') p.push({ x: ox + (x + .5) * cell, y: oy + (y + .5) * cell, diam: cell * .8 }); }); return { pos: p }; },
   scatterPlot: function (n, w, h, o) {
     var r = o.rand, pd = o.padding, cw = clamp(w - pd.l - pd.r, 240, o.maxChartW), ch = clamp(h - pd.t - pd.b, 200, o.maxChartH), cx = w / 2 + (pd.l - pd.r) / 2, cy = h / 2 + (pd.t - pd.b) / 2, ox = cx - cw / 2, oy = cy - ch / 2, xr = o.xMax - o.xMin, yr = o.yMax - o.yMin, p = [];
     for (var i = 0; i < o.count; i++) { var x = o.xMin + xr * (.0185 + r() * .8889), t = (x - o.xMin) / xr, y = clamp(o.yMin + (.14 + t * .72) * yr + gauss(r, 0, .11 * yr), o.yMin + .03 * yr, o.yMax - .01 * yr); p.push({ x: ox + t * cw, y: oy + (1 - (y - o.yMin) / yr) * ch, diam: o.diam }); }
@@ -61,7 +61,7 @@ class HWDotField extends HTMLElement {
     var pr = this.getAttribute('preset') || 'landing', P;
     if (pr === 'icons') {
       var names = (this.getAttribute('icons') || 'HOUSE').split('|'), sz = +(this.getAttribute('icon-size') || .7);
-      P = { color: '#BC532D', dot: 9, count: 60, drift: 1.5, wander: false, responsive: false, scrub: .4, interval: +(this.getAttribute('interval') || 3400), start: 0,
+      P = { color: '#BC532D', dot: 9, count: 60, drift: 0, push: 0, wander: false, responsive: false, scrub: .4, interval: +(this.getAttribute('interval') || 3400), start: 0,
         loop: function () { var sc = { name: 'scatter', opts: { margin: .08, count: 60 } }, st = names.map(function (n) { return n === 'SCATTER' ? sc : { name: 'tool', opts: { icon: n, size: sz } }; }); return names.indexOf('SCATTER') < 0 ? [sc].concat(st) : st; } };
     } else P = PRESETS[pr];
     this.P = P;
@@ -149,10 +149,10 @@ class HWDotField extends HTMLElement {
       }
       if (P.drift > 0 && d.mode === 'parked') { d.dp += .01; d.dx = Math.cos(d.dp) * P.drift; d.dy = Math.sin(d.dp * 1.3) * P.drift; }
     }
-    var m = this.mouse, rad = 110;
+    var m = this.mouse, rad = 110, push = P.push == null ? 16 : P.push;
     for (var j = 0; j < this.dots.length; j++) {
       var q = this.dots[j], tx = 0, ty = 0, vx2 = q.x - m.x, vy2 = q.y - m.y, ds = vx2 * vx2 + vy2 * vy2;
-      if (ds < rad * rad && ds > 1e-6) { var dist = Math.sqrt(ds), f = 16 * (1 - dist / rad) * (1 - dist / rad); tx = vx2 / dist * f; ty = vy2 / dist * f; }
+      if (ds < rad * rad && ds > 1e-6) { var dist = Math.sqrt(ds), f = push * (1 - dist / rad) * (1 - dist / rad); tx = vx2 / dist * f; ty = vy2 / dist * f; }
       q.nx += (tx - q.nx) * .18; q.ny += (ty - q.ny) * .18;
     }
     var c = this.cv.getContext('2d'), rgb = this.rgb;
